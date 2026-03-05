@@ -1,0 +1,102 @@
+[
+  {
+    "id": "west_bay",
+    "area": "west_bay",
+    "displayName": "West Bay",
+    "overview": "West Bay is home to Roatán's most famous beach — a mile-long stretch of powdery white sand with crystal-clear water and a reef you can snorkel right from shore. This is where the resorts, beach bars, and most tourist activity are concentrated.",
+    "vibe": "Polished, resort-style Caribbean with a laid-back beach atmosphere and upscale dining.",
+    "bestFor": "Beach lovers, families, luxury travelers, snorkelers",
+    "topPicks": ["b001", "b002", "b003", "b004", "b005"],
+    "gettingThere": "From Mahogany Bay cruise port: free chairlift to the beach area or a 10-minute taxi ride ($5-8/person). From Coxen Hole port: 20-minute taxi ($8-12/person). From the airport: 25-minute taxi ($15-20)."
+  },
+  {
+    "id": "west_end",
+    "area": "west_end",
+    "displayName": "West End",
+    "overview": "West End is the bohemian heart of Roatán — a colorful village built along a single road hugging Half Moon Bay. This is where you'll find the island's best dive shops, eclectic restaurants, craft cocktail bars, and a relaxed backpacker-meets-expat energy.",
+    "vibe": "Laid-back, artsy, and social — flip-flops and dive tanks are the dress code.",
+    "bestFor": "Divers, budget travelers, nightlife seekers, digital nomads, foodies",
+    "topPicks": ["b006", "b007", "b008", "b009", "b010"],
+    "gettingThere": "From Mahogany Bay: 15-minute taxi ($5-8/person). From Coxen Hole: 15-minute taxi ($8-10/person). From West Bay: walk the beach path (20 minutes) or take a water taxi ($3/person, 5 minutes)."
+  },
+  {
+    "id": "sandy_bay",
+    "area": "sandy_bay",
+    "displayName": "Sandy Bay",
+    "overview": "Sandy Bay stretches along the north coast between West End and Coxen Hole. It's quieter than its neighbors, home to marine research facilities, Anthony's Key Resort, and the Roatán Institute for Marine Sciences. The vibe here is nature-first and unhurried.",
+    "vibe": "Quiet, nature-oriented, and residential — the place to disconnect and go slow.",
+    "bestFor": "Nature lovers, dolphin encounters, families seeking calm, snorkelers",
+    "topPicks": ["b011", "b012", "b013", "b014"],
+    "gettingThere": "From Coxen Hole: 10-minute taxi ($5-8/person). From West End: 10-minute taxi ($5-8/person). Sandy Bay sits between the two on the main coastal road."
+  },
+  {
+    "id": "coxen_hole",
+    "area": "coxen_hole",
+    "displayName": "Coxen Hole",
+    "overview": "Coxen Hole is Roatán's capital and main commercial center. It's not a tourist destination, but it's where real island life happens — the central market, government offices, banks, and the busiest port. You'll pass through here on your way to anywhere else on the island.",
+    "vibe": "Busy, authentic, and local — the working heart of the island with no tourist polish.",
+    "bestFor": "Cultural immersion, budget shopping, local food, practical errands",
+    "topPicks": ["b015", "b016", "b017", "b018"],
+    "gettingThere": "From the airport: 5-minute taxi ($5). From West Bay or West End: 15-20 minute taxi ($8-12/person). The Town Center cruise port is located right in Coxen Hole."
+  },
+  {
+    "id": "flowers_bay",
+    "area": "flowers_bay",
+    "displayName": "Flowers Bay",
+    "overview": "Flowers Bay is a small, predominantly local community on the south side of the island, just east of Coxen Hole. It's off the beaten tourist path with a handful of quiet restaurants and beautiful views. The rocky shoreline here is different from the sandy beaches of the west.",
+    "vibe": "Sleepy, residential, and authentic — a glimpse of island life away from tourism.",
+    "bestFor": "Adventurous travelers, those seeking local experiences, ironshore exploring",
+    "topPicks": ["b019", "b020"],
+    "gettingThere": "From Coxen Hole: 10-minute taxi ($5). From West Bay: 25-minute taxi ($10-15/person). There's no regular public transport — you'll need a taxi or rental car."
+  },
+  {
+    "id": "french_harbour",
+    "area": "french_harbour",
+    "displayName": "French Harbour",
+    "overview": "French Harbour is the commercial and fishing hub of Roatán. The island's shrimp fleet operates from here, and the area is home to excellent seafood restaurants, a growing marina scene, and Arch's Iguana Farm. It's more practical than pretty, but the food alone is worth the trip.",
+    "vibe": "Working port town with surprisingly great food and a no-nonsense island character.",
+    "bestFor": "Foodies, seafood lovers, those wanting to see the real island economy",
+    "topPicks": ["b021", "b022", "b023", "b024", "b025"],
+    "gettingThere": "From Coxen Hole: 20-minute taxi ($10-12/person). From West Bay: 30-minute taxi ($15-20/person). Located roughly in the center of the island along the main highway."
+  },
+  {
+    "id": "oak_ridge",
+    "area": "oak_ridge",
+    "displayName": "Oak Ridge",
+    "overview": "Oak Ridge is one of Roatán's oldest and most picturesque settlements — a fishing village built on stilts over the water in a protected harbor. The mangrove tunnels nearby are a must-see natural wonder, and the community offers a window into traditional island life that hasn't changed much in decades.",
+    "vibe": "Remote, historic, and deeply local — the Roatán that existed before tourism arrived.",
+    "bestFor": "History buffs, nature lovers, kayakers, photographers, off-the-beaten-path seekers",
+    "topPicks": ["b026", "b027", "b028"],
+    "gettingThere": "From Coxen Hole: 45-minute taxi ($20-25). From West Bay: about 1 hour by taxi ($25-30). Best visited as part of a full-day island tour with a hired driver."
+  },
+  {
+    "id": "punta_gorda",
+    "area": "punta_gorda",
+    "displayName": "Punta Gorda",
+    "overview": "Punta Gorda is the oldest community on Roatán and the cultural home of the Garifuna people — an Afro-Caribbean group with their own language, music, dance, and cuisine. The village is small but culturally rich, with drumming circles, traditional cooking, and a proud heritage that predates modern tourism.",
+    "vibe": "Culturally vibrant, welcoming, and deeply rooted in Garifuna heritage and tradition.",
+    "bestFor": "Cultural travelers, music lovers, history enthusiasts, authentic cuisine seekers",
+    "topPicks": ["b029", "b030", "b031"],
+    "gettingThere": "From Coxen Hole: 50-minute taxi ($20-25). From West Bay: about 1 hour by taxi ($25-30). Usually combined with an Oak Ridge visit on a full-day island tour."
+  },
+  {
+    "id": "port_royal",
+    "area": "port_royal",
+    "displayName": "Port Royal",
+    "overview": "Port Royal sits at the remote eastern tip of Roatán, surrounded by the Port Royal Park and Wildlife Refuge. This is the least developed and most ecologically pristine part of the island. Dense mangroves, untouched reef, and virtually no tourist infrastructure make it a true frontier destination.",
+    "vibe": "Wild, remote, and untouched — genuine adventure territory for the intrepid traveler.",
+    "bestFor": "Eco-adventurers, kayakers, birdwatchers, travelers seeking true solitude",
+    "topPicks": ["b032", "b033"],
+    "gettingThere": "From Coxen Hole: about 1 hour by taxi ($25-30). The road gets rough past Oak Ridge. Best accessed with a local guide and a vehicle with decent clearance. Not recommended for a quick cruise port visit."
+  },
+  {
+    "id": "camp_bay",
+    "area": "camp_bay",
+    "displayName": "Camp Bay",
+    "overview": "Camp Bay is Roatán's hidden beach paradise on the far eastern end of the island. The long, quiet beach has almost no development and far fewer visitors than West Bay. The water is calm, the sand is soft, and you might have the entire stretch to yourself. Getting here is half the adventure.",
+    "vibe": "Secluded, peaceful, and raw — the beach day you fantasize about when you're stuck in traffic.",
+    "bestFor": "Solitude seekers, beach purists, photographers, those with a full day to explore",
+    "topPicks": ["b034", "b035"],
+    "gettingThere": "From Coxen Hole: about 1 hour 15 minutes by taxi ($25-35). The last stretch of road is unpaved. Bring everything you need — there's very little infrastructure. Best combined with visits to Oak Ridge and Punta Gorda on a full-day island tour."
+  }
+]

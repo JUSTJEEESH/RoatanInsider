@@ -1,0 +1,5189 @@
+[
+  {
+    "id": "b001",
+    "slug": "sundowners-bar-grill",
+    "name": "Sundowners Bar & Grill",
+    "description": "Legendary beachfront spot in West End with the best sunset views on the island. Fresh seafood and cold Salva Vidas right on the water.",
+    "insiderTip": "Grab a dock seat by 4:30 PM for golden hour — they fill up fast.",
+    "category": "eat",
+    "subcategory": "Seafood",
+    "area": "west_end",
+    "latitude": 16.299,
+    "longitude": -86.61,
+    "addressDescription": "On the main road in West End, right on the water past the dive shops",
+    "phone": "+504-9658-1234",
+    "whatsapp": "+50496581234",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@sundowners_roatan",
+    "priceRange": 2,
+    "features": [
+      "Beachfront",
+      "Sunset Views",
+      "Live Music",
+      "Full Bar"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "21:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b002",
+    "slug": "cannibal-cafe",
+    "name": "Cannibal Cafe",
+    "description": "Funky West End hangout with creative dishes and killer cocktails. The fish tacos are legendary among locals and travelers alike.",
+    "insiderTip": "Try the coconut shrimp — it's the best on the island.",
+    "category": "eat",
+    "subcategory": "Casual Dining",
+    "area": "west_end",
+    "latitude": 16.2985,
+    "longitude": -86.6105,
+    "addressDescription": "Main drag in West End, look for the colorful sign",
+    "phone": "+504-9876-5432",
+    "whatsapp": "+50498765432",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@cannibalcafe",
+    "priceRange": 2,
+    "features": [
+      "WiFi",
+      "Vegetarian Options",
+      "Full Bar",
+      "Outdoor Seating"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "21:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b003",
+    "slug": "vintage-pearl-restaurant",
+    "name": "Vintage Pearl Restaurant",
+    "description": "West Bay's upscale dining experience with Caribbean fusion cuisine. White tablecloths, ocean views, and a wine list that surprises.",
+    "insiderTip": "Reserve a table for Friday lobster night — it sells out.",
+    "category": "eat",
+    "subcategory": "Fine Dining",
+    "area": "west_bay",
+    "latitude": 16.2945,
+    "longitude": -86.6175,
+    "addressDescription": "Inside Infinity Bay Resort, West Bay Beach",
+    "phone": "+504-2445-5050",
+    "whatsapp": null,
+    "email": "reservations@vintagepearl.hn",
+    "website": "https://vintagepearl.hn",
+    "facebook": null,
+    "instagram": "@vintagepearlroatan",
+    "priceRange": 4,
+    "features": [
+      "Fine Dining",
+      "Ocean View",
+      "Wine List",
+      "Reservations Recommended"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "21:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b004",
+    "slug": "cafe-escondido",
+    "name": "Café Escondido",
+    "description": "Hidden gem coffee shop in Sandy Bay with the best espresso on the island. Homemade pastries and a quiet garden setting.",
+    "insiderTip": "The banana bread sells out by 10 AM — come early.",
+    "category": "eat",
+    "subcategory": "Cafe",
+    "area": "sandy_bay",
+    "latitude": 16.314,
+    "longitude": -86.5855,
+    "addressDescription": "Off the main road in Sandy Bay, behind the church",
+    "phone": "+504-9712-3456",
+    "whatsapp": "+50497123456",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "WiFi",
+      "Garden Seating",
+      "Coffee",
+      "Pastries"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "21:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b005",
+    "slug": "baleadas-express",
+    "name": "Baleadas Express",
+    "description": "The island's most authentic baleada spot. Locals line up here for a reason — generous fillings, handmade tortillas, and prices that haven't changed in years.",
+    "insiderTip": "Order the baleada con todo with extra cheese. Bring cash — no cards.",
+    "category": "eat",
+    "subcategory": "Local Food",
+    "area": "coxen_hole",
+    "latitude": 16.3035,
+    "longitude": -86.5555,
+    "addressDescription": "Near the main market in Coxen Hole",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Cash Only",
+      "Local Favorite",
+      "Quick Service",
+      "Authentic"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "21:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b006",
+    "slug": "herby-cafe",
+    "name": "Herby's Sports Bar & Grill",
+    "description": "French Harbour's go-to for burgers, wings, and cold beer. Big screens for game days and a local crowd that keeps things lively.",
+    "insiderTip": "Thursday is wing night — half price and worth the drive.",
+    "category": "eat",
+    "subcategory": "American",
+    "area": "french_harbour",
+    "latitude": 16.3345,
+    "longitude": -86.4605,
+    "addressDescription": "Main road through French Harbour, across from the marina",
+    "phone": "+504-2455-7890",
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Sports TV",
+      "Full Bar",
+      "Family Friendly",
+      "Parking"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "21:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b007",
+    "slug": "thai-place",
+    "name": "The Thai Place",
+    "description": "Surprisingly authentic Thai food in West End. The owner trained in Bangkok and brings real flavors to the Caribbean.",
+    "insiderTip": "The green curry with local fish is the move. Ask for it spicy.",
+    "category": "eat",
+    "subcategory": "Thai",
+    "area": "west_end",
+    "latitude": 16.2992,
+    "longitude": -86.6098,
+    "addressDescription": "Upstairs on the main road in West End",
+    "phone": "+504-9654-7890",
+    "whatsapp": "+50496547890",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@thaiplaceroatan",
+    "priceRange": 2,
+    "features": [
+      "Vegetarian Options",
+      "Outdoor Seating",
+      "BYOB Friendly"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "21:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b008",
+    "slug": "island-fresh-bakery",
+    "name": "Island Fresh Bakery",
+    "description": "Early morning bakery in West Bay serving fresh bread, croissants, and breakfast sandwiches. Everything baked on-site daily.",
+    "insiderTip": "Get there before 8 AM for the best selection.",
+    "category": "eat",
+    "subcategory": "Bakery",
+    "area": "west_bay",
+    "latitude": 16.2935,
+    "longitude": -86.6168,
+    "addressDescription": "Behind the main beach road in West Bay",
+    "phone": null,
+    "whatsapp": "+50498765111",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Breakfast",
+      "Fresh Baked",
+      "Coffee",
+      "Early Opening"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "21:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b009",
+    "slug": "oak-ridge-seafood",
+    "name": "Hole in the Wall Seafood",
+    "description": "Oak Ridge's best-kept secret. Fresh catch prepared while you wait in a waterfront shack with the most authentic island experience.",
+    "insiderTip": "Ask what they caught today and have them grill it whole.",
+    "category": "eat",
+    "subcategory": "Seafood",
+    "area": "oak_ridge",
+    "latitude": 16.3665,
+    "longitude": -86.3695,
+    "addressDescription": "On the waterfront in Oak Ridge, take the water taxi",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Waterfront",
+      "Fresh Catch",
+      "Cash Only",
+      "Local Favorite"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "21:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b010",
+    "slug": "creole-rotisserie",
+    "name": "Creole's Rotisserie Chicken",
+    "description": "Perfectly spiced rotisserie chicken with rice and beans that locals swear by. Fast, flavorful, and insanely affordable.",
+    "insiderTip": "Half chicken with plantains is the best lunch deal on the island.",
+    "category": "eat",
+    "subcategory": "Local Food",
+    "area": "coxen_hole",
+    "latitude": 16.3042,
+    "longitude": -86.5548,
+    "addressDescription": "Near the Coxen Hole dock, next to the pharmacy",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Quick Service",
+      "Cash Only",
+      "Local Favorite",
+      "Takeout"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "22:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "23:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "21:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b011",
+    "slug": "blue-marlin",
+    "name": "Blue Marlin Bar",
+    "description": "West End's most popular beach bar with toes-in-the-sand seating and rum drinks that hit different at sunset.",
+    "insiderTip": "Monday night is locals' night — cheaper drinks and a great crowd.",
+    "category": "drink",
+    "subcategory": "Beach Bar",
+    "area": "west_end",
+    "latitude": 16.2988,
+    "longitude": -86.6108,
+    "addressDescription": "On the beach in West End, near the Half Moon Bay entrance",
+    "phone": "+504-9678-2345",
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@bluemarlinroatan",
+    "priceRange": 2,
+    "features": [
+      "Beachfront",
+      "Sunset Views",
+      "Live Music",
+      "Happy Hour"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "tuesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "wednesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "thursday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "friday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "saturday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "sunday": {
+        "open": "12:00",
+        "close": "22:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b012",
+    "slug": "west-bay-lodge-bar",
+    "name": "West Bay Lodge Bar",
+    "description": "Chill beach bar right on West Bay Beach. Simple, unpretentious, and the Salva Vida is always ice cold.",
+    "insiderTip": "Best value drinks on West Bay Beach — skip the resort bars.",
+    "category": "drink",
+    "subcategory": "Beach Bar",
+    "area": "west_bay",
+    "latitude": 16.2942,
+    "longitude": -86.6172,
+    "addressDescription": "On West Bay Beach, look for the thatched roof",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Beachfront",
+      "Budget Friendly",
+      "Cash Preferred"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "tuesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "wednesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "thursday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "friday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "saturday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "sunday": {
+        "open": "12:00",
+        "close": "22:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b013",
+    "slug": "lands-end",
+    "name": "Land's End Bar",
+    "description": "Iconic West End sunset bar perched over the water. The rum punch is famous and the atmosphere is pure island vibes.",
+    "insiderTip": "Sit on the dock — it's the best sunset seat on Roatán.",
+    "category": "drink",
+    "subcategory": "Cocktail Bar",
+    "area": "west_end",
+    "latitude": 16.2995,
+    "longitude": -86.6095,
+    "addressDescription": "At the very end of the main road in West End",
+    "phone": "+504-9688-7654",
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@landsendroatan",
+    "priceRange": 2,
+    "features": [
+      "Sunset Views",
+      "Waterfront",
+      "Cocktails",
+      "Dock Seating"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "tuesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "wednesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "thursday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "friday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "saturday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "sunday": {
+        "open": "12:00",
+        "close": "22:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b014",
+    "slug": "splash-inn-bar",
+    "name": "Splash Inn Pool Bar",
+    "description": "Swim-up pool bar in West End with a party vibe on weekends. Great cocktails and a fun crowd.",
+    "insiderTip": "Wednesday is 2-for-1 margaritas — the pool gets packed.",
+    "category": "drink",
+    "subcategory": "Pool Bar",
+    "area": "west_end",
+    "latitude": 16.298,
+    "longitude": -86.6112,
+    "addressDescription": "Splash Inn Dive Resort, West End main road",
+    "phone": "+504-2445-1010",
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Pool",
+      "Happy Hour",
+      "WiFi",
+      "Music"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "tuesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "wednesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "thursday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "friday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "saturday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "sunday": {
+        "open": "12:00",
+        "close": "22:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b015",
+    "slug": "palm-beach-bar",
+    "name": "Palm Beach Bar",
+    "description": "Laid-back West Bay beach bar with hammocks, cold beer, and zero pretension.",
+    "insiderTip": "Order the michelada — they make it with fresh lime.",
+    "category": "drink",
+    "subcategory": "Beach Bar",
+    "area": "west_bay",
+    "latitude": 16.2938,
+    "longitude": -86.6178,
+    "addressDescription": "South end of West Bay Beach",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Beachfront",
+      "Hammocks",
+      "Casual"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "tuesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "wednesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "thursday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "friday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "saturday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "sunday": {
+        "open": "12:00",
+        "close": "22:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b016",
+    "slug": "gios-bar",
+    "name": "Gio's Sports Bar",
+    "description": "French Harbour's favorite watering hole with pool tables, darts, and a loyal local crowd.",
+    "insiderTip": "Friday karaoke night is an experience you won't forget.",
+    "category": "drink",
+    "subcategory": "Sports Bar",
+    "area": "french_harbour",
+    "latitude": 16.3348,
+    "longitude": -86.4598,
+    "addressDescription": "Main road in French Harbour",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Pool Tables",
+      "Sports TV",
+      "Karaoke",
+      "Local Crowd"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "tuesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "wednesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "thursday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "friday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "saturday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "sunday": {
+        "open": "12:00",
+        "close": "22:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b017",
+    "slug": "coconut-grove",
+    "name": "Coconut Grove Bar",
+    "description": "Sandy Bay's hidden cocktail spot surrounded by palm trees. Craft cocktails with local ingredients.",
+    "insiderTip": "Try the passion fruit daiquiri — made with fruit from the garden.",
+    "category": "drink",
+    "subcategory": "Cocktail Bar",
+    "area": "sandy_bay",
+    "latitude": 16.3155,
+    "longitude": -86.5845,
+    "addressDescription": "Off the main road in Sandy Bay, follow the signs",
+    "phone": null,
+    "whatsapp": "+50499887766",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Garden Setting",
+      "Craft Cocktails",
+      "Quiet"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "tuesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "wednesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "thursday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "friday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "saturday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "sunday": {
+        "open": "12:00",
+        "close": "22:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b018",
+    "slug": "pirate-cove",
+    "name": "Pirate's Cove Bar",
+    "description": "Themed bar in West End with a fun pirate atmosphere and strong pours. Tourist-friendly but the drinks deliver.",
+    "insiderTip": "The rum bucket is enough for two — don't try to finish it alone.",
+    "category": "drink",
+    "subcategory": "Theme Bar",
+    "area": "west_end",
+    "latitude": 16.2978,
+    "longitude": -86.6115,
+    "addressDescription": "West End main road, hard to miss the pirate flag",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Themed Decor",
+      "Full Bar",
+      "Music",
+      "Late Night"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "tuesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "wednesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "thursday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "friday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "saturday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "sunday": {
+        "open": "12:00",
+        "close": "22:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b019",
+    "slug": "flowers-bay-cantina",
+    "name": "Flores Bay Cantina",
+    "description": "Local spot in Flowers Bay where islanders drink after work. Cold beer, warm people, real Roatán.",
+    "insiderTip": "Just show up, be friendly, and you'll make friends for life.",
+    "category": "drink",
+    "subcategory": "Local Bar",
+    "area": "flowers_bay",
+    "latitude": 16.3205,
+    "longitude": -86.5395,
+    "addressDescription": "Flowers Bay main road, near the dock",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Cash Only",
+      "Local Favorite",
+      "Authentic"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "tuesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "wednesday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "thursday": {
+        "open": "11:00",
+        "close": "00:00"
+      },
+      "friday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "saturday": {
+        "open": "11:00",
+        "close": "02:00"
+      },
+      "sunday": {
+        "open": "12:00",
+        "close": "22:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b020",
+    "slug": "coconut-tree-divers",
+    "name": "Coconut Tree Divers",
+    "description": "Top-rated PADI dive shop in West End with small groups and expert instructors. The best reef diving in the Caribbean starts here.",
+    "insiderTip": "Book the afternoon 2-tank dive — fewer people and better light.",
+    "category": "dive",
+    "subcategory": "Dive Shop",
+    "area": "west_end",
+    "latitude": 16.2987,
+    "longitude": -86.6102,
+    "addressDescription": "West End main road, right on the water",
+    "phone": "+504-2445-4100",
+    "whatsapp": "+50424454100",
+    "email": "info@coconuttreedivers.com",
+    "website": "https://coconuttreedivers.com",
+    "facebook": null,
+    "instagram": "@coconuttreedivers",
+    "priceRange": 3,
+    "features": [
+      "PADI Certified",
+      "Small Groups",
+      "Equipment Rental",
+      "Night Dives"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "07:00",
+        "close": "15:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b021",
+    "slug": "reef-gliders",
+    "name": "Reef Gliders",
+    "description": "West End dive shop known for personalized service and excellent guides. Perfect for beginners and experienced divers.",
+    "insiderTip": "Ask for Carlos — he knows every turtle on the reef by name.",
+    "category": "dive",
+    "subcategory": "Dive Shop",
+    "area": "west_end",
+    "latitude": 16.2992,
+    "longitude": -86.6095,
+    "addressDescription": "North end of West End, past the church",
+    "phone": "+504-2445-4200",
+    "whatsapp": "+50424454200",
+    "email": "dive@reefgliders.com",
+    "website": "https://reefgliders.com",
+    "facebook": null,
+    "instagram": "@reefgliders",
+    "priceRange": 3,
+    "features": [
+      "PADI Certified",
+      "SSI Certified",
+      "Discover Scuba",
+      "Technical Diving"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "07:00",
+        "close": "15:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b022",
+    "slug": "west-bay-divers",
+    "name": "West Bay Divers",
+    "description": "Shore diving right off West Bay Beach. Walk in, gear up, and you're on the reef in minutes.",
+    "insiderTip": "The shore dive here is better than most boat dives elsewhere.",
+    "category": "dive",
+    "subcategory": "Dive Shop",
+    "area": "west_bay",
+    "latitude": 16.294,
+    "longitude": -86.617,
+    "addressDescription": "West Bay Beach, near the main beach entrance",
+    "phone": "+504-9712-8888",
+    "whatsapp": "+50497128888",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@westbaydivers",
+    "priceRange": 2,
+    "features": [
+      "Shore Diving",
+      "PADI Certified",
+      "Snorkel Trips",
+      "Equipment Rental"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "07:00",
+        "close": "15:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b023",
+    "slug": "native-sons-diving",
+    "name": "Native Sons Diving",
+    "description": "Locally owned dive operation in Sandy Bay with deep knowledge of the reef system. Supporting local divers.",
+    "insiderTip": "They do early morning dives before the crowds — ask about the 7 AM slot.",
+    "category": "dive",
+    "subcategory": "Dive Shop",
+    "area": "sandy_bay",
+    "latitude": 16.3148,
+    "longitude": -86.5848,
+    "addressDescription": "Sandy Bay waterfront",
+    "phone": "+504-9654-3210",
+    "whatsapp": "+50496543210",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "PADI Certified",
+      "Local Guides",
+      "Reef Conservation"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "07:00",
+        "close": "15:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b024",
+    "slug": "roatan-snorkel-tours",
+    "name": "Roatán Snorkel Tours",
+    "description": "Best snorkeling experience for non-divers. Glass-bottom boat, guided reef tours, and guaranteed turtle sightings.",
+    "insiderTip": "The afternoon tour has fewer boats and calmer water.",
+    "category": "dive",
+    "subcategory": "Snorkel Tour",
+    "area": "west_bay",
+    "latitude": 16.2948,
+    "longitude": -86.6165,
+    "addressDescription": "West Bay Beach dock area",
+    "phone": "+504-9876-1111",
+    "whatsapp": "+50498761111",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@roatansnorkel",
+    "priceRange": 2,
+    "features": [
+      "Family Friendly",
+      "No Experience Needed",
+      "Equipment Included",
+      "Turtle Spotting"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "07:00",
+        "close": "15:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b025",
+    "slug": "utila-dive-center-roatan",
+    "name": "Submarine Dive Center",
+    "description": "French Harbour dive shop specializing in south side wall dives and advanced courses.",
+    "insiderTip": "The south wall dives here are world-class — don't skip them for the tourist sites.",
+    "category": "dive",
+    "subcategory": "Dive Shop",
+    "area": "french_harbour",
+    "latitude": 16.334,
+    "longitude": -86.461,
+    "addressDescription": "French Harbour marina area",
+    "phone": "+504-2455-6789",
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 3,
+    "features": [
+      "PADI Certified",
+      "Advanced Courses",
+      "Wall Dives",
+      "Boat Dives"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "07:00",
+        "close": "15:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b026",
+    "slug": "splash-inn-dive",
+    "name": "Splash Inn Dive Center",
+    "description": "Full-service dive resort in West End with pool training, daily boats, and all-inclusive dive packages.",
+    "insiderTip": "The stay-and-dive package saves you hundreds compared to booking separately.",
+    "category": "dive",
+    "subcategory": "Dive Resort",
+    "area": "west_end",
+    "latitude": 16.298,
+    "longitude": -86.6112,
+    "addressDescription": "Splash Inn Resort, West End",
+    "phone": "+504-2445-1010",
+    "whatsapp": null,
+    "email": "dive@splashinn.com",
+    "website": "https://splashinn.com",
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 3,
+    "features": [
+      "PADI Certified",
+      "Pool Training",
+      "Accommodation",
+      "Packages"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "07:00",
+        "close": "15:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b027",
+    "slug": "oak-ridge-dive",
+    "name": "Oak Ridge Dive Adventures",
+    "description": "Off-the-beaten-path diving on the east end. Pristine reefs with virtually no other divers.",
+    "insiderTip": "Worth the trip for experienced divers — you'll have the reef to yourself.",
+    "category": "dive",
+    "subcategory": "Dive Shop",
+    "area": "oak_ridge",
+    "latitude": 16.3668,
+    "longitude": -86.3688,
+    "addressDescription": "Oak Ridge waterfront, near the bridge",
+    "phone": null,
+    "whatsapp": "+50496547777",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Uncrowded",
+      "Pristine Reefs",
+      "Boat Dives",
+      "Advanced Diving"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "07:00",
+        "close": "15:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b028",
+    "slug": "seagrape-snorkel",
+    "name": "Seagrape Plantation Snorkel",
+    "description": "Private snorkel experience in Sandy Bay with a marine biologist guide. Educational and stunning.",
+    "insiderTip": "Book the private tour for couples — it's unforgettable.",
+    "category": "dive",
+    "subcategory": "Snorkel Tour",
+    "area": "sandy_bay",
+    "latitude": 16.3145,
+    "longitude": -86.5855,
+    "addressDescription": "Seagrape Plantation Resort, Sandy Bay",
+    "phone": "+504-2445-8080",
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 3,
+    "features": [
+      "Private Tours",
+      "Marine Biology",
+      "Eco-Friendly",
+      "Family Friendly"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "07:00",
+        "close": "15:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b029",
+    "slug": "bodden-tours",
+    "name": "Bodden Tours",
+    "description": "Island-wide tours with genuine local guides who share the real Roatán. Full-day and half-day options.",
+    "insiderTip": "Ask for Daniel — he was born on the island and knows everyone.",
+    "category": "tours",
+    "subcategory": "Island Tours",
+    "area": "coxen_hole",
+    "latitude": 16.3038,
+    "longitude": -86.5555,
+    "addressDescription": "Near the Coxen Hole cruise port",
+    "phone": "+504-9876-4321",
+    "whatsapp": "+50498764321",
+    "email": "boddentours@gmail.com",
+    "website": null,
+    "facebook": null,
+    "instagram": "@boddentours",
+    "priceRange": 2,
+    "features": [
+      "Local Guides",
+      "Pickup Included",
+      "Full Day",
+      "Half Day"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "16:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b030",
+    "slug": "roatan-zipline",
+    "name": "South Shore Zipline",
+    "description": "8-line zipline course through the jungle canopy with ocean views. Thrilling and safe with professional guides.",
+    "insiderTip": "Go in the morning when it's cooler — you'll enjoy it more.",
+    "category": "tours",
+    "subcategory": "Adventure",
+    "area": "french_harbour",
+    "latitude": 16.333,
+    "longitude": -86.462,
+    "addressDescription": "South shore road near French Harbour, signs posted",
+    "phone": "+504-2455-1234",
+    "whatsapp": "+50424551234",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@roatanzipline",
+    "priceRange": 2,
+    "features": [
+      "Family Friendly",
+      "Safety Equipment",
+      "Photos Included",
+      "Ocean Views"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "16:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b031",
+    "slug": "fishing-charter-roatan",
+    "name": "Roatán Deep Sea Fishing",
+    "description": "Full-day and half-day deep sea fishing charters. Marlin, tuna, mahi-mahi — the Mesoamerican reef delivers.",
+    "insiderTip": "Book the early morning charter for the best chance at marlin.",
+    "category": "tours",
+    "subcategory": "Fishing",
+    "area": "west_end",
+    "latitude": 16.2985,
+    "longitude": -86.6108,
+    "addressDescription": "West End dock area",
+    "phone": "+504-9654-8888",
+    "whatsapp": "+50496548888",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@roatanfishing",
+    "priceRange": 4,
+    "features": [
+      "Deep Sea",
+      "Equipment Included",
+      "Catch & Release",
+      "All Levels"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "16:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b032",
+    "slug": "mangrove-kayak-tour",
+    "name": "Mangrove Kayak Adventure",
+    "description": "Guided kayak tour through Roatán's mangrove tunnels. See wildlife up close in a pristine ecosystem.",
+    "insiderTip": "Bring waterproof sunscreen — you'll be out for 3 hours.",
+    "category": "tours",
+    "subcategory": "Eco Tour",
+    "area": "oak_ridge",
+    "latitude": 16.3672,
+    "longitude": -86.3685,
+    "addressDescription": "Oak Ridge waterfront, near the gas station",
+    "phone": null,
+    "whatsapp": "+50498761234",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Eco-Friendly",
+      "Family Friendly",
+      "Wildlife",
+      "Guided"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "16:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b033",
+    "slug": "glass-bottom-boat",
+    "name": "Island Glass Bottom Boat",
+    "description": "See the reef without getting wet. Crystal-clear viewing panels and a knowledgeable captain.",
+    "insiderTip": "Sit at the front of the boat for the best views.",
+    "category": "tours",
+    "subcategory": "Boat Tour",
+    "area": "west_bay",
+    "latitude": 16.2944,
+    "longitude": -86.617,
+    "addressDescription": "West Bay Beach, near the main dock",
+    "phone": "+504-9712-5555",
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Family Friendly",
+      "No Swimming Required",
+      "Reef Viewing",
+      "45 Minutes"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "16:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b034",
+    "slug": "horseback-roatan",
+    "name": "Barrio Dorcas Horse Ranch",
+    "description": "Horseback riding on the beach and through tropical trails. Gentle horses suitable for all experience levels.",
+    "insiderTip": "The sunset ride is magical — book 2 days in advance.",
+    "category": "tours",
+    "subcategory": "Horseback",
+    "area": "sandy_bay",
+    "latitude": 16.316,
+    "longitude": -86.584,
+    "addressDescription": "Sandy Bay hills, pickup available",
+    "phone": null,
+    "whatsapp": "+50497126666",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Beginner Friendly",
+      "Beach Ride",
+      "Sunset Tours",
+      "Photos"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "16:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b035",
+    "slug": "monkey-sloth-hangout",
+    "name": "Daniel Johnson's Monkey & Sloth Hangout",
+    "description": "Meet monkeys and sloths up close in a rescue sanctuary setting. Educational, fun, and great for families.",
+    "insiderTip": "Go right when they open at 8 AM — the animals are most active and it's less crowded.",
+    "category": "tours",
+    "subcategory": "Wildlife",
+    "area": "french_harbour",
+    "latitude": 16.3355,
+    "longitude": -86.459,
+    "addressDescription": "French Harbour area, well-signed from the main road",
+    "phone": "+504-9654-2222",
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@monkeysloth",
+    "priceRange": 1,
+    "features": [
+      "Family Friendly",
+      "Wildlife",
+      "Educational",
+      "Photo Opportunities"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "16:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b036",
+    "slug": "garifuna-cultural-tour",
+    "name": "Punta Gorda Cultural Experience",
+    "description": "Immersive Garifuna cultural tour including traditional cooking, drumming, and storytelling with community elders.",
+    "insiderTip": "This is the most authentic cultural experience on Roatán — don't miss it.",
+    "category": "tours",
+    "subcategory": "Cultural",
+    "area": "punta_gorda",
+    "latitude": 16.3728,
+    "longitude": -86.3425,
+    "addressDescription": "Punta Gorda village, ask for the cultural center",
+    "phone": null,
+    "whatsapp": "+50498765555",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Cultural Immersion",
+      "Traditional Food",
+      "Music",
+      "Community Supported"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "16:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b037",
+    "slug": "roatan-helicopter",
+    "name": "Bay Islands Helicopter Tours",
+    "description": "See Roatán from above with a scenic helicopter flight over the reef, jungle, and coastline.",
+    "insiderTip": "Book the full-island tour — the east end from the air is spectacular.",
+    "category": "tours",
+    "subcategory": "Aerial",
+    "area": "coxen_hole",
+    "latitude": 16.316,
+    "longitude": -86.523,
+    "addressDescription": "Near the Roatán airport",
+    "phone": "+504-2445-9999",
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 4,
+    "features": [
+      "Scenic Flights",
+      "Photography",
+      "15-60 Minutes",
+      "Unique Experience"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "16:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b038",
+    "slug": "yaba-ding-ding",
+    "name": "Yaba Ding Ding Gift Shop",
+    "description": "West End's quirkiest shop with handmade jewelry, local art, and the best Roatán souvenirs.",
+    "insiderTip": "The hand-painted coconuts make perfect gifts — each one is unique.",
+    "category": "shop",
+    "subcategory": "Gift Shop",
+    "area": "west_end",
+    "latitude": 16.299,
+    "longitude": -86.6098,
+    "addressDescription": "Main road in West End, look for the colorful storefront",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@yabaroatan",
+    "priceRange": 2,
+    "features": [
+      "Handmade",
+      "Local Art",
+      "Souvenirs",
+      "Unique Gifts"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "09:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "10:00",
+        "close": "15:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b039",
+    "slug": "roatan-cigar-factory",
+    "name": "Roatán Cigar Company",
+    "description": "Hand-rolled cigars made on the island with Honduran tobacco. Watch them being made and sample the collection.",
+    "insiderTip": "The maduro is excellent — buy a box, they're a fraction of US prices.",
+    "category": "shop",
+    "subcategory": "Specialty",
+    "area": "french_harbour",
+    "latitude": 16.3342,
+    "longitude": -86.4602,
+    "addressDescription": "French Harbour main road, next to the marina",
+    "phone": "+504-2455-3456",
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Handmade",
+      "Tastings",
+      "Factory Tour",
+      "Gifts"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "09:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "10:00",
+        "close": "15:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b040",
+    "slug": "rusty-fish-gallery",
+    "name": "Rusty Fish Art Gallery",
+    "description": "Local artist cooperative showcasing paintings, sculptures, and photography inspired by island life.",
+    "insiderTip": "Ask about commission work — several artists do custom pieces.",
+    "category": "shop",
+    "subcategory": "Art Gallery",
+    "area": "west_end",
+    "latitude": 16.2988,
+    "longitude": -86.6105,
+    "addressDescription": "West End, second floor above the dive shop",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@rustyfishart",
+    "priceRange": 3,
+    "features": [
+      "Local Art",
+      "Original Works",
+      "Custom Pieces"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "09:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "10:00",
+        "close": "15:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b041",
+    "slug": "town-center-market",
+    "name": "Coxen Hole Town Market",
+    "description": "Bustling local market with produce, spices, household goods, and authentic Honduran products.",
+    "insiderTip": "Come Saturday morning for the best produce and haggle respectfully.",
+    "category": "shop",
+    "subcategory": "Market",
+    "area": "coxen_hole",
+    "latitude": 16.304,
+    "longitude": -86.5558,
+    "addressDescription": "Town center in Coxen Hole, near the dock",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Local Market",
+      "Fresh Produce",
+      "Authentic",
+      "Cash Only"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "09:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "10:00",
+        "close": "15:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b042",
+    "slug": "west-bay-boutique",
+    "name": "Isla Bella Boutique",
+    "description": "Beach clothing, swimwear, and resort wear at West Bay. Curated collection from Caribbean designers.",
+    "insiderTip": "End-of-season sales in November have 50% off everything.",
+    "category": "shop",
+    "subcategory": "Clothing",
+    "area": "west_bay",
+    "latitude": 16.2942,
+    "longitude": -86.6168,
+    "addressDescription": "West Bay Beach entrance area",
+    "phone": null,
+    "whatsapp": "+50497123333",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@islabellaboutique",
+    "priceRange": 3,
+    "features": [
+      "Designer",
+      "Swimwear",
+      "Beach Clothing",
+      "Caribbean Style"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "09:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "10:00",
+        "close": "15:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b043",
+    "slug": "garifuna-crafts",
+    "name": "Garifuna Arts & Crafts",
+    "description": "Traditional Garifuna handicrafts — woven baskets, drums, dolls, and artwork made by community artisans.",
+    "insiderTip": "Every purchase supports the Garifuna community directly.",
+    "category": "shop",
+    "subcategory": "Handicrafts",
+    "area": "punta_gorda",
+    "latitude": 16.3732,
+    "longitude": -86.3418,
+    "addressDescription": "Punta Gorda village main road",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Handmade",
+      "Cultural",
+      "Community Supported",
+      "Authentic"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "09:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "10:00",
+        "close": "15:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b044",
+    "slug": "mega-plaza",
+    "name": "MegaPlaza Roatán",
+    "description": "The island's main shopping center with a supermarket, pharmacy, electronics, and everyday essentials.",
+    "insiderTip": "Stock up on sunscreen and water here — beach shops charge double.",
+    "category": "shop",
+    "subcategory": "Shopping Center",
+    "area": "coxen_hole",
+    "latitude": 16.3045,
+    "longitude": -86.5552,
+    "addressDescription": "Main highway in Coxen Hole, impossible to miss",
+    "phone": "+504-2445-5000",
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Supermarket",
+      "Pharmacy",
+      "ATM",
+      "Parking"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "09:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "10:00",
+        "close": "15:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b045",
+    "slug": "reef-jewelry",
+    "name": "Reef Treasures Jewelry",
+    "description": "Custom jewelry featuring sea glass, coral-inspired designs, and sterling silver. Made on the island.",
+    "insiderTip": "They'll custom-make a pendant from sea glass you find on the beach.",
+    "category": "shop",
+    "subcategory": "Jewelry",
+    "area": "west_end",
+    "latitude": 16.2993,
+    "longitude": -86.6093,
+    "addressDescription": "West End, near the end of the main road",
+    "phone": null,
+    "whatsapp": "+50497129999",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@reeftreasures",
+    "priceRange": 2,
+    "features": [
+      "Handmade",
+      "Custom",
+      "Sea Glass",
+      "Sterling Silver"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "09:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "09:00",
+        "close": "17:00"
+      },
+      "sunday": {
+        "open": "10:00",
+        "close": "15:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b046",
+    "slug": "infinity-bay",
+    "name": "Infinity Bay Resort",
+    "description": "West Bay's premier beachfront resort with spacious condos, infinity pool, and direct beach access.",
+    "insiderTip": "Book a top-floor unit facing the ocean — the sunrise is stunning.",
+    "category": "stay",
+    "subcategory": "Resort",
+    "area": "west_bay",
+    "latitude": 16.2945,
+    "longitude": -86.6175,
+    "addressDescription": "West Bay Beach, main resort area",
+    "phone": "+504-2445-5050",
+    "whatsapp": null,
+    "email": "reservations@infinitybay.com",
+    "website": "https://infinitybay.com",
+    "facebook": null,
+    "instagram": "@infinitybayroatan",
+    "priceRange": 4,
+    "features": [
+      "Beachfront",
+      "Pool",
+      "Restaurant",
+      "Spa",
+      "WiFi",
+      "Dive Shop"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "tuesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "wednesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "thursday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "friday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "saturday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "sunday": {
+        "open": "00:00",
+        "close": "23:59"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b047",
+    "slug": "splash-inn",
+    "name": "Splash Inn Dive Resort",
+    "description": "West End's best dive resort with pool, restaurant, and in-house dive shop. Great value packages.",
+    "insiderTip": "The dive-and-stay packages save you hundreds compared to booking separately.",
+    "category": "stay",
+    "subcategory": "Dive Resort",
+    "area": "west_end",
+    "latitude": 16.298,
+    "longitude": -86.6112,
+    "addressDescription": "West End main road, right in the heart of town",
+    "phone": "+504-2445-1010",
+    "whatsapp": null,
+    "email": "info@splashinn.com",
+    "website": "https://splashinn.com",
+    "facebook": null,
+    "instagram": "@splashinnroatan",
+    "priceRange": 2,
+    "features": [
+      "Pool",
+      "Dive Shop",
+      "Restaurant",
+      "WiFi",
+      "Bar"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "tuesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "wednesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "thursday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "friday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "saturday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "sunday": {
+        "open": "00:00",
+        "close": "23:59"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b048",
+    "slug": "casa-calico",
+    "name": "Casa Calico Hostel",
+    "description": "Budget-friendly hostel in West End with a social vibe, hammocks, and a shared kitchen. Backpacker paradise.",
+    "insiderTip": "The dorm room upstairs has the best breeze — request it specifically.",
+    "category": "stay",
+    "subcategory": "Hostel",
+    "area": "west_end",
+    "latitude": 16.2982,
+    "longitude": -86.6106,
+    "addressDescription": "West End, behind the main strip",
+    "phone": null,
+    "whatsapp": "+50498765000",
+    "email": "casacalico@gmail.com",
+    "website": null,
+    "facebook": null,
+    "instagram": "@casacalico",
+    "priceRange": 1,
+    "features": [
+      "Budget Friendly",
+      "Kitchen",
+      "WiFi",
+      "Social Atmosphere",
+      "Hammocks"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "tuesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "wednesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "thursday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "friday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "saturday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "sunday": {
+        "open": "00:00",
+        "close": "23:59"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b049",
+    "slug": "grand-roatan",
+    "name": "Grand Roatán Resort",
+    "description": "All-inclusive luxury on the west end with private beach, spa, and multiple restaurants.",
+    "insiderTip": "Ask for a room in building 3 — closest to the beach and quietest.",
+    "category": "stay",
+    "subcategory": "All-Inclusive",
+    "area": "west_bay",
+    "latitude": 16.295,
+    "longitude": -86.616,
+    "addressDescription": "West Bay, past the main beach area",
+    "phone": "+504-2445-8888",
+    "whatsapp": null,
+    "email": null,
+    "website": "https://grandroatan.com",
+    "facebook": null,
+    "instagram": "@grandroatan",
+    "priceRange": 4,
+    "features": [
+      "All-Inclusive",
+      "Spa",
+      "Private Beach",
+      "Multiple Restaurants",
+      "Pool"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "tuesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "wednesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "thursday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "friday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "saturday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "sunday": {
+        "open": "00:00",
+        "close": "23:59"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b050",
+    "slug": "posada-arco-iris",
+    "name": "Posada Arco Iris",
+    "description": "Charming locally-owned guesthouse in West End with colorful rooms and home-cooked breakfast included.",
+    "insiderTip": "Maria's breakfast is worth the stay alone — ask for the banana pancakes.",
+    "category": "stay",
+    "subcategory": "Guesthouse",
+    "area": "west_end",
+    "latitude": 16.2995,
+    "longitude": -86.609,
+    "addressDescription": "Quiet end of West End, near the church",
+    "phone": null,
+    "whatsapp": "+50496547000",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Breakfast Included",
+      "Garden",
+      "Quiet",
+      "Local Owner",
+      "WiFi"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "tuesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "wednesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "thursday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "friday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "saturday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "sunday": {
+        "open": "00:00",
+        "close": "23:59"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b051",
+    "slug": "turquoise-bay-resort",
+    "name": "Turquoise Bay Dive Resort",
+    "description": "Eco-lodge on the south side with amazing wall diving right off shore. Remote and beautiful.",
+    "insiderTip": "The house reef here is the best shore dive on the island.",
+    "category": "stay",
+    "subcategory": "Eco Resort",
+    "area": "sandy_bay",
+    "latitude": 16.31,
+    "longitude": -86.587,
+    "addressDescription": "South shore road, Sandy Bay area",
+    "phone": "+504-9888-1234",
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 3,
+    "features": [
+      "Eco-Friendly",
+      "Dive Shop",
+      "Shore Diving",
+      "Restaurant",
+      "Secluded"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "tuesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "wednesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "thursday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "friday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "saturday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "sunday": {
+        "open": "00:00",
+        "close": "23:59"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b052",
+    "slug": "oak-ridge-bnb",
+    "name": "Ridge View B&B",
+    "description": "Cozy bed and breakfast overlooking Oak Ridge harbor. Wake up to the sound of fishing boats.",
+    "insiderTip": "Ask for the harbor-view room — watch the boats come in at dawn.",
+    "category": "stay",
+    "subcategory": "B&B",
+    "area": "oak_ridge",
+    "latitude": 16.366,
+    "longitude": -86.3692,
+    "addressDescription": "Hillside above Oak Ridge harbor",
+    "phone": null,
+    "whatsapp": "+50498762222",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Harbor Views",
+      "Breakfast Included",
+      "Quiet",
+      "Local Owner"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "tuesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "wednesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "thursday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "friday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "saturday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "sunday": {
+        "open": "00:00",
+        "close": "23:59"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b053",
+    "slug": "camp-bay-lodge",
+    "name": "Camp Bay Lodge",
+    "description": "Remote beach lodge at the quiet eastern end of the island. Pure seclusion with the beach to yourself.",
+    "insiderTip": "Bring everything you need — there are no shops nearby.",
+    "category": "stay",
+    "subcategory": "Lodge",
+    "area": "camp_bay",
+    "latitude": 16.4195,
+    "longitude": -86.2905,
+    "addressDescription": "End of the road at Camp Bay Beach",
+    "phone": null,
+    "whatsapp": "+50496541111",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Beachfront",
+      "Secluded",
+      "Nature",
+      "Off-Grid"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "tuesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "wednesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "thursday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "friday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "saturday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "sunday": {
+        "open": "00:00",
+        "close": "23:59"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b054",
+    "slug": "mayan-princess",
+    "name": "Mayan Princess Resort",
+    "description": "Mid-range West Bay resort with full kitchens, pool, and beach access. Great for families.",
+    "insiderTip": "The 2-bedroom units are perfect for families — book early for holiday weeks.",
+    "category": "stay",
+    "subcategory": "Resort",
+    "area": "west_bay",
+    "latitude": 16.2938,
+    "longitude": -86.618,
+    "addressDescription": "West Bay Beach, south end",
+    "phone": "+504-2445-6060",
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 3,
+    "features": [
+      "Beachfront",
+      "Pool",
+      "Kitchen",
+      "Family Friendly",
+      "WiFi"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "tuesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "wednesday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "thursday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "friday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "saturday": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "sunday": {
+        "open": "00:00",
+        "close": "23:59"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b055",
+    "slug": "captain-vans",
+    "name": "Captain Van's Scooter Rentals",
+    "description": "Most popular scooter rental in West End. Well-maintained bikes, helmets included, and fair prices.",
+    "insiderTip": "Get the full-day rate even if you think you only need half a day — you'll want to explore.",
+    "category": "rentals",
+    "subcategory": "Scooter Rental",
+    "area": "west_end",
+    "latitude": 16.2988,
+    "longitude": -86.61,
+    "addressDescription": "West End main road, near the entrance",
+    "phone": "+504-9654-9876",
+    "whatsapp": "+50496549876",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Helmets Included",
+      "Insurance",
+      "Daily Rates",
+      "Delivery"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "16:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b056",
+    "slug": "roatan-car-rental",
+    "name": "Roatán Auto Rentals",
+    "description": "Reliable car rental near the airport. SUVs, sedans, and 4x4s with fair rates and no hidden fees.",
+    "insiderTip": "Get a 4x4 if you're heading east of French Harbour — the road gets rough.",
+    "category": "rentals",
+    "subcategory": "Car Rental",
+    "area": "coxen_hole",
+    "latitude": 16.3155,
+    "longitude": -86.5235,
+    "addressDescription": "Near Juan Manuel Gálvez Airport",
+    "phone": "+504-2445-1234",
+    "whatsapp": "+50424451234",
+    "email": "rentals@roatanauto.com",
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Airport Pickup",
+      "Insurance Included",
+      "4x4 Available",
+      "Weekly Discounts"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "16:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b057",
+    "slug": "kayak-roatan",
+    "name": "Roatán Kayak Rentals",
+    "description": "Kayak and paddleboard rentals on West Bay Beach. Single, double, and clear-bottom kayaks available.",
+    "insiderTip": "The clear-bottom kayak over the reef at sunset is unforgettable.",
+    "category": "rentals",
+    "subcategory": "Water Sports",
+    "area": "west_bay",
+    "latitude": 16.2946,
+    "longitude": -86.6168,
+    "addressDescription": "West Bay Beach, near the main entrance",
+    "phone": null,
+    "whatsapp": "+50498761000",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Paddleboards",
+      "Clear Kayaks",
+      "Hourly Rates",
+      "No Experience Needed"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "16:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b058",
+    "slug": "ebikes-roatan",
+    "name": "E-Bike Island Tours",
+    "description": "Electric bike rentals for exploring Roatán without breaking a sweat. Self-guided tour maps included.",
+    "insiderTip": "The battery lasts about 4 hours — plan your route accordingly.",
+    "category": "rentals",
+    "subcategory": "Bike Rental",
+    "area": "west_end",
+    "latitude": 16.2984,
+    "longitude": -86.611,
+    "addressDescription": "West End main road, near the dive shops",
+    "phone": null,
+    "whatsapp": "+50497128000",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@ebikesroatan",
+    "priceRange": 2,
+    "features": [
+      "Electric",
+      "Maps Included",
+      "Helmet",
+      "Self-Guided"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "16:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b059",
+    "slug": "golf-cart-west-bay",
+    "name": "West Bay Golf Cart Rentals",
+    "description": "Cruise around West Bay in style. Golf carts are the local way to get around the beach area.",
+    "insiderTip": "The 4-seater is perfect for families — fits everyone plus beach gear.",
+    "category": "rentals",
+    "subcategory": "Golf Cart",
+    "area": "west_bay",
+    "latitude": 16.294,
+    "longitude": -86.6165,
+    "addressDescription": "West Bay, near the main road entrance",
+    "phone": "+504-9712-4444",
+    "whatsapp": "+50497124444",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Hourly Rates",
+      "Daily Rates",
+      "Family Size",
+      "Easy to Drive"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "16:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b060",
+    "slug": "boat-rentals-roatan",
+    "name": "Island Boat Charters",
+    "description": "Private boat rentals for reef exploring, island hopping, or a day on the water.",
+    "insiderTip": "The half-day charter to the Cayos Cochinos is the trip of a lifetime.",
+    "category": "rentals",
+    "subcategory": "Boat Rental",
+    "area": "french_harbour",
+    "latitude": 16.3348,
+    "longitude": -86.4595,
+    "addressDescription": "French Harbour marina",
+    "phone": "+504-9654-7777",
+    "whatsapp": "+50496547777",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@islandboatcharters",
+    "priceRange": 3,
+    "features": [
+      "Private Charters",
+      "Captain Included",
+      "Snorkel Gear",
+      "Island Hopping"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "16:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b061",
+    "slug": "roatan-jet-ski",
+    "name": "Roatán Jet Ski Rentals",
+    "description": "Jet ski fun on the west end. Guided tours and free-ride options available.",
+    "insiderTip": "The guided tour takes you to hidden beaches you can't reach by road.",
+    "category": "rentals",
+    "subcategory": "Jet Ski",
+    "area": "west_bay",
+    "latitude": 16.2935,
+    "longitude": -86.6175,
+    "addressDescription": "South end of West Bay Beach",
+    "phone": null,
+    "whatsapp": "+50498766000",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 3,
+    "features": [
+      "Guided Tours",
+      "Free Ride",
+      "Safety Brief",
+      "Life Jackets"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "16:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b062",
+    "slug": "snorkel-gear-rental",
+    "name": "Reef Ready Snorkel Rentals",
+    "description": "Quality snorkel equipment rental right on West Bay Beach. Masks, fins, and underwater cameras.",
+    "insiderTip": "Rent the underwater camera — you'll want photos of the reef.",
+    "category": "rentals",
+    "subcategory": "Snorkel Gear",
+    "area": "west_bay",
+    "latitude": 16.2943,
+    "longitude": -86.6172,
+    "addressDescription": "West Bay Beach, main beach area",
+    "phone": null,
+    "whatsapp": "+50497125555",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Quality Equipment",
+      "Underwater Cameras",
+      "Daily Rates",
+      "Beach Delivery"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "07:00",
+        "close": "18:00"
+      },
+      "sunday": {
+        "open": "08:00",
+        "close": "16:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b063",
+    "slug": "taxi-marvin",
+    "name": "Marvin's Taxi Service",
+    "description": "Reliable island-wide taxi service. Marvin knows every road and shortcut on Roatán.",
+    "insiderTip": "Save his WhatsApp — he's the most reliable driver on the island.",
+    "category": "transport",
+    "subcategory": "Taxi",
+    "area": "coxen_hole",
+    "latitude": 16.304,
+    "longitude": -86.5555,
+    "addressDescription": "Based in Coxen Hole, serves entire island",
+    "phone": "+504-9876-3333",
+    "whatsapp": "+50498763333",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Airport Transfers",
+      "Island Wide",
+      "English Speaking",
+      "Reliable"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "tuesday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "wednesday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "thursday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "friday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "saturday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "sunday": {
+        "open": "07:00",
+        "close": "18:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b064",
+    "slug": "water-taxi-west",
+    "name": "West End Water Taxi",
+    "description": "Quick water taxi between West End and West Bay. Faster and more scenic than driving.",
+    "insiderTip": "The last boat back is at 5 PM — don't get stranded.",
+    "category": "transport",
+    "subcategory": "Water Taxi",
+    "area": "west_end",
+    "latitude": 16.2985,
+    "longitude": -86.61,
+    "addressDescription": "West End main dock",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Scenic",
+      "Quick",
+      "Cash Only",
+      "Regular Schedule"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "tuesday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "wednesday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "thursday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "friday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "saturday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "sunday": {
+        "open": "07:00",
+        "close": "18:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b065",
+    "slug": "cruise-port-shuttle",
+    "name": "Port Express Shuttle",
+    "description": "Shuttle service from both cruise ports to West Bay and West End. Air-conditioned vans.",
+    "insiderTip": "Pre-book online for guaranteed seats on busy cruise ship days.",
+    "category": "transport",
+    "subcategory": "Shuttle",
+    "area": "coxen_hole",
+    "latitude": 16.3042,
+    "longitude": -86.555,
+    "addressDescription": "At both cruise port exits",
+    "phone": "+504-2445-7000",
+    "whatsapp": "+50424457000",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Air Conditioned",
+      "Fixed Route",
+      "Cruise Port Pickup",
+      "Reliable"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "tuesday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "wednesday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "thursday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "friday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "saturday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "sunday": {
+        "open": "07:00",
+        "close": "18:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b066",
+    "slug": "airport-transfer",
+    "name": "Roatán Airport Transfers",
+    "description": "Professional airport pickup and drop-off service. Meet-and-greet with name sign.",
+    "insiderTip": "Book in advance for international flights — taxi availability varies.",
+    "category": "transport",
+    "subcategory": "Airport Transfer",
+    "area": "coxen_hole",
+    "latitude": 16.316,
+    "longitude": -86.5225,
+    "addressDescription": "Juan Manuel Gálvez Airport",
+    "phone": "+504-2445-8000",
+    "whatsapp": "+50424458000",
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Meet & Greet",
+      "Fixed Price",
+      "Air Conditioned",
+      "Luggage Help"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "tuesday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "wednesday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "thursday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "friday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "saturday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "sunday": {
+        "open": "07:00",
+        "close": "18:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b067",
+    "slug": "oak-ridge-water-taxi",
+    "name": "Oak Ridge Water Taxi",
+    "description": "Traditional cayuco water taxis in Oak Ridge. The only way to explore the stilt village.",
+    "insiderTip": "Agree on the price before you get in — standard rate is about $2-3.",
+    "category": "transport",
+    "subcategory": "Water Taxi",
+    "area": "oak_ridge",
+    "latitude": 16.3668,
+    "longitude": -86.369,
+    "addressDescription": "Oak Ridge main dock",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Traditional",
+      "Scenic",
+      "Cash Only",
+      "Local Experience"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "tuesday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "wednesday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "thursday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "friday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "saturday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "sunday": {
+        "open": "07:00",
+        "close": "18:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b068",
+    "slug": "bus-roatan",
+    "name": "Roatán Local Bus",
+    "description": "Public minibus running the main highway from West End to Oak Ridge. Cheap and authentic.",
+    "insiderTip": "Flag it down anywhere on the main road — there are no official stops.",
+    "category": "transport",
+    "subcategory": "Public Bus",
+    "area": "coxen_hole",
+    "latitude": 16.3035,
+    "longitude": -86.556,
+    "addressDescription": "Main highway, flag down anywhere",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Budget Friendly",
+      "Authentic",
+      "Island Wide",
+      "Cash Only"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "tuesday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "wednesday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "thursday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "friday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "saturday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "sunday": {
+        "open": "07:00",
+        "close": "18:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b069",
+    "slug": "private-driver",
+    "name": "Bay Island Transfers",
+    "description": "Private driver service for full-day or half-day island exploration. Custom itineraries.",
+    "insiderTip": "Book the full-day rate for east end exploration — it's the only comfortable way.",
+    "category": "transport",
+    "subcategory": "Private Driver",
+    "area": "west_bay",
+    "latitude": 16.294,
+    "longitude": -86.6175,
+    "addressDescription": "Pickup from any West Bay or West End location",
+    "phone": null,
+    "whatsapp": "+50498764000",
+    "email": "bayislandtransfers@gmail.com",
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 3,
+    "features": [
+      "Private",
+      "Custom Itinerary",
+      "Air Conditioned",
+      "English Speaking"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "tuesday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "wednesday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "thursday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "friday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "saturday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "sunday": {
+        "open": "07:00",
+        "close": "18:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b070",
+    "slug": "ferry-utila",
+    "name": "Roatán-Utila Ferry",
+    "description": "Daily ferry service between Roatán and Utila. Catamaran with air conditioning.",
+    "insiderTip": "Book the morning crossing — afternoon seas can be rough.",
+    "category": "transport",
+    "subcategory": "Ferry",
+    "area": "coxen_hole",
+    "latitude": 16.303,
+    "longitude": -86.5565,
+    "addressDescription": "Coxen Hole main dock, buy tickets at the terminal",
+    "phone": "+504-2445-3000",
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Air Conditioned",
+      "Daily Service",
+      "Inter-Island",
+      "Catamaran"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "tuesday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "wednesday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "thursday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "friday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "saturday": {
+        "open": "06:00",
+        "close": "20:00"
+      },
+      "sunday": {
+        "open": "07:00",
+        "close": "18:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b071",
+    "slug": "west-bay-beach",
+    "name": "West Bay Beach",
+    "description": "The #1 beach in Honduras and one of the best in the Caribbean. Powdery white sand, crystal water, and reef just offshore.",
+    "insiderTip": "Walk south past the resorts for a quieter stretch of sand.",
+    "category": "beaches",
+    "subcategory": "Public Beach",
+    "area": "west_bay",
+    "latitude": 16.294,
+    "longitude": -86.6175,
+    "addressDescription": "West Bay — you can't miss it",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "White Sand",
+      "Snorkeling",
+      "Restaurants Nearby",
+      "Accessible"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "sunday": {
+        "open": "06:00",
+        "close": "18:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b072",
+    "slug": "half-moon-bay",
+    "name": "Half Moon Bay Beach",
+    "description": "Mellow crescent beach in West End. More chill than West Bay with great snorkeling right off shore.",
+    "insiderTip": "Best snorkeling is on the north point — look for parrotfish.",
+    "category": "beaches",
+    "subcategory": "Public Beach",
+    "area": "west_end",
+    "latitude": 16.2998,
+    "longitude": -86.6085,
+    "addressDescription": "North end of West End",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Snorkeling",
+      "Quiet",
+      "Free Entry",
+      "Reef Access"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "sunday": {
+        "open": "06:00",
+        "close": "18:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b073",
+    "slug": "camp-bay-beach",
+    "name": "Camp Bay Beach",
+    "description": "Remote, pristine, and nearly empty. Worth the drive for those who want a beach entirely to themselves.",
+    "insiderTip": "Bring everything — water, snacks, sunscreen. There's nothing out there.",
+    "category": "beaches",
+    "subcategory": "Secluded Beach",
+    "area": "camp_bay",
+    "latitude": 16.42,
+    "longitude": -86.29,
+    "addressDescription": "End of the road, eastern tip of Roatán",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Secluded",
+      "Pristine",
+      "No Crowds",
+      "Natural"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "sunday": {
+        "open": "06:00",
+        "close": "18:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b074",
+    "slug": "tabyana-beach",
+    "name": "Tabyana Beach",
+    "description": "Private beach resort popular with cruise passengers. Clean facilities, clear water, and organized activities.",
+    "insiderTip": "Skip the overpriced cruise ship excursion — just take a taxi and pay at the gate.",
+    "category": "beaches",
+    "subcategory": "Beach Club",
+    "area": "west_bay",
+    "latitude": 16.2948,
+    "longitude": -86.6162,
+    "addressDescription": "West Bay Beach, south section near Tabyana",
+    "phone": "+504-9654-5000",
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Facilities",
+      "Lounge Chairs",
+      "Bar",
+      "Snorkel Rental"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "sunday": {
+        "open": "06:00",
+        "close": "18:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b075",
+    "slug": "sandy-bay-beach",
+    "name": "Sandy Bay Public Beach",
+    "description": "Quiet local beach in Sandy Bay. Less famous than West Bay but beautiful and far less crowded.",
+    "insiderTip": "Come on weekdays — you'll often have it to yourself.",
+    "category": "beaches",
+    "subcategory": "Public Beach",
+    "area": "sandy_bay",
+    "latitude": 16.3155,
+    "longitude": -86.584,
+    "addressDescription": "Sandy Bay waterfront, follow signs from the main road",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Quiet",
+      "No Crowds",
+      "Local Vibe",
+      "Free"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "sunday": {
+        "open": "06:00",
+        "close": "18:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b076",
+    "slug": "punta-gorda-beach",
+    "name": "Punta Gorda Beach",
+    "description": "Garifuna community beach with warm hospitality. Experience local culture while enjoying the water.",
+    "insiderTip": "Visit during a Garifuna festival — the drumming and dancing on the beach is magical.",
+    "category": "beaches",
+    "subcategory": "Cultural Beach",
+    "area": "punta_gorda",
+    "latitude": 16.3735,
+    "longitude": -86.3415,
+    "addressDescription": "Punta Gorda village waterfront",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Cultural",
+      "Authentic",
+      "Community",
+      "Free"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "sunday": {
+        "open": "06:00",
+        "close": "18:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b077",
+    "slug": "big-bight-beach",
+    "name": "Big Bight Beach",
+    "description": "Hidden cove near Sandy Bay accessible by a short trail. Calm, clear water perfect for swimming.",
+    "insiderTip": "The trail starts behind the resort — follow it for 10 minutes.",
+    "category": "beaches",
+    "subcategory": "Hidden Beach",
+    "area": "sandy_bay",
+    "latitude": 16.312,
+    "longitude": -86.586,
+    "addressDescription": "Sandy Bay, ask locals for the trailhead",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Hidden",
+      "Calm Water",
+      "No Crowds",
+      "Trail Access"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "sunday": {
+        "open": "06:00",
+        "close": "18:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b078",
+    "slug": "port-royal-beach",
+    "name": "Port Royal Beach",
+    "description": "Remote paradise on the far east end. Worth the adventure for pristine sand and world-class snorkeling.",
+    "insiderTip": "Hire a local boat from Oak Ridge to get there — the road is very rough.",
+    "category": "beaches",
+    "subcategory": "Remote Beach",
+    "area": "port_royal",
+    "latitude": 16.4045,
+    "longitude": -86.3205,
+    "addressDescription": "Port Royal, eastern Roatán",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Remote",
+      "Pristine",
+      "Snorkeling",
+      "Adventure"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "tuesday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "wednesday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "thursday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "friday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "saturday": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "sunday": {
+        "open": "06:00",
+        "close": "18:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b079",
+    "slug": "sundowners-late-night",
+    "name": "Sundowners Late Night",
+    "description": "West End's nightlife epicenter. Live music most nights, dancing, and the party goes until 2 AM.",
+    "insiderTip": "Thursday is the biggest night — live band and packed dance floor.",
+    "category": "nightlife",
+    "subcategory": "Live Music",
+    "area": "west_end",
+    "latitude": 16.299,
+    "longitude": -86.61,
+    "addressDescription": "West End waterfront, same as daytime Sundowners",
+    "phone": "+504-9658-1234",
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@sundowners_roatan",
+    "priceRange": 2,
+    "features": [
+      "Live Music",
+      "Dancing",
+      "Late Night",
+      "Waterfront"
+    ],
+    "isVerified": true,
+    "isFeatured": true,
+    "hours": {
+      "monday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "tuesday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "wednesday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "thursday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "friday": {
+        "open": "18:00",
+        "close": "03:00"
+      },
+      "saturday": {
+        "open": "18:00",
+        "close": "03:00"
+      },
+      "sunday": {
+        "open": "18:00",
+        "close": "00:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b080",
+    "slug": "eagle-rays-bar",
+    "name": "Eagle Ray's Bar",
+    "description": "West End party spot with DJs on weekends. The rooftop has the best night views on the strip.",
+    "insiderTip": "Saturday night is the main event — get there by 10 PM.",
+    "category": "nightlife",
+    "subcategory": "DJ Bar",
+    "area": "west_end",
+    "latitude": 16.2985,
+    "longitude": -86.6105,
+    "addressDescription": "West End main road, upstairs with rooftop",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@eagleraysroatan",
+    "priceRange": 2,
+    "features": [
+      "DJs",
+      "Rooftop",
+      "Dancing",
+      "Late Night"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "tuesday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "wednesday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "thursday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "friday": {
+        "open": "18:00",
+        "close": "03:00"
+      },
+      "saturday": {
+        "open": "18:00",
+        "close": "03:00"
+      },
+      "sunday": {
+        "open": "18:00",
+        "close": "00:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b081",
+    "slug": "west-bay-bonfire",
+    "name": "Beach Bonfire Nights",
+    "description": "Weekly beach bonfire events on West Bay Beach. Fire poi, live music, and stars over the Caribbean.",
+    "insiderTip": "Check their Instagram for the next bonfire date — usually Wednesday.",
+    "category": "nightlife",
+    "subcategory": "Beach Party",
+    "area": "west_bay",
+    "latitude": 16.2938,
+    "longitude": -86.6178,
+    "addressDescription": "West Bay Beach, south end",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@westbaybonfire",
+    "priceRange": 1,
+    "features": [
+      "Beach",
+      "Bonfire",
+      "Live Music",
+      "BYOB",
+      "Weekly Event"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "tuesday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "wednesday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "thursday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "friday": {
+        "open": "18:00",
+        "close": "03:00"
+      },
+      "saturday": {
+        "open": "18:00",
+        "close": "03:00"
+      },
+      "sunday": {
+        "open": "18:00",
+        "close": "00:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b082",
+    "slug": "roosters-bar",
+    "name": "Rooster's Bar",
+    "description": "Late-night dive bar in West End where locals and travelers mix until the small hours. Cash only.",
+    "insiderTip": "Don't judge it by the outside — the inside has character.",
+    "category": "nightlife",
+    "subcategory": "Dive Bar",
+    "area": "west_end",
+    "latitude": 16.2978,
+    "longitude": -86.6115,
+    "addressDescription": "West End, past the main strip",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "Late Night",
+      "Cash Only",
+      "Local Crowd",
+      "Pool Table"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "tuesday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "wednesday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "thursday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "friday": {
+        "open": "18:00",
+        "close": "03:00"
+      },
+      "saturday": {
+        "open": "18:00",
+        "close": "03:00"
+      },
+      "sunday": {
+        "open": "18:00",
+        "close": "00:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b083",
+    "slug": "coco-lounge",
+    "name": "Coco Lounge",
+    "description": "Upscale cocktail lounge in West Bay. Craft cocktails, ambient music, and a sophisticated crowd.",
+    "insiderTip": "The espresso martini is the best on the island.",
+    "category": "nightlife",
+    "subcategory": "Lounge",
+    "area": "west_bay",
+    "latitude": 16.2945,
+    "longitude": -86.617,
+    "addressDescription": "West Bay resort area",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": "@cocoloungeroatan",
+    "priceRange": 3,
+    "features": [
+      "Craft Cocktails",
+      "Upscale",
+      "Music",
+      "Late Night"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "tuesday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "wednesday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "thursday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "friday": {
+        "open": "18:00",
+        "close": "03:00"
+      },
+      "saturday": {
+        "open": "18:00",
+        "close": "03:00"
+      },
+      "sunday": {
+        "open": "18:00",
+        "close": "00:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b084",
+    "slug": "fh-nightlife",
+    "name": "Harbour Nights Club",
+    "description": "French Harbour's only nightclub. Local DJs, dancing, and a different vibe from the tourist areas.",
+    "insiderTip": "Saturday night is the only night worth going — it's dead otherwise.",
+    "category": "nightlife",
+    "subcategory": "Nightclub",
+    "area": "french_harbour",
+    "latitude": 16.335,
+    "longitude": -86.4598,
+    "addressDescription": "French Harbour main road, look for the neon sign",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 1,
+    "features": [
+      "DJs",
+      "Dancing",
+      "Local Crowd",
+      "Late Night"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "tuesday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "wednesday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "thursday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "friday": {
+        "open": "18:00",
+        "close": "03:00"
+      },
+      "saturday": {
+        "open": "18:00",
+        "close": "03:00"
+      },
+      "sunday": {
+        "open": "18:00",
+        "close": "00:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  },
+  {
+    "id": "b085",
+    "slug": "karaoke-night-wb",
+    "name": "Paradise Karaoke Nights",
+    "description": "Karaoke bar in West Bay with a huge song catalog and enthusiastic crowds. Liquid courage sold separately.",
+    "insiderTip": "Tuesday and Friday are the busiest — come ready to perform.",
+    "category": "nightlife",
+    "subcategory": "Karaoke",
+    "area": "west_bay",
+    "latitude": 16.2942,
+    "longitude": -86.6168,
+    "addressDescription": "West Bay, near the resort strip",
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "website": null,
+    "facebook": null,
+    "instagram": null,
+    "priceRange": 2,
+    "features": [
+      "Karaoke",
+      "Full Bar",
+      "Party Atmosphere",
+      "Family Friendly Early"
+    ],
+    "isVerified": true,
+    "isFeatured": false,
+    "hours": {
+      "monday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "tuesday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "wednesday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "thursday": {
+        "open": "18:00",
+        "close": "02:00"
+      },
+      "friday": {
+        "open": "18:00",
+        "close": "03:00"
+      },
+      "saturday": {
+        "open": "18:00",
+        "close": "03:00"
+      },
+      "sunday": {
+        "open": "18:00",
+        "close": "00:00"
+      }
+    },
+    "images": [
+      "business_placeholder"
+    ]
+  }
+]

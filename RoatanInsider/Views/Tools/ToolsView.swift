@@ -1,0 +1,32 @@
+import SwiftUI
+
+struct ToolsView: View {
+    @State private var viewModel = ToolsViewModel()
+
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 0) {
+                Picker("Tool", selection: $viewModel.selectedTool) {
+                    ForEach(ToolsViewModel.ToolTab.allCases, id: \.self) { tab in
+                        Text(tab.rawValue).tag(tab)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal, 20)
+                .padding(.top, 12)
+
+                ScrollView {
+                    switch viewModel.selectedTool {
+                    case .currency:
+                        CurrencyConverterView(viewModel: viewModel)
+                    case .tips:
+                        TipCalculatorView(viewModel: viewModel)
+                    }
+                }
+            }
+            .background(Color.riWhite)
+            .navigationTitle("Tools")
+            .navigationBarTitleDisplayMode(.large)
+        }
+    }
+}
