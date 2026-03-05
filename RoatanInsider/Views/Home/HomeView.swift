@@ -1,0 +1,84 @@
+import SwiftUI
+
+struct HomeView: View {
+    @Environment(DataManager.self) private var dataManager
+    @State private var viewModel = HomeViewModel()
+
+    var body: some View {
+        NavigationStack {
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 0) {
+                    HeroSection()
+
+                    // Featured — white background
+                    FeaturedSection(businesses: dataManager.featuredBusinesses)
+                        .padding(.vertical, AppConstants.sectionPadding)
+
+                    // Categories — dark background
+                    CategoryGridSection()
+                        .padding(.vertical, AppConstants.sectionPadding)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.riDark)
+
+                    // Insider Picks — white background
+                    InsiderPicksSection(businesses: dataManager.insiderPicks())
+                        .padding(.vertical, AppConstants.sectionPadding)
+
+                    // Quick Guides — dark background
+                    QuickGuidesSection()
+                        .padding(.vertical, AppConstants.sectionPadding)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.riDark)
+
+                    // CTA — white background
+                    ctaSection
+                        .padding(.vertical, AppConstants.sectionPadding)
+                }
+            }
+            .background(Color.riWhite)
+            .navigationDestination(for: Business.self) { business in
+                BusinessDetailView(business: business)
+            }
+            .navigationDestination(for: Category.self) { category in
+                CategoryListView(category: category)
+            }
+        }
+    }
+
+    private var ctaSection: some View {
+        VStack(spacing: 16) {
+            Text("Explore the island\nlike a local.")
+                .riDisplayStyle(30)
+                .foregroundStyle(Color.riDark)
+                .multilineTextAlignment(.center)
+
+            Text("Discover the best of Roatán — curated by people who live here.")
+                .font(.riBody)
+                .foregroundStyle(Color.riMediumGray)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
+        }
+        .padding(.horizontal, 20)
+    }
+}
+
+struct CategoryListView: View {
+    let category: Category
+    @Environment(DataManager.self) private var dataManager
+
+    var body: some View {
+        ScrollView {
+            LazyVStack(spacing: 16) {
+                ForEach(dataManager.businesses(for: category)) { business in
+                    NavigationLink(value: business) {
+                        BusinessCard(business: business)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(20)
+        }
+        .navigationTitle(category.displayName)
+        .background(Color.riWhite)
+    }
+}

@@ -1,0 +1,103 @@
+{
+  "topics": [
+    {
+      "id": "money",
+      "title": "Money & Payments",
+      "icon": "dollarsign.circle",
+      "content": "US dollars are widely accepted across Roatán, especially in tourist areas like West Bay, West End, and at dive shops. The local currency is the Honduran Lempira (HNL), and the exchange rate hovers around 24-25 Lempiras per dollar. You'll get change in a mix of USD and Lempiras — don't be surprised if you pay in dollars and get Lempiras back. ATMs are available in Coxen Hole, French Harbour, and West End, but they dispense Lempiras only. Credit cards are accepted at most restaurants and larger shops in tourist zones, but cash is king everywhere else. Visa and Mastercard work best — Amex and Discover are rarely accepted.",
+      "tips": [
+        "Always carry small bills. A $50 or $100 bill is nearly impossible to break at small shops and beach vendors. Stock up on $1s, $5s, and $10s before your trip.",
+        "Count your change carefully when receiving Lempiras. Know the approximate exchange rate so you're not shortchanged.",
+        "ATMs in Coxen Hole sometimes run out of cash on heavy cruise days. Withdraw what you need early in the morning or bring enough USD from the ship."
+      ]
+    },
+    {
+      "id": "safety",
+      "title": "Safety",
+      "icon": "shield.checkmark",
+      "content": "Roatán is generally safe for tourists, especially in West Bay, West End, and Sandy Bay. These areas are well-traveled, have a visible security presence, and businesses depend on tourist safety. That said, use the same street smarts you'd use in any Caribbean destination. Petty theft can happen if you leave valuables unattended on the beach or flash expensive items. Coxen Hole and areas outside the main tourist zones require more awareness — they're not dangerous, but they're working-class communities where a tourist with a $2,000 camera stands out. Violent crime against tourists is rare but not unheard of. Travel in groups after dark, use reputable taxi services, and trust your instincts.",
+      "tips": [
+        "Use hotel safes or waterproof pouches for valuables at the beach. Never leave phones, wallets, or cameras unattended on a beach chair.",
+        "Stick to official taxis, especially from the cruise ports. They're identifiable and regulated. Your hotel or restaurant can always call one for you.",
+        "Avoid walking alone on unlit roads after dark outside of West Bay and West End resort areas. Take a taxi — it's cheap and not worth the risk."
+      ]
+    },
+    {
+      "id": "water",
+      "title": "Water & Hydration",
+      "icon": "drop.fill",
+      "content": "Do not drink the tap water on Roatán. This applies everywhere on the island — hotels, restaurants, homes. Locals don't drink it either. Bottled water is available at every shop, gas station, and restaurant for $1-2. Most restaurants use purified water for ice and cooking, but if you're at a very small local spot, it's reasonable to ask. The tropical heat and humidity will dehydrate you faster than you realize, especially if you're active, snorkeling, or drinking alcohol. By the time you feel thirsty, you're already behind.",
+      "tips": [
+        "Buy a large bottle of water first thing and carry it with you all day. A 1.5-liter bottle costs about $1.50 from any shop.",
+        "Drink water before you feel thirsty. Aim for at least 2-3 liters per day, more if you're snorkeling or hiking.",
+        "Alcohol and sun are a deceptive combination. Alternate every cocktail with a glass of water, especially at beach bars where the breeze masks how hot it actually is."
+      ]
+    },
+    {
+      "id": "sun",
+      "title": "Sun Protection",
+      "icon": "sun.max.fill",
+      "content": "Roatán sits at 16° north latitude — the sun here is no joke. You can burn in 15-20 minutes even on a cloudy day, especially on the water where UV reflects off the surface. The most common injury for tourists on Roatán isn't a twisted ankle or a jellyfish sting — it's a devastating sunburn that ruins the rest of their trip. Wear reef-safe sunscreen (SPF 50+), reapply every 90 minutes, and seriously consider a rash guard for snorkeling. A sunburn acquired at 10am will intensify through the afternoon and peak that evening.",
+      "tips": [
+        "Use reef-safe sunscreen only. Oxybenzone and octinoxate (found in most mainstream sunscreens) kill coral. Look for zinc oxide or titanium dioxide-based formulas.",
+        "Wear a rash guard or UV shirt for snorkeling. Your back and shoulders get the worst burns because they face straight up toward the sun while you're in the water.",
+        "The most dangerous sun hours are 10am to 2pm. If you can, take a shaded lunch break during this window and hit the beach in the morning or late afternoon."
+      ]
+    },
+    {
+      "id": "language",
+      "title": "Language",
+      "icon": "text.bubble",
+      "content": "English is widely spoken on Roatán — much more than mainland Honduras. The island was a British colony until 1859, and many native islanders (especially in West End, West Bay, and the eastern communities) speak English as their first language with a Caribbean Creole accent. Spanish is the official national language and is the primary language in Coxen Hole, French Harbour, and among mainland Hondurans who've moved to the island for work. In tourist areas, you can get by entirely in English. Learning a few Spanish phrases will earn you smiles and better service everywhere else.",
+      "tips": [
+        "\"Buenos días\" (good morning), \"Gracias\" (thank you), and \"La cuenta, por favor\" (the check, please) will cover 80% of your Spanish needs.",
+        "The Garifuna community in Punta Gorda speaks their own language in addition to English and Spanish. It's a UNESCO-recognized cultural heritage.",
+        "If someone doesn't understand your English, speak slower — not louder. A few simple words and a smile go further than a complicated sentence."
+      ]
+    },
+    {
+      "id": "electricity",
+      "title": "Electricity",
+      "icon": "bolt.fill",
+      "content": "Roatán uses the same electrical standard as the US — 110V, 60Hz, with Type A and Type B outlets (flat two-prong and three-prong). If you're coming from the US or Canada, your chargers and devices will work without any adapter. European and UK travelers will need a plug adapter and possibly a voltage converter for non-dual-voltage devices. Power on Roatán is generally reliable in tourist areas, but brief outages do happen, especially during storms. Most hotels and restaurants have backup generators that kick in within seconds.",
+      "tips": [
+        "US and Canadian travelers: you don't need any adapters. Your phone charger, camera charger, and hair dryer will all work as-is.",
+        "Bring a portable power bank for day trips. If you're out exploring the island all day, you won't always find an outlet to charge your phone.",
+        "During storm season (October-January), power outages are more common. Keep a flashlight app accessible and don't rely on a phone alarm without backup."
+      ]
+    },
+    {
+      "id": "healthcare",
+      "title": "Healthcare",
+      "icon": "cross.case.fill",
+      "content": "Roatán has basic medical facilities but it's not the place you want to have a serious medical emergency. The public hospital in Coxen Hole handles emergencies but is very basic by US standards. There are a few private clinics — Clinica Esperanza in Sandy Bay (nonprofit, accepts donations), and private doctors in West End and French Harbour. The hyperbaric chamber at Anthony's Key Resort handles diving emergencies. For anything serious, patients are airlifted to La Ceiba or San Pedro Sula on the mainland, or to hospitals in the US. Travel insurance with medical evacuation coverage is strongly recommended.",
+      "tips": [
+        "Get travel insurance with medical evacuation coverage before your trip. A medevac flight from Roatán to Miami costs $25,000+ out of pocket.",
+        "Bring any prescription medications you need in their original bottles. Pharmacies on the island stock basics but may not have your specific medication.",
+        "Pharmacies in Coxen Hole sell many medications over the counter that require prescriptions in the US, including antibiotics and anti-nausea medication. Useful in a pinch."
+      ]
+    },
+    {
+      "id": "connectivity",
+      "title": "Connectivity",
+      "icon": "wifi",
+      "content": "Wi-Fi is available at most hotels, restaurants, and cafes in West Bay and West End, but don't expect high-speed connections. Roatán's internet infrastructure is limited and shared bandwidth means speeds drop during peak hours. Video calls and streaming can be frustrating. Cell service from Honduran carriers (Tigo and Claro) covers most of the island, but gets spotty east of French Harbour. US cell plans with international roaming generally work on Roatán but check with your carrier about rates — roaming charges can be brutal. For cruise passengers, the ship's Wi-Fi may actually be more reliable than what you'll find on shore.",
+      "tips": [
+        "Download offline maps of Roatán before you arrive. Google Maps and Apple Maps both support offline areas. Cell service is unreliable in parts of the island.",
+        "If you need reliable connectivity, buy a local Tigo SIM card at a shop in Coxen Hole for about $10-15 with data. Your phone must be unlocked.",
+        "Don't rely on being able to look things up on the go. Save important addresses, phone numbers, and your ship's departure time before you leave the port."
+      ]
+    },
+    {
+      "id": "wildlife",
+      "title": "Wildlife & Reef Etiquette",
+      "icon": "leaf.fill",
+      "content": "Roatán sits on the Mesoamerican Barrier Reef — the second largest reef system in the world after Australia's Great Barrier Reef. The marine life here is extraordinary: sea turtles, eagle rays, whale sharks (seasonal), nurse sharks, moray eels, and hundreds of species of tropical fish and coral. On land, you'll encounter iguanas everywhere, the occasional coatimundi (looks like a raccoon with a long nose), and dozens of bird species. The ecosystem is fragile and directly supports the island's economy through dive tourism. Treating it with respect isn't just ethical — it's essential for Roatán's future.",
+      "tips": [
+        "Never touch, stand on, or take pieces of coral. It takes decades to grow and seconds to destroy. Maintain a comfortable distance while snorkeling and control your fins.",
+        "Don't chase, touch, or ride sea turtles. It's illegal in Honduras and stresses the animals. Float quietly and they'll often come surprisingly close on their own.",
+        "Take all trash with you — especially plastic. Plastic waste is a serious problem on the island. If you see trash on the beach or in the water, pick it up."
+      ]
+    }
+  ]
+}

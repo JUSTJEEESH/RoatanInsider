@@ -1,0 +1,191 @@
+{
+  "id": "cruise-mahogany-bay",
+  "portName": "Mahogany Bay",
+  "portDescription": "Carnival's private port facility on the south side of Roatán, about 2 miles from West Bay Beach. Connected by a free chairlift to the beach area, or a short taxi ride to West Bay and West End.",
+  "latitude": 16.2980,
+  "longitude": -86.5920,
+  "itineraries": [
+    {
+      "id": "mahogany-4hr",
+      "duration": "4 Hours",
+      "title": "Quick Beach Day",
+      "steps": [
+        {
+          "id": "mb4-1",
+          "time": "0:00",
+          "title": "Take the Chairlift to the Beach",
+          "description": "Head straight from the ship to the free chairlift at Mahogany Bay. It drops you at a small beach area with shops and a pool. Skip the shops for now — you can browse on the way back.",
+          "estimatedCost": "Free",
+          "tip": "The chairlift line is longest right after docking. If you're one of the first off the ship, go immediately. Otherwise, grab a taxi to West Bay instead ($5/person)."
+        },
+        {
+          "id": "mb4-2",
+          "time": "0:20",
+          "title": "Taxi to West Bay Beach",
+          "description": "Grab a shared taxi from the Mahogany Bay beach area to West Bay Beach. The ride is about 10 minutes. Tell the driver 'West Bay Beach' — they all know it. You'll be dropped near the public beach entrance.",
+          "estimatedCost": "$5 per person",
+          "tip": "Share a taxi with other cruise passengers to split the cost. Drivers will wait for a full van — it's cheaper for everyone."
+        },
+        {
+          "id": "mb4-3",
+          "time": "0:40",
+          "title": "Beach Time at West Bay",
+          "description": "Rent a beach chair and umbrella and enjoy one of the Caribbean's best beaches. The water is crystal clear with a sandy bottom — perfect for wading and swimming. Snorkel gear is available to rent right on the beach.",
+          "estimatedCost": "$10-15 for chair/umbrella, $10 for snorkel gear",
+          "tip": "Walk past the first cluster of chairs near the entrance. Prices get better further down the beach, and it's less crowded."
+        },
+        {
+          "id": "mb4-4",
+          "time": "2:30",
+          "title": "Lunch on the Beach",
+          "description": "Grab lunch at one of the beachfront restaurants. Most serve fresh seafood, burgers, and cold beer. Eating on the beach means you don't waste any of your precious time traveling.",
+          "estimatedCost": "$12-20 per person",
+          "tip": "Order the fish tacos or coconut shrimp — you're on a Caribbean island, eat like it. Most beach restaurants accept USD."
+        },
+        {
+          "id": "mb4-5",
+          "time": "3:15",
+          "title": "Head Back to the Ship",
+          "description": "Grab a taxi back to Mahogany Bay. Allow at least 30 minutes for the return trip — traffic can be heavy on cruise ship days. The taxi drops you at the port entrance, and it's a short walk back to the ship.",
+          "estimatedCost": "$5 per person",
+          "tip": "Don't wait until the last minute. Taxis get scarce as all-aboard time approaches, and the line for the chairlift back gets very long."
+        }
+      ]
+    },
+    {
+      "id": "mahogany-6hr",
+      "duration": "6 Hours",
+      "title": "Beach & Explore",
+      "steps": [
+        {
+          "id": "mb6-1",
+          "time": "0:00",
+          "title": "Taxi Straight to West Bay Beach",
+          "description": "Skip the chairlift and grab a taxi directly to West Bay Beach. It's faster and gives you more time on the sand. Taxis line up right outside the port exit.",
+          "estimatedCost": "$5 per person",
+          "tip": "Agree on the price before getting in. $5 per person to West Bay is standard — don't pay more."
+        },
+        {
+          "id": "mb6-2",
+          "time": "0:20",
+          "title": "Morning Beach & Snorkeling",
+          "description": "Set up on West Bay Beach and spend the morning in the water. The reef is just 50 yards from shore — you can snorkel right off the beach. You'll see parrotfish, sergeant majors, and if you're lucky, a sea turtle.",
+          "estimatedCost": "$10-15 for chair/umbrella, $10 for snorkel gear",
+          "tip": "The best snorkeling is at the north end of West Bay Beach near the rocks. Swim out past the sandy bottom until you see the reef drop-off."
+        },
+        {
+          "id": "mb6-3",
+          "time": "2:00",
+          "title": "Lunch at a Beachfront Spot",
+          "description": "Walk along the beach to one of the restaurants. Fresh grilled fish, ceviche, and cold Salva Vida beers are the move. Most places have tables right in the sand with your feet in it.",
+          "estimatedCost": "$15-25 per person",
+          "tip": "Ask what fish was caught today — the daily catch is always the best thing on the menu."
+        },
+        {
+          "id": "mb6-4",
+          "time": "3:00",
+          "title": "Walk to West End Village",
+          "description": "Take a water taxi or walk the beach path from West Bay to West End (about 20 minutes on foot). West End is a laid-back village with dive shops, local bars, and souvenir shops lining a single sand road.",
+          "estimatedCost": "$3 for water taxi, free to walk",
+          "tip": "The beach path between West Bay and West End is scenic but can be rocky in spots. Wear sandals you don't mind getting wet."
+        },
+        {
+          "id": "mb6-5",
+          "time": "3:45",
+          "title": "Explore West End",
+          "description": "Browse the shops, grab a drink at a dock bar, and soak in the village vibe. West End feels like the real Roatán — colorful buildings, friendly locals, and no cruise port polish. This is where the dive instructors and expats hang out.",
+          "estimatedCost": "$5-15 for drinks/shopping",
+          "tip": "Sundowners Bar at the south end of West End has the best sunset view on this side of the island. Even if you can't stay for sunset, the dock is worth a visit."
+        },
+        {
+          "id": "mb6-6",
+          "time": "4:45",
+          "title": "Taxi Back to Mahogany Bay",
+          "description": "Flag a taxi on the main road in West End for the ride back to the port. The trip takes about 15-20 minutes depending on traffic. Make sure to tell the driver Mahogany Bay, not Coxen Hole.",
+          "estimatedCost": "$5 per person",
+          "tip": "Leave West End no later than 75 minutes before all-aboard. Cruise ship day traffic between West End and the port is unpredictable."
+        }
+      ]
+    },
+    {
+      "id": "mahogany-8hr",
+      "duration": "8 Hours",
+      "title": "Full Island Experience",
+      "steps": [
+        {
+          "id": "mb8-1",
+          "time": "0:00",
+          "title": "Grab a Taxi to West Bay Beach",
+          "description": "Head straight to West Bay Beach by taxi. With 8 hours, you have time to see the island, but start with the beach while it's still morning-calm and less crowded.",
+          "estimatedCost": "$5 per person",
+          "tip": "If you want to do a private island tour, negotiate with your taxi driver right here. A half-day tour should run $80-120 for the whole vehicle, not per person."
+        },
+        {
+          "id": "mb8-2",
+          "time": "0:20",
+          "title": "Morning Snorkeling at West Bay",
+          "description": "The reef right off West Bay Beach is some of the best shore snorkeling in the Caribbean. Visibility is usually 60-80 feet in the morning before boat traffic stirs things up. Rent gear on the beach.",
+          "estimatedCost": "$10 for snorkel gear rental",
+          "tip": "Morning is the best time for snorkeling — the water is calmest and the fish are most active. Don't touch the coral, even if it looks like rock."
+        },
+        {
+          "id": "mb8-3",
+          "time": "1:30",
+          "title": "Early Lunch on the Beach",
+          "description": "Eat early to beat the lunch rush. Beach restaurants start filling up around noon when more passengers arrive. Grilled fish, shrimp, and plantains are all excellent choices.",
+          "estimatedCost": "$15-25 per person",
+          "tip": "If you see baleadas on the menu, try one. It's Honduras's national dish — a thick flour tortilla stuffed with beans, cheese, and cream. Simple and delicious."
+        },
+        {
+          "id": "mb8-4",
+          "time": "2:30",
+          "title": "Drive to Gumbalimba Park",
+          "description": "Take a taxi to Gumbalimba Park, a nature reserve between West Bay and West End. Walk through the jungle canopy, see monkeys and macaws up close, and explore a beach cove. It's touristy but genuinely fun.",
+          "estimatedCost": "$45 admission, $5 taxi",
+          "tip": "The zip line at Gumbalimba is short but flies right over the water — worth the extra fee if you like that sort of thing."
+        },
+        {
+          "id": "mb8-5",
+          "time": "4:00",
+          "title": "Explore West End Village",
+          "description": "Head to West End and walk the main drag. Pop into dive shops, buy locally made jewelry or hot sauce, and grab a cold drink at one of the dock bars hanging over the water.",
+          "estimatedCost": "$5-20 for drinks and shopping",
+          "tip": "Look for Roatán-made hot sauce and locally roasted coffee — they're the best souvenirs because they're authentic and you can't get them anywhere else."
+        },
+        {
+          "id": "mb8-6",
+          "time": "5:00",
+          "title": "Scenic Drive Along the Coast",
+          "description": "Have your taxi take the main road east toward Sandy Bay and Coxen Hole. You'll see the real Roatán — hillside houses, roadside fruit stands, and views of the reef from above. Stop at any overlook that catches your eye.",
+          "estimatedCost": "Included in taxi tour price",
+          "tip": "Roll the windows down and enjoy the breeze. Some of the best views on the island are from the road between West End and Coxen Hole."
+        },
+        {
+          "id": "mb8-7",
+          "time": "6:00",
+          "title": "Drinks with a View",
+          "description": "Stop at a hillside restaurant or bar in the Sandy Bay area for a drink before heading back. The views from up high over the reef are stunning, especially in the late afternoon light.",
+          "estimatedCost": "$5-12 for drinks",
+          "tip": "Ask your driver for their personal recommendation — locals always know the best spots that aren't in the guidebooks."
+        },
+        {
+          "id": "mb8-8",
+          "time": "6:45",
+          "title": "Return to Mahogany Bay",
+          "description": "Head back to the port with plenty of time to spare. The drive from Sandy Bay to Mahogany Bay is about 15 minutes. Browse the shops at the port area if you have extra time.",
+          "estimatedCost": "Included in taxi tour price",
+          "tip": "Don't buy souvenirs at the port shops — prices are double what you'd pay in West End or Coxen Hole. You had all day to shop smarter."
+        }
+      ]
+    }
+  ],
+  "safetyTips": [
+    "Stick to well-traveled tourist areas like West Bay, West End, and Sandy Bay. These areas are safe and welcoming.",
+    "Use licensed taxis from the port — they have visible ID plates. Agree on the price before you get in. Never get in an unmarked vehicle.",
+    "Keep valuables secured. Leave passports on the ship. Bring a copy of your ship card, your phone, cash, and nothing else.",
+    "Drink bottled water only. It's cheap and available everywhere. Ice at restaurants in tourist areas is made from purified water and is safe.",
+    "Apply reef-safe sunscreen before you go. Regular sunscreen with oxybenzone kills the coral reef — and Roatán's reef is the reason you're here.",
+    "If you're snorkeling, don't touch or stand on the coral. It takes decades to grow and seconds to destroy. Float, don't walk."
+  ],
+  "returnReminder": "Set an alarm for 30 minutes before all-aboard. Traffic from West Bay to Mahogany Bay can take 15-20 minutes during cruise ship days."
+}
