@@ -8,7 +8,7 @@ struct MiniMapView: View {
     var body: some View {
         Map {
             Marker(name, coordinate: coordinate)
-                .tint(.riPink)
+                .tint(Color.riPink)
         }
         .mapStyle(.standard)
         .disabled(true)
