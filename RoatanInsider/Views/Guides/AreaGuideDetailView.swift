@@ -11,7 +11,7 @@ struct AreaGuideDetailView: View {
                 // Area map
                 Map {
                     Marker(area.displayName, coordinate: area.coordinate)
-                        .tint(.riPink)
+                        .tint(Color.riPink)
                 }
                 .mapStyle(.standard)
                 .frame(height: 200)
