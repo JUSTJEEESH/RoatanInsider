@@ -26,12 +26,12 @@ struct BusinessImageView: View {
 
             VStack(spacing: 10) {
                 Image(systemName: business.category.iconName)
-                    .font(.system(size: 32, weight: .light))
-                    .foregroundStyle(.white.opacity(0.5))
+                    .font(.system(size: 32, weight: .medium))
+                    .foregroundStyle(Color.riMint)
 
                 Text(business.category.displayName.uppercased())
                     .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(.white.opacity(0.35))
+                    .foregroundStyle(Color.riMint.opacity(0.7))
                     .tracking(1.5)
             }
         }
