@@ -171,7 +171,7 @@ struct MapSearchBar: View {
                 .font(.system(size: 15, weight: .medium))
 
             TextField("Search businesses, keywords...", text: $query)
-                .font(.riBody(15))
+                .font(.system(size: 15, weight: .regular))
                 .submitLabel(.search)
                 .onSubmit(onSubmit)
 
