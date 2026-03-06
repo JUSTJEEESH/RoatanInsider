@@ -28,10 +28,7 @@ struct InsiderPickCard: View {
         NavigationLink(value: business) {
             VStack(alignment: .leading, spacing: 0) {
                 ZStack(alignment: .topTrailing) {
-                    Image(business.images.first ?? "business_placeholder")
-                        .resizable()
-                        .aspectRatio(16/9, contentMode: .fill)
-                        .clipped()
+                    BusinessImageView(business: business, aspectRatio: 16/9)
 
                     FavoriteButton(businessId: business.id)
                         .padding(12)
