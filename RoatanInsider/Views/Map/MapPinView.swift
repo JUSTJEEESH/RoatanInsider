@@ -25,6 +25,30 @@ struct MapPinView: View {
     }
 }
 
+struct AppleResultPinView: View {
+    let iconName: String
+    let isSelected: Bool
+
+    var body: some View {
+        VStack(spacing: 0) {
+            ZStack {
+                Circle()
+                    .fill(Color.riPink)
+                    .frame(width: isSelected ? 36 : 28, height: isSelected ? 36 : 28)
+
+                Image(systemName: iconName)
+                    .font(.system(size: isSelected ? 16 : 12, weight: .medium))
+                    .foregroundStyle(.white)
+            }
+
+            Triangle()
+                .fill(Color.riPink)
+                .frame(width: 12, height: 6)
+        }
+        .animation(.easeInOut(duration: 0.2), value: isSelected)
+    }
+}
+
 struct Triangle: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()

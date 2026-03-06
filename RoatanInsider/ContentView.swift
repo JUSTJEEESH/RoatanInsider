@@ -5,6 +5,7 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var dataManager = DataManager()
     @State private var locationManager = LocationManager()
+    @State private var networkMonitor = NetworkMonitor()
     @State private var favoritesStore: FavoritesStore?
     @State private var selectedTab = 0
 
@@ -45,6 +46,7 @@ struct ContentView: View {
                 .tint(.riPink)
                 .environment(dataManager)
                 .environment(locationManager)
+                .environment(networkMonitor)
                 .environment(favoritesStore)
             }
         }
