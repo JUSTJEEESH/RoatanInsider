@@ -13,32 +13,56 @@ final class DataManager {
     }
 
     private func loadBusinesses() {
-        guard let url = Bundle.main.url(forResource: "businesses", withExtension: "json"),
-              let data = try? Data(contentsOf: url) else { return }
-        let decoder = JSONDecoder()
-        businesses = (try? decoder.decode([Business].self, from: data)) ?? []
+        guard let url = Bundle.main.url(forResource: "businesses", withExtension: "json") else {
+            print("⚠️ DataManager: businesses.json not found in bundle")
+            return
+        }
+        do {
+            let data = try Data(contentsOf: url)
+            businesses = try JSONDecoder().decode([Business].self, from: data)
+            print("✅ Loaded \(businesses.count) businesses")
+        } catch {
+            print("⚠️ DataManager: Failed to decode businesses.json: \(error)")
+        }
     }
 
     private func loadGuides() {
         // Cruise guides
         for filename in ["cruise-mahogany-bay", "cruise-coxen-hole"] {
-            if let url = Bundle.main.url(forResource: filename, withExtension: "json"),
-               let data = try? Data(contentsOf: url),
-               let guide = try? JSONDecoder().decode(CruiseGuide.self, from: data) {
-                cruiseGuides.append(guide)
+            if let url = Bundle.main.url(forResource: filename, withExtension: "json") {
+                do {
+                    let data = try Data(contentsOf: url)
+                    let guide = try JSONDecoder().decode(CruiseGuide.self, from: data)
+                    cruiseGuides.append(guide)
+                    print("✅ Loaded cruise guide: \(filename)")
+                } catch {
+                    print("⚠️ Failed to decode \(filename): \(error)")
+                }
+            } else {
+                print("⚠️ \(filename).json not found in bundle")
             }
         }
 
         // Area guides
-        if let url = Bundle.main.url(forResource: "areas", withExtension: "json"),
-           let data = try? Data(contentsOf: url) {
-            areaGuides = (try? JSONDecoder().decode([AreaGuide].self, from: data)) ?? []
+        if let url = Bundle.main.url(forResource: "areas", withExtension: "json") {
+            do {
+                let data = try Data(contentsOf: url)
+                areaGuides = try JSONDecoder().decode([AreaGuide].self, from: data)
+                print("✅ Loaded \(areaGuides.count) area guides")
+            } catch {
+                print("⚠️ Failed to decode areas.json: \(error)")
+            }
         }
 
         // Essentials
-        if let url = Bundle.main.url(forResource: "essentials", withExtension: "json"),
-           let data = try? Data(contentsOf: url) {
-            essentials = try? JSONDecoder().decode(EssentialsGuide.self, from: data)
+        if let url = Bundle.main.url(forResource: "essentials", withExtension: "json") {
+            do {
+                let data = try Data(contentsOf: url)
+                essentials = try JSONDecoder().decode(EssentialsGuide.self, from: data)
+                print("✅ Loaded essentials guide")
+            } catch {
+                print("⚠️ Failed to decode essentials.json: \(error)")
+            }
         }
     }
 
