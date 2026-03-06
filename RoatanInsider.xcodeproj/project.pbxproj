@@ -53,7 +53,7 @@
 		3FD1EB5C9D3E5DA1F0758290 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51054B681FC2110BFBBA3B9 /* Constants.swift */; };
 		A4DADDCADC5AB14F38A3C02B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42C0F536141123397F12BB3 /* Extensions.swift */; };
 		78AF3FF6C235822D0DF0F776 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E372D20A681F4605FF9F95E /* Fonts.swift */; };
-		E1A2B3C4D5E6F70819203142 /* UnitPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5C /* UnitPreference.swift */; };
+		E1A2B3C4D5E6F70819203142 /* UnitPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A8B9C0D1E2F31425364758 /* UnitPreference.swift */; };
 		1AE9C4081261D4DB4583A7F6 /* Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB8B7661998E6D132F5842E /* Area.swift */; };
 		AEF7FECD88521DA0CA44A502 /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05F076695AC04B8CD07E4F /* Business.swift */; };
 		78BD20A5A047DEA271A02AA3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FC53A49F6C4F4E5D210CB8 /* Category.swift */; };
@@ -63,6 +63,13 @@
 		16B0AD0D383892CC2B8A5085 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CBE2E226575D5AA1E8F25D /* LocationManager.swift */; };
 		AA11BB22CC33DD44EE55FF66 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB22CC33DD44EE55FF660011 /* NetworkMonitor.swift */; };
 		6744D1163A8FF348A5301C83 /* SearchEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A9A634F3CE5F95335B4A75 /* SearchEngine.swift */; };
+		AA22BB33CC44DD55EE66FF01 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA22BB33CC44DD55EE66FF02 /* Haptics.swift */; };
+		AA22BB33CC44DD55EE66FF03 /* CruiseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA22BB33CC44DD55EE66FF04 /* CruiseViewModel.swift */; };
+		AA22BB33CC44DD55EE66FF05 /* CruiseBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA22BB33CC44DD55EE66FF06 /* CruiseBanner.swift */; };
+		AA22BB33CC44DD55EE66FF07 /* CruiseModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA22BB33CC44DD55EE66FF08 /* CruiseModeView.swift */; };
+		AA22BB33CC44DD55EE66FF09 /* AskALocalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA22BB33CC44DD55EE66FF0A /* AskALocalView.swift */; };
+		AA22BB33CC44DD55EE66FF0B /* RightNowSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA22BB33CC44DD55EE66FF0C /* RightNowSection.swift */; };
+		AA22BB33CC44DD55EE66FF0D /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA22BB33CC44DD55EE66FF0E /* OnboardingView.swift */; };
 		AC57565D7F0EE0912A57CC03 /* areas.json in Resources */ = {isa = PBXBuildFile; fileRef = 184A4AB40EF1F2D2FE0EAB19 /* areas.json */; };
 		4AE8A7EDB3949FC07ACDF38E /* businesses.json in Resources */ = {isa = PBXBuildFile; fileRef = 179BA40591A489E6690226B8 /* businesses.json */; };
 		B3063911EAE150C625BEEDFA /* cruise-coxen-hole.json in Resources */ = {isa = PBXBuildFile; fileRef = 52133D52DF9293C51F2C38DF /* cruise-coxen-hole.json */; };
@@ -118,7 +125,14 @@
 		C51054B681FC2110BFBBA3B9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants.swift"; sourceTree = "<group>"; };
 		F42C0F536141123397F12BB3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions.swift"; sourceTree = "<group>"; };
 		6E372D20A681F4605FF9F95E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fonts.swift"; sourceTree = "<group>"; };
-		A1B2C3D4E5F60718293A4B5C /* UnitPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnitPreference.swift"; sourceTree = "<group>"; };
+		F7A8B9C0D1E2F31425364758 /* UnitPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnitPreference.swift"; sourceTree = "<group>"; };
+		AA22BB33CC44DD55EE66FF02 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Haptics.swift"; sourceTree = "<group>"; };
+		AA22BB33CC44DD55EE66FF04 /* CruiseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CruiseViewModel.swift"; sourceTree = "<group>"; };
+		AA22BB33CC44DD55EE66FF06 /* CruiseBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CruiseBanner.swift"; sourceTree = "<group>"; };
+		AA22BB33CC44DD55EE66FF08 /* CruiseModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CruiseModeView.swift"; sourceTree = "<group>"; };
+		AA22BB33CC44DD55EE66FF0A /* AskALocalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AskALocalView.swift"; sourceTree = "<group>"; };
+		AA22BB33CC44DD55EE66FF0C /* RightNowSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RightNowSection.swift"; sourceTree = "<group>"; };
+		AA22BB33CC44DD55EE66FF0E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnboardingView.swift"; sourceTree = "<group>"; };
 		CEB8B7661998E6D132F5842E /* Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Area.swift"; sourceTree = "<group>"; };
 		0A05F076695AC04B8CD07E4F /* Business.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Business.swift"; sourceTree = "<group>"; };
 		63FC53A49F6C4F4E5D210CB8 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category.swift"; sourceTree = "<group>"; };
@@ -231,7 +245,8 @@
 				C51054B681FC2110BFBBA3B9 /* Constants.swift */,
 				F42C0F536141123397F12BB3 /* Extensions.swift */,
 				6E372D20A681F4605FF9F95E /* Fonts.swift */,
-				A1B2C3D4E5F60718293A4B5C /* UnitPreference.swift */,
+				AA22BB33CC44DD55EE66FF02 /* Haptics.swift */,
+				F7A8B9C0D1E2F31425364758 /* UnitPreference.swift */,
 			);
 			path = "Utilities";
 			sourceTree = "<group>";
@@ -239,6 +254,7 @@
 		9C866EFFEB5A6CCC2196EF16 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				AA22BB33CC44DD55EE66FF04 /* CruiseViewModel.swift */,
 				71DC0C34EBA248624D3A1D9A /* ExploreViewModel.swift */,
 				389B96AE42FCC81DEE6EF792 /* FavoritesViewModel.swift */,
 				92B8F61BC74788565AFEE3C1 /* HomeViewModel.swift */,
@@ -252,11 +268,13 @@
 			isa = PBXGroup;
 			children = (
 				B837B38185D1D5A63E8550A7 /* Components */,
+				AA22BB33CC44DD55EE66FF20 /* CruiseMode */,
 				EA920C55081837BA07E6B00B /* Detail */,
 				8A107D8FC1B6AEAB2517CBAB /* Explore */,
 				471578CBB5CA3667CA526A32 /* Guides */,
 				FACFED56E433978F4BC60FB2 /* Home */,
 				6102130A33B29F5DBD4CF5FB /* Map */,
+				AA22BB33CC44DD55EE66FF30 /* Onboarding */,
 				555846928AD3258E38C20C23 /* Saved */,
 				6AC5A770C379D07F61854276 /* Tools */,
 			);
@@ -305,6 +323,7 @@
 			children = (
 				DC2076FB4F7DEB35747E9167 /* AreaGuideDetailView.swift */,
 				136D08D83D445A12DF0BDD78 /* AreaGuideView.swift */,
+				AA22BB33CC44DD55EE66FF0A /* AskALocalView.swift */,
 				8EEC4EF8709E310E256F3EFE /* CruiseDayGuideView.swift */,
 				8B708D588E7F11A4C26B7999 /* IslandEssentialsView.swift */,
 			);
@@ -320,6 +339,7 @@
 				20C92DD6E4FC1FFDC07625C8 /* HomeView.swift */,
 				EFF1B08F812BB0484720A4FB /* InsiderPicksSection.swift */,
 				7529901218BBFDEC3A98653D /* QuickGuidesSection.swift */,
+				AA22BB33CC44DD55EE66FF0C /* RightNowSection.swift */,
 			);
 			path = "Home";
 			sourceTree = "<group>";
@@ -351,6 +371,23 @@
 				78C31DA567C4344BAAEA4422 /* ToolsView.swift */,
 			);
 			path = "Tools";
+			sourceTree = "<group>";
+		};
+		AA22BB33CC44DD55EE66FF20 /* CruiseMode */ = {
+			isa = PBXGroup;
+			children = (
+				AA22BB33CC44DD55EE66FF06 /* CruiseBanner.swift */,
+				AA22BB33CC44DD55EE66FF08 /* CruiseModeView.swift */,
+			);
+			path = "CruiseMode";
+			sourceTree = "<group>";
+		};
+		AA22BB33CC44DD55EE66FF30 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				AA22BB33CC44DD55EE66FF0E /* OnboardingView.swift */,
+			);
+			path = "Onboarding";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -478,6 +515,13 @@
 				AA11BB22CC33DD44EE55FF66 /* NetworkMonitor.swift in Sources */,
 				6744D1163A8FF348A5301C83 /* SearchEngine.swift in Sources */,
 				E1A2B3C4D5E6F70819203142 /* UnitPreference.swift in Sources */,
+				AA22BB33CC44DD55EE66FF01 /* Haptics.swift in Sources */,
+				AA22BB33CC44DD55EE66FF03 /* CruiseViewModel.swift in Sources */,
+				AA22BB33CC44DD55EE66FF05 /* CruiseBanner.swift in Sources */,
+				AA22BB33CC44DD55EE66FF07 /* CruiseModeView.swift in Sources */,
+				AA22BB33CC44DD55EE66FF09 /* AskALocalView.swift in Sources */,
+				AA22BB33CC44DD55EE66FF0B /* RightNowSection.swift in Sources */,
+				AA22BB33CC44DD55EE66FF0D /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
