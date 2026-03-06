@@ -21,22 +21,21 @@ struct BusinessImageView: View {
     }
 
     private var categoryPlaceholder: some View {
-        ZStack {
-            business.category.placeholderColor
+        business.category.placeholderColor
+            .overlay {
+                VStack(spacing: 10) {
+                    Image(systemName: business.category.iconName)
+                        .font(.system(size: 32, weight: .medium))
+                        .foregroundStyle(Color.riMint)
 
-            VStack(spacing: 10) {
-                Image(systemName: business.category.iconName)
-                    .font(.system(size: 32, weight: .medium))
-                    .foregroundStyle(Color.riMint)
-
-                Text(business.category.displayName.uppercased())
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(Color.riMint.opacity(0.7))
-                    .tracking(1.5)
+                    Text(business.category.displayName.uppercased())
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(Color.riMint.opacity(0.7))
+                        .tracking(1.5)
+                }
             }
-        }
-        .frame(maxWidth: .infinity)
-        .aspectRatio(aspectRatio, contentMode: .fit)
+            .aspectRatio(aspectRatio, contentMode: .fill)
+            .clipped()
     }
 }
 
