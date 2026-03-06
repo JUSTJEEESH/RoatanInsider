@@ -35,6 +35,16 @@ struct QuickGuidesSection: View {
                         subtitle: "Money, safety, tips, and more"
                     )
                 }
+
+                NavigationLink {
+                    AskALocalView()
+                } label: {
+                    GuideRow(
+                        icon: "bubble.left.and.text.bubble.right",
+                        title: "Ask a Local",
+                        subtitle: "15 questions every visitor asks"
+                    )
+                }
             }
             .padding(.horizontal, 20)
         }
