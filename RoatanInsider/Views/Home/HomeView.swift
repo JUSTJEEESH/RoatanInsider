@@ -11,15 +11,19 @@ struct HomeView: View {
                 VStack(spacing: 0) {
                     HeroSection()
 
-                    // Featured — white background
-                    FeaturedSection(businesses: dataManager.featuredBusinesses)
+                    // Right Now — white background (time-aware picks)
+                    RightNowSection(businesses: dataManager.activeBusinesses)
                         .padding(.vertical, AppConstants.sectionPadding)
 
-                    // Categories — dark background
-                    CategoryGridSection()
+                    // Featured — dark background
+                    FeaturedSection(businesses: dataManager.featuredBusinesses)
                         .padding(.vertical, AppConstants.sectionPadding)
                         .frame(maxWidth: .infinity)
                         .background(Color.riDark)
+
+                    // Categories — white background
+                    CategoryGridSection()
+                        .padding(.vertical, AppConstants.sectionPadding)
 
                     // Insider Picks — white background
                     InsiderPicksSection(businesses: dataManager.insiderPicks())
