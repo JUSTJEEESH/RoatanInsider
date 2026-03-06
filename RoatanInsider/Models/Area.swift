@@ -12,6 +12,7 @@ enum Area: String, Codable, CaseIterable, Identifiable {
     case puntaGorda = "punta_gorda"
     case portRoyal = "port_royal"
     case campBay = "camp_bay"
+    case dixonCove = "dixon_cove"
 
     var id: String { rawValue }
 
@@ -27,6 +28,7 @@ enum Area: String, Codable, CaseIterable, Identifiable {
         case .puntaGorda: return "Punta Gorda"
         case .portRoyal: return "Port Royal"
         case .campBay: return "Camp Bay"
+        case .dixonCove: return "Dixon Cove"
         }
     }
 
@@ -42,6 +44,7 @@ enum Area: String, Codable, CaseIterable, Identifiable {
         case .puntaGorda: return CLLocationCoordinate2D(latitude: 16.3730, longitude: -86.3420)
         case .portRoyal: return CLLocationCoordinate2D(latitude: 16.4050, longitude: -86.3200)
         case .campBay: return CLLocationCoordinate2D(latitude: 16.4200, longitude: -86.2900)
+        case .dixonCove: return CLLocationCoordinate2D(latitude: 16.3100, longitude: -86.5700)
         }
     }
 
@@ -57,6 +60,7 @@ enum Area: String, Codable, CaseIterable, Identifiable {
         case .puntaGorda: return "The oldest Garifuna community on Roatán — rich culture, traditional food, and warm hospitality."
         case .portRoyal: return "Remote and wild — the far eastern tip with pristine reefs and virtually no tourists."
         case .campBay: return "Secluded beach paradise on the eastern end. Worth the drive for solitude seekers."
+        case .dixonCove: return "A small community between Sandy Bay and Coxen Hole, home to the Mahogany Bay cruise port."
         }
     }
 
@@ -72,6 +76,7 @@ enum Area: String, Codable, CaseIterable, Identifiable {
         case .puntaGorda: return "Cultural immersion, Garifuna heritage"
         case .portRoyal: return "Adventure seekers, advanced divers"
         case .campBay: return "Solitude, remote beaches, nature"
+        case .dixonCove: return "Cruise passengers, quick stops, local shopping"
         }
     }
 }
