@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @Binding var selectedTab: Int
     @Environment(DataManager.self) private var dataManager
     @State private var viewModel = HomeViewModel()
 
@@ -58,7 +59,9 @@ struct HomeView: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
 
-            NavigationLink(value: Category.eat) {
+            Button {
+                selectedTab = 1
+            } label: {
                 Text("Start Exploring")
                     .font(.riButton)
                     .foregroundStyle(.white)
