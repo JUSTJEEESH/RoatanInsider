@@ -46,7 +46,7 @@ struct HomeView: View {
     }
 
     private var ctaSection: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 20) {
             Text("Explore the island\nlike a local.")
                 .riDisplayStyle(30)
                 .foregroundStyle(Color.riDark)
@@ -57,6 +57,17 @@ struct HomeView: View {
                 .foregroundStyle(Color.riMediumGray)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
+
+            NavigationLink(value: Category.eat) {
+                Text("Start Exploring")
+                    .font(.riButton)
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: AppConstants.buttonHeight)
+                    .background(Color.riPink)
+                    .clipShape(RoundedRectangle(cornerRadius: AppConstants.buttonCornerRadius))
+            }
+            .padding(.horizontal, 40)
         }
         .padding(.horizontal, 20)
     }
