@@ -22,12 +22,12 @@ struct PhotoGallery: View {
 
                         VStack(spacing: 12) {
                             Image(systemName: category.iconName)
-                                .font(.system(size: 48, weight: .light))
-                                .foregroundStyle(.white.opacity(0.4))
+                                .font(.system(size: 48, weight: .medium))
+                                .foregroundStyle(Color.riMint)
 
                             Text(category.displayName.uppercased())
                                 .font(.system(size: 12, weight: .semibold))
-                                .foregroundStyle(.white.opacity(0.3))
+                                .foregroundStyle(Color.riMint.opacity(0.7))
                                 .tracking(2)
                         }
                     }
