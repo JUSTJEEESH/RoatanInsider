@@ -18,21 +18,33 @@ struct ExploreView: View {
                     .padding(.horizontal, 20)
                     .padding(.top, 8)
 
-                FilterBar(searchEngine: viewModel.searchEngine)
-                    .padding(.top, 8)
+                FilterBar(
+                    searchEngine: viewModel.searchEngine,
+                    allFeatures: SearchEngine.allFeatures(from: dataManager.businesses)
+                )
+                .padding(.top, 8)
 
                 let results = viewModel.filteredBusinesses(from: dataManager.businesses)
                 ScrollView {
                     if results.isEmpty {
                         emptyState
                     } else {
+                        HStack {
+                            Text("\(results.count) results")
+                                .font(.riCaption(13))
+                                .foregroundStyle(Color.riLightGray)
+                            Spacer()
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.top, 12)
+
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(results) { business in
                                 BusinessCardGrid(business: business)
                             }
                         }
                         .padding(.horizontal, 16)
-                        .padding(.vertical, 20)
+                        .padding(.vertical, 12)
                     }
                 }
             }

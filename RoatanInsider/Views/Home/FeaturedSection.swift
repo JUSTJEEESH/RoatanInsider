@@ -5,7 +5,7 @@ struct FeaturedSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            SectionHeader(title: "Featured")
+            SectionHeader(title: "Featured", lightText: true)
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {

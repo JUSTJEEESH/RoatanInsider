@@ -5,12 +5,12 @@ struct CategoryGridSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            SectionHeader(title: "Browse by Category", lightText: true)
+            SectionHeader(title: "Browse by Category")
 
             LazyVGrid(columns: columns, spacing: 20) {
                 ForEach(Category.allCases) { category in
                     NavigationLink(value: category) {
-                        CategoryIcon(category: category, lightText: true)
+                        CategoryIcon(category: category)
                     }
                     .buttonStyle(.plain)
                 }

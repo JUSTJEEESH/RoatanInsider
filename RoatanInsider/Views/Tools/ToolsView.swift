@@ -14,6 +14,9 @@ struct ToolsView: View {
                 .pickerStyle(.segmented)
                 .padding(.horizontal, 20)
                 .padding(.top, 12)
+                .onChange(of: viewModel.selectedTool) { _, _ in
+                    Haptics.select()
+                }
 
                 ScrollView {
                     switch viewModel.selectedTool {
