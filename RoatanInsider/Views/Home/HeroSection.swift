@@ -32,15 +32,9 @@ struct HeroSection: View {
                 }
             }
 
-            // Dark overlay for text
-            VStack {} .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(
-                    LinearGradient(
-                        colors: [.clear, .clear, Color.black.opacity(0.65)],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
+            // Dark overlay for text readability
+            Color.black.opacity(0.45)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             // Text overlay
             VStack(alignment: .leading, spacing: 8) {

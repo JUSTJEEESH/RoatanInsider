@@ -67,11 +67,8 @@ struct InsiderPickCard: View {
                 }
                 .padding(16)
             }
+            .background(Color.riOffWhite)
             .clipShape(RoundedRectangle(cornerRadius: AppConstants.cardCornerRadius))
-            .background(
-                RoundedRectangle(cornerRadius: AppConstants.cardCornerRadius)
-                    .fill(Color.riOffWhite)
-            )
         }
         .buttonStyle(.plain)
     }
