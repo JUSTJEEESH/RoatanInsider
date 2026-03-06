@@ -117,6 +117,35 @@ struct BusinessDetailView: View {
         .background(Color.riWhite)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(.hidden, for: .navigationBar)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    Haptics.impact()
+                    shareBusiness()
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundStyle(Color.riDark)
+                }
+                .accessibilityLabel("Share \(business.name)")
+            }
+        }
+    }
+
+    private func shareBusiness() {
+        let shareText = "\(business.name) — \(business.category.displayName) in \(business.area.displayName). \(business.insiderTip ?? business.description.prefix(100).description)"
+
+        var items: [Any] = [shareText]
+
+        if let image = ShareHelper.shareImage(for: business) {
+            items.insert(image, at: 0)
+        }
+
+        let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootVC = windowScene.windows.first?.rootViewController {
+            rootVC.present(activityVC, animated: true)
+        }
     }
 
     private var hoursSection: some View {

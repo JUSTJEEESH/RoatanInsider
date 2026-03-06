@@ -39,7 +39,10 @@ struct ContactActions: View {
     }
 
     private func contactButton(icon: String, label: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
+        Button {
+            Haptics.impact()
+            action()
+        } label: {
             VStack(spacing: 6) {
                 Image(systemName: icon)
                     .font(.system(size: 20, weight: .medium))
@@ -53,6 +56,7 @@ struct ContactActions: View {
             .frame(height: AppConstants.minTapTarget)
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(label)
     }
 }
 

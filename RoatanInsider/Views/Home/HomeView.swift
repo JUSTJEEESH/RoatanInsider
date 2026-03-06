@@ -27,23 +27,35 @@ struct HomeView: View {
                         .frame(maxWidth: .infinity)
                         .background(Color.riDark)
 
-                    // Categories — white background
+                    // Best of Roatán — curated collections (white background)
+                    CollectionsSection(businesses: dataManager.activeBusinesses)
+                        .padding(.vertical, AppConstants.sectionPadding)
+
+                    // Categories — dark background
                     CategoryGridSection()
                         .padding(.vertical, AppConstants.sectionPadding)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.riDark)
 
                     // Insider Picks — white background
                     InsiderPicksSection(businesses: dataManager.insiderPicks())
                         .padding(.vertical, AppConstants.sectionPadding)
 
-                    // Quick Guides — dark background
-                    QuickGuidesSection()
+                    // Local Secrets (tips feed) — dark background
+                    InsiderTipsFeedSection(businesses: dataManager.activeBusinesses)
                         .padding(.vertical, AppConstants.sectionPadding)
                         .frame(maxWidth: .infinity)
                         .background(Color.riDark)
 
-                    // CTA — white background
+                    // Quick Guides — white background
+                    QuickGuidesSection()
+                        .padding(.vertical, AppConstants.sectionPadding)
+
+                    // CTA — dark background
                     ctaSection
                         .padding(.vertical, AppConstants.sectionPadding)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.riDark)
                 }
             }
             .background(Color.riWhite)
@@ -63,16 +75,17 @@ struct HomeView: View {
         VStack(spacing: 20) {
             Text("Explore the island\nlike a local.")
                 .riDisplayStyle(30)
-                .foregroundStyle(Color.riDark)
+                .foregroundStyle(.white)
                 .multilineTextAlignment(.center)
 
             Text("Discover the best of Roatán — curated by people who live here.")
                 .font(.riBody)
-                .foregroundStyle(Color.riMediumGray)
+                .foregroundStyle(Color.riLightGray)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
 
             Button {
+                Haptics.impact()
                 selectedTab = 1
             } label: {
                 Text("Start Exploring")
@@ -84,6 +97,7 @@ struct HomeView: View {
                     .clipShape(RoundedRectangle(cornerRadius: AppConstants.buttonCornerRadius))
             }
             .padding(.horizontal, 40)
+            .accessibilityLabel("Start exploring Roatán")
         }
         .padding(.horizontal, 20)
     }

@@ -8,7 +8,13 @@ struct RoatanInsiderApp: App {
     private let favoritesStore: FavoritesStore
 
     init() {
-        let container = try! ModelContainer(for: Favorite.self)
+        let schema = Schema(versionedSchema: FavoriteSchemaV1.self)
+        let config = ModelConfiguration(schema: schema)
+        let container = try! ModelContainer(
+            for: schema,
+            migrationPlan: FavoriteMigrationPlan.self,
+            configurations: [config]
+        )
         self.modelContainer = container
         self.favoritesStore = FavoritesStore(modelContext: container.mainContext)
     }
