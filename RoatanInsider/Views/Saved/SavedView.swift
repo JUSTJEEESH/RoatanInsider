@@ -20,7 +20,7 @@ struct SavedView: View {
                                         Button(role: .destructive) {
                                             favoritesStore.removeFavorite(business.id)
                                         } label: {
-                                            Label("Remove from Saved", systemImage: "heart.slash")
+                                            Label("Remove from Favorites", systemImage: "heart.slash")
                                         }
                                     }
                             }
@@ -31,7 +31,7 @@ struct SavedView: View {
                 }
             }
             .background(Color.riWhite)
-            .navigationTitle("Saved")
+            .navigationTitle("Favorites")
             .navigationBarTitleDisplayMode(.large)
             .navigationDestination(for: Business.self) { business in
                 BusinessDetailView(business: business)
