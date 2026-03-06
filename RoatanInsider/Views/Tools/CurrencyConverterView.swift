@@ -10,8 +10,9 @@ struct CurrencyConverterView: View {
                 // From
                 VStack(spacing: 8) {
                     Text(viewModel.isUsdToHnl ? "USD" : "HNL")
-                        .font(.riCaption(14))
-                        .foregroundStyle(Color.riLightGray)
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(Color.riMediumGray)
+                        .tracking(1)
 
                     TextField("0", text: $viewModel.usdAmount)
                         .font(.system(size: 48, weight: .bold, design: .default))
@@ -36,12 +37,13 @@ struct CurrencyConverterView: View {
                 // To
                 VStack(spacing: 8) {
                     Text(viewModel.isUsdToHnl ? "HNL" : "USD")
-                        .font(.riCaption(14))
-                        .foregroundStyle(Color.riLightGray)
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(Color.riMediumGray)
+                        .tracking(1)
 
                     Text(viewModel.convertedDisplay)
                         .font(.system(size: 48, weight: .bold, design: .default))
-                        .foregroundStyle(Color.riMint)
+                        .foregroundStyle(Color.riDark)
                         .tracking(-1)
                 }
             }
@@ -49,13 +51,14 @@ struct CurrencyConverterView: View {
             // Rate info
             Text("1 USD = \(AppConstants.usdToHnlRate, specifier: "%.2f") HNL")
                 .font(.riCaption(13))
-                .foregroundStyle(Color.riLightGray)
+                .foregroundStyle(Color.riMediumGray)
 
             // Quick amount buttons
             VStack(spacing: 12) {
                 Text("Quick Convert")
-                    .font(.riCaption(14))
-                    .foregroundStyle(Color.riLightGray)
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(Color.riMediumGray)
+                    .tracking(0.5)
 
                 HStack(spacing: 10) {
                     ForEach(AppConstants.quickAmounts, id: \.self) { amount in

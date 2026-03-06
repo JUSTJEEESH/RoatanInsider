@@ -21,7 +21,7 @@ struct BusinessDetailView: View {
 
                             Spacer()
 
-                            FavoriteButton(businessId: business.id)
+                            FavoriteButton(businessId: business.id, onPhoto: false)
                         }
 
                         HStack(spacing: 6) {

@@ -13,7 +13,7 @@ struct EmptyFavoritesView: View {
 
             Text("Explore the island and save\nyour favorites.")
                 .font(.riBody)
-                .foregroundStyle(Color.riLightGray)
+                .foregroundStyle(Color.riMediumGray)
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

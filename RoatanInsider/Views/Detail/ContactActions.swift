@@ -47,7 +47,7 @@ struct ContactActions: View {
 
                 Text(label)
                     .font(.riCaption(11))
-                    .foregroundStyle(Color.riLightGray)
+                    .foregroundStyle(Color.riMediumGray)
             }
             .frame(maxWidth: .infinity)
             .frame(height: AppConstants.minTapTarget)

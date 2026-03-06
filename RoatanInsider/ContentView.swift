@@ -5,45 +5,53 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var dataManager = DataManager()
     @State private var locationManager = LocationManager()
+    @State private var favoritesStore: FavoritesStore?
     @State private var selectedTab = 0
 
     var body: some View {
-        TabView(selection: $selectedTab) {
-            HomeView()
-                .tabItem {
-                    Label("Home", systemImage: "house.fill")
-                }
-                .tag(0)
+        Group {
+            if let favoritesStore {
+                TabView(selection: $selectedTab) {
+                    HomeView()
+                        .tabItem {
+                            Label("Home", systemImage: "house.fill")
+                        }
+                        .tag(0)
 
-            ExploreView()
-                .tabItem {
-                    Label("Explore", systemImage: "magnifyingglass")
-                }
-                .tag(1)
+                    ExploreView()
+                        .tabItem {
+                            Label("Explore", systemImage: "magnifyingglass")
+                        }
+                        .tag(1)
 
-            MapTabView()
-                .tabItem {
-                    Label("Map", systemImage: "map.fill")
-                }
-                .tag(2)
+                    MapTabView()
+                        .tabItem {
+                            Label("Map", systemImage: "map.fill")
+                        }
+                        .tag(2)
 
-            ToolsView()
-                .tabItem {
-                    Label("Tools", systemImage: "wrench.and.screwdriver.fill")
-                }
-                .tag(3)
+                    ToolsView()
+                        .tabItem {
+                            Label("Tools", systemImage: "wrench.and.screwdriver.fill")
+                        }
+                        .tag(3)
 
-            SavedView()
-                .tabItem {
-                    Label("Saved", systemImage: "heart.fill")
+                    SavedView()
+                        .tabItem {
+                            Label("Saved", systemImage: "heart.fill")
+                        }
+                        .tag(4)
                 }
-                .tag(4)
+                .tint(.riPink)
+                .environment(dataManager)
+                .environment(locationManager)
+                .environment(favoritesStore)
+            }
         }
-        .tint(.riPink)
-        .environment(dataManager)
-        .environment(locationManager)
-        .environment(FavoritesStore(modelContext: modelContext))
         .onAppear {
+            if favoritesStore == nil {
+                favoritesStore = FavoritesStore(modelContext: modelContext)
+            }
             configureTabBarAppearance()
         }
     }
