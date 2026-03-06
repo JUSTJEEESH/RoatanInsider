@@ -4,22 +4,46 @@ import MapKit
 struct MapTabView: View {
     @Environment(DataManager.self) private var dataManager
     @Environment(LocationManager.self) private var locationManager
+    @Environment(NetworkMonitor.self) private var networkMonitor
     @State private var viewModel = MapViewModel()
+
+    private var isOffline: Bool { !networkMonitor.isConnected }
 
     var body: some View {
         NavigationStack {
             ZStack(alignment: .top) {
                 Map(position: $viewModel.cameraPosition) {
-                    let businesses = viewModel.filteredBusinesses(from: dataManager.businesses)
-                    ForEach(businesses) { business in
-                        Annotation(business.name, coordinate: business.coordinate) {
-                            MapPinView(
-                                business: business,
-                                isSelected: viewModel.selectedBusiness?.id == business.id
-                            )
-                            .onTapGesture {
-                                withAnimation(.easeInOut(duration: 0.2)) {
-                                    viewModel.selectedBusiness = business
+                    // Online: show Apple Maps search results
+                    if !isOffline && viewModel.isShowingAppleResults {
+                        ForEach(viewModel.searchResults, id: \.self) { item in
+                            Annotation(item.name ?? "", coordinate: item.placemark.coordinate) {
+                                AppleResultPinView(
+                                    iconName: pinIcon(for: viewModel.selectedCategory),
+                                    isSelected: viewModel.selectedMapItem == item
+                                )
+                                .onTapGesture {
+                                    withAnimation(.easeInOut(duration: 0.2)) {
+                                        viewModel.selectedMapItem = item
+                                        viewModel.selectedBusiness = nil
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // Offline: show bundled business pins as fallback
+                    else if isOffline {
+                        let businesses = viewModel.filteredBusinesses(from: dataManager.businesses)
+                        ForEach(businesses) { business in
+                            Annotation(business.name, coordinate: business.coordinate) {
+                                MapPinView(
+                                    business: business,
+                                    isSelected: viewModel.selectedBusiness?.id == business.id
+                                )
+                                .onTapGesture {
+                                    withAnimation(.easeInOut(duration: 0.2)) {
+                                        viewModel.selectedBusiness = business
+                                        viewModel.selectedMapItem = nil
+                                    }
                                 }
                             }
                         }
@@ -43,7 +67,6 @@ struct MapTabView: View {
                         viewModel.submitSearch()
                     } onClear: {
                         viewModel.clearSearch()
-                        viewModel.selectedCategory = nil
                     }
                     .padding(.horizontal, 16)
                     .padding(.top, 8)
@@ -74,7 +97,17 @@ struct MapTabView: View {
                 .background(.ultraThinMaterial)
             }
             .overlay(alignment: .bottom) {
-                if let business = viewModel.selectedBusiness {
+                // Apple Maps result popup
+                if let mapItem = viewModel.selectedMapItem {
+                    MapItemPopupCard(mapItem: mapItem) {
+                        viewModel.selectedMapItem = nil
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 16)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
+                // Bundled business popup (offline)
+                else if let business = viewModel.selectedBusiness {
                     MapPopupCard(business: business) {
                         viewModel.selectedBusiness = nil
                     }
@@ -99,6 +132,10 @@ struct MapTabView: View {
             }
         }
     }
+
+    private func pinIcon(for category: Category?) -> String {
+        category?.iconName ?? "mappin"
+    }
 }
 
 // MARK: - Search Bar
@@ -115,7 +152,7 @@ struct MapSearchBar: View {
                 .foregroundStyle(Color.riLightGray)
                 .font(.system(size: 15, weight: .medium))
 
-            TextField("Search businesses, keywords...", text: $query)
+            TextField("Search places on Roatán...", text: $query)
                 .font(.system(size: 15, weight: .regular))
                 .submitLabel(.search)
                 .onSubmit(onSubmit)
