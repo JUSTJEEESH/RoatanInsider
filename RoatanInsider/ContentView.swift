@@ -2,61 +2,53 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
     @State private var dataManager = DataManager()
     @State private var locationManager = LocationManager()
     @State private var networkMonitor = NetworkMonitor()
-    @State private var favoritesStore: FavoritesStore?
     @State private var selectedTab = 0
+    let favoritesStore: FavoritesStore
 
     var body: some View {
-        Group {
-            if let favoritesStore {
-                TabView(selection: $selectedTab) {
-                    HomeView(selectedTab: $selectedTab)
-                        .tabItem {
-                            Label("Home", systemImage: "house.fill")
-                        }
-                        .tag(0)
-
-                    ExploreView()
-                        .tabItem {
-                            Label("Explore", systemImage: "magnifyingglass")
-                        }
-                        .tag(1)
-
-                    MapTabView()
-                        .tabItem {
-                            Label("Map", systemImage: "map.fill")
-                        }
-                        .tag(2)
-
-                    ToolsView()
-                        .tabItem {
-                            Label("Tools", systemImage: "wrench.and.screwdriver.fill")
-                        }
-                        .tag(3)
-
-                    SavedView()
-                        .tabItem {
-                            Label("Favorites", systemImage: "heart.fill")
-                        }
-                        .tag(4)
+        TabView(selection: $selectedTab) {
+            HomeView(selectedTab: $selectedTab)
+                .tabItem {
+                    Label("Home", systemImage: "house.fill")
                 }
-                .tint(.riPink)
-                .onChange(of: selectedTab) { _, _ in
-                    Haptics.select()
+                .tag(0)
+
+            ExploreView()
+                .tabItem {
+                    Label("Explore", systemImage: "magnifyingglass")
                 }
-                .environment(dataManager)
-                .environment(locationManager)
-                .environment(networkMonitor)
-                .environment(favoritesStore)
-            }
+                .tag(1)
+
+            MapTabView()
+                .tabItem {
+                    Label("Map", systemImage: "map.fill")
+                }
+                .tag(2)
+
+            ToolsView()
+                .tabItem {
+                    Label("Tools", systemImage: "wrench.and.screwdriver.fill")
+                }
+                .tag(3)
+
+            SavedView()
+                .tabItem {
+                    Label("Favorites", systemImage: "heart.fill")
+                }
+                .tag(4)
         }
-        .task {
-            if favoritesStore == nil {
-                favoritesStore = FavoritesStore(modelContext: modelContext)
-            }
+        .tint(.riPink)
+        .onChange(of: selectedTab) { _, _ in
+            Haptics.select()
+        }
+        .environment(dataManager)
+        .environment(locationManager)
+        .environment(networkMonitor)
+        .environment(favoritesStore)
+        .onAppear {
             configureTabBarAppearance()
         }
     }
