@@ -3,6 +3,7 @@ import SwiftUI
 struct CruiseModeView: View {
     @Bindable var viewModel: CruiseViewModel
     @Environment(DataManager.self) private var dataManager
+    @Environment(\.dismiss) private var dismiss
     @State private var selectedCategory: Category?
     @State private var timer = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
 
@@ -35,6 +36,7 @@ struct CruiseModeView: View {
                     Button {
                         Haptics.tap()
                         viewModel.isActive = false
+                        dismiss()
                     } label: {
                         Text("Exit")
                             .font(.riCaption(15))
