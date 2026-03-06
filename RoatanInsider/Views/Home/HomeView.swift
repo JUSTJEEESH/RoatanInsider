@@ -4,12 +4,18 @@ struct HomeView: View {
     @Binding var selectedTab: Int
     @Environment(DataManager.self) private var dataManager
     @State private var viewModel = HomeViewModel()
+    @State private var cruiseViewModel = CruiseViewModel()
+    @State private var showCruiseMode = false
 
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 0) {
                     HeroSection()
+
+                    // Cruise banner
+                    CruiseBanner(showCruiseMode: $showCruiseMode)
+                        .padding(.top, 24)
 
                     // Right Now — white background (time-aware picks)
                     RightNowSection(businesses: dataManager.activeBusinesses)
@@ -46,6 +52,9 @@ struct HomeView: View {
             }
             .navigationDestination(for: Category.self) { category in
                 CategoryListView(category: category)
+            }
+            .fullScreenCover(isPresented: $showCruiseMode) {
+                CruiseModeView(viewModel: cruiseViewModel)
             }
         }
     }
