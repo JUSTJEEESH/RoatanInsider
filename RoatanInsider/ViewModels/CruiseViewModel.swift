@@ -17,14 +17,14 @@ final class CruiseViewModel {
         var displayName: String {
             switch self {
             case .mahoganyBay: return "Mahogany Bay"
-            case .coxenHole: return "Coxen Hole"
+            case .coxenHole: return "Port of Roatán"
             }
         }
 
         var subtitle: String {
             switch self {
-            case .mahoganyBay: return "Dixon Cove · East of Coxen Hole"
-            case .coxenHole: return "Town Center · Near West End"
+            case .mahoganyBay: return "Dixon Cove · West of French Harbour"
+            case .coxenHole: return "Coxen Hole · Island's Main Town"
             }
         }
 
@@ -32,7 +32,7 @@ final class CruiseViewModel {
             switch self {
             // Mahogany Bay cruise terminal is in Dixon Cove, east of Coxen Hole
             case .mahoganyBay: return CLLocationCoordinate2D(latitude: 16.3248, longitude: -86.4959)
-            // Town Center port in Coxen Hole, closer to western tourist areas
+            // Port of Roatán in Coxen Hole
             case .coxenHole: return CLLocationCoordinate2D(latitude: 16.3170, longitude: -86.5370)
             }
         }
@@ -155,16 +155,9 @@ final class CruiseViewModel {
         }
     }
 
-    func distanceFromPort(_ business: Business) -> String {
-        let portLocation = selectedPort.location
-        let businessLocation = CLLocation(latitude: business.latitude, longitude: business.longitude)
-        let distance = portLocation.distance(from: businessLocation)
-
-        if distance < 1000 {
-            return "\(Int(distance))m"
-        } else {
-            return String(format: "%.1fkm", distance / 1000)
-        }
+    func distanceFromPort(_ business: Business, useMetric: Bool = false) -> String {
+        let distance = rawDistanceFromPort(business)
+        return UnitPreference.formatDistance(meters: distance, useMetric: useMetric)
     }
 
     func rawDistanceFromPort(_ business: Business) -> Double {

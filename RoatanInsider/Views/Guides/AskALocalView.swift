@@ -135,7 +135,7 @@ extension AskALocalView {
         LocalQA(
             id: "cruise-time",
             question: "I have 6 hours from my cruise ship — what should I do?",
-            answer: "Skip the overpriced excursions sold on the ship. Here's what I'd do: grab a taxi to West Bay Beach ($5-8 per person from Mahogany Bay). Spend 3 hours swimming, snorkeling, and having a couple beers at a beach bar. Eat fresh fish tacos for lunch. Then head back with an hour buffer — you do NOT want to miss the ship. If you're at Coxen Hole port, it's a bit farther to West Bay (20 min taxi, ~$10-15) but still totally doable."
+            answer: "Skip the overpriced excursions sold on the ship. Here's what I'd do: grab a taxi to West Bay Beach ($5-8 per person from Mahogany Bay). Spend 3 hours swimming, snorkeling, and having a couple beers at a beach bar. Eat fresh fish tacos for lunch. Then head back with an hour buffer — you do NOT want to miss the ship. If you're at the Port of Roatán, it's a bit farther to West Bay (20 min taxi, ~$10-15) but still totally doable."
         ),
         LocalQA(
             id: "water",
