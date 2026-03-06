@@ -10,17 +10,19 @@ struct ExploreView: View {
     ]
 
     var body: some View {
+        @Bindable var searchEngine = viewModel.searchEngine
+
         NavigationStack {
             VStack(spacing: 0) {
-                SearchBar(text: $viewModel.searchEngine.searchText)
+                SearchBar(text: $searchEngine.searchText)
                     .padding(.horizontal, 20)
                     .padding(.top, 8)
 
                 FilterBar(searchEngine: viewModel.searchEngine)
                     .padding(.top, 8)
 
+                let results = viewModel.filteredBusinesses(from: dataManager.businesses)
                 ScrollView {
-                    let results = viewModel.filteredBusinesses(from: dataManager.businesses)
                     if results.isEmpty {
                         emptyState
                     } else {
