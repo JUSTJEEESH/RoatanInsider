@@ -2,6 +2,7 @@ import SwiftUI
 
 struct CurrencyConverterView: View {
     @Bindable var viewModel: ToolsViewModel
+    @FocusState private var isInputFocused: Bool
 
     var body: some View {
         VStack(spacing: 32) {
@@ -11,7 +12,7 @@ struct CurrencyConverterView: View {
                 VStack(spacing: 8) {
                     Text(viewModel.isUsdToHnl ? "USD" : "HNL")
                         .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(Color.riMediumGray)
+                        .foregroundStyle(Color.riDark)
                         .tracking(1)
 
                     TextField("0", text: $viewModel.usdAmount)
@@ -20,6 +21,16 @@ struct CurrencyConverterView: View {
                         .multilineTextAlignment(.center)
                         .keyboardType(.decimalPad)
                         .tracking(-1)
+                        .focused($isInputFocused)
+                        .toolbar {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                Spacer()
+                                Button("Done") {
+                                    isInputFocused = false
+                                }
+                                .fontWeight(.semibold)
+                            }
+                        }
                 }
 
                 // Swap button
@@ -38,7 +49,7 @@ struct CurrencyConverterView: View {
                 VStack(spacing: 8) {
                     Text(viewModel.isUsdToHnl ? "HNL" : "USD")
                         .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(Color.riMediumGray)
+                        .foregroundStyle(Color.riDark)
                         .tracking(1)
 
                     Text(viewModel.convertedDisplay)
@@ -51,13 +62,13 @@ struct CurrencyConverterView: View {
             // Rate info
             Text("1 USD = \(AppConstants.usdToHnlRate, specifier: "%.2f") HNL")
                 .font(.riCaption(13))
-                .foregroundStyle(Color.riMediumGray)
+                .foregroundStyle(Color.riLightGray)
 
             // Quick amount buttons
             VStack(spacing: 12) {
                 Text("Quick Convert")
                     .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(Color.riMediumGray)
+                    .foregroundStyle(Color.riDark)
                     .tracking(0.5)
 
                 HStack(spacing: 10) {
