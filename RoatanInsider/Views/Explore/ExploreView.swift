@@ -4,6 +4,11 @@ struct ExploreView: View {
     @Environment(DataManager.self) private var dataManager
     @State private var viewModel = ExploreViewModel()
 
+    private let columns = [
+        GridItem(.flexible(), spacing: 12),
+        GridItem(.flexible(), spacing: 12)
+    ]
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
@@ -15,17 +20,18 @@ struct ExploreView: View {
                     .padding(.top, 8)
 
                 ScrollView {
-                    LazyVStack(spacing: 16) {
-                        let results = viewModel.filteredBusinesses(from: dataManager.businesses)
-                        if results.isEmpty {
-                            emptyState
-                        } else {
+                    let results = viewModel.filteredBusinesses(from: dataManager.businesses)
+                    if results.isEmpty {
+                        emptyState
+                    } else {
+                        LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(results) { business in
-                                BusinessCard(business: business)
+                                BusinessCardGrid(business: business)
                             }
                         }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 20)
                     }
-                    .padding(20)
                 }
             }
             .background(Color.riWhite)

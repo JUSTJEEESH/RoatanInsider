@@ -7,9 +7,7 @@ struct MapPopupCard: View {
     var body: some View {
         NavigationLink(value: business) {
             HStack(spacing: 12) {
-                Image(business.images.first ?? "business_placeholder")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+                BusinessImageView(business: business, aspectRatio: 1)
                     .frame(width: 80, height: 80)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
 
