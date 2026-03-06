@@ -56,7 +56,7 @@ struct FilterChip: View {
     let action: () -> Void
 
     var body: some View {
-        Button(action: action) {
+        Button(action: { Haptics.tap(); action() }) {
             Text(label)
                 .font(.riCaption(14))
                 .fontWeight(.medium)

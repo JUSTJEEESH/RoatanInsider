@@ -9,6 +9,7 @@ struct FavoriteButton: View {
         let isSaved = favoritesStore.isFavorite(businessId)
 
         Button {
+            Haptics.impact()
             withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
                 favoritesStore.toggleFavorite(businessId)
             }

@@ -41,6 +41,7 @@ struct TipCalculatorView: View {
                 HStack(spacing: 10) {
                     ForEach(AppConstants.tipPercentages, id: \.self) { pct in
                         Button {
+                            Haptics.select()
                             viewModel.tipPercentage = pct
                         } label: {
                             Text("\(pct)%")
@@ -65,6 +66,7 @@ struct TipCalculatorView: View {
 
                 HStack(spacing: 16) {
                     Button {
+                        Haptics.tap()
                         if viewModel.splitCount > 1 { viewModel.splitCount -= 1 }
                     } label: {
                         Image(systemName: "minus")
@@ -81,6 +83,7 @@ struct TipCalculatorView: View {
                         .frame(width: 60)
 
                     Button {
+                        Haptics.tap()
                         viewModel.splitCount += 1
                     } label: {
                         Image(systemName: "plus")

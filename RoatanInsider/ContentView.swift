@@ -44,6 +44,9 @@ struct ContentView: View {
                         .tag(4)
                 }
                 .tint(.riPink)
+                .onChange(of: selectedTab) { _, _ in
+                    Haptics.select()
+                }
                 .environment(dataManager)
                 .environment(locationManager)
                 .environment(networkMonitor)

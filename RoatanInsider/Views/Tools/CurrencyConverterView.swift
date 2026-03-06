@@ -35,6 +35,7 @@ struct CurrencyConverterView: View {
 
                 // Swap button
                 Button {
+                    Haptics.tap()
                     viewModel.isUsdToHnl.toggle()
                 } label: {
                     Image(systemName: "arrow.up.arrow.down")
@@ -74,6 +75,7 @@ struct CurrencyConverterView: View {
                 HStack(spacing: 10) {
                     ForEach(AppConstants.quickAmounts, id: \.self) { amount in
                         Button {
+                            Haptics.select()
                             viewModel.isUsdToHnl = true
                             viewModel.setQuickAmount(amount)
                         } label: {
