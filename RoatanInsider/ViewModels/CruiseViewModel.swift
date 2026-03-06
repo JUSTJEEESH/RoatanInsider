@@ -23,14 +23,16 @@ final class CruiseViewModel {
 
         var subtitle: String {
             switch self {
-            case .mahoganyBay: return "Near West Bay & West End"
-            case .coxenHole: return "Town Center Port"
+            case .mahoganyBay: return "Dixon Cove · East of Coxen Hole"
+            case .coxenHole: return "Town Center · Near West End"
             }
         }
 
         var coordinate: CLLocationCoordinate2D {
             switch self {
-            case .mahoganyBay: return CLLocationCoordinate2D(latitude: 16.3120, longitude: -86.5530)
+            // Mahogany Bay cruise terminal is in Dixon Cove, east of Coxen Hole
+            case .mahoganyBay: return CLLocationCoordinate2D(latitude: 16.3248, longitude: -86.4959)
+            // Town Center port in Coxen Hole, closer to western tourist areas
             case .coxenHole: return CLLocationCoordinate2D(latitude: 16.3170, longitude: -86.5370)
             }
         }
@@ -39,10 +41,13 @@ final class CruiseViewModel {
             CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         }
 
+        /// Areas ordered by proximity to the port
         var nearbyAreas: [Area] {
             switch self {
-            case .mahoganyBay: return [.westBay, .westEnd, .sandyBay, .dixonCove, .coxenHole]
-            case .coxenHole: return [.coxenHole, .sandyBay, .westEnd, .westBay, .dixonCove]
+            case .mahoganyBay:
+                return [.dixonCove, .frenchHarbour, .coxenHole, .palmettoBay, .sandyBay, .flowersBay]
+            case .coxenHole:
+                return [.coxenHole, .sandyBay, .flowersBay, .westEnd, .westBay, .dixonCove]
             }
         }
     }
@@ -63,40 +68,91 @@ final class CruiseViewModel {
         return "\(minutes)m"
     }
 
+    /// Under 30 min — critical
+    var isCritical: Bool {
+        timeRemaining > 0 && timeRemaining < 1800
+    }
+
+    /// 30–60 min — urgent, start heading back
     var isUrgent: Bool {
-        timeRemaining < 3600 && timeRemaining > 0
+        timeRemaining > 0 && timeRemaining < 3600
     }
 
     var isExpired: Bool {
         timeRemaining <= 0
     }
 
-    var urgencyMessage: String {
-        if isExpired {
-            return "Time to head back!"
-        } else if timeRemaining < 1800 {
-            return "Head to port NOW"
-        } else if timeRemaining < 3600 {
-            return "Start heading back soon"
-        } else {
-            return "You have time — enjoy!"
+    enum UrgencyLevel {
+        case expired, critical, urgent, moderate, relaxed
+
+        var color: Color {
+            switch self {
+            case .expired: return .riPink
+            case .critical: return .riPink
+            case .urgent: return .orange
+            case .moderate: return .riMint
+            case .relaxed: return .riMint
+            }
         }
+
+        var icon: String {
+            switch self {
+            case .expired: return "exclamationmark.octagon.fill"
+            case .critical: return "exclamationmark.triangle.fill"
+            case .urgent: return "exclamationmark.triangle.fill"
+            case .moderate: return "clock.fill"
+            case .relaxed: return "clock.fill"
+            }
+        }
+
+        var message: String {
+            switch self {
+            case .expired: return "You should be at the port!"
+            case .critical: return "Head to port NOW"
+            case .urgent: return "Start heading back soon"
+            case .moderate: return "Keep an eye on the time"
+            case .relaxed: return "You have time — enjoy!"
+            }
+        }
+    }
+
+    var urgencyLevel: UrgencyLevel {
+        if isExpired { return .expired }
+        if timeRemaining < 1800 { return .critical }
+        if timeRemaining < 3600 { return .urgent }
+        if timeRemaining < 7200 { return .moderate }
+        return .relaxed
     }
 
     // MARK: - Business Filtering
 
     func filteredBusinesses(_ businesses: [Business]) -> [Business] {
         let portLocation = selectedPort.location
-        let nearby = selectedPort.nearbyAreas
 
-        return businesses
+        var result = businesses
             .filter { $0.isActive }
-            .filter { nearby.contains($0.area) }
-            .sorted { b1, b2 in
-                let d1 = portLocation.distance(from: CLLocation(latitude: b1.latitude, longitude: b1.longitude))
-                let d2 = portLocation.distance(from: CLLocation(latitude: b2.latitude, longitude: b2.longitude))
-                return d1 < d2
+            .filter { selectedPort.nearbyAreas.contains($0.area) }
+
+        // When time is short, restrict to closer businesses only
+        if timeRemaining < 3600 {
+            // Under 1 hour: only businesses within ~3km
+            result = result.filter { business in
+                let loc = CLLocation(latitude: business.latitude, longitude: business.longitude)
+                return portLocation.distance(from: loc) < 3000
             }
+        } else if timeRemaining < 7200 {
+            // Under 2 hours: businesses within ~8km
+            result = result.filter { business in
+                let loc = CLLocation(latitude: business.latitude, longitude: business.longitude)
+                return portLocation.distance(from: loc) < 8000
+            }
+        }
+
+        return result.sorted { b1, b2 in
+            let d1 = portLocation.distance(from: CLLocation(latitude: b1.latitude, longitude: b1.longitude))
+            let d2 = portLocation.distance(from: CLLocation(latitude: b2.latitude, longitude: b2.longitude))
+            return d1 < d2
+        }
     }
 
     func distanceFromPort(_ business: Business) -> String {
@@ -111,24 +167,27 @@ final class CruiseViewModel {
         }
     }
 
-    func travelTime(_ business: Business) -> String {
+    func rawDistanceFromPort(_ business: Business) -> Double {
         let portLocation = selectedPort.location
         let businessLocation = CLLocation(latitude: business.latitude, longitude: business.longitude)
-        let distance = portLocation.distance(from: businessLocation)
+        return portLocation.distance(from: businessLocation)
+    }
 
-        // Rough estimate: taxi ~30km/h, add 5min buffer
-        let minutes = Int(distance / 500) + 5
+    func travelTimeMinutes(_ business: Business) -> Int {
+        let distance = rawDistanceFromPort(business)
+        // Roatán roads are slow — roughly 25km/h average by taxi, plus 5min wait/buffer
+        return max(5, Int(distance / 420) + 5)
+    }
+
+    func travelTime(_ business: Business) -> String {
+        let minutes = travelTimeMinutes(business)
         return "~\(minutes) min"
     }
 
     func canVisitAndReturn(_ business: Business) -> Bool {
-        let portLocation = selectedPort.location
-        let businessLocation = CLLocation(latitude: business.latitude, longitude: business.longitude)
-        let distance = portLocation.distance(from: businessLocation)
-
-        // Need round-trip travel time + minimum 30 min at location
-        let travelMinutes = Double(Int(distance / 500) + 5)
-        let minimumNeeded = (travelMinutes * 2 + 30) * 60
+        let minutes = travelTimeMinutes(business)
+        // Round-trip travel + 30 min minimum at the location
+        let minimumNeeded = Double(minutes * 2 + 30) * 60
         return timeRemaining > minimumNeeded
     }
 
