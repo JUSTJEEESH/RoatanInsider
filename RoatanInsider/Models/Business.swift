@@ -25,7 +25,7 @@ struct Business: Identifiable, Codable, Hashable {
     let facebook: String?
     let instagram: String?
     let priceRange: Int
-    let hours: [String: DayHours]
+    let hours: [String: DayHours?]
     let features: [String]
     let images: [String]
     let isVerified: Bool
@@ -47,7 +47,7 @@ struct Business: Identifiable, Codable, Hashable {
     func isOpenNow() -> Bool {
         let now = Date()
         let dayKey = now.currentDayKey
-        guard let dayHours = hours[dayKey] else { return false }
+        guard let dayHours = hours[dayKey] ?? nil else { return false }
 
         let timeString = now.currentTimeString
         return timeString >= dayHours.open && timeString <= dayHours.close
