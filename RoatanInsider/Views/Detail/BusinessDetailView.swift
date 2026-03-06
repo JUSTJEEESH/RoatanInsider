@@ -9,7 +9,7 @@ struct BusinessDetailView: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 0) {
                 // Hero image
-                PhotoGallery(images: business.images, category: business.category)
+                PhotoGallery(images: business.images, category: business.category, slug: business.slug)
 
                 VStack(alignment: .leading, spacing: 20) {
                     // Title section

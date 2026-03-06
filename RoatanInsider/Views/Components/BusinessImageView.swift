@@ -1,23 +1,49 @@
 import SwiftUI
 
-/// Displays a business photo or a styled category-aware placeholder when no image exists.
+/// Displays a business photo from Supabase storage, local asset catalog, or a styled category-aware placeholder.
 struct BusinessImageView: View {
     let business: Business
     var aspectRatio: CGFloat = 16/9
     var contentMode: ContentMode = .fill
 
     var body: some View {
-        let imageName = business.images.first ?? "business_placeholder"
-        let hasImage = UIImage(named: imageName) != nil
+        let imageName = business.images.first ?? ""
+        let hasLocalImage = UIImage(named: imageName) != nil
 
-        if hasImage {
+        if hasLocalImage {
             Image(imageName)
                 .resizable()
                 .aspectRatio(aspectRatio, contentMode: contentMode)
                 .clipped()
+        } else if let url = supabaseURL {
+            AsyncImage(url: url) { phase in
+                switch phase {
+                case .success(let image):
+                    image
+                        .resizable()
+                        .aspectRatio(aspectRatio, contentMode: contentMode)
+                        .clipped()
+                case .failure:
+                    categoryPlaceholder
+                case .empty:
+                    categoryPlaceholder
+                        .overlay {
+                            ProgressView()
+                                .tint(Color.riMint)
+                        }
+                @unknown default:
+                    categoryPlaceholder
+                }
+            }
         } else {
             categoryPlaceholder
         }
+    }
+
+    private var supabaseURL: URL? {
+        let slug = business.slug
+        guard !slug.isEmpty else { return nil }
+        return URL(string: AppConstants.supabaseStorageBaseURL + slug + ".jpg")
     }
 
     private var categoryPlaceholder: some View {
