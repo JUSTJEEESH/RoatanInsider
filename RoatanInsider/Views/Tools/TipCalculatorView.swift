@@ -8,8 +8,9 @@ struct TipCalculatorView: View {
             // Bill amount
             VStack(spacing: 8) {
                 Text("Bill Amount (USD)")
-                    .font(.riCaption(14))
-                    .foregroundStyle(Color.riLightGray)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(Color.riMediumGray)
+                    .tracking(0.5)
 
                 TextField("0.00", text: $viewModel.billAmount)
                     .font(.system(size: 44, weight: .bold))
@@ -22,8 +23,9 @@ struct TipCalculatorView: View {
             // Tip percentage buttons
             VStack(spacing: 12) {
                 Text("Tip Percentage")
-                    .font(.riCaption(14))
-                    .foregroundStyle(Color.riLightGray)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(Color.riMediumGray)
+                    .tracking(0.5)
 
                 HStack(spacing: 10) {
                     ForEach(AppConstants.tipPercentages, id: \.self) { pct in
@@ -46,8 +48,9 @@ struct TipCalculatorView: View {
             // Split
             VStack(spacing: 12) {
                 Text("Split Between")
-                    .font(.riCaption(14))
-                    .foregroundStyle(Color.riLightGray)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(Color.riMediumGray)
+                    .tracking(0.5)
 
                 HStack(spacing: 16) {
                     Button {
@@ -111,7 +114,7 @@ struct TipCalculatorView: View {
 
             Text(value)
                 .font(.system(size: highlight ? 22 : 18, weight: .bold))
-                .foregroundStyle(highlight ? Color.riMint : Color.riDark)
+                .foregroundStyle(highlight ? Color.riDark : Color.riDark)
         }
     }
 }
