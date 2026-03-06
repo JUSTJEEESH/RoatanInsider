@@ -22,6 +22,7 @@
 		F4373ADE141B6B92A2E83A3B /* InsiderPicksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF1B08F812BB0484720A4FB /* InsiderPicksSection.swift */; };
 		DC9BB0CE144E5F772CC64DFE /* QuickGuidesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7529901218BBFDEC3A98653D /* QuickGuidesSection.swift */; };
 		8DD01B1FD61DA6D8208CEBAE /* BusinessCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DA2C4F7D608011B2EDFCD6 /* BusinessCard.swift */; };
+		A1B2C3D4E5F60718293A4B5C /* BusinessImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6071829A3B4C5D6 /* BusinessImageView.swift */; };
 		F5C33467F2D5026850EE591D /* CategoryIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E96A2A0AF97CA265A823A1 /* CategoryIcon.swift */; };
 		65ABAB072B0FF83CAD4611BD /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CC41408A026EF99B71056B /* FavoriteButton.swift */; };
 		66AA047D8764DD6F1344D587 /* OpenStatusBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC204C0715C10682D6C667F /* OpenStatusBadge.swift */; };
@@ -84,6 +85,7 @@
 		EFF1B08F812BB0484720A4FB /* InsiderPicksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InsiderPicksSection.swift"; sourceTree = "<group>"; };
 		7529901218BBFDEC3A98653D /* QuickGuidesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuickGuidesSection.swift"; sourceTree = "<group>"; };
 		42DA2C4F7D608011B2EDFCD6 /* BusinessCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BusinessCard.swift"; sourceTree = "<group>"; };
+		B2C3D4E5F6071829A3B4C5D6 /* BusinessImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BusinessImageView.swift"; sourceTree = "<group>"; };
 		92E96A2A0AF97CA265A823A1 /* CategoryIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryIcon.swift"; sourceTree = "<group>"; };
 		D3CC41408A026EF99B71056B /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteButton.swift"; sourceTree = "<group>"; };
 		AEC204C0715C10682D6C667F /* OpenStatusBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenStatusBadge.swift"; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				42DA2C4F7D608011B2EDFCD6 /* BusinessCard.swift */,
+				B2C3D4E5F6071829A3B4C5D6 /* BusinessImageView.swift */,
 				92E96A2A0AF97CA265A823A1 /* CategoryIcon.swift */,
 				D3CC41408A026EF99B71056B /* FavoriteButton.swift */,
 				AEC204C0715C10682D6C667F /* OpenStatusBadge.swift */,
@@ -428,6 +431,7 @@
 				F4373ADE141B6B92A2E83A3B /* InsiderPicksSection.swift in Sources */,
 				DC9BB0CE144E5F772CC64DFE /* QuickGuidesSection.swift in Sources */,
 				8DD01B1FD61DA6D8208CEBAE /* BusinessCard.swift in Sources */,
+				A1B2C3D4E5F60718293A4B5C /* BusinessImageView.swift in Sources */,
 				F5C33467F2D5026850EE591D /* CategoryIcon.swift in Sources */,
 				65ABAB072B0FF83CAD4611BD /* FavoriteButton.swift in Sources */,
 				66AA047D8764DD6F1344D587 /* OpenStatusBadge.swift in Sources */,
