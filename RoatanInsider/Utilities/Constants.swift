@@ -14,6 +14,9 @@ enum AppConstants {
     static let roatanSpanLat: Double = 0.20
     static let roatanSpanLon: Double = 0.40
 
+    // Supabase Storage
+    static let supabaseStorageBaseURL = "https://vbxmmslzanixvqswtnnv.supabase.co/storage/v1/object/public/business-photos/"
+
     // Design
     static let cardCornerRadius: CGFloat = 16
     static let buttonCornerRadius: CGFloat = 16
