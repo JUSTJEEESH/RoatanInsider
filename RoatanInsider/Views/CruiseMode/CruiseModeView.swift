@@ -5,27 +5,25 @@ struct CruiseModeView: View {
     @Environment(DataManager.self) private var dataManager
     @Environment(\.dismiss) private var dismiss
     @State private var selectedCategory: Category?
-    @State private var timer = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
+    @State private var tick = 0
+    private let timer = Timer.publish(every: 15, on: .main, in: .common).autoconnect()
 
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 0) {
-                    // Countdown header
                     countdownHeader
-                        .padding(.bottom, 24)
 
-                    // Port selector
                     portSelector
                         .padding(.horizontal, 20)
+                        .padding(.top, 24)
                         .padding(.bottom, 20)
 
-                    // Quick categories
                     categoryFilter
-                        .padding(.bottom, 16)
+                        .padding(.bottom, 20)
 
-                    // Nearby businesses
                     businessList
+                        .padding(.bottom, 40)
                 }
             }
             .background(Color.riWhite)
@@ -49,7 +47,7 @@ struct CruiseModeView: View {
                 BusinessDetailView(business: business)
             }
             .onReceive(timer) { _ in
-                // Force view update for countdown
+                tick += 1
             }
         }
     }
@@ -57,87 +55,95 @@ struct CruiseModeView: View {
     // MARK: - Countdown Header
 
     private var countdownHeader: some View {
-        VStack(spacing: 12) {
-            // Urgency banner
-            HStack(spacing: 8) {
-                Image(systemName: viewModel.isUrgent ? "exclamationmark.triangle.fill" : "clock.fill")
-                    .font(.system(size: 14, weight: .medium))
+        let urgency = viewModel.urgencyLevel
 
-                Text(viewModel.urgencyMessage)
-                    .font(.system(size: 14, weight: .semibold))
+        return VStack(spacing: 0) {
+            // Urgency banner — full width, prominent
+            HStack(spacing: 8) {
+                Image(systemName: urgency.icon)
+                    .font(.system(size: 15, weight: .semibold))
+
+                Text(urgency.message)
+                    .font(.system(size: 15, weight: .bold))
             }
             .foregroundStyle(.white)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 10)
             .frame(maxWidth: .infinity)
-            .background(viewModel.isExpired ? Color.riPink : (viewModel.isUrgent ? Color.orange : Color.riMint))
+            .padding(.vertical, 12)
+            .background(urgency.color)
 
             // Time display
-            VStack(spacing: 4) {
+            VStack(spacing: 6) {
                 Text("BACK ON BOARD BY")
                     .font(.system(size: 11, weight: .bold))
                     .foregroundStyle(Color.riLightGray)
                     .tracking(1.5)
 
-                // Boarding time picker
                 DatePicker("", selection: $viewModel.boardingTime, displayedComponents: .hourAndMinute)
                     .datePickerStyle(.compact)
                     .labelsHidden()
-                    .scaleEffect(1.2)
+                    .scaleEffect(1.1)
                     .onChange(of: viewModel.boardingTime) { _, _ in
                         Haptics.select()
                     }
 
-                HStack(spacing: 4) {
+                // Large countdown
+                let _ = tick
+                HStack(spacing: 6) {
                     Image(systemName: "timer")
-                        .font(.system(size: 18, weight: .medium))
+                        .font(.system(size: 22, weight: .medium))
                     Text(viewModel.timeRemainingFormatted)
-                        .font(.system(size: 36, weight: .bold))
-                        .tracking(-1)
+                        .font(.system(size: 44, weight: .bold))
+                        .tracking(-1.5)
+                        .monospacedDigit()
                 }
-                .foregroundStyle(viewModel.isUrgent ? Color.riPink : Color.riDark)
+                .foregroundStyle(countdownColor)
 
                 Text("remaining")
                     .font(.riCaption(13))
                     .foregroundStyle(Color.riLightGray)
             }
-            .padding(.top, 8)
+            .padding(.vertical, 16)
+        }
+    }
+
+    private var countdownColor: Color {
+        switch viewModel.urgencyLevel {
+        case .expired, .critical: return .riPink
+        case .urgent: return .orange
+        case .moderate, .relaxed: return .riDark
         }
     }
 
     // MARK: - Port Selector
 
     private var portSelector: some View {
-        VStack(spacing: 12) {
-            Text("YOUR PORT")
-                .font(.system(size: 11, weight: .bold))
-                .foregroundStyle(Color.riLightGray)
-                .tracking(1.5)
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-            HStack(spacing: 10) {
-                ForEach(CruiseViewModel.CruisePort.allCases) { port in
-                    Button {
-                        Haptics.select()
+        HStack(spacing: 10) {
+            ForEach(CruiseViewModel.CruisePort.allCases) { port in
+                Button {
+                    Haptics.select()
+                    withAnimation(.easeInOut(duration: 0.2)) {
                         viewModel.selectedPort = port
-                    } label: {
-                        VStack(spacing: 4) {
-                            Image(systemName: "ferry")
-                                .font(.system(size: 18, weight: .medium))
-                            Text(port.displayName)
-                                .font(.system(size: 14, weight: .semibold))
-                            Text(port.subtitle)
-                                .font(.riCaption(11))
-                                .lineLimit(1)
-                        }
-                        .foregroundStyle(viewModel.selectedPort == port ? .white : Color.riDark)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
-                        .background(viewModel.selectedPort == port ? Color.riDark : Color.riOffWhite)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        selectedCategory = nil
                     }
-                    .buttonStyle(.plain)
+                } label: {
+                    VStack(spacing: 4) {
+                        Image(systemName: "ferry")
+                            .font(.system(size: 18, weight: .medium))
+                        Text(port.displayName)
+                            .font(.system(size: 14, weight: .bold))
+                        Text(port.subtitle)
+                            .font(.riCaption(11))
+                            .lineLimit(2)
+                            .multilineTextAlignment(.center)
+                    }
+                    .foregroundStyle(viewModel.selectedPort == port ? .white : Color.riDark)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .padding(.horizontal, 8)
+                    .background(viewModel.selectedPort == port ? Color.riDark : Color.riOffWhite)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
+                .buttonStyle(.plain)
             }
         }
     }
@@ -164,20 +170,88 @@ struct CruiseModeView: View {
     // MARK: - Business List
 
     private var businessList: some View {
-        let businesses = viewModel.filteredBusinesses(dataManager.businesses)
-        let filtered = selectedCategory == nil ? businesses : businesses.filter { $0.category == selectedCategory }
+        let allFiltered = viewModel.filteredBusinesses(dataManager.businesses)
+        let businesses = selectedCategory == nil
+            ? allFiltered
+            : allFiltered.filter { $0.category == selectedCategory }
+        let visitable = businesses.filter { viewModel.canVisitAndReturn($0) }
+        let tooFar = businesses.filter { !viewModel.canVisitAndReturn($0) }
 
-        return LazyVStack(spacing: 0) {
-            ForEach(filtered.prefix(30)) { business in
-                CruiseBusinessRow(
-                    business: business,
-                    distance: viewModel.distanceFromPort(business),
-                    travelTime: viewModel.travelTime(business),
-                    canVisit: viewModel.canVisitAndReturn(business)
-                )
+        return VStack(spacing: 0) {
+            if businesses.isEmpty {
+                emptyState
+            } else {
+                // Visitable businesses
+                if !visitable.isEmpty {
+                    sectionLabel(
+                        visitable.count == businesses.count ? "Nearby" : "You have time for",
+                        icon: "checkmark.circle.fill",
+                        color: .riMint
+                    )
+
+                    ForEach(visitable) { business in
+                        CruiseBusinessRow(
+                            business: business,
+                            distance: viewModel.distanceFromPort(business),
+                            travelTime: viewModel.travelTime(business),
+                            canVisit: true,
+                            isOpen: business.isOpenNow()
+                        )
+                    }
+                }
+
+                // Not enough time
+                if !tooFar.isEmpty && !viewModel.isExpired {
+                    sectionLabel(
+                        "Not enough time",
+                        icon: "clock.badge.xmark",
+                        color: .riLightGray
+                    )
+                    .padding(.top, visitable.isEmpty ? 0 : 8)
+
+                    ForEach(tooFar) { business in
+                        CruiseBusinessRow(
+                            business: business,
+                            distance: viewModel.distanceFromPort(business),
+                            travelTime: viewModel.travelTime(business),
+                            canVisit: false,
+                            isOpen: business.isOpenNow()
+                        )
+                    }
+                }
             }
         }
         .padding(.horizontal, 20)
+    }
+
+    private func sectionLabel(_ title: String, icon: String, color: Color) -> some View {
+        HStack(spacing: 6) {
+            Image(systemName: icon)
+                .font(.system(size: 13, weight: .medium))
+            Text(title.uppercased())
+                .font(.system(size: 12, weight: .bold))
+                .tracking(1)
+        }
+        .foregroundStyle(color)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.vertical, 12)
+    }
+
+    private var emptyState: some View {
+        VStack(spacing: 12) {
+            Image(systemName: "ferry")
+                .font(.system(size: 32, weight: .light))
+                .foregroundStyle(Color.riLightGray)
+
+            Text(viewModel.isExpired
+                 ? "Time's up — head to the port!"
+                 : "No matching businesses nearby")
+                .font(.system(size: 15, weight: .medium))
+                .foregroundStyle(Color.riMediumGray)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 60)
     }
 }
 
@@ -188,19 +262,18 @@ private struct CruiseBusinessRow: View {
     let distance: String
     let travelTime: String
     let canVisit: Bool
+    let isOpen: Bool
 
     var body: some View {
         NavigationLink(value: business) {
             HStack(spacing: 14) {
-                // Thumbnail
                 BusinessImageView(business: business, aspectRatio: 1)
-                    .frame(width: 64, height: 64)
+                    .frame(width: 56, height: 56)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
 
-                // Info
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 3) {
                     Text(business.name)
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.system(size: 15, weight: .semibold))
                         .foregroundStyle(Color.riDark)
                         .lineLimit(1)
 
@@ -212,37 +285,33 @@ private struct CruiseBusinessRow: View {
                     .font(.riCaption(13))
                     .foregroundStyle(Color.riLightGray)
 
-                    HStack(spacing: 8) {
-                        Label(distance, systemImage: "location")
-                        Label(travelTime, systemImage: "car")
+                    HStack(spacing: 10) {
+                        Label(distance, systemImage: "location.fill")
+                        Label(travelTime, systemImage: "car.fill")
                     }
                     .font(.riCaption(12))
                     .foregroundStyle(Color.riMediumGray)
                 }
 
-                Spacer()
+                Spacer(minLength: 4)
 
-                // Status
-                VStack(spacing: 4) {
-                    if business.isOpenNow() {
+                // Right side status
+                VStack(alignment: .trailing, spacing: 4) {
+                    if isOpen {
                         Text("Open")
-                            .font(.riCaption(11))
-                            .fontWeight(.semibold)
+                            .font(.system(size: 11, weight: .bold))
                             .foregroundStyle(Color.riMint)
                     }
 
                     if !canVisit {
-                        Image(systemName: "clock.badge.xmark")
-                            .font(.system(size: 16))
-                            .foregroundStyle(Color.riPink.opacity(0.6))
+                        Text("Too far")
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundStyle(Color.riLightGray)
                     }
                 }
             }
-            .padding(.vertical, 14)
-            .overlay(alignment: .bottom) {
-                Divider()
-            }
-            .opacity(canVisit ? 1 : 0.5)
+            .padding(.vertical, 12)
+            .opacity(canVisit ? 1 : 0.4)
         }
         .buttonStyle(.plain)
     }
