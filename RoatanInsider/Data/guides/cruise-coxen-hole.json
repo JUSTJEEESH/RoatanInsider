@@ -1,7 +1,7 @@
 {
   "id": "cruise-coxen-hole",
-  "portName": "Coxen Hole (Town Center)",
-  "portDescription": "The Town Center port is located in Coxen Hole, Roatán's main town and commercial hub. Unlike the private Mahogany Bay facility, this port drops you right into the heart of the island's capital. It's more authentic but less polished — and you're closer to local life, markets, and the road network to the rest of the island.",
+  "portName": "The Port of Roatán",
+  "portDescription": "The Port of Roatán is located in Coxen Hole, Roatán's main town and commercial hub. Unlike the private Mahogany Bay facility, this port drops you right into the heart of the island's capital. It's more authentic but less polished — and you're closer to local life, markets, and the road network to the rest of the island.",
   "latitude": 16.3040,
   "longitude": -86.5560,
   "itineraries": [
@@ -45,8 +45,8 @@
         {
           "id": "c4-5",
           "time": "3:00",
-          "title": "Taxi Back to Coxen Hole",
-          "description": "Hail a taxi from the beach road and head back to the port. The drive is 20 minutes without traffic, but allow 30-35 minutes on cruise days. Security lines at Town Center port are usually shorter than Mahogany Bay.",
+          "title": "Taxi Back to the Port",
+          "description": "Hail a taxi from the beach road and head back to the Port of Roatán in Coxen Hole. The drive is 20 minutes without traffic, but allow 30-35 minutes on cruise days. Security lines at the Port of Roatán are usually shorter than Mahogany Bay.",
           "estimatedCost": "$8-12 per person",
           "tip": "Leave at least 45 minutes before all-aboard. The road from West Bay to Coxen Hole has one lane each way and cruise day traffic can be unpredictable."
         }
@@ -100,8 +100,8 @@
         {
           "id": "c6-6",
           "time": "5:00",
-          "title": "Return to Coxen Hole Port",
-          "description": "Taxi from West End back to the Coxen Hole port. The drive is about 15 minutes. Allow 30 minutes total to account for traffic and security. The Town Center port is more compact than Mahogany Bay, so boarding is usually quicker.",
+          "title": "Return to the Port of Roatán",
+          "description": "Taxi from West End back to the Port of Roatán in Coxen Hole. The drive is about 15 minutes. Allow 30 minutes total to account for traffic and security. The Port of Roatán is more compact than Mahogany Bay, so boarding is usually quicker.",
           "estimatedCost": "$8-10 per person",
           "tip": "West End taxis know the cruise ship schedules. Tell them your all-aboard time and they'll make sure you get back."
         }
@@ -171,8 +171,8 @@
         {
           "id": "c8-8",
           "time": "7:00",
-          "title": "Return to Coxen Hole Port",
-          "description": "Your driver takes you directly back to the Coxen Hole port. From West Bay, it's about 20-25 minutes. Clear security and reboard with time to spare. You've just seen more of Roatán than 95% of cruise passengers ever do.",
+          "title": "Return to the Port of Roatán",
+          "description": "Your driver takes you directly back to the Port of Roatán in Coxen Hole. From West Bay, it's about 20-25 minutes. Clear security and reboard with time to spare. You've just seen more of Roatán than 95% of cruise passengers ever do.",
           "estimatedCost": "Included in driver fee",
           "tip": "Tip your driver generously — $15-20 on top of the agreed rate if they did a great job. They earn the majority of their income during cruise season."
         }
@@ -182,10 +182,10 @@
   "safetyTips": [
     "Coxen Hole is a working town, not a tourist resort. Stay alert, keep valuables out of sight, and stick to main roads if walking around town.",
     "Use official port taxis only. They have visible identification and regulated rates. Avoid accepting rides from unofficial vehicles outside the port area.",
-    "Carry small bills in USD for tips and purchases. Many vendors can't break a $50 or $100. ATMs in Coxen Hole dispense Lempiras, which is useful for local shops.",
+    "Carry small bills in USD for tips and purchases. Many vendors can't break a $50 or $100. ATMs in Coxen Hole dispense Lempiras, which are useful for local shops.",
     "Drink bottled water exclusively. Buy a couple of bottles at the port before heading out for the day. Dehydration in the tropical heat sneaks up fast.",
     "Wear reef-safe sunscreen to protect the Mesoamerican Barrier Reef — the second largest in the world. Roatán's economy depends on healthy coral.",
     "If exploring Coxen Hole on foot, avoid side streets away from the main commercial area. The market and main road are perfectly fine during daylight hours."
   ],
-  "returnReminder": "Set an alarm for 45 minutes before all-aboard. Traffic between West Bay and Coxen Hole can be heavy on cruise ship days, and the drive is longer than you'd expect on island roads."
+  "returnReminder": "Set an alarm for 45 minutes before all-aboard. Traffic heading back to the Port of Roatán can be heavy on cruise ship days, and the drive is longer than you'd expect on island roads."
 }

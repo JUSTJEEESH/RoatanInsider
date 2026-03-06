@@ -5,6 +5,7 @@ struct ContentView: View {
     @State private var dataManager = DataManager()
     @State private var locationManager = LocationManager()
     @State private var networkMonitor = NetworkMonitor()
+    @State private var unitPreference = UnitPreference()
     @State private var selectedTab = 0
     let favoritesStore: FavoritesStore
 
@@ -48,6 +49,7 @@ struct ContentView: View {
         .environment(locationManager)
         .environment(networkMonitor)
         .environment(favoritesStore)
+        .environment(unitPreference)
         .onAppear {
             configureTabBarAppearance()
         }

@@ -3,6 +3,7 @@ import SwiftUI
 struct CruiseModeView: View {
     @Bindable var viewModel: CruiseViewModel
     @Environment(DataManager.self) private var dataManager
+    @Environment(UnitPreference.self) private var unitPreference
     @Environment(\.dismiss) private var dismiss
     @State private var selectedCategory: Category?
     @State private var tick = 0
@@ -30,6 +31,20 @@ struct CruiseModeView: View {
             .navigationTitle("Cruise Day")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        Haptics.select()
+                        unitPreference.useMetric.toggle()
+                    } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: "ruler")
+                                .font(.system(size: 13, weight: .medium))
+                            Text(unitPreference.useMetric ? "km" : "mi")
+                                .font(.system(size: 13, weight: .bold))
+                        }
+                        .foregroundStyle(Color.riMint)
+                    }
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         Haptics.tap()
@@ -192,7 +207,7 @@ struct CruiseModeView: View {
                     ForEach(visitable) { business in
                         CruiseBusinessRow(
                             business: business,
-                            distance: viewModel.distanceFromPort(business),
+                            distance: viewModel.distanceFromPort(business, useMetric: unitPreference.useMetric),
                             travelTime: viewModel.travelTime(business),
                             canVisit: true,
                             isOpen: business.isOpenNow()
@@ -212,7 +227,7 @@ struct CruiseModeView: View {
                     ForEach(tooFar) { business in
                         CruiseBusinessRow(
                             business: business,
-                            distance: viewModel.distanceFromPort(business),
+                            distance: viewModel.distanceFromPort(business, useMetric: unitPreference.useMetric),
                             travelTime: viewModel.travelTime(business),
                             canVisit: false,
                             isOpen: business.isOpenNow()
