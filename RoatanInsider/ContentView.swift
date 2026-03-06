@@ -38,7 +38,7 @@ struct ContentView: View {
 
                     SavedView()
                         .tabItem {
-                            Label("Saved", systemImage: "heart.fill")
+                            Label("Favorites", systemImage: "heart.fill")
                         }
                         .tag(4)
                 }
