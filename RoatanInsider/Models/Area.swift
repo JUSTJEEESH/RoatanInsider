@@ -13,6 +13,9 @@ enum Area: String, Codable, CaseIterable, Identifiable {
     case portRoyal = "port_royal"
     case campBay = "camp_bay"
     case dixonCove = "dixon_cove"
+    case palmettoBay = "palmetto_bay"
+    case miltonBight = "milton_bight"
+    case johnsonBight = "johnson_bight"
 
     var id: String { rawValue }
 
@@ -29,22 +32,28 @@ enum Area: String, Codable, CaseIterable, Identifiable {
         case .portRoyal: return "Port Royal"
         case .campBay: return "Camp Bay"
         case .dixonCove: return "Dixon Cove"
+        case .palmettoBay: return "Palmetto Bay"
+        case .miltonBight: return "Milton Bight"
+        case .johnsonBight: return "Johnson Bight"
         }
     }
 
     var coordinate: CLLocationCoordinate2D {
         switch self {
-        case .westBay: return CLLocationCoordinate2D(latitude: 16.2940, longitude: -86.6180)
-        case .westEnd: return CLLocationCoordinate2D(latitude: 16.2985, longitude: -86.6110)
-        case .sandyBay: return CLLocationCoordinate2D(latitude: 16.3150, longitude: -86.5850)
-        case .coxenHole: return CLLocationCoordinate2D(latitude: 16.3040, longitude: -86.5560)
-        case .flowersBay: return CLLocationCoordinate2D(latitude: 16.3200, longitude: -86.5400)
-        case .frenchHarbour: return CLLocationCoordinate2D(latitude: 16.3350, longitude: -86.4600)
-        case .oakRidge: return CLLocationCoordinate2D(latitude: 16.3670, longitude: -86.3690)
-        case .puntaGorda: return CLLocationCoordinate2D(latitude: 16.3730, longitude: -86.3420)
+        case .westBay: return CLLocationCoordinate2D(latitude: 16.2750, longitude: -86.5990)
+        case .westEnd: return CLLocationCoordinate2D(latitude: 16.3040, longitude: -86.5935)
+        case .sandyBay: return CLLocationCoordinate2D(latitude: 16.3280, longitude: -86.5680)
+        case .coxenHole: return CLLocationCoordinate2D(latitude: 16.3170, longitude: -86.5370)
+        case .flowersBay: return CLLocationCoordinate2D(latitude: 16.3000, longitude: -86.5450)
+        case .frenchHarbour: return CLLocationCoordinate2D(latitude: 16.3380, longitude: -86.4650)
+        case .oakRidge: return CLLocationCoordinate2D(latitude: 16.3700, longitude: -86.3650)
+        case .puntaGorda: return CLLocationCoordinate2D(latitude: 16.3833, longitude: -86.3000)
         case .portRoyal: return CLLocationCoordinate2D(latitude: 16.4050, longitude: -86.3200)
-        case .campBay: return CLLocationCoordinate2D(latitude: 16.4200, longitude: -86.2900)
-        case .dixonCove: return CLLocationCoordinate2D(latitude: 16.3100, longitude: -86.5700)
+        case .campBay: return CLLocationCoordinate2D(latitude: 16.4290, longitude: -86.2970)
+        case .dixonCove: return CLLocationCoordinate2D(latitude: 16.3248, longitude: -86.4959)
+        case .palmettoBay: return CLLocationCoordinate2D(latitude: 16.3350, longitude: -86.5100)
+        case .miltonBight: return CLLocationCoordinate2D(latitude: 16.3725, longitude: -86.4325)
+        case .johnsonBight: return CLLocationCoordinate2D(latitude: 16.3950, longitude: -86.4350)
         }
     }
 
@@ -52,15 +61,18 @@ enum Area: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .westBay: return "Roatán's most famous beach — powdery white sand, turquoise water, and the island's best resorts and restaurants."
         case .westEnd: return "The bohemian heart of Roatán. Dive shops, bars, live music, and the island's best sunsets."
-        case .sandyBay: return "A quiet residential stretch between West Bay and Coxen Hole with a few hidden gems."
+        case .sandyBay: return "A quiet residential stretch between West End and Coxen Hole with marine research and nature."
         case .coxenHole: return "The island's capital and commercial hub. Cruise port, markets, banks, and local life."
-        case .flowersBay: return "A peaceful local community east of Coxen Hole with authentic Honduran culture."
+        case .flowersBay: return "A peaceful local community south of Coxen Hole with authentic Honduran culture."
         case .frenchHarbour: return "The island's business center — seafood processing, marinas, and great local restaurants."
         case .oakRidge: return "A charming fishing village built on stilts over the water. Authentic and off the beaten path."
         case .puntaGorda: return "The oldest Garifuna community on Roatán — rich culture, traditional food, and warm hospitality."
         case .portRoyal: return "Remote and wild — the far eastern tip with pristine reefs and virtually no tourists."
         case .campBay: return "Secluded beach paradise on the eastern end. Worth the drive for solitude seekers."
-        case .dixonCove: return "A small community between Sandy Bay and Coxen Hole, home to the Mahogany Bay cruise port."
+        case .dixonCove: return "Home to the Mahogany Bay cruise port, the ferry terminal, and duty-free shopping."
+        case .palmettoBay: return "A growing community between Sandy Bay and French Harbour with craft breweries and local businesses."
+        case .miltonBight: return "A quiet stretch on the north shore between French Harbour and Oak Ridge with secluded dive resorts."
+        case .johnsonBight: return "A remote area on the eastern end with quiet beaches and the island's best-kept-secret beach clubs."
         }
     }
 
@@ -76,7 +88,10 @@ enum Area: String, Codable, CaseIterable, Identifiable {
         case .puntaGorda: return "Cultural immersion, Garifuna heritage"
         case .portRoyal: return "Adventure seekers, advanced divers"
         case .campBay: return "Solitude, remote beaches, nature"
-        case .dixonCove: return "Cruise passengers, quick stops, local shopping"
+        case .dixonCove: return "Cruise passengers, ferry, duty-free shopping"
+        case .palmettoBay: return "Craft beer, local dining, quiet stays"
+        case .miltonBight: return "Secluded diving, eco-resorts, nature"
+        case .johnsonBight: return "Remote beaches, beach clubs, day trips"
         }
     }
 }

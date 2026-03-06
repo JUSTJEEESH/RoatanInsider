@@ -98,5 +98,45 @@
     "bestFor": "Solitude seekers, beach purists, photographers, those with a full day to explore",
     "topPicks": ["b034", "b035"],
     "gettingThere": "From Coxen Hole: about 1 hour 15 minutes by taxi ($25-35). The last stretch of road is unpaved. Bring everything you need — there's very little infrastructure. Best combined with visits to Oak Ridge and Punta Gorda on a full-day island tour."
+  },
+  {
+    "id": "dixon_cove",
+    "area": "dixon_cove",
+    "displayName": "Dixon Cove",
+    "overview": "Dixon Cove sits between Sandy Bay and Coxen Hole on the south coast and is home to the Mahogany Bay cruise port — the island's busiest cruise terminal. The area has duty-free shopping, the Galaxy Wave ferry terminal connecting Roatán to La Ceiba, and a growing number of services catering to cruise passengers.",
+    "vibe": "Transit hub with a cruise-port energy — busy on ship days, quiet otherwise.",
+    "bestFor": "Cruise passengers, ferry travelers, duty-free shopping, quick island stops",
+    "topPicks": [],
+    "gettingThere": "From the airport: 15-minute taxi ($8-10). From West Bay: 20-minute taxi ($10-15). From Coxen Hole: 10-minute taxi ($5-8). The Mahogany Bay chairlift connects the cruise terminal to the beach area."
+  },
+  {
+    "id": "palmetto_bay",
+    "area": "palmetto_bay",
+    "displayName": "Palmetto Bay",
+    "overview": "Palmetto Bay is a growing community on the north shore between Sandy Bay and French Harbour. It's home to Roatán's craft brewery scene, a few excellent restaurants, and a quieter alternative to the tourist zones. The area is increasingly popular with expats and long-term visitors.",
+    "vibe": "Emerging and laid-back — a local's neighborhood with a few hidden gems worth seeking out.",
+    "bestFor": "Craft beer lovers, expats, those seeking quieter dining away from the tourist strip",
+    "topPicks": [],
+    "gettingThere": "From Coxen Hole: 15-minute taxi ($8-10). From West Bay: 25-minute taxi ($12-15). Located along the main highway between Sandy Bay and French Harbour."
+  },
+  {
+    "id": "milton_bight",
+    "area": "milton_bight",
+    "displayName": "Milton Bight",
+    "overview": "Milton Bight is a quiet stretch on the north shore between French Harbour and Oak Ridge. The area is home to a few secluded dive resorts that offer an away-from-it-all experience with world-class reef access. There's very little commercial development — just reef, jungle, and peace.",
+    "vibe": "Remote and serene — a diver's retreat with pristine reef right offshore.",
+    "bestFor": "Serious divers, eco-resort guests, nature lovers seeking seclusion",
+    "topPicks": [],
+    "gettingThere": "From Coxen Hole: 35-minute taxi ($15-20). From French Harbour: 15-minute taxi ($8-10). Most guests arrive via resort transfers. The main highway passes through, but there's little reason to stop unless you're staying here."
+  },
+  {
+    "id": "johnson_bight",
+    "area": "johnson_bight",
+    "displayName": "Johnson Bight",
+    "overview": "Johnson Bight is a remote area on the eastern end of Roatán, between Oak Ridge and Punta Gorda. It's home to Palm Beach (Beach Club Roatan), one of the island's best-kept-secret beach clubs. The area is far from the tourist zones but rewards the journey with uncrowded beaches and authentic island vibes.",
+    "vibe": "Off the grid and unhurried — the kind of place where you lose track of time.",
+    "bestFor": "Beach club day trips, remote beach seekers, those with a rental car and a full day",
+    "topPicks": [],
+    "gettingThere": "From Coxen Hole: 50 minutes by taxi ($20-25). From French Harbour: 30 minutes ($15). Best accessed with a rental car or as part of an east-end island tour. The road is paved but winding."
   }
 ]
