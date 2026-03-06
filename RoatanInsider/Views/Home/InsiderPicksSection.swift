@@ -67,6 +67,7 @@ struct InsiderPickCard: View {
                 }
                 .padding(16)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             .background(Color.riOffWhite)
             .clipShape(RoundedRectangle(cornerRadius: AppConstants.cardCornerRadius))
         }
