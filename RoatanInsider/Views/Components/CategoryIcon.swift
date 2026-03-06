@@ -3,6 +3,7 @@ import SwiftUI
 struct CategoryIcon: View {
     let category: Category
     var size: CGFloat = 48
+    var lightText: Bool = false
 
     var body: some View {
         VStack(spacing: 8) {
@@ -18,7 +19,7 @@ struct CategoryIcon: View {
 
             Text(category.displayName)
                 .font(.riCaption(12))
-                .foregroundStyle(Color.riMediumGray)
+                .foregroundStyle(lightText ? Color.riOffWhite : Color.riMediumGray)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
         }

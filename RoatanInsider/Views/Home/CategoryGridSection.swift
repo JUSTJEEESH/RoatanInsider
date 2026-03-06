@@ -10,7 +10,7 @@ struct CategoryGridSection: View {
             LazyVGrid(columns: columns, spacing: 20) {
                 ForEach(Category.allCases) { category in
                     NavigationLink(value: category) {
-                        CategoryIcon(category: category)
+                        CategoryIcon(category: category, lightText: true)
                     }
                     .buttonStyle(.plain)
                 }
