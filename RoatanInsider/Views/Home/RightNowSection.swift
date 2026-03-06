@@ -19,11 +19,26 @@ struct RightNowSection: View {
                             .font(.system(size: 12, weight: .bold))
                             .foregroundStyle(Color.riMint)
                             .tracking(1.5)
+
+                        Spacer()
+
+                        // Sunset countdown
+                        if let countdown = SunsetCalculator.sunsetCountdown() {
+                            HStack(spacing: 4) {
+                                Image(systemName: "sunset.fill")
+                                    .font(.system(size: 12, weight: .medium))
+                                Text("Sunset \(countdown)")
+                                    .font(.system(size: 12, weight: .semibold))
+                            }
+                            .foregroundStyle(Color.riMediumGray)
+                            .accessibilityLabel("Sunset in \(countdown)")
+                        }
                     }
 
                     Text(context.headline)
                         .riHeadlineStyle(24)
                         .foregroundStyle(Color.riDark)
+                        .accessibilityAddTraits(.isHeader)
 
                     Text(context.subheadline)
                         .font(.riBody)

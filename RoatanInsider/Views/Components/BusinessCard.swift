@@ -1,8 +1,11 @@
 import SwiftUI
+import CoreLocation
 
 struct BusinessCard: View {
     let business: Business
     @Environment(FavoritesStore.self) private var favoritesStore
+    @Environment(LocationManager.self) private var locationManager
+    @Environment(UnitPreference.self) private var unitPreference
 
     var body: some View {
         NavigationLink(value: business) {
@@ -26,6 +29,11 @@ struct BusinessCard: View {
                         Text(business.area.displayName)
                         Text("·")
                         Text(business.priceLabel)
+
+                        if let distance = distanceText {
+                            Text("·")
+                            Text(distance)
+                        }
                     }
                     .font(.riCaption(14))
                     .foregroundStyle(Color.riLightGray)
@@ -37,6 +45,15 @@ struct BusinessCard: View {
             .clipShape(RoundedRectangle(cornerRadius: AppConstants.cardCornerRadius))
         }
         .buttonStyle(.plain)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(business.name), \(business.category.displayName) in \(business.area.displayName), \(business.priceLabel)")
+    }
+
+    private var distanceText: String? {
+        guard let userLocation = locationManager.userLocation else { return nil }
+        let businessLocation = CLLocation(latitude: business.latitude, longitude: business.longitude)
+        let meters = userLocation.distance(from: businessLocation)
+        return UnitPreference.formatDistance(meters: meters, useMetric: unitPreference.useMetric)
     }
 }
 
@@ -44,6 +61,8 @@ struct BusinessCard: View {
 struct BusinessCardCompact: View {
     let business: Business
     @Environment(FavoritesStore.self) private var favoritesStore
+    @Environment(LocationManager.self) private var locationManager
+    @Environment(UnitPreference.self) private var unitPreference
 
     var body: some View {
         NavigationLink(value: business) {
@@ -67,6 +86,11 @@ struct BusinessCardCompact: View {
                         Text(business.area.displayName)
                         Text("·")
                         Text(business.priceLabel)
+
+                        if let distance = distanceText {
+                            Text("·")
+                            Text(distance)
+                        }
                     }
                     .font(.riCaption(13))
                     .foregroundStyle(Color.riLightGray)
@@ -78,6 +102,15 @@ struct BusinessCardCompact: View {
             .clipShape(RoundedRectangle(cornerRadius: AppConstants.cardCornerRadius))
         }
         .buttonStyle(.plain)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(business.name), \(business.area.displayName), \(business.priceLabel)")
+    }
+
+    private var distanceText: String? {
+        guard let userLocation = locationManager.userLocation else { return nil }
+        let businessLocation = CLLocation(latitude: business.latitude, longitude: business.longitude)
+        let meters = userLocation.distance(from: businessLocation)
+        return UnitPreference.formatDistance(meters: meters, useMetric: unitPreference.useMetric)
     }
 }
 
@@ -85,6 +118,8 @@ struct BusinessCardCompact: View {
 struct BusinessCardGrid: View {
     let business: Business
     @Environment(FavoritesStore.self) private var favoritesStore
+    @Environment(LocationManager.self) private var locationManager
+    @Environment(UnitPreference.self) private var unitPreference
 
     var body: some View {
         NavigationLink(value: business) {
@@ -106,6 +141,11 @@ struct BusinessCardGrid: View {
                         Text(business.area.displayName)
                         Text("·")
                         Text(business.priceLabel)
+
+                        if let distance = distanceText {
+                            Text("·")
+                            Text(distance)
+                        }
                     }
                     .font(.riCaption(12))
                     .foregroundStyle(Color.riLightGray)
@@ -117,5 +157,14 @@ struct BusinessCardGrid: View {
             .clipShape(RoundedRectangle(cornerRadius: AppConstants.cardCornerRadius))
         }
         .buttonStyle(.plain)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(business.name), \(business.area.displayName)")
+    }
+
+    private var distanceText: String? {
+        guard let userLocation = locationManager.userLocation else { return nil }
+        let businessLocation = CLLocation(latitude: business.latitude, longitude: business.longitude)
+        let meters = userLocation.distance(from: businessLocation)
+        return UnitPreference.formatDistance(meters: meters, useMetric: unitPreference.useMetric)
     }
 }

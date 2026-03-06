@@ -25,6 +25,8 @@ struct ToolsView: View {
                         CurrencyConverterView(viewModel: viewModel)
                     case .tips:
                         TipCalculatorView(viewModel: viewModel)
+                    case .safety:
+                        SafetyCardView()
                     }
                 }
                 .scrollDismissesKeyboard(.interactively)

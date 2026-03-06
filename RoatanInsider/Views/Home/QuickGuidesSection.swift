@@ -3,7 +3,7 @@ import SwiftUI
 struct QuickGuidesSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            SectionHeader(title: "Quick Guides", lightText: true)
+            SectionHeader(title: "Quick Guides")
 
             VStack(spacing: 12) {
                 NavigationLink {
@@ -82,5 +82,8 @@ struct GuideRow: View {
         .padding(16)
         .background(Color.riNearBlack)
         .clipShape(RoundedRectangle(cornerRadius: 12))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(title). \(subtitle)")
+        .accessibilityAddTraits(.isButton)
     }
 }
