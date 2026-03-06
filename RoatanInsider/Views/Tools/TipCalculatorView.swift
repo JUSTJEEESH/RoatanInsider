@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TipCalculatorView: View {
     @Bindable var viewModel: ToolsViewModel
+    @FocusState private var isInputFocused: Bool
 
     var body: some View {
         VStack(spacing: 28) {
@@ -9,7 +10,7 @@ struct TipCalculatorView: View {
             VStack(spacing: 8) {
                 Text("Bill Amount (USD)")
                     .font(.system(size: 14, weight: .semibold))
-                    .foregroundStyle(Color.riMediumGray)
+                    .foregroundStyle(Color.riDark)
                     .tracking(0.5)
 
                 TextField("0.00", text: $viewModel.billAmount)
@@ -18,13 +19,23 @@ struct TipCalculatorView: View {
                     .multilineTextAlignment(.center)
                     .keyboardType(.decimalPad)
                     .tracking(-1)
+                    .focused($isInputFocused)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Spacer()
+                            Button("Done") {
+                                isInputFocused = false
+                            }
+                            .fontWeight(.semibold)
+                        }
+                    }
             }
 
             // Tip percentage buttons
             VStack(spacing: 12) {
                 Text("Tip Percentage")
                     .font(.system(size: 14, weight: .semibold))
-                    .foregroundStyle(Color.riMediumGray)
+                    .foregroundStyle(Color.riDark)
                     .tracking(0.5)
 
                 HStack(spacing: 10) {
@@ -49,7 +60,7 @@ struct TipCalculatorView: View {
             VStack(spacing: 12) {
                 Text("Split Between")
                     .font(.system(size: 14, weight: .semibold))
-                    .foregroundStyle(Color.riMediumGray)
+                    .foregroundStyle(Color.riDark)
                     .tracking(0.5)
 
                 HStack(spacing: 16) {
@@ -108,7 +119,7 @@ struct TipCalculatorView: View {
         HStack {
             Text(label)
                 .font(.riBody)
-                .foregroundStyle(Color.riMediumGray)
+                .foregroundStyle(Color.riDark)
 
             Spacer()
 

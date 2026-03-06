@@ -23,8 +23,12 @@ struct ToolsView: View {
                         TipCalculatorView(viewModel: viewModel)
                     }
                 }
+                .scrollDismissesKeyboard(.interactively)
             }
             .background(Color.riWhite)
+            .onTapGesture {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
             .navigationTitle("Tools")
             .navigationBarTitleDisplayMode(.large)
         }
