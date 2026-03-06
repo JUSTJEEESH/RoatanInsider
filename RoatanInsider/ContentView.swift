@@ -53,7 +53,7 @@ struct ContentView: View {
                 .environment(favoritesStore)
             }
         }
-        .onAppear {
+        .task {
             if favoritesStore == nil {
                 favoritesStore = FavoritesStore(modelContext: modelContext)
             }
