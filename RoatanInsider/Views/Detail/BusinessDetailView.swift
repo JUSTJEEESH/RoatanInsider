@@ -129,7 +129,7 @@ struct BusinessDetailView: View {
             let today = Date().currentDayKey
 
             ForEach(days, id: \.self) { day in
-                if let hours = business.hours[day] {
+                if let hours = business.hours[day] ?? nil {
                     HStack {
                         Text(day.capitalized)
                             .font(.riCaption(14))
