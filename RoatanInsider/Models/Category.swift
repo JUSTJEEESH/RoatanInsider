@@ -36,6 +36,21 @@ enum Category: String, Codable, CaseIterable, Identifiable {
         }
     }
 
+    var mapSearchTerms: [String] {
+        switch self {
+        case .eat: return ["restaurants", "food"]
+        case .drink: return ["bars", "coffee"]
+        case .dive: return ["scuba diving", "snorkeling"]
+        case .tours: return ["tours", "activities"]
+        case .shop: return ["shopping"]
+        case .stay: return ["hotels", "resorts"]
+        case .rentals: return ["car rental", "scooter rental"]
+        case .transport: return ["taxi", "transportation"]
+        case .beaches: return ["beach"]
+        case .nightlife: return ["nightclub", "nightlife"]
+        }
+    }
+
     /// Light mint background for category placeholders
     var placeholderColor: Color {
         Color.riMint.opacity(0.15)
