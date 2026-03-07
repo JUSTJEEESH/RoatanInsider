@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct HeroSection: View {
+    @Binding var selectedTab: Int
     @Environment(DataManager.self) private var dataManager
     @State private var currentIndex = 0
 
@@ -15,7 +16,7 @@ struct HeroSection: View {
             let minY = outerGeo.frame(in: .global).minY
             let parallaxOffset = minY > 0 ? -minY : -minY * 0.35
 
-            ZStack(alignment: .bottomLeading) {
+            ZStack {
                 if heroBusinesses.isEmpty {
                     staticHero
                 } else {
@@ -40,32 +41,36 @@ struct HeroSection: View {
                 Color.black.opacity(0.45)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                // Text overlay
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Roatán\nInsider")
-                        .riDisplayStyle(40)
+                // CTA overlay
+                VStack(spacing: 16) {
+                    Text("Explore the island\nlike a local.")
+                        .riDisplayStyle(30)
                         .foregroundStyle(.white)
-                        .accessibilityAddTraits(.isHeader)
+                        .multilineTextAlignment(.center)
 
-                    Text(AppConstants.tagline)
+                    Text("Discover the best of Roatán — curated by people who live here.")
                         .font(.riBody)
-                        .foregroundStyle(.white.opacity(0.9))
+                        .foregroundStyle(.white.opacity(0.85))
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 20)
 
-                    // Page dots
-                    if heroBusinesses.count > 1 {
-                        HStack(spacing: 6) {
-                            ForEach(0..<heroBusinesses.count, id: \.self) { i in
-                                Circle()
-                                    .fill(i == currentIndex ? Color.white : Color.white.opacity(0.4))
-                                    .frame(width: 6, height: 6)
-                            }
-                        }
-                        .padding(.top, 8)
-                        .accessibilityLabel("Page \(currentIndex + 1) of \(heroBusinesses.count)")
+                    Button {
+                        Haptics.impact()
+                        selectedTab = 1
+                    } label: {
+                        Text("Start Exploring")
+                            .font(.riButton)
+                            .foregroundStyle(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: AppConstants.buttonHeight)
+                            .background(Color.riPink)
+                            .clipShape(RoundedRectangle(cornerRadius: AppConstants.buttonCornerRadius))
                     }
+                    .padding(.horizontal, 40)
+                    .padding(.top, 4)
+                    .accessibilityLabel("Start exploring Roatán")
                 }
                 .padding(24)
-                .padding(.bottom, 16)
             }
             .offset(y: parallaxOffset)
         }
