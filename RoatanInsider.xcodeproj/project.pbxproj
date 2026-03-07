@@ -77,6 +77,7 @@
 		BB33CC44DD55EE66FF770019 /* ShareableBusinessCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB33CC44DD55EE66FF77001A /* ShareableBusinessCard.swift */; };
 		CC44DD55EE66FF77880001AB /* AnimatedLaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC44DD55EE66FF77880002AB /* AnimatedLaunchView.swift */; };
 		CC44DD55EE66FF77880003AB /* PalmRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC44DD55EE66FF77880004AB /* PalmRefreshView.swift */; };
+		DD55EE66FF77880099001122 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD55EE66FF77880099003344 /* RatingView.swift */; };
 		AC57565D7F0EE0912A57CC03 /* areas.json in Resources */ = {isa = PBXBuildFile; fileRef = 184A4AB40EF1F2D2FE0EAB19 /* areas.json */; };
 		4AE8A7EDB3949FC07ACDF38E /* businesses.json in Resources */ = {isa = PBXBuildFile; fileRef = 179BA40591A489E6690226B8 /* businesses.json */; };
 		B3063911EAE150C625BEEDFA /* cruise-coxen-hole.json in Resources */ = {isa = PBXBuildFile; fileRef = 52133D52DF9293C51F2C38DF /* cruise-coxen-hole.json */; };
@@ -147,6 +148,7 @@
 		BB33CC44DD55EE66FF77001A /* ShareableBusinessCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShareableBusinessCard.swift"; sourceTree = "<group>"; };
 		CC44DD55EE66FF77880002AB /* AnimatedLaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimatedLaunchView.swift"; sourceTree = "<group>"; };
 		CC44DD55EE66FF77880004AB /* PalmRefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PalmRefreshView.swift"; sourceTree = "<group>"; };
+		DD55EE66FF77880099003344 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RatingView.swift"; sourceTree = "<group>"; };
 		CEB8B7661998E6D132F5842E /* Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Area.swift"; sourceTree = "<group>"; };
 		0A05F076695AC04B8CD07E4F /* Business.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Business.swift"; sourceTree = "<group>"; };
 		63FC53A49F6C4F4E5D210CB8 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category.swift"; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 				44663F107017ED1A955889AE /* PriceRangeView.swift */,
 				C59651E187E480E7EDB4DF49 /* SectionHeader.swift */,
 				CC44DD55EE66FF77880004AB /* PalmRefreshView.swift */,
+				DD55EE66FF77880099003344 /* RatingView.swift */,
 				BB33CC44DD55EE66FF77001A /* ShareableBusinessCard.swift */,
 				4611149A9B0F906F8558EE2F /* SkeletonView.swift */,
 			);
@@ -500,6 +503,7 @@
 				65ABAB072B0FF83CAD4611BD /* FavoriteButton.swift in Sources */,
 				66AA047D8764DD6F1344D587 /* OpenStatusBadge.swift in Sources */,
 				9ED2AC98AC8AE76C18351D28 /* PriceRangeView.swift in Sources */,
+				DD55EE66FF77880099001122 /* RatingView.swift in Sources */,
 				FCCED8522A7F779F23DB9546 /* SectionHeader.swift in Sources */,
 				B5B7224EFA25DD6CB1C7C120 /* SkeletonView.swift in Sources */,
 				FDEB71B2C218169B5E6FB51C /* AreaGuideDetailView.swift in Sources */,
