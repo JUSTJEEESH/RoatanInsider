@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct AnimatedLaunchView: View {
-    @State private var logoScale: CGFloat = 0.6
     @State private var logoOpacity: Double = 0
     @State private var swayAngle: Double = 0
     @State private var textOffset: CGFloat = 20
@@ -15,21 +14,10 @@ struct AnimatedLaunchView: View {
             Color.riPink
                 .ignoresSafeArea()
 
-            VStack(spacing: 28) {
-                Image("palm_logo")
-                    .renderingMode(.template)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 150, height: 150)
-                    .foregroundStyle(Color.riDark)
-                    .scaleEffect(logoScale)
-                    .rotationEffect(
-                        .degrees(swayAngle),
-                        anchor: .init(x: 0.5, y: 0.85)
-                    )
-                    .opacity(logoOpacity)
+            VStack(spacing: 0) {
+                Spacer()
 
-                VStack(spacing: 6) {
+                VStack(spacing: 24) {
                     Text("Roatán Insider")
                         .font(.system(size: 28, weight: .bold))
                         .tracking(-0.5)
@@ -41,33 +29,48 @@ struct AnimatedLaunchView: View {
                 }
                 .opacity(textOpacity)
                 .offset(y: textOffset)
+                .padding(.bottom, 60)
+
+                // Palm tree with base pinned at bottom
+                Image("palm_logo")
+                    .renderingMode(.template)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundStyle(Color.riDark)
+                    .opacity(logoOpacity)
+                    .rotationEffect(
+                        .degrees(swayAngle),
+                        anchor: .bottom
+                    )
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, 80)
             }
+            .ignoresSafeArea(.container, edges: .bottom)
         }
         .onAppear {
-            // Palm tree appears with spring
-            withAnimation(.spring(response: 0.7, dampingFraction: 0.6)) {
-                logoScale = 1.0
+            // Tree fades in
+            withAnimation(.easeOut(duration: 0.5)) {
                 logoOpacity = 1.0
             }
 
-            // Start gentle sway after tree appears
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            // Gentle sway starts after tree appears
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 withAnimation(
-                    .easeInOut(duration: 1.2)
+                    .easeInOut(duration: 1.8)
                     .repeatForever(autoreverses: true)
                 ) {
-                    swayAngle = 3.5
+                    swayAngle = 2.5
                 }
             }
 
             // Text slides up and fades in
-            withAnimation(.easeOut(duration: 0.6).delay(0.5)) {
+            withAnimation(.easeOut(duration: 0.6).delay(0.4)) {
                 textOpacity = 1.0
                 textOffset = 0
             }
 
             // Dismiss after pause
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 withAnimation(.easeInOut(duration: 0.35)) {
                     isFinished = true
                 }
