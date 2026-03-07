@@ -15,7 +15,6 @@ struct HeroSection: View {
                     .aspectRatio(contentMode: .fit)
                     .foregroundStyle(.white.opacity(0.04))
                     .frame(height: 320)
-                    .offset(x: 60, y: -20)
 
                 // CTA content — pushed down to clear status bar
                 VStack(spacing: 16) {
