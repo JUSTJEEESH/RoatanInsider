@@ -4,6 +4,7 @@ import SwiftData
 @main
 struct RoatanInsiderApp: App {
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
+    @State private var showLaunch = true
     private let modelContainer: ModelContainer
     private let favoritesStore: FavoritesStore
 
@@ -21,10 +22,19 @@ struct RoatanInsiderApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if hasCompletedOnboarding {
-                ContentView(favoritesStore: favoritesStore)
-            } else {
-                OnboardingView(hasCompletedOnboarding: $hasCompletedOnboarding)
+            ZStack {
+                if hasCompletedOnboarding {
+                    ContentView(favoritesStore: favoritesStore)
+                } else {
+                    OnboardingView(hasCompletedOnboarding: $hasCompletedOnboarding)
+                }
+
+                if showLaunch {
+                    AnimatedLaunchView {
+                        showLaunch = false
+                    }
+                    .zIndex(1)
+                }
             }
         }
         .modelContainer(modelContainer)
