@@ -1,23 +1,23 @@
 [
   {
     "id": "b036",
-    "slug": "bjs-backyard",
-    "name": "BJ's Backyard",
-    "description": "Over-the-water seafood shack in Oak Ridge, going strong for 35+ years. Conch burgers, garlic-butter shrimp, and ice-cold Salva Vidas served where the shrimping boats dock. Friday afternoon live music. The real, unhurried Roatan.",
-    "insiderTip": "The conch burger is the signature dish - don't leave without trying it.",
+    "slug": "salty-dawg",
+    "name": "Salty Dawg",
+    "description": "Lively Cajun-inspired waterfront eatery in Oak Ridge, serving creative shrimp, fish, chicken, and pork dishes bursting with flavor. Shares a building on the bay with Serve Coffee. Live music every Friday afternoon draws a fun crowd. A real east-side gem worth the drive from West Bay.",
+    "insiderTip": "Come for the Friday live music from 1-4pm — grab a waterfront seat early and try the Cajun shrimp.",
     "category": "eat",
-    "subcategory": "Seafood",
+    "subcategory": "Cajun & Caribbean",
     "area": "oak_ridge",
     "latitude": 16.389587,
     "longitude": -86.356025,
-    "addressDescription": "Over the water, Oak Ridge",
+    "addressDescription": "On the water in downtown Oak Ridge, same building as Serve Coffee",
     "phone": null,
     "whatsapp": null,
-    "email": null,
+    "email": "saltydawgroatan@gmail.com",
     "website": null,
-    "facebook": null,
+    "facebook": "https://www.facebook.com/SaltyDawgRoatan/",
     "instagram": null,
-    "priceRange": 1,
+    "priceRange": 2,
     "hours": {
       "monday": {
         "open": "10:00",
@@ -51,8 +51,10 @@
     "hoursText": "Daily; Fri live entertainment",
     "features": [
       "Waterfront",
-      "Local Food",
-      "Budget Friendly"
+      "Cajun",
+      "Live Music",
+      "Outdoor Seating",
+      "Takeout"
     ],
     "images": [
       "business_placeholder"

@@ -33,7 +33,7 @@ Total businesses: 200
 | bean-crazy | Bean Crazy | eat |
 | big-bight-beach | Big Bight Beach | beaches |
 | bite-on-the-beach | Bite on the Beach | eat |
-| bjs-backyard | BJ's Backyard | eat |
+| salty-dawg | Salty Dawg | eat |
 | blue-bahia-beach-bar | Blue Bahia Beach Bar | drink |
 | blue-bahia-resort | Blue Bahia Resort | stay |
 | blue-elephant-thai | Blue Elephant Thai | eat |
