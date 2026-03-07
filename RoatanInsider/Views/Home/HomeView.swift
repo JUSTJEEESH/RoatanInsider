@@ -58,6 +58,9 @@ struct HomeView: View {
                         .background(Color.riDark)
                 }
             }
+            .palmRefresh {
+                try? await Task.sleep(for: .milliseconds(800))
+            }
             .background(Color.riWhite)
             .navigationDestination(for: Business.self) { business in
                 BusinessDetailView(business: business)
