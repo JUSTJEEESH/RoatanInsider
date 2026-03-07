@@ -35,6 +35,17 @@ struct BusinessDetailView: View {
                         .foregroundStyle(Color.riLightGray)
 
                         HStack(spacing: 12) {
+                            if let rating = business.rating {
+                                HStack(spacing: 4) {
+                                    RatingView(rating: rating, size: 14)
+
+                                    if let count = business.reviewCount, count > 0 {
+                                        Text("(\(count))")
+                                            .font(.riCaption(13))
+                                            .foregroundStyle(Color.riLightGray)
+                                    }
+                                }
+                            }
                             PriceRangeView(priceRange: business.priceRange)
                             OpenStatusBadge(business: business)
                         }
@@ -94,6 +105,16 @@ struct BusinessDetailView: View {
                     // Hours
                     if !business.hours.isEmpty {
                         hoursSection
+                    } else if let hoursText = business.hoursText {
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("Hours")
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundStyle(Color.riDark)
+
+                            Text(hoursText)
+                                .font(.riCaption(14))
+                                .foregroundStyle(Color.riMediumGray)
+                        }
                     }
 
                     // Location
