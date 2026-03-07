@@ -30,6 +30,11 @@ struct Business: Identifiable, Codable, Hashable {
     let images: [String]
     let isVerified: Bool
     let isFeatured: Bool
+    let isInsiderPick: Bool
+    let isBestOf: Bool
+    let rating: Double?
+    let reviewCount: Int?
+    let hoursText: String?
     let status: String
 
     var coordinate: CLLocationCoordinate2D {

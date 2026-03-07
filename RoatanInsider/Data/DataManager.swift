@@ -90,8 +90,12 @@ final class DataManager {
 
     func insiderPicks(limit: Int = 6) -> [Business] {
         activeBusinesses
-            .filter { $0.insiderTip != nil && $0.isFeatured }
+            .filter { $0.isInsiderPick }
             .prefix(limit)
             .map { $0 }
+    }
+
+    var bestOfBusinesses: [Business] {
+        businesses.filter { $0.isBestOf && $0.isActive }
     }
 }

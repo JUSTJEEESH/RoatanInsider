@@ -26,6 +26,9 @@ struct BusinessCard: View {
                         .lineLimit(1)
 
                     HStack(spacing: 4) {
+                        if let rating = business.rating {
+                            RatingView(rating: rating, size: 12)
+                        }
                         Text(business.area.displayName)
                         Text("·")
                         Text(business.priceLabel)
@@ -83,6 +86,9 @@ struct BusinessCardCompact: View {
                         .lineLimit(1)
 
                     HStack(spacing: 4) {
+                        if let rating = business.rating {
+                            RatingView(rating: rating, size: 11)
+                        }
                         Text(business.area.displayName)
                         Text("·")
                         Text(business.priceLabel)
@@ -138,6 +144,9 @@ struct BusinessCardGrid: View {
                         .lineLimit(1)
 
                     HStack(spacing: 3) {
+                        if let rating = business.rating {
+                            RatingView(rating: rating, size: 10)
+                        }
                         Text(business.area.displayName)
                         Text("·")
                         Text(business.priceLabel)
