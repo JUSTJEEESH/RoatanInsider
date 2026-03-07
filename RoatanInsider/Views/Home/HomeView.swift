@@ -61,7 +61,9 @@ struct HomeView: View {
             .palmRefresh {
                 try? await Task.sleep(for: .milliseconds(800))
             }
+            .ignoresSafeArea(edges: .top)
             .background(Color.riWhite)
+            .toolbar(.hidden, for: .navigationBar)
             .navigationDestination(for: Business.self) { business in
                 BusinessDetailView(business: business)
             }
