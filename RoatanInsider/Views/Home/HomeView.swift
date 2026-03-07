@@ -51,11 +51,15 @@ struct HomeView: View {
                     QuickGuidesSection()
                         .padding(.vertical, AppConstants.sectionPadding)
 
-                    // CTA — dark background
-                    ctaSection
+                    // Business Owner CTA — dark background
+                    BusinessCTASection()
                         .padding(.vertical, AppConstants.sectionPadding)
                         .frame(maxWidth: .infinity)
                         .background(Color.riDark)
+
+                    // CTA — white background
+                    ctaSection
+                        .padding(.vertical, AppConstants.sectionPadding)
                 }
             }
             .palmRefresh {
@@ -78,12 +82,12 @@ struct HomeView: View {
         VStack(spacing: 20) {
             Text("Explore the island\nlike a local.")
                 .riDisplayStyle(30)
-                .foregroundStyle(.white)
+                .foregroundStyle(Color.riDark)
                 .multilineTextAlignment(.center)
 
             Text("Discover the best of Roatán — curated by people who live here.")
                 .font(.riBody)
-                .foregroundStyle(Color.riLightGray)
+                .foregroundStyle(Color.riMediumGray)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
 
