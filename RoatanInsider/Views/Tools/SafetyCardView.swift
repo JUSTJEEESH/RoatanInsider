@@ -106,13 +106,18 @@ struct SafetyCardView: View {
                 // Safety tips
                 sectionLabel("Quick Safety Tips")
 
-                tipRow("Use official taxis or arrange transport through your hotel/resort")
-                tipRow("Keep valuables in your hotel safe — don't flash expensive jewelry or electronics")
-                tipRow("Stick to well-traveled areas after dark, especially if alone")
-                tipRow("Drink bottled water outside of resorts and hotels")
-                tipRow("Reef-safe sunscreen is required by law — regular sunscreen damages coral")
-                tipRow("If diving, always verify your operator is PADI/SSI certified")
-                tipRow("Save your hotel's contact info and address before going out")
+                VStack(alignment: .leading, spacing: 10) {
+                    tipRow("Use official taxis or arrange transport through your hotel — avoid unmarked vehicles")
+                    tipRow("Keep valuables in your hotel safe and leave flashy jewelry at home")
+                    tipRow("Stick to well-traveled areas after dark, especially if you're alone")
+                    tipRow("Drink bottled or filtered water outside of resorts")
+                    tipRow("Reef-safe sunscreen is required by law — shops near the beach sell it")
+                    tipRow("Verify your dive operator is PADI or SSI certified before booking")
+                    tipRow("Carry small bills — many local vendors can't break large USD notes")
+                    tipRow("Screenshot your hotel address and GPS pin before heading out — cell service is spotty")
+                    tipRow("Don't leave belongings unattended on the beach, even briefly")
+                    tipRow("Negotiate taxi fares before getting in — agree on a price upfront")
+                }
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 32)
@@ -228,6 +233,8 @@ struct SafetyCardView: View {
                 .font(.riCaption(14))
                 .foregroundStyle(Color.riMediumGray)
                 .fixedSize(horizontal: false, vertical: true)
+
+            Spacer(minLength: 0)
         }
     }
 }
