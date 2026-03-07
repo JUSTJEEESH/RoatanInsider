@@ -21,6 +21,7 @@
 		81290E28565EC83C35FF23B3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C92DD6E4FC1FFDC07625C8 /* HomeView.swift */; };
 		F4373ADE141B6B92A2E83A3B /* InsiderPicksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF1B08F812BB0484720A4FB /* InsiderPicksSection.swift */; };
 		DC9BB0CE144E5F772CC64DFE /* QuickGuidesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7529901218BBFDEC3A98653D /* QuickGuidesSection.swift */; };
+		A1B2C3D4E5F60718293A4B5C /* BusinessCTASection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E5F6071829A1B2C3A4B5C6 /* BusinessCTASection.swift */; };
 		8DD01B1FD61DA6D8208CEBAE /* BusinessCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DA2C4F7D608011B2EDFCD6 /* BusinessCard.swift */; };
 		A1B2C3D4E5F60718293A4B5C /* BusinessImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6071829A3B4C5D6 /* BusinessImageView.swift */; };
 		F5C33467F2D5026850EE591D /* CategoryIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E96A2A0AF97CA265A823A1 /* CategoryIcon.swift */; };
@@ -101,6 +102,7 @@
 		20C92DD6E4FC1FFDC07625C8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeView.swift"; sourceTree = "<group>"; };
 		EFF1B08F812BB0484720A4FB /* InsiderPicksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InsiderPicksSection.swift"; sourceTree = "<group>"; };
 		7529901218BBFDEC3A98653D /* QuickGuidesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuickGuidesSection.swift"; sourceTree = "<group>"; };
+		D4E5F6071829A1B2C3A4B5C6 /* BusinessCTASection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BusinessCTASection.swift"; sourceTree = "<group>"; };
 		42DA2C4F7D608011B2EDFCD6 /* BusinessCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BusinessCard.swift"; sourceTree = "<group>"; };
 		B2C3D4E5F6071829A3B4C5D6 /* BusinessImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BusinessImageView.swift"; sourceTree = "<group>"; };
 		92E96A2A0AF97CA265A823A1 /* CategoryIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryIcon.swift"; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				BB33CC44DD55EE66FF770018 /* InsiderTipsFeedSection.swift */,
 				EFF1B08F812BB0484720A4FB /* InsiderPicksSection.swift */,
 				7529901218BBFDEC3A98653D /* QuickGuidesSection.swift */,
+				D4E5F6071829A1B2C3A4B5C6 /* BusinessCTASection.swift */,
 				AA22BB33CC44DD55EE66FF0C /* RightNowSection.swift */,
 			);
 			path = "Home";
@@ -497,6 +500,7 @@
 				81290E28565EC83C35FF23B3 /* HomeView.swift in Sources */,
 				F4373ADE141B6B92A2E83A3B /* InsiderPicksSection.swift in Sources */,
 				DC9BB0CE144E5F772CC64DFE /* QuickGuidesSection.swift in Sources */,
+				A1B2C3D4E5F60718293A4B5C /* BusinessCTASection.swift in Sources */,
 				8DD01B1FD61DA6D8208CEBAE /* BusinessCard.swift in Sources */,
 				A1B2C3D4E5F60718293A4B5C /* BusinessImageView.swift in Sources */,
 				F5C33467F2D5026850EE591D /* CategoryIcon.swift in Sources */,
