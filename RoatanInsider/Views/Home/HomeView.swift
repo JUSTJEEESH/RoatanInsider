@@ -11,7 +11,7 @@ struct HomeView: View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 0) {
-                    HeroSection()
+                    HeroSection(selectedTab: $selectedTab)
 
                     // Cruise banner
                     CruiseBanner(showCruiseMode: $showCruiseMode)
@@ -56,10 +56,6 @@ struct HomeView: View {
                         .padding(.vertical, AppConstants.sectionPadding)
                         .frame(maxWidth: .infinity)
                         .background(Color.riDark)
-
-                    // CTA — white background
-                    ctaSection
-                        .padding(.vertical, AppConstants.sectionPadding)
                 }
             }
             .palmRefresh {
@@ -78,36 +74,7 @@ struct HomeView: View {
         }
     }
 
-    private var ctaSection: some View {
-        VStack(spacing: 20) {
-            Text("Explore the island\nlike a local.")
-                .riDisplayStyle(30)
-                .foregroundStyle(Color.riDark)
-                .multilineTextAlignment(.center)
 
-            Text("Discover the best of Roatán — curated by people who live here.")
-                .font(.riBody)
-                .foregroundStyle(Color.riMediumGray)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 40)
-
-            Button {
-                Haptics.impact()
-                selectedTab = 1
-            } label: {
-                Text("Start Exploring")
-                    .font(.riButton)
-                    .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: AppConstants.buttonHeight)
-                    .background(Color.riPink)
-                    .clipShape(RoundedRectangle(cornerRadius: AppConstants.buttonCornerRadius))
-            }
-            .padding(.horizontal, 40)
-            .accessibilityLabel("Start exploring Roatán")
-        }
-        .padding(.horizontal, 20)
-    }
 }
 
 struct CategoryListView: View {
