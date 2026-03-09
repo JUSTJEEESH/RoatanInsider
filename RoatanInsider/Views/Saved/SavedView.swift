@@ -7,7 +7,21 @@ struct SavedView: View {
 
     var body: some View {
         NavigationStack {
-            Group {
+            VStack(alignment: .leading, spacing: 0) {
+                // Custom header for reliable display on all devices
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Favorites")
+                        .riDisplayStyle(34)
+                        .foregroundStyle(Color.riDark)
+                    Text("Your personal island shortlist")
+                        .font(.riCaption(15))
+                        .foregroundStyle(Color.riLightGray)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 20)
+                .padding(.top, 12)
+                .padding(.bottom, 8)
+
                 let businesses = viewModel.favoriteBusinesses(from: dataManager, favoritesStore: favoritesStore)
                 if businesses.isEmpty {
                     EmptyFavoritesView()
@@ -31,8 +45,7 @@ struct SavedView: View {
                 }
             }
             .background(Color.riWhite)
-            .navigationTitle("Favorites")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarHidden(true)
             .navigationDestination(for: Business.self) { business in
                 BusinessDetailView(business: business)
             }

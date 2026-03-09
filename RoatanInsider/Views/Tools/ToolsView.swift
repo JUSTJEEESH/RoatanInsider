@@ -7,17 +7,60 @@ struct ToolsView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                Picker("Tool", selection: $viewModel.selectedTool) {
-                    ForEach(ToolsViewModel.ToolTab.allCases, id: \.self) { tab in
-                        Text(tab.rawValue).tag(tab)
+                // Custom header for reliable display on all devices
+                HStack(alignment: .bottom) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Tools")
+                            .riDisplayStyle(34)
+                            .foregroundStyle(Color.riDark)
+                        Text("Island math, made easy")
+                            .font(.riCaption(15))
+                            .foregroundStyle(Color.riLightGray)
                     }
+                    Spacer()
+                    Button {
+                        Haptics.select()
+                        unitPreference.useMetric.toggle()
+                    } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: "ruler")
+                                .font(.system(size: 14, weight: .medium))
+                            Text(unitPreference.useMetric ? "km" : "mi")
+                                .font(.system(size: 14, weight: .bold))
+                        }
+                        .foregroundStyle(Color.riMint)
+                    }
+                    .padding(.bottom, 4)
                 }
-                .pickerStyle(.segmented)
                 .padding(.horizontal, 20)
                 .padding(.top, 12)
-                .onChange(of: viewModel.selectedTool) { _, _ in
-                    Haptics.select()
+                .padding(.bottom, 8)
+
+                // Custom segmented control with better visibility
+                HStack(spacing: 0) {
+                    ForEach(ToolsViewModel.ToolTab.allCases, id: \.self) { tab in
+                        Button {
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                viewModel.selectedTool = tab
+                            }
+                            Haptics.select()
+                        } label: {
+                            Text(tab.rawValue)
+                                .font(.system(size: 15, weight: viewModel.selectedTool == tab ? .bold : .medium))
+                                .foregroundStyle(viewModel.selectedTool == tab ? .white : Color.riMediumGray)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 10)
+                                .background(
+                                    viewModel.selectedTool == tab
+                                        ? Color.riDark
+                                        : Color.riOffWhite
+                                )
+                        }
+                    }
                 }
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .padding(.horizontal, 20)
+                .padding(.bottom, 8)
 
                 ScrollView {
                     switch viewModel.selectedTool {
@@ -35,24 +78,7 @@ struct ToolsView: View {
             .onTapGesture {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
-            .navigationTitle("Tools")
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        Haptics.select()
-                        unitPreference.useMetric.toggle()
-                    } label: {
-                        HStack(spacing: 4) {
-                            Image(systemName: "ruler")
-                                .font(.system(size: 14, weight: .medium))
-                            Text(unitPreference.useMetric ? "km" : "mi")
-                                .font(.system(size: 14, weight: .bold))
-                        }
-                        .foregroundStyle(Color.riMint)
-                    }
-                }
-            }
+            .navigationBarHidden(true)
         }
     }
 }

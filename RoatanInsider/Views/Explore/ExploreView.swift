@@ -14,9 +14,22 @@ struct ExploreView: View {
 
         NavigationStack {
             VStack(spacing: 0) {
+                // Custom header for reliable display on all devices
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Explore")
+                        .riDisplayStyle(34)
+                        .foregroundStyle(Color.riDark)
+                    Text("Find your next island adventure")
+                        .font(.riCaption(15))
+                        .foregroundStyle(Color.riLightGray)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 20)
+                .padding(.top, 12)
+                .padding(.bottom, 8)
+
                 SearchBar(text: $searchEngine.searchText)
                     .padding(.horizontal, 20)
-                    .padding(.top, 8)
 
                 FilterBar(
                     searchEngine: viewModel.searchEngine,
@@ -49,8 +62,7 @@ struct ExploreView: View {
                 }
             }
             .background(Color.riWhite)
-            .navigationTitle("Explore")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarHidden(true)
             .navigationDestination(for: Business.self) { business in
                 BusinessDetailView(business: business)
             }

@@ -60,6 +60,14 @@ struct MapTabView: View {
 
                 // Search bar + category filters
                 VStack(spacing: 0) {
+                    Text("See what's around you")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(Color.riDark)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 20)
+                        .padding(.top, 10)
+                        .padding(.bottom, 2)
+
                     MapSearchBar(
                         query: $viewModel.searchQuery,
                         isSearching: viewModel.isSearching
@@ -69,7 +77,7 @@ struct MapTabView: View {
                         viewModel.clearSearch()
                     }
                     .padding(.horizontal, 16)
-                    .padding(.top, 8)
+                    .padding(.top, 4)
                     .padding(.bottom, 4)
 
                     ScrollView(.horizontal, showsIndicators: false) {
