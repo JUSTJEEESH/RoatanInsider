@@ -23,7 +23,7 @@ struct CuratedCollection: Identifiable {
         },
         CuratedCollection(
             title: "Best for Families",
-            subtitle: "Kid-friendly picks across the island",
+            subtitle: "Fun for the whole crew",
             icon: "figure.2.and.child.holdinghands",
             coverCategory: .tours
         ) { business in
