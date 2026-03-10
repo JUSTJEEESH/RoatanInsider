@@ -12,7 +12,7 @@ struct MapTabView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .top) {
-                Map(position: $viewModel.cameraPosition) {
+                Map(position: $viewModel.cameraPosition, interactionModes: .all) {
                     // Online: show Apple Maps search results
                     if !isOffline && viewModel.isShowingAppleResults {
                         ForEach(viewModel.searchResults, id: \.self) { item in
@@ -64,14 +64,13 @@ struct MapTabView: View {
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Map")
                             .riDisplayStyle(34)
-                            .foregroundStyle(Color.riDark)
+                            .foregroundStyle(Color(.label))
                         Text("See what's around you")
                             .font(.riCaption(15))
-                            .foregroundStyle(Color.riLightGray)
+                            .foregroundStyle(Color(.secondaryLabel))
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 20)
-                    .padding(.top, 12)
                     .padding(.bottom, 6)
 
                     MapSearchBar(
@@ -108,6 +107,7 @@ struct MapTabView: View {
                         .padding(.vertical, 8)
                     }
                 }
+                .padding(.top, 12)
                 .background(.ultraThinMaterial)
             }
             .overlay(alignment: .bottom) {
