@@ -274,7 +274,7 @@ struct FilterChip: View {
                 .foregroundStyle(isSelected ? .white : Color.riMediumGray)
                 .padding(.horizontal, 14)
                 .padding(.vertical, 8)
-                .background(isSelected ? Color.riDark : Color.riOffWhite)
+                .background(isSelected ? Color.riFixedDark : Color.riOffWhite)
                 .clipShape(Capsule())
         }
         .buttonStyle(.plain)
@@ -307,7 +307,7 @@ struct FilterChipDropdown: View {
             .foregroundStyle(count > 0 ? .white : Color.riMediumGray)
             .padding(.horizontal, 14)
             .padding(.vertical, 8)
-            .background(count > 0 ? Color.riDark : Color.riOffWhite)
+            .background(count > 0 ? Color.riFixedDark : Color.riOffWhite)
             .clipShape(Capsule())
         }
         .buttonStyle(.plain)

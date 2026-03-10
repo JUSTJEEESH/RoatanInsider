@@ -52,7 +52,7 @@ struct ToolsView: View {
                                 .padding(.vertical, 10)
                                 .background(
                                     viewModel.selectedTool == tab
-                                        ? Color.riDark
+                                        ? Color.riFixedDark
                                         : Color.riOffWhite
                                 )
                         }

@@ -155,7 +155,7 @@ struct CruiseModeView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 14)
                     .padding(.horizontal, 8)
-                    .background(viewModel.selectedPort == port ? Color.riDark : Color.riOffWhite)
+                    .background(viewModel.selectedPort == port ? Color.riFixedDark : Color.riOffWhite)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
                 .buttonStyle(.plain)
