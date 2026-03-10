@@ -79,6 +79,9 @@ struct ToolsView: View {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
             .navigationBarHidden(true)
+            .task {
+                await viewModel.exchangeRateService.fetchLatestRate()
+            }
         }
     }
 }

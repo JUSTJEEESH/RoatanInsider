@@ -109,7 +109,7 @@ struct TipCalculatorView: View {
 
                 resultRow(
                     label: viewModel.splitCount > 1 ? "Per Person (HNL)" : "Total (HNL)",
-                    value: (viewModel.splitCount > 1 ? viewModel.perPersonHNL : viewModel.totalWithTip * AppConstants.usdToHnlRate)
+                    value: (viewModel.splitCount > 1 ? viewModel.perPersonHNL : viewModel.totalWithTip * viewModel.rate)
                         .formattedCurrency(code: "HNL")
                 )
             }

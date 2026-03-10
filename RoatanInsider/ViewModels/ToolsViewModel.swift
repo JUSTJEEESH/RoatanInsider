@@ -10,6 +10,13 @@ final class ToolsViewModel {
 
     var selectedTool: ToolTab = .currency
 
+    // Exchange rate
+    let exchangeRateService = ExchangeRateService()
+
+    var rate: Double {
+        exchangeRateService.currentRate
+    }
+
     // Currency
     var usdAmount: String = ""
     var isUsdToHnl: Bool = true
@@ -17,8 +24,8 @@ final class ToolsViewModel {
     var convertedAmount: Double {
         let amount = Double(usdAmount) ?? 0
         return isUsdToHnl
-            ? amount * AppConstants.usdToHnlRate
-            : amount / AppConstants.usdToHnlRate
+            ? amount * rate
+            : amount / rate
     }
 
     var convertedDisplay: String {
@@ -51,6 +58,6 @@ final class ToolsViewModel {
     }
 
     var perPersonHNL: Double {
-        perPerson * AppConstants.usdToHnlRate
+        perPerson * rate
     }
 }
