@@ -16,10 +16,10 @@ struct MapTabView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Map")
                         .riDisplayStyle(34)
-                        .foregroundStyle(Color(.label))
+                        .foregroundStyle(Color.riDark)
                     Text("See what's around you")
                         .font(.riCaption(15))
-                        .foregroundStyle(Color(.secondaryLabel))
+                        .foregroundStyle(Color.riLightGray)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 20)
@@ -130,7 +130,7 @@ struct MapTabView: View {
                     }
                 }
             }
-            .background(Color(.systemBackground))
+            .background(Color.riWhite)
             .navigationBarHidden(true)
             .navigationDestination(for: Business.self) { business in
                 BusinessDetailView(business: business)
