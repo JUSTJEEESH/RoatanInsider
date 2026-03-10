@@ -11,54 +11,52 @@ struct MapTabView: View {
 
     var body: some View {
         NavigationStack {
-            ZStack(alignment: .top) {
-                Map(position: $viewModel.cameraPosition, interactionModes: .all) {
-                    // Online: show Apple Maps search results
-                    if !isOffline && viewModel.isShowingAppleResults {
-                        ForEach(viewModel.searchResults, id: \.self) { item in
-                            Annotation(item.name ?? "", coordinate: item.placemark.coordinate) {
-                                AppleResultPinView(
-                                    iconName: pinIcon(for: viewModel.selectedCategory),
-                                    isSelected: viewModel.selectedMapItem == item
-                                )
-                                .onTapGesture {
-                                    withAnimation(.easeInOut(duration: 0.2)) {
-                                        viewModel.selectedMapItem = item
-                                        viewModel.selectedBusiness = nil
-                                    }
+            Map(position: $viewModel.cameraPosition, interactionModes: .all) {
+                // Online: show Apple Maps search results
+                if !isOffline && viewModel.isShowingAppleResults {
+                    ForEach(viewModel.searchResults, id: \.self) { item in
+                        Annotation(item.name ?? "", coordinate: item.placemark.coordinate) {
+                            AppleResultPinView(
+                                iconName: pinIcon(for: viewModel.selectedCategory),
+                                isSelected: viewModel.selectedMapItem == item
+                            )
+                            .onTapGesture {
+                                withAnimation(.easeInOut(duration: 0.2)) {
+                                    viewModel.selectedMapItem = item
+                                    viewModel.selectedBusiness = nil
                                 }
                             }
                         }
                     }
-                    // Offline: show bundled business pins as fallback
-                    else if isOffline {
-                        let businesses = viewModel.filteredBusinesses(from: dataManager.businesses)
-                        ForEach(businesses) { business in
-                            Annotation(business.name, coordinate: business.coordinate) {
-                                MapPinView(
-                                    business: business,
-                                    isSelected: viewModel.selectedBusiness?.id == business.id
-                                )
-                                .onTapGesture {
-                                    withAnimation(.easeInOut(duration: 0.2)) {
-                                        viewModel.selectedBusiness = business
-                                        viewModel.selectedMapItem = nil
-                                    }
+                }
+                // Offline: show bundled business pins as fallback
+                else if isOffline {
+                    let businesses = viewModel.filteredBusinesses(from: dataManager.businesses)
+                    ForEach(businesses) { business in
+                        Annotation(business.name, coordinate: business.coordinate) {
+                            MapPinView(
+                                business: business,
+                                isSelected: viewModel.selectedBusiness?.id == business.id
+                            )
+                            .onTapGesture {
+                                withAnimation(.easeInOut(duration: 0.2)) {
+                                    viewModel.selectedBusiness = business
+                                    viewModel.selectedMapItem = nil
                                 }
                             }
                         }
                     }
-
-                    UserAnnotation()
-                }
-                .mapStyle(.standard)
-                .mapControls {
-                    MapUserLocationButton()
-                    MapCompass()
-                    MapScaleView()
                 }
 
-                // Search bar + category filters
+                UserAnnotation()
+            }
+            .mapStyle(.standard)
+            .mapControls {
+                MapUserLocationButton()
+                MapCompass()
+                MapScaleView()
+            }
+            .safeAreaInset(edge: .top) {
                 VStack(spacing: 0) {
                     // Custom header matching other tabs
                     VStack(alignment: .leading, spacing: 2) {
@@ -71,6 +69,7 @@ struct MapTabView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 20)
+                    .padding(.top, 12)
                     .padding(.bottom, 6)
 
                     MapSearchBar(
@@ -107,7 +106,6 @@ struct MapTabView: View {
                         .padding(.vertical, 8)
                     }
                 }
-                .padding(.top, 12)
                 .background(.ultraThinMaterial)
             }
             .overlay(alignment: .bottom) {
