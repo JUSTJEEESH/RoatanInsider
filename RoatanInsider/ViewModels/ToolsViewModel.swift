@@ -5,6 +5,7 @@ final class ToolsViewModel {
     enum ToolTab: String, CaseIterable {
         case currency = "Currency"
         case tips = "Tips"
+        case phrases = "Phrases"
         case safety = "Safety"
     }
 
