@@ -67,11 +67,12 @@ struct CurrencyConverterView: View {
                     .foregroundStyle(Color.riLightGray)
 
                 HStack(spacing: 4) {
+                    let service = viewModel.exchangeRateService
                     Circle()
-                        .fill(viewModel.exchangeRateService.isLive ? Color.riMint : Color.riLightGray)
+                        .fill(service.isLive ? Color.riMint : Color.riLightGray)
                         .frame(width: 6, height: 6)
 
-                    Text(viewModel.exchangeRateService.rateSourceLabel)
+                    Text(service.rateSourceLabel)
                         .font(.riCaption(11))
                         .foregroundStyle(Color.riLightGray)
                 }
