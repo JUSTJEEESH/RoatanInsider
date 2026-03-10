@@ -13,7 +13,7 @@ struct ToolsView: View {
                         Text("Tools")
                             .riDisplayStyle(34)
                             .foregroundStyle(Color.riDark)
-                        Text("Island math, made easy")
+                        Text("Everything you need on the go")
                             .font(.riCaption(15))
                             .foregroundStyle(Color.riLightGray)
                     }
@@ -46,7 +46,7 @@ struct ToolsView: View {
                             Haptics.select()
                         } label: {
                             Text(tab.rawValue)
-                                .font(.system(size: 15, weight: viewModel.selectedTool == tab ? .bold : .medium))
+                                .font(.system(size: 14, weight: viewModel.selectedTool == tab ? .bold : .medium))
                                 .foregroundStyle(viewModel.selectedTool == tab ? .white : Color.riMediumGray)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 10)
@@ -68,6 +68,8 @@ struct ToolsView: View {
                         CurrencyConverterView(viewModel: viewModel)
                     case .tips:
                         TipCalculatorView(viewModel: viewModel)
+                    case .phrases:
+                        PhrasesView()
                     case .safety:
                         SafetyCardView()
                     }
