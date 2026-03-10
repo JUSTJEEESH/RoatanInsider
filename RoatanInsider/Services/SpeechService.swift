@@ -27,7 +27,7 @@ final class SpeechService {
 
         let utterance = AVSpeechUtterance(string: cleaned)
         utterance.voice = AVSpeechSynthesisVoice(language: voiceIdentifier)
-        utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 0.85
+        utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 0.45
         utterance.pitchMultiplier = 1.0
 
         currentlyPlayingID = id
