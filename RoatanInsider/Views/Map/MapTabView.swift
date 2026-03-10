@@ -11,131 +11,127 @@ struct MapTabView: View {
 
     var body: some View {
         NavigationStack {
-            Map(position: $viewModel.cameraPosition, interactionModes: .all) {
-                // Online: show Apple Maps search results
-                if !isOffline && viewModel.isShowingAppleResults {
-                    ForEach(viewModel.searchResults, id: \.self) { item in
-                        Annotation(item.name ?? "", coordinate: item.placemark.coordinate) {
-                            AppleResultPinView(
-                                iconName: pinIcon(for: viewModel.selectedCategory),
-                                isSelected: viewModel.selectedMapItem == item
-                            )
-                            .onTapGesture {
-                                withAnimation(.easeInOut(duration: 0.2)) {
-                                    viewModel.selectedMapItem = item
-                                    viewModel.selectedBusiness = nil
-                                }
+            VStack(spacing: 0) {
+                // Custom header matching other tabs
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Map")
+                        .riDisplayStyle(34)
+                        .foregroundStyle(Color(.label))
+                    Text("See what's around you")
+                        .font(.riCaption(15))
+                        .foregroundStyle(Color(.secondaryLabel))
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 20)
+                .padding(.top, 12)
+                .padding(.bottom, 6)
+
+                MapSearchBar(
+                    query: $viewModel.searchQuery,
+                    isSearching: viewModel.isSearching
+                ) {
+                    viewModel.submitSearch()
+                } onClear: {
+                    viewModel.clearSearch()
+                }
+                .padding(.horizontal, 16)
+                .padding(.bottom, 4)
+
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                        FilterChip(
+                            label: "All",
+                            isSelected: viewModel.selectedCategory == nil
+                        ) {
+                            viewModel.selectCategory(nil)
+                        }
+
+                        ForEach(Category.allCases) { category in
+                            FilterChip(
+                                label: category.displayName,
+                                isSelected: viewModel.selectedCategory == category
+                            ) {
+                                viewModel.selectCategory(category)
                             }
                         }
-                    }
-                }
-                // Offline: show bundled business pins as fallback
-                else if isOffline {
-                    let businesses = viewModel.filteredBusinesses(from: dataManager.businesses)
-                    ForEach(businesses) { business in
-                        Annotation(business.name, coordinate: business.coordinate) {
-                            MapPinView(
-                                business: business,
-                                isSelected: viewModel.selectedBusiness?.id == business.id
-                            )
-                            .onTapGesture {
-                                withAnimation(.easeInOut(duration: 0.2)) {
-                                    viewModel.selectedBusiness = business
-                                    viewModel.selectedMapItem = nil
-                                }
-                            }
-                        }
-                    }
-                }
-
-                UserAnnotation()
-            }
-            .mapStyle(.standard)
-            .mapControls {
-                MapUserLocationButton()
-                MapCompass()
-                MapScaleView()
-            }
-            .safeAreaInset(edge: .top) {
-                VStack(spacing: 0) {
-                    // Custom header matching other tabs
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("Map")
-                            .riDisplayStyle(34)
-                            .foregroundStyle(Color(.label))
-                        Text("See what's around you")
-                            .font(.riCaption(15))
-                            .foregroundStyle(Color(.secondaryLabel))
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 12)
-                    .padding(.bottom, 6)
-
-                    MapSearchBar(
-                        query: $viewModel.searchQuery,
-                        isSearching: viewModel.isSearching
-                    ) {
-                        viewModel.submitSearch()
-                    } onClear: {
-                        viewModel.clearSearch()
                     }
                     .padding(.horizontal, 16)
-                    .padding(.top, 4)
-                    .padding(.bottom, 4)
+                    .padding(.vertical, 8)
+                }
 
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 8) {
-                            FilterChip(
-                                label: "All",
-                                isSelected: viewModel.selectedCategory == nil
-                            ) {
-                                viewModel.selectCategory(nil)
-                            }
-
-                            ForEach(Category.allCases) { category in
-                                FilterChip(
-                                    label: category.displayName,
-                                    isSelected: viewModel.selectedCategory == category
-                                ) {
-                                    viewModel.selectCategory(category)
+                // Map fills remaining space
+                ZStack {
+                    Map(position: $viewModel.cameraPosition, interactionModes: .all) {
+                        if !isOffline && viewModel.isShowingAppleResults {
+                            ForEach(viewModel.searchResults, id: \.self) { item in
+                                Annotation(item.name ?? "", coordinate: item.placemark.coordinate) {
+                                    AppleResultPinView(
+                                        iconName: pinIcon(for: viewModel.selectedCategory),
+                                        isSelected: viewModel.selectedMapItem == item
+                                    )
+                                    .onTapGesture {
+                                        withAnimation(.easeInOut(duration: 0.2)) {
+                                            viewModel.selectedMapItem = item
+                                            viewModel.selectedBusiness = nil
+                                        }
+                                    }
                                 }
                             }
+                        } else if isOffline {
+                            let businesses = viewModel.filteredBusinesses(from: dataManager.businesses)
+                            ForEach(businesses) { business in
+                                Annotation(business.name, coordinate: business.coordinate) {
+                                    MapPinView(
+                                        business: business,
+                                        isSelected: viewModel.selectedBusiness?.id == business.id
+                                    )
+                                    .onTapGesture {
+                                        withAnimation(.easeInOut(duration: 0.2)) {
+                                            viewModel.selectedBusiness = business
+                                            viewModel.selectedMapItem = nil
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        UserAnnotation()
+                    }
+                    .mapStyle(.standard)
+                    .mapControls {
+                        MapUserLocationButton()
+                        MapCompass()
+                        MapScaleView()
+                    }
+                }
+                .overlay(alignment: .bottom) {
+                    if let mapItem = viewModel.selectedMapItem {
+                        MapItemPopupCard(mapItem: mapItem) {
+                            viewModel.selectedMapItem = nil
                         }
                         .padding(.horizontal, 16)
-                        .padding(.vertical, 8)
+                        .padding(.bottom, 16)
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                    } else if let business = viewModel.selectedBusiness {
+                        MapPopupCard(business: business) {
+                            viewModel.selectedBusiness = nil
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.bottom, 16)
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
                     }
                 }
-                .background(.ultraThinMaterial)
-            }
-            .overlay(alignment: .bottom) {
-                // Apple Maps result popup
-                if let mapItem = viewModel.selectedMapItem {
-                    MapItemPopupCard(mapItem: mapItem) {
-                        viewModel.selectedMapItem = nil
+                .overlay(alignment: .center) {
+                    if viewModel.isSearching {
+                        ProgressView()
+                            .padding(16)
+                            .background(.ultraThinMaterial)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 16)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
-                }
-                // Bundled business popup (offline)
-                else if let business = viewModel.selectedBusiness {
-                    MapPopupCard(business: business) {
-                        viewModel.selectedBusiness = nil
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 16)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
                 }
             }
-            .overlay(alignment: .center) {
-                if viewModel.isSearching {
-                    ProgressView()
-                        .padding(16)
-                        .background(.ultraThinMaterial)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                }
-            }
+            .background(Color(.systemBackground))
+            .navigationBarHidden(true)
             .navigationDestination(for: Business.self) { business in
                 BusinessDetailView(business: business)
             }
