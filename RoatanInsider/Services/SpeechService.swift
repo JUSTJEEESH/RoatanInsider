@@ -18,6 +18,10 @@ final class SpeechService {
             synthesizer.stopSpeaking(at: .immediate)
         }
 
+        // Use .playback category so audio plays even when the mute switch is on
+        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+        try? AVAudioSession.sharedInstance().setActive(true)
+
         // Strip leading punctuation marks that don't affect pronunciation
         let cleaned = text.trimmingCharacters(in: CharacterSet(charactersIn: "¡¿"))
 
