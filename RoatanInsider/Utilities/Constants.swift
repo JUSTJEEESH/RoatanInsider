@@ -7,7 +7,7 @@ enum AppConstants {
     static let tagline = "Explore the island like a local."
 
     // Currency
-    static let usdToHnlRate: Double = 24.85
+    static let usdToHnlRate: Double = 26.10
 
     // Map
     static let roatanCenter = CLLocationCoordinate2D(latitude: 16.3300, longitude: -86.5200)

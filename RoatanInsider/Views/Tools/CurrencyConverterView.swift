@@ -61,9 +61,21 @@ struct CurrencyConverterView: View {
             }
 
             // Rate info
-            Text("1 USD = \(AppConstants.usdToHnlRate, specifier: "%.2f") HNL")
-                .font(.riCaption(13))
-                .foregroundStyle(Color.riLightGray)
+            VStack(spacing: 4) {
+                Text("1 USD = \(viewModel.rate, specifier: "%.2f") HNL")
+                    .font(.riCaption(13))
+                    .foregroundStyle(Color.riLightGray)
+
+                HStack(spacing: 4) {
+                    Circle()
+                        .fill(viewModel.exchangeRateService.isLive ? Color.riMint : Color.riLightGray)
+                        .frame(width: 6, height: 6)
+
+                    Text(viewModel.exchangeRateService.rateSourceLabel)
+                        .font(.riCaption(11))
+                        .foregroundStyle(Color.riLightGray)
+                }
+            }
 
             // Quick amount buttons
             VStack(spacing: 12) {
