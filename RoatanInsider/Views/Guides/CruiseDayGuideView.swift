@@ -47,7 +47,7 @@ struct CruiseDayGuideView: View {
                                             .foregroundStyle(selectedItineraryIndex == index ? .white : Color.riDark)
                                             .padding(.horizontal, 16)
                                             .frame(height: 40)
-                                            .background(selectedItineraryIndex == index ? Color.riDark : Color.riOffWhite)
+                                            .background(selectedItineraryIndex == index ? Color.riFixedDark : Color.riOffWhite)
                                             .clipShape(RoundedRectangle(cornerRadius: 10))
                                     }
                                     .buttonStyle(.plain)

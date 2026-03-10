@@ -25,7 +25,7 @@ struct HomeView: View {
                     FeaturedSection(businesses: dataManager.featuredBusinesses)
                         .padding(.vertical, AppConstants.sectionPadding)
                         .frame(maxWidth: .infinity)
-                        .background(Color.riDark)
+                        .background(Color.riFixedDark)
 
                     // Best of Roatán — curated collections (white background)
                     CollectionsSection(businesses: dataManager.activeBusinesses)
@@ -35,7 +35,7 @@ struct HomeView: View {
                     CategoryGridSection()
                         .padding(.vertical, AppConstants.sectionPadding)
                         .frame(maxWidth: .infinity)
-                        .background(Color.riDark)
+                        .background(Color.riFixedDark)
 
                     // Insider Picks — white background
                     InsiderPicksSection(businesses: dataManager.insiderPicks())
@@ -45,7 +45,7 @@ struct HomeView: View {
                     InsiderTipsFeedSection(businesses: dataManager.activeBusinesses)
                         .padding(.vertical, AppConstants.sectionPadding)
                         .frame(maxWidth: .infinity)
-                        .background(Color.riDark)
+                        .background(Color.riFixedDark)
 
                     // Quick Guides — white background
                     QuickGuidesSection()
@@ -55,7 +55,7 @@ struct HomeView: View {
                     BusinessCTASection()
                         .padding(.vertical, AppConstants.sectionPadding)
                         .frame(maxWidth: .infinity)
-                        .background(Color.riDark)
+                        .background(Color.riFixedDark)
                 }
                 .environment(\.colorScheme, .light)
             }
@@ -63,7 +63,7 @@ struct HomeView: View {
                 try? await Task.sleep(for: .milliseconds(800))
             }
             .ignoresSafeArea(edges: .top)
-            .background(Color.riWhite)
+            .background(.white)
             .toolbar(.hidden, for: .navigationBar)
             .navigationDestination(for: Business.self) { business in
                 BusinessDetailView(business: business)

@@ -33,6 +33,10 @@ extension Color {
     /// Tab bar background: stays near-black in both modes
     static let riNearBlack = Color(hex: "1A1A1A")
 
+    /// Fixed charcoal — always #2D2D2D regardless of light/dark mode.
+    /// Use for backgrounds that have white text on top (selected states, dark sections).
+    static let riFixedDark = Color(hex: "2D2D2D")
+
     /// Secondary body text: medium gray, lighter in dark mode for readability
     static let riMediumGray = Color(UIColor { traits in
         traits.userInterfaceStyle == .dark
