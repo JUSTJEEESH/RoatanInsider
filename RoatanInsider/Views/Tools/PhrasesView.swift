@@ -16,9 +16,10 @@ struct PhrasesView: View {
                     .font(.system(size: 22, weight: .bold))
                     .foregroundStyle(Color.riDark)
 
-                Text("Tap the play button to hear it spoken")
+                Text("A little Spanish goes a long way — locals appreciate the effort")
                     .font(.riCaption(14))
                     .foregroundStyle(Color.riMediumGray)
+                    .multilineTextAlignment(.center)
             }
             .padding(.top, 28)
             .padding(.bottom, 24)
