@@ -33,7 +33,7 @@ struct AreaCard: View {
         VStack(alignment: .leading, spacing: 8) {
             ZStack(alignment: .bottomLeading) {
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(Color.riDark)
+                    .fill(Color(hex: "2D2D2D"))
                     .frame(height: 120)
 
                 VStack(alignment: .leading, spacing: 2) {

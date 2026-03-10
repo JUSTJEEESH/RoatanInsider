@@ -57,6 +57,7 @@ struct HomeView: View {
                         .frame(maxWidth: .infinity)
                         .background(Color.riDark)
                 }
+                .environment(\.colorScheme, .light)
             }
             .palmRefresh {
                 try? await Task.sleep(for: .milliseconds(800))
