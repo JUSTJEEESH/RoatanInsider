@@ -80,6 +80,9 @@
 		CC44DD55EE66FF77880001AB /* AnimatedLaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC44DD55EE66FF77880002AB /* AnimatedLaunchView.swift */; };
 		CC44DD55EE66FF77880003AB /* PalmRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC44DD55EE66FF77880004AB /* PalmRefreshView.swift */; };
 		DD55EE66FF77880099001122 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD55EE66FF77880099003344 /* RatingView.swift */; };
+		EE66FF77880099AA11220001 /* Phrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220002 /* Phrase.swift */; };
+		EE66FF77880099AA11220003 /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220004 /* SpeechService.swift */; };
+		EE66FF77880099AA11220005 /* PhrasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220006 /* PhrasesView.swift */; };
 		AC57565D7F0EE0912A57CC03 /* areas.json in Resources */ = {isa = PBXBuildFile; fileRef = 184A4AB40EF1F2D2FE0EAB19 /* areas.json */; };
 		4AE8A7EDB3949FC07ACDF38E /* businesses.json in Resources */ = {isa = PBXBuildFile; fileRef = 179BA40591A489E6690226B8 /* businesses.json */; };
 		B3063911EAE150C625BEEDFA /* cruise-coxen-hole.json in Resources */ = {isa = PBXBuildFile; fileRef = 52133D52DF9293C51F2C38DF /* cruise-coxen-hole.json */; };
@@ -152,6 +155,9 @@
 		CC44DD55EE66FF77880002AB /* AnimatedLaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimatedLaunchView.swift"; sourceTree = "<group>"; };
 		CC44DD55EE66FF77880004AB /* PalmRefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PalmRefreshView.swift"; sourceTree = "<group>"; };
 		DD55EE66FF77880099003344 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RatingView.swift"; sourceTree = "<group>"; };
+		EE66FF77880099AA11220002 /* Phrase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Phrase.swift"; sourceTree = "<group>"; };
+		EE66FF77880099AA11220004 /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpeechService.swift"; sourceTree = "<group>"; };
+		EE66FF77880099AA11220006 /* PhrasesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhrasesView.swift"; sourceTree = "<group>"; };
 		CEB8B7661998E6D132F5842E /* Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Area.swift"; sourceTree = "<group>"; };
 		0A05F076695AC04B8CD07E4F /* Business.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Business.swift"; sourceTree = "<group>"; };
 		63FC53A49F6C4F4E5D210CB8 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category.swift"; sourceTree = "<group>"; };
@@ -243,6 +249,7 @@
 				63FC53A49F6C4F4E5D210CB8 /* Category.swift */,
 				C414E435A7648730B69DDDD4 /* Favorite.swift */,
 				DEF0097318F6AEE97EB0C03E /* Guide.swift */,
+				EE66FF77880099AA11220002 /* Phrase.swift */,
 			);
 			path = "Models";
 			sourceTree = "<group>";
@@ -255,6 +262,7 @@
 				BB22CC33DD44EE55FF660011 /* NetworkMonitor.swift */,
 				C25E7EE11F9B4BA8863E1EC0 /* ExchangeRateService.swift */,
 				91A9A634F3CE5F95335B4A75 /* SearchEngine.swift */,
+				EE66FF77880099AA11220004 /* SpeechService.swift */,
 				BB33CC44DD55EE66FF770012 /* SunsetCalculator.swift */,
 			);
 			path = "Services";
@@ -396,6 +404,7 @@
 			isa = PBXGroup;
 			children = (
 				9242610978DC3254B2295A95 /* CurrencyConverterView.swift */,
+				EE66FF77880099AA11220006 /* PhrasesView.swift */,
 				BB33CC44DD55EE66FF770014 /* SafetyCardView.swift */,
 				75ACB383FC33499CC46A8D24 /* TipCalculatorView.swift */,
 				78C31DA567C4344BAAEA4422 /* ToolsView.swift */,
@@ -562,6 +571,9 @@
 				BB33CC44DD55EE66FF770019 /* ShareableBusinessCard.swift in Sources */,
 				CC44DD55EE66FF77880001AB /* AnimatedLaunchView.swift in Sources */,
 				CC44DD55EE66FF77880003AB /* PalmRefreshView.swift in Sources */,
+				EE66FF77880099AA11220001 /* Phrase.swift in Sources */,
+				EE66FF77880099AA11220003 /* SpeechService.swift in Sources */,
+				EE66FF77880099AA11220005 /* PhrasesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
