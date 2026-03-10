@@ -60,13 +60,19 @@ struct MapTabView: View {
 
                 // Search bar + category filters
                 VStack(spacing: 0) {
-                    Text("See what's around you")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(Color.riDark)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal, 20)
-                        .padding(.top, 10)
-                        .padding(.bottom, 2)
+                    // Custom header matching other tabs
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Map")
+                            .riDisplayStyle(34)
+                            .foregroundStyle(Color.riDark)
+                        Text("See what's around you")
+                            .font(.riCaption(15))
+                            .foregroundStyle(Color.riLightGray)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 12)
+                    .padding(.bottom, 6)
 
                     MapSearchBar(
                         query: $viewModel.searchQuery,
