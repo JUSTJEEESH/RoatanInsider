@@ -107,10 +107,17 @@ enum HomeCurrency: String, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
-    var flag: String {
+    var symbol: String {
         switch self {
-        case .cad: return "🇨🇦"
-        case .eur: return "🇪🇺"
+        case .cad: return "$"
+        case .eur: return "\u{20AC}"
+        }
+    }
+
+    var displayLabel: String {
+        switch self {
+        case .cad: return "$CAD"
+        case .eur: return "\u{20AC}EUR"
         }
     }
 

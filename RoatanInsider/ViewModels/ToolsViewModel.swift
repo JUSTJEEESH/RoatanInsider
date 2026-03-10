@@ -39,17 +39,19 @@ final class ToolsViewModel {
     }
 
     // Home Currency (CAD / EUR)
-    var selectedHomeCurrency: HomeCurrency? = nil
-    var homeAmount: String = ""
-
-    var homeToUsd: Double {
-        guard let currency = selectedHomeCurrency else { return 0 }
-        let amount = Double(homeAmount) ?? 0
-        return amount * exchangeRateService.toUsd(from: currency)
+    /// The current USD amount (from the main converter input) expressed in a given home currency.
+    func usdInHomeCurrency(_ currency: HomeCurrency) -> Double {
+        let usd = currentUsdValue
+        switch currency {
+        case .cad: return usd * exchangeRateService.cadRate
+        case .eur: return usd * exchangeRateService.eurRate
+        }
     }
 
-    var homeToHnl: Double {
-        homeToUsd * rate
+    /// The USD value currently entered, regardless of converter direction.
+    var currentUsdValue: Double {
+        let amount = Double(usdAmount) ?? 0
+        return isUsdToHnl ? amount : convertedAmount
     }
 
     // Tip Calculator
