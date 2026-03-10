@@ -10,8 +10,8 @@ enum Category: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .eat: return "Eat"
         case .drink: return "Drink"
-        case .dive: return "Dive & Snorkel"
-        case .tours: return "Tours & Activities"
+        case .dive: return "Dive"
+        case .tours: return "Tours"
         case .shop: return "Shop"
         case .stay: return "Stay"
         case .rentals: return "Rentals"
