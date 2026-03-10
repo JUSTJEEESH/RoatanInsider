@@ -12,7 +12,7 @@ struct QuickGuidesSection: View {
                     GuideRow(
                         icon: "ferry",
                         title: "Cruise Day Guide",
-                        subtitle: "Make the most of your time on the island"
+                        subtitle: "Plan your perfect port day"
                     )
                 }
 
