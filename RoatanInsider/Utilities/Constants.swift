@@ -6,8 +6,10 @@ enum AppConstants {
     static let subtitle = "Your Local Guide to Roatán"
     static let tagline = "Explore the island like a local."
 
-    // Currency
+    // Currency (fallback rates when offline)
     static let usdToHnlRate: Double = 26.10
+    static let usdToCadRate: Double = 1.44  // ~Mar 2026
+    static let usdToEurRate: Double = 0.92  // ~Mar 2026
 
     // Map
     static let roatanCenter = CLLocationCoordinate2D(latitude: 16.3300, longitude: -86.5200)

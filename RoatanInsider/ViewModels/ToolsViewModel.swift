@@ -38,6 +38,20 @@ final class ToolsViewModel {
         usdAmount = "\(amount)"
     }
 
+    // Home Currency (CAD / EUR)
+    var selectedHomeCurrency: HomeCurrency? = nil
+    var homeAmount: String = ""
+
+    var homeToUsd: Double {
+        guard let currency = selectedHomeCurrency else { return 0 }
+        let amount = Double(homeAmount) ?? 0
+        return amount * exchangeRateService.toUsd(from: currency)
+    }
+
+    var homeToHnl: Double {
+        homeToUsd * rate
+    }
+
     // Tip Calculator
     var billAmount: String = ""
     var tipPercentage: Int = 18
