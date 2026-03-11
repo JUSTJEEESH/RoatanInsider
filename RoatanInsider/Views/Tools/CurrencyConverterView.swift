@@ -135,9 +135,11 @@ struct CurrencyConverterView: View {
                         }
                     }
                 }
+                .transition(.opacity.combined(with: .offset(y: 8)))
             }
         }
         .padding(24)
         .padding(.top, 20)
+        .animation(.easeOut(duration: 0.25), value: viewModel.currentUsdValue > 0)
     }
 }

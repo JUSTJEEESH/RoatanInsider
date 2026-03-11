@@ -62,11 +62,13 @@ struct GuideRow: View {
                 .font(.system(size: 20, weight: .medium))
                 .foregroundStyle(Color.riMint)
                 .frame(width: 44, height: 44)
+                .background(Color.riMint.opacity(0.1))
+                .clipShape(RoundedRectangle(cornerRadius: 10))
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Color.riDark)
 
                 Text(subtitle)
                     .font(.riCaption(13))
@@ -77,10 +79,10 @@ struct GuideRow: View {
 
             Image(systemName: "chevron.right")
                 .font(.system(size: 14, weight: .medium))
-                .foregroundStyle(Color.riMediumGray)
+                .foregroundStyle(Color.riLightGray)
         }
         .padding(16)
-        .background(Color.riNearBlack)
+        .background(Color.riOffWhite)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(title). \(subtitle)")

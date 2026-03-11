@@ -9,12 +9,12 @@ struct CategoryIcon: View {
         VStack(spacing: 8) {
             ZStack {
                 Circle()
-                    .fill(Color.riOffWhite)
+                    .fill(lightText ? Color.white.opacity(0.1) : Color.riOffWhite)
                     .frame(width: size, height: size)
 
                 Image(systemName: category.iconName)
                     .font(.system(size: size * 0.4, weight: .medium))
-                    .foregroundStyle(Color.riDark)
+                    .foregroundStyle(lightText ? .white : Color.riDark)
             }
 
             Text(category.displayName)

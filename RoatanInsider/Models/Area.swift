@@ -19,6 +19,8 @@ enum Area: String, Codable, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
+    var imageName: String { "area_\(rawValue)" }
+
     var displayName: String {
         switch self {
         case .westBay: return "West Bay"
