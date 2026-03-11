@@ -7,27 +7,44 @@ struct HeroSection: View {
         GeometryReader { geo in
             let topInset = geo.safeAreaInsets.top
 
-            ZStack {
-                // Palm tree watermark
-                Image("palm_logo")
+            ZStack(alignment: .bottom) {
+                // Hero photo
+                Image("hero_roatan")
                     .resizable()
-                    .renderingMode(.template)
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundStyle(.white.opacity(0.04))
-                    .frame(height: 320)
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: geo.size.width, height: 480)
+                    .clipped()
 
-                // CTA content — pushed down to clear status bar
-                VStack(spacing: 16) {
+                // Dark scrim at bottom for text readability
+                Rectangle()
+                    .fill(
+                        .linearGradient(
+                            colors: [.clear, .black.opacity(0.3), .black.opacity(0.75)],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+
+                // CTA content
+                VStack(spacing: 14) {
+                    Spacer()
+
+                    Image("palm_logo")
+                        .resizable()
+                        .renderingMode(.template)
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundStyle(.white.opacity(0.15))
+                        .frame(height: 60)
+
                     Text("Explore the island\nlike a local.")
-                        .riDisplayStyle(30)
+                        .riDisplayStyle(32)
                         .foregroundStyle(.white)
                         .multilineTextAlignment(.center)
 
-                    Text("Discover the best of Roatán — curated by people who live here.")
-                        .font(.riBody)
-                        .foregroundStyle(.white.opacity(0.7))
+                    Text("Curated by people who live here.")
+                        .font(.system(size: 16, weight: .regular))
+                        .foregroundStyle(.white.opacity(0.8))
                         .multilineTextAlignment(.center)
-                        .padding(.horizontal, 20)
 
                     Button {
                         Haptics.impact()
@@ -50,7 +67,7 @@ struct HeroSection: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(height: 420)
+        .frame(height: 480)
         .background(Color.riNearBlack.ignoresSafeArea(edges: .top))
     }
 }

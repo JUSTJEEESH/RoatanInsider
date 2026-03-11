@@ -1,4 +1,5 @@
 import SwiftUI
+import MapKit
 
 struct AreaGuideView: View {
     let columns = [
@@ -32,17 +33,32 @@ struct AreaCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             ZStack(alignment: .bottomLeading) {
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(Color(hex: "2D2D2D"))
-                    .frame(height: 120)
+                // Satellite map of the area
+                Map(initialPosition: .region(MKCoordinateRegion(
+                    center: area.coordinate,
+                    span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015)
+                ))) {}
+                .mapStyle(.imagery)
+                .disabled(true)
+                .allowsHitTesting(false)
 
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(area.displayName)
-                        .font(.system(size: 16, weight: .bold))
-                        .foregroundStyle(.white)
-                }
-                .padding(12)
+                // Dark scrim for text readability
+                Rectangle()
+                    .fill(
+                        .linearGradient(
+                            colors: [.clear, .black.opacity(0.65)],
+                            startPoint: .center,
+                            endPoint: .bottom
+                        )
+                    )
+
+                Text(area.displayName)
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundStyle(.white)
+                    .padding(12)
             }
+            .frame(height: 120)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
 
             Text(area.bestFor)
                 .font(.riCaption(12))

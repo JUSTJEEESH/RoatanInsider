@@ -10,7 +10,7 @@ struct SavedView: View {
             VStack(alignment: .leading, spacing: 0) {
                 // Custom header for reliable display on all devices
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Favorites")
+                    Text("Saved")
                         .riDisplayStyle(34)
                         .foregroundStyle(Color.riDark)
                     Text("Your personal island shortlist")
