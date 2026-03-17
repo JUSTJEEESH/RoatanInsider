@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct AnimatedLaunchView: View {
-    @Environment(\.colorScheme) private var colorScheme
     @State private var isFinished = false
 
     var onFinish: () -> Void
