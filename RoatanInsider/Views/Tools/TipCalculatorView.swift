@@ -49,7 +49,7 @@ struct TipCalculatorView: View {
                                 .foregroundStyle(viewModel.tipPercentage == pct ? .white : Color.riDark)
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 44)
-                                .background(viewModel.tipPercentage == pct ? Color.riFixedDark : Color.riOffWhite)
+                                .background(viewModel.tipPercentage == pct ? Color.riPink : Color.riOffWhite)
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
                         .buttonStyle(.plain)

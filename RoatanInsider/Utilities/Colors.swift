@@ -9,10 +9,10 @@ extension Color {
 
     // MARK: - Adaptive Colors (respond to light/dark mode)
 
-    /// Main background: white in light mode, charcoal in dark mode
+    /// Main background: white in light mode, near-black in dark mode (matches header)
     static let riWhite = Color(UIColor { traits in
         traits.userInterfaceStyle == .dark
-            ? UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1)   // #2D2D2D
+            ? UIColor(red: 26/255, green: 26/255, blue: 26/255, alpha: 1)   // #1A1A1A
             : .white
     })
 
