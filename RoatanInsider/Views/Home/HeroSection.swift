@@ -43,12 +43,11 @@ struct HeroSection: View {
                         Text("Start Exploring")
                             .font(.riButton)
                             .foregroundStyle(.white)
-                            .frame(maxWidth: .infinity)
+                            .padding(.horizontal, 36)
                             .frame(height: AppConstants.buttonHeight)
                             .background(Color.riPink)
                             .clipShape(RoundedRectangle(cornerRadius: AppConstants.buttonCornerRadius))
                     }
-                    .padding(.horizontal, 40)
                     .padding(.top, 4)
                     .accessibilityLabel("Start exploring Roatán")
                 }
