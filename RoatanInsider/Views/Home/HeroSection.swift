@@ -5,9 +5,7 @@ struct HeroSection: View {
 
     var body: some View {
         GeometryReader { geo in
-            let topInset = geo.safeAreaInsets.top
-
-            ZStack(alignment: .bottom) {
+            ZStack {
                 // Hero photo
                 Image("hero_roatan")
                     .resizable()
@@ -15,25 +13,17 @@ struct HeroSection: View {
                     .frame(width: geo.size.width, height: 480)
                     .clipped()
 
-                // Dark scrim at bottom for text readability
+                // Dark scrim for text readability
                 Rectangle()
-                    .fill(
-                        .linearGradient(
-                            colors: [.clear, .black.opacity(0.3), .black.opacity(0.75)],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    )
+                    .fill(.black.opacity(0.55))
 
                 // CTA content
                 VStack(spacing: 14) {
-                    Spacer()
-
                     Image("palm_logo")
                         .resizable()
                         .renderingMode(.template)
                         .aspectRatio(contentMode: .fit)
-                        .foregroundStyle(.white.opacity(0.15))
+                        .foregroundStyle(Color.riPink)
                         .frame(height: 60)
 
                     Text("Explore the island\nlike a local.")
@@ -63,7 +53,6 @@ struct HeroSection: View {
                     .accessibilityLabel("Start exploring Roatán")
                 }
                 .padding(24)
-                .padding(.top, topInset)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
