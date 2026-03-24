@@ -89,11 +89,13 @@
 		14FA262B52372AF12B6DC719 /* cruise-mahogany-bay.json in Resources */ = {isa = PBXBuildFile; fileRef = A7242144E4B8E49A85DEFD47 /* cruise-mahogany-bay.json */; };
 		771325A05FD5B483C97C568D /* essentials.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED16F04793732E4FF32E158 /* essentials.json */; };
 		0A3C304657086C8DDAAB7EF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F73B201D3F8FCB88366DA9E3 /* Assets.xcassets */; };
+		PRIV0001MANIFEST00000001 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = PRIV0001MANIFEST00000002 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		510C3B6295519CEB5456C37E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView.swift"; sourceTree = "<group>"; };
 		C6258ED1366C00347B067090 /* RoatanInsiderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoatanInsiderApp.swift"; sourceTree = "<group>"; };
+		PRIV0001MANIFEST00000002 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PrivacyInfo.xcprivacy"; sourceTree = "<group>"; };
 		71DC0C34EBA248624D3A1D9A /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExploreViewModel.swift"; sourceTree = "<group>"; };
 		389B96AE42FCC81DEE6EF792 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoritesViewModel.swift"; sourceTree = "<group>"; };
 		92B8F61BC74788565AFEE3C1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewModel.swift"; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				510C3B6295519CEB5456C37E /* ContentView.swift */,
 				C6258ED1366C00347B067090 /* RoatanInsiderApp.swift */,
 				F73B201D3F8FCB88366DA9E3 /* Assets.xcassets */,
+				PRIV0001MANIFEST00000002 /* PrivacyInfo.xcprivacy */,
 			);
 			path = RoatanInsider;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				14FA262B52372AF12B6DC719 /* cruise-mahogany-bay.json in Resources */,
 				771325A05FD5B483C97C568D /* essentials.json in Resources */,
 				0A3C304657086C8DDAAB7EF1 /* Assets.xcassets in Resources */,
+				PRIV0001MANIFEST00000001 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,6 +729,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				"INFOPLIST_KEY_UILaunchStoryboardName-$(CONFIGURATION)" = "";
 				INFOPLIST_KEY_UILaunchScreen_BackgroundColor = LaunchBackground;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -761,6 +766,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				"INFOPLIST_KEY_UILaunchStoryboardName-$(CONFIGURATION)" = "";
 				INFOPLIST_KEY_UILaunchScreen_BackgroundColor = LaunchBackground;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
