@@ -74,7 +74,17 @@ final class SearchEngine {
 
         switch sortOption {
         case .featured:
-            results.sort { ($0.isFeatured ? 0 : 1) < ($1.isFeatured ? 0 : 1) }
+            results.sort { lhs, rhs in
+                let lhsTier = lhs.isFeatured ? 0 : (lhs.isInsiderPick ? 1 : 2)
+                let rhsTier = rhs.isFeatured ? 0 : (rhs.isInsiderPick ? 1 : 2)
+                if lhsTier != rhsTier { return lhsTier < rhsTier }
+                let lhsRating = lhs.rating ?? 0
+                let rhsRating = rhs.rating ?? 0
+                if lhsRating != rhsRating { return lhsRating > rhsRating }
+                let lhsReviews = lhs.reviewCount ?? 0
+                let rhsReviews = rhs.reviewCount ?? 0
+                return lhsReviews > rhsReviews
+            }
         case .nameAZ:
             results.sort { $0.name < $1.name }
         case .distance:

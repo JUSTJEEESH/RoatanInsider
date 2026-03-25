@@ -1,15 +1,15 @@
 import SwiftUI
+import MapKit
 
 struct ContactActions: View {
     let business: Business
+    @State private var showingMenu = false
 
     var body: some View {
-        HStack(spacing: 0) {
-            if let phone = business.phone {
-                contactButton(icon: "phone", label: "Call") {
-                    if let url = URL(string: "tel:\(phone.replacingOccurrences(of: " ", with: ""))") {
-                        UIApplication.shared.open(url)
-                    }
+        HStack(spacing: 20) {
+            if let menuImages = business.menuImages, !menuImages.isEmpty {
+                contactButton(icon: "menucard", label: "Menu") {
+                    showingMenu = true
                 }
             }
 
@@ -35,6 +35,16 @@ struct ContactActions: View {
                 mapItem.name = business.name
                 mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
             }
+
+            Spacer()
+        }
+        .fullScreenCover(isPresented: $showingMenu) {
+            MenuGalleryView(
+                businessName: business.name,
+                menuImages: business.menuImages ?? [],
+                category: business.category,
+                slug: business.slug
+            )
         }
     }
 
@@ -52,12 +62,10 @@ struct ContactActions: View {
                     .font(.riCaption(11))
                     .foregroundStyle(Color.riMediumGray)
             }
-            .frame(maxWidth: .infinity)
+            .frame(width: 64)
             .frame(height: AppConstants.minTapTarget)
         }
         .buttonStyle(.plain)
         .accessibilityLabel(label)
     }
 }
-
-import MapKit

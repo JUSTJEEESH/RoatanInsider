@@ -77,11 +77,11 @@ final class DataManager {
     }
 
     func businesses(for category: Category) -> [Business] {
-        activeBusinesses.filter { $0.category == category }
+        activeBusinesses.filter { $0.category == category }.smartSorted()
     }
 
     func businesses(for area: Area) -> [Business] {
-        activeBusinesses.filter { $0.area == area }
+        activeBusinesses.filter { $0.area == area }.smartSorted()
     }
 
     func business(withId id: String) -> Business? {
@@ -91,6 +91,7 @@ final class DataManager {
     func insiderPicks(limit: Int = 6) -> [Business] {
         activeBusinesses
             .filter { $0.isInsiderPick }
+            .smartSorted()
             .prefix(limit)
             .map { $0 }
     }

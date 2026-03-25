@@ -25,9 +25,7 @@ struct CuratedCollection: Identifiable {
             coverImage: "collection_sunset_spots.jpg",
             coverCategory: .drink
         ) { business in
-            (business.category == .drink || business.category == .beaches) &&
-            (business.area == .westEnd || business.area == .westBay) &&
-            business.isActive
+            business.collections.contains("sunset_spots") && business.isActive
         },
         CuratedCollection(
             title: "Best for Families",
@@ -36,17 +34,7 @@ struct CuratedCollection: Identifiable {
             coverImage: "collection_families.jpg",
             coverCategory: .tours
         ) { business in
-            business.features.contains(where: { $0.lowercased().contains("family") }) &&
-            business.isActive
-        },
-        CuratedCollection(
-            title: "Top Dive Sites",
-            subtitle: "World-class reefs and walls",
-            icon: "figure.pool.swim",
-            coverImage: "collection_dive_sites.jpg",
-            coverCategory: .dive
-        ) { business in
-            business.category == .dive && business.isActive
+            business.collections.contains("families") && business.isActive
         },
         CuratedCollection(
             title: "Cheap Eats",
@@ -55,7 +43,7 @@ struct CuratedCollection: Identifiable {
             coverImage: "collection_cheap_eats.jpg",
             coverCategory: .eat
         ) { business in
-            business.category == .eat && business.priceRange <= 2 && business.isActive
+            business.collections.contains("cheap_eats") && business.isActive
         },
         CuratedCollection(
             title: "Beach Bars",
@@ -64,9 +52,7 @@ struct CuratedCollection: Identifiable {
             coverImage: "collection_beach_bars.jpg",
             coverCategory: .drink
         ) { business in
-            business.category == .drink &&
-            business.features.contains(where: { $0.lowercased().contains("beach") || $0.lowercased().contains("waterfront") }) &&
-            business.isActive
+            business.collections.contains("beach_bars") && business.isActive
         },
         CuratedCollection(
             title: "Off the Beaten Path",
@@ -75,8 +61,25 @@ struct CuratedCollection: Identifiable {
             coverImage: "collection_off_beaten_path.jpg",
             coverCategory: .tours
         ) { business in
-            let remoteAreas: Set<Area> = [.oakRidge, .puntaGorda, .portRoyal, .campBay]
-            return remoteAreas.contains(business.area) && business.isActive
+            business.collections.contains("off_beaten_path") && business.isActive
+        },
+        CuratedCollection(
+            title: "Cruise Day Must-Dos",
+            subtitle: "Make the most of your port day",
+            icon: "ferry.fill",
+            coverImage: "collection_cruise_must_dos.jpg",
+            coverCategory: .tours
+        ) { business in
+            business.collections.contains("cruise_must_dos") && business.isActive
+        },
+        CuratedCollection(
+            title: "Late Night",
+            subtitle: "Where the island comes alive after dark",
+            icon: "moon.stars.fill",
+            coverImage: "collection_late_night.jpg",
+            coverCategory: .nightlife
+        ) { business in
+            business.collections.contains("late_night") && business.isActive
         }
     ]
 }
@@ -104,7 +107,7 @@ struct CollectionsSection: View {
                             NavigationLink {
                                 CollectionDetailView(
                                     collection: collection,
-                                    businesses: businesses.filter(collection.filter)
+                                    businesses: businesses.filter(collection.filter).smartSorted()
                                 )
                             } label: {
                                 CollectionCard(collection: collection)
