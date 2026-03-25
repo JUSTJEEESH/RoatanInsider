@@ -10,14 +10,14 @@ struct BusinessCard: View {
     var body: some View {
         NavigationLink(value: business) {
             VStack(alignment: .leading, spacing: 0) {
-                // Photo — full width, 16:9 aspect ratio, image fills and crops
+                // Photo
                 ZStack(alignment: .topTrailing) {
-                    Color.clear
-                        .aspectRatio(16/9, contentMode: .fit)
-                        .background {
-                            BusinessImageView(business: business, aspectRatio: 16/9)
-                        }
-                        .clipped()
+                    GeometryReader { geo in
+                        BusinessImageView(business: business, aspectRatio: 16/9)
+                            .frame(width: geo.size.width, height: geo.size.height)
+                    }
+                    .aspectRatio(16/9, contentMode: .fit)
+                    .clipped()
 
                     FavoriteButton(businessId: business.id)
                         .padding(12)
@@ -69,6 +69,7 @@ struct BusinessCard: View {
 // Compact card for horizontal scrolling
 struct BusinessCardCompact: View {
     let business: Business
+    var darkStyle: Bool = false
     @Environment(FavoritesStore.self) private var favoritesStore
     @Environment(LocationManager.self) private var locationManager
     @Environment(UnitPreference.self) private var unitPreference
@@ -88,7 +89,7 @@ struct BusinessCardCompact: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(business.name)
                         .font(.system(size: 16, weight: .semibold))
-                        .foregroundStyle(Color.riDark)
+                        .foregroundStyle(darkStyle ? .white : Color.riDark)
                         .lineLimit(1)
 
                     HStack(spacing: 4) {
@@ -111,7 +112,7 @@ struct BusinessCardCompact: View {
                 .padding(10)
             }
             .frame(width: 260)
-            .background(Color.riOffWhite)
+            .background(darkStyle ? Color.riFixedDark : Color.riOffWhite)
             .clipShape(RoundedRectangle(cornerRadius: AppConstants.cardCornerRadius))
         }
         .buttonStyle(.plain)
@@ -138,12 +139,12 @@ struct BusinessCardGrid: View {
         NavigationLink(value: business) {
             VStack(alignment: .leading, spacing: 0) {
                 ZStack(alignment: .topTrailing) {
-                    Color.clear
-                        .aspectRatio(4/3, contentMode: .fit)
-                        .background {
-                            BusinessImageView(business: business, aspectRatio: 4/3)
-                        }
-                        .clipped()
+                    GeometryReader { geo in
+                        BusinessImageView(business: business, aspectRatio: 4/3)
+                            .frame(width: geo.size.width, height: geo.size.height)
+                    }
+                    .aspectRatio(4/3, contentMode: .fit)
+                    .clipped()
 
                     FavoriteButton(businessId: business.id)
                         .padding(8)

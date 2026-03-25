@@ -50,7 +50,7 @@ struct RightNowSection: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 14) {
                         ForEach(recommended.prefix(8)) { business in
-                            BusinessCardCompact(business: business)
+                            BusinessCardCompact(business: business, darkStyle: true)
                         }
                     }
                     .padding(.horizontal, 20)
