@@ -28,12 +28,12 @@ struct InsiderPickCard: View {
         NavigationLink(value: business) {
             VStack(alignment: .leading, spacing: 0) {
                 ZStack(alignment: .topTrailing) {
-                    Color.clear
-                        .aspectRatio(16/9, contentMode: .fit)
-                        .background {
-                            BusinessImageView(business: business, aspectRatio: 16/9)
-                        }
-                        .clipped()
+                    GeometryReader { geo in
+                        BusinessImageView(business: business, aspectRatio: 16/9)
+                            .frame(width: geo.size.width, height: geo.size.height)
+                    }
+                    .aspectRatio(16/9, contentMode: .fit)
+                    .clipped()
 
                     FavoriteButton(businessId: business.id)
                         .padding(12)
@@ -42,7 +42,7 @@ struct InsiderPickCard: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(business.name)
                         .font(.system(size: 18, weight: .bold))
-                        .foregroundStyle(Color.riDark)
+                        .foregroundStyle(.white)
 
                     HStack(spacing: 4) {
                         Text(business.category.displayName)
@@ -62,7 +62,7 @@ struct InsiderPickCard: View {
 
                             Text(tip)
                                 .font(.riCaption(14))
-                                .foregroundStyle(Color.riMediumGray)
+                                .foregroundStyle(Color.riLightGray)
                                 .italic()
                                 .padding(.leading, 12)
                                 .padding(.vertical, 4)
@@ -73,7 +73,7 @@ struct InsiderPickCard: View {
                 .padding(16)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.riOffWhite)
+            .background(Color.riFixedDark)
             .clipShape(RoundedRectangle(cornerRadius: AppConstants.cardCornerRadius))
         }
         .buttonStyle(.plain)
