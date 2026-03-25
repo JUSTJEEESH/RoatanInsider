@@ -4,25 +4,26 @@ import SwiftUI
 struct BusinessImageView: View {
     let business: Business
     var aspectRatio: CGFloat = 16/9
-    var contentMode: ContentMode = .fill
 
     var body: some View {
         let imageName = business.images.first ?? ""
         let hasLocalImage = UIImage(named: imageName) != nil
 
         if hasLocalImage {
-            Image(imageName)
-                .resizable()
-                .aspectRatio(aspectRatio, contentMode: contentMode)
-                .clipped()
+            imageContainer {
+                Image(imageName)
+                    .resizable()
+                    .scaledToFill()
+            }
         } else if let url = supabaseURL {
             AsyncImage(url: url) { phase in
                 switch phase {
                 case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(aspectRatio, contentMode: contentMode)
-                        .clipped()
+                    imageContainer {
+                        image
+                            .resizable()
+                            .scaledToFill()
+                    }
                 case .failure:
                     categoryPlaceholder
                 case .empty:
@@ -38,6 +39,17 @@ struct BusinessImageView: View {
         } else {
             categoryPlaceholder
         }
+    }
+
+    /// Creates a container with the desired aspect ratio, fills it with the image content, and clips overflow.
+    /// This prevents distortion — the image scales to fill and excess is cropped.
+    private func imageContainer<Content: View>(@ViewBuilder content: () -> Content) -> some View {
+        Color.clear
+            .aspectRatio(aspectRatio, contentMode: .fit)
+            .overlay {
+                content()
+            }
+            .clipped()
     }
 
     private var supabaseURL: URL? {
@@ -60,8 +72,7 @@ struct BusinessImageView: View {
                         .tracking(1.5)
                 }
             }
-            .aspectRatio(aspectRatio, contentMode: .fill)
-            .clipped()
+            .aspectRatio(aspectRatio, contentMode: .fit)
     }
 }
 

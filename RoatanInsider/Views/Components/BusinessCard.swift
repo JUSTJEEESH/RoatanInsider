@@ -40,6 +40,7 @@ struct BusinessCard: View {
                     }
                     .font(.riCaption(14))
                     .foregroundStyle(Color.riLightGray)
+                    .lineLimit(1)
                 }
                 .padding(.horizontal, 12)
                 .padding(.vertical, 12)
@@ -100,6 +101,7 @@ struct BusinessCardCompact: View {
                     }
                     .font(.riCaption(13))
                     .foregroundStyle(Color.riLightGray)
+                    .lineLimit(1)
                 }
                 .padding(10)
             }
@@ -158,6 +160,7 @@ struct BusinessCardGrid: View {
                     }
                     .font(.riCaption(12))
                     .foregroundStyle(Color.riLightGray)
+                    .lineLimit(1)
                 }
                 .padding(.horizontal, 10)
                 .padding(.vertical, 10)
