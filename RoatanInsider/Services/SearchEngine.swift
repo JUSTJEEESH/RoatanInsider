@@ -41,21 +41,25 @@ final class SearchEngine {
 
         if !searchText.isEmpty {
             let query = searchText.lowercased()
-            results = results.filter {
-                $0.name.lowercased().contains(query) ||
-                $0.description.lowercased().contains(query) ||
-                $0.subcategory.lowercased().contains(query) ||
-                $0.area.displayName.lowercased().contains(query) ||
-                $0.features.contains { $0.lowercased().contains(query) }
+            results = results.filter { biz in
+                biz.name.lowercased().contains(query) ||
+                biz.description.lowercased().contains(query) ||
+                biz.allCategories.contains { $0.subcategory.lowercased().contains(query) } ||
+                biz.allAreas.contains { $0.displayName.lowercased().contains(query) } ||
+                biz.features.contains { $0.lowercased().contains(query) }
             }
         }
 
         if !selectedCategories.isEmpty {
-            results = results.filter { selectedCategories.contains($0.category) }
+            results = results.filter { biz in
+                selectedCategories.contains { biz.hasCategory($0) }
+            }
         }
 
         if !selectedAreas.isEmpty {
-            results = results.filter { selectedAreas.contains($0.area) }
+            results = results.filter { biz in
+                selectedAreas.contains { biz.isInArea($0) }
+            }
         }
 
         if !selectedPriceRanges.isEmpty {

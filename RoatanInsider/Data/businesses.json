@@ -67,7 +67,9 @@
     "reviewCount": 50,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b072",
@@ -136,7 +138,9 @@
     "reviewCount": 1200,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b005",
@@ -204,7 +208,9 @@
     "reviewCount": 465,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b108",
@@ -255,7 +261,9 @@
     "reviewCount": 50,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b118",
@@ -324,7 +332,9 @@
     "reviewCount": 300,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b135",
@@ -393,7 +403,9 @@
     "reviewCount": 300,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b098",
@@ -450,7 +462,9 @@
     "reviewCount": 50,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b065",
@@ -518,7 +532,9 @@
     "reviewCount": 100,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b076",
@@ -587,7 +603,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b197",
@@ -656,7 +674,9 @@
     "reviewCount": 50,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b081",
@@ -725,7 +745,9 @@
     "reviewCount": 50,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b009",
@@ -793,7 +815,9 @@
     "reviewCount": 238,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b029",
@@ -861,7 +885,9 @@
     "reviewCount": 349,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b133",
@@ -930,7 +956,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b193",
@@ -999,7 +1027,9 @@
     "reviewCount": 100,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b199",
@@ -1068,7 +1098,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b058",
@@ -1136,7 +1168,9 @@
     "reviewCount": 50,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b088",
@@ -1205,7 +1239,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b085",
@@ -1274,7 +1310,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b082",
@@ -1343,7 +1381,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b083",
@@ -1412,7 +1452,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b168",
@@ -1481,7 +1523,9 @@
     "reviewCount": 221,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b004",
@@ -1549,7 +1593,9 @@
     "reviewCount": 377,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b089",
@@ -1618,7 +1664,9 @@
     "reviewCount": 50,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b022",
@@ -1686,7 +1734,9 @@
     "reviewCount": 200,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b146",
@@ -1754,7 +1804,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b054",
@@ -1822,7 +1874,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b161",
@@ -1891,7 +1945,9 @@
     "reviewCount": 1623,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b086",
@@ -1960,7 +2016,9 @@
     "reviewCount": 1623,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b154",
@@ -2029,7 +2087,9 @@
     "reviewCount": 111,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b155",
@@ -2098,7 +2158,9 @@
     "reviewCount": 500,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b045",
@@ -2166,7 +2228,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b195",
@@ -2235,7 +2299,9 @@
     "reviewCount": 100,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b049",
@@ -2303,7 +2369,9 @@
     "reviewCount": 350,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b104",
@@ -2354,7 +2422,9 @@
     "reviewCount": 350,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b010",
@@ -2419,7 +2489,9 @@
     "reviewCount": 261,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b046",
@@ -2487,7 +2559,9 @@
     "reviewCount": 275,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b091",
@@ -2547,7 +2621,9 @@
     "reviewCount": 275,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b111",
@@ -2616,7 +2692,9 @@
     "reviewCount": 500,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b042",
@@ -2684,7 +2762,9 @@
     "reviewCount": 95,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b013",
@@ -2752,7 +2832,9 @@
     "reviewCount": 51,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b002",
@@ -2820,7 +2902,9 @@
     "reviewCount": 624,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b169",
@@ -2889,7 +2973,9 @@
     "reviewCount": 200,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b141",
@@ -2958,7 +3044,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b026",
@@ -3026,7 +3114,9 @@
     "reviewCount": 856,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b165",
@@ -3095,7 +3185,9 @@
     "reviewCount": 717,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b066",
@@ -3164,7 +3256,9 @@
     "reviewCount": 1320,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b011",
@@ -3232,7 +3326,9 @@
     "reviewCount": 50,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b113",
@@ -3301,7 +3397,9 @@
     "reviewCount": 1000,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b028",
@@ -3363,7 +3461,9 @@
     "reviewCount": 7,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b139",
@@ -3432,7 +3532,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b047",
@@ -3500,7 +3602,9 @@
     "reviewCount": 100,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b043",
@@ -3568,7 +3672,9 @@
     "reviewCount": 70,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b033",
@@ -3633,7 +3739,9 @@
     "reviewCount": 590,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b112",
@@ -3702,7 +3810,9 @@
     "reviewCount": 1525,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b190",
@@ -3771,7 +3881,9 @@
     "reviewCount": 500,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b023",
@@ -3839,7 +3951,9 @@
     "reviewCount": 487,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b035",
@@ -3907,7 +4021,9 @@
     "reviewCount": 334,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b148",
@@ -3976,7 +4092,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b122",
@@ -4045,7 +4163,9 @@
     "reviewCount": 100,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b096",
@@ -4096,7 +4216,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b151",
@@ -4165,7 +4287,9 @@
     "reviewCount": 1013,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b079",
@@ -4234,7 +4358,9 @@
     "reviewCount": 100,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b153",
@@ -4303,7 +4429,9 @@
     "reviewCount": 1507,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b024",
@@ -4371,7 +4499,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b127",
@@ -4440,7 +4570,9 @@
     "reviewCount": 2000,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b131",
@@ -4509,7 +4641,9 @@
     "reviewCount": 7,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b120",
@@ -4578,7 +4712,9 @@
     "reviewCount": 100,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b020",
@@ -4646,7 +4782,9 @@
     "reviewCount": 139,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b007",
@@ -4711,7 +4849,9 @@
     "reviewCount": 250,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b123",
@@ -4780,7 +4920,9 @@
     "reviewCount": 50,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b176",
@@ -4849,7 +4991,9 @@
     "reviewCount": 50,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b163",
@@ -4918,7 +5062,9 @@
     "reviewCount": 426,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b067",
@@ -4987,7 +5133,9 @@
     "reviewCount": 500,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b179",
@@ -5056,7 +5204,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b003",
@@ -5121,7 +5271,9 @@
     "reviewCount": 1104,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b173",
@@ -5190,7 +5342,9 @@
     "reviewCount": 100,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b119",
@@ -5258,7 +5412,9 @@
     "reviewCount": 300,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b034",
@@ -5326,7 +5482,9 @@
     "reviewCount": 168,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b099",
@@ -5395,7 +5553,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b116",
@@ -5464,7 +5624,9 @@
     "reviewCount": 379,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b053",
@@ -5532,7 +5694,9 @@
     "reviewCount": 84,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b012",
@@ -5600,7 +5764,9 @@
     "reviewCount": 368,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b114",
@@ -5669,7 +5835,9 @@
     "reviewCount": 1023,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b068",
@@ -5738,7 +5906,9 @@
     "reviewCount": 300,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b001",
@@ -5806,7 +5976,9 @@
     "reviewCount": 1562,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b041",
@@ -5874,7 +6046,9 @@
     "reviewCount": 1562,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b092",
@@ -5943,7 +6117,9 @@
     "reviewCount": 1562,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b192",
@@ -6012,7 +6188,9 @@
     "reviewCount": 1000,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b044",
@@ -6080,7 +6258,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b156",
@@ -6149,7 +6329,9 @@
     "reviewCount": 577,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b019",
@@ -6217,7 +6399,9 @@
     "reviewCount": 1366,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b132",
@@ -6286,7 +6470,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b158",
@@ -6355,7 +6541,9 @@
     "reviewCount": 500,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b025",
@@ -6420,7 +6608,9 @@
     "reviewCount": 928,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b134",
@@ -6489,7 +6679,9 @@
     "reviewCount": 50,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b189",
@@ -6558,7 +6750,9 @@
     "reviewCount": 5000,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b097",
@@ -6612,7 +6806,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b074",
@@ -6681,7 +6877,9 @@
     "reviewCount": 944,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b180",
@@ -6750,7 +6948,9 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b191",
@@ -6819,7 +7019,9 @@
     "reviewCount": 200,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b069",
@@ -6888,7 +7090,9 @@
     "reviewCount": 400,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   },
   {
     "id": "b136",
@@ -6957,6 +7161,8 @@
     "reviewCount": null,
     "status": "active",
     "collections": [],
-    "menuImages": null
+    "menuImages": null,
+    "additionalCategories": [],
+    "additionalLocations": []
   }
 ]

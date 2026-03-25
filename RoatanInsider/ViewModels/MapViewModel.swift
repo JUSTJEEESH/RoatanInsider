@@ -30,7 +30,7 @@ final class MapViewModel {
     func filteredBusinesses(from businesses: [Business]) -> [Business] {
         let active = businesses.filter { $0.isActive }
         if let cat = selectedCategory {
-            return active.filter { $0.category == cat }
+            return active.filter { $0.hasCategory(cat) }
         }
         return active
     }

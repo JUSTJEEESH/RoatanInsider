@@ -6,6 +6,22 @@ struct DayHours: Codable, Hashable {
     let close: String
 }
 
+struct CategoryEntry: Codable, Hashable {
+    let category: Category
+    let subcategory: String
+}
+
+struct BusinessLocation: Codable, Hashable {
+    let area: Area
+    let latitude: Double
+    let longitude: Double
+    let addressDescription: String
+
+    var coordinate: CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+}
+
 struct Business: Identifiable, Codable, Hashable {
     let id: String
     let slug: String
@@ -38,6 +54,8 @@ struct Business: Identifiable, Codable, Hashable {
     let status: String
     let collections: [String]
     let menuImages: [String]?
+    let additionalCategories: [CategoryEntry]
+    let additionalLocations: [BusinessLocation]
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -72,7 +90,54 @@ struct Business: Identifiable, Codable, Hashable {
         status = try container.decode(String.self, forKey: .status)
         collections = (try? container.decode([String].self, forKey: .collections)) ?? []
         menuImages = try? container.decodeIfPresent([String].self, forKey: .menuImages)
+        additionalCategories = (try? container.decode([CategoryEntry].self, forKey: .additionalCategories)) ?? []
+        additionalLocations = (try? container.decode([BusinessLocation].self, forKey: .additionalLocations)) ?? []
     }
+
+    // MARK: - All categories (primary + additional)
+
+    var allCategories: [CategoryEntry] {
+        var result = [CategoryEntry(category: category, subcategory: subcategory)]
+        result.append(contentsOf: additionalCategories)
+        return result
+    }
+
+    /// Check if this business belongs to a given category
+    func hasCategory(_ cat: Category) -> Bool {
+        category == cat || additionalCategories.contains { $0.category == cat }
+    }
+
+    /// Get the subcategory label for a specific category context
+    func subcategory(for cat: Category) -> String {
+        if category == cat { return subcategory }
+        return additionalCategories.first { $0.category == cat }?.subcategory ?? subcategory
+    }
+
+    // MARK: - All locations (primary + additional)
+
+    var allLocations: [BusinessLocation] {
+        var result = [BusinessLocation(area: area, latitude: latitude, longitude: longitude, addressDescription: addressDescription)]
+        result.append(contentsOf: additionalLocations)
+        return result
+    }
+
+    /// All unique areas this business is in
+    var allAreas: [Area] {
+        var areas = [area]
+        for loc in additionalLocations {
+            if !areas.contains(loc.area) {
+                areas.append(loc.area)
+            }
+        }
+        return areas
+    }
+
+    /// Check if this business is in a given area
+    func isInArea(_ a: Area) -> Bool {
+        area == a || additionalLocations.contains { $0.area == a }
+    }
+
+    // MARK: - Existing computed properties
 
     var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
