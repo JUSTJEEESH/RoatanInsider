@@ -12,12 +12,8 @@ struct BusinessCard: View {
             VStack(alignment: .leading, spacing: 0) {
                 // Photo
                 ZStack(alignment: .topTrailing) {
-                    GeometryReader { geo in
-                        BusinessImageView(business: business, aspectRatio: 16/9)
-                            .frame(width: geo.size.width, height: geo.size.height)
-                    }
-                    .aspectRatio(16/9, contentMode: .fit)
-                    .clipped()
+                    BusinessImageView(business: business, aspectRatio: 16/9)
+                        .aspectRatio(16/9, contentMode: .fit)
 
                     FavoriteButton(businessId: business.id)
                         .padding(12)
@@ -80,7 +76,6 @@ struct BusinessCardCompact: View {
                 ZStack(alignment: .topTrailing) {
                     BusinessImageView(business: business, aspectRatio: 4/3)
                         .frame(width: 260, height: 180)
-                        .clipped()
 
                     FavoriteButton(businessId: business.id)
                         .padding(8)
@@ -139,12 +134,8 @@ struct BusinessCardGrid: View {
         NavigationLink(value: business) {
             VStack(alignment: .leading, spacing: 0) {
                 ZStack(alignment: .topTrailing) {
-                    GeometryReader { geo in
-                        BusinessImageView(business: business, aspectRatio: 4/3)
-                            .frame(width: geo.size.width, height: geo.size.height)
-                    }
-                    .aspectRatio(4/3, contentMode: .fit)
-                    .clipped()
+                    BusinessImageView(business: business, aspectRatio: 4/3)
+                        .aspectRatio(4/3, contentMode: .fit)
 
                     FavoriteButton(businessId: business.id)
                         .padding(8)
