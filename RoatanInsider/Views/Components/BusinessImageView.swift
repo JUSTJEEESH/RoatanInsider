@@ -42,8 +42,9 @@ struct BusinessImageView: View {
     }
 
     private func imageContainer<Content: View>(@ViewBuilder content: () -> Content) -> some View {
-        GeometryReader { geo in
-            content()
+        let resolved = content()
+        return GeometryReader { geo in
+            resolved
                 .frame(width: geo.size.width, height: geo.size.height)
         }
         .aspectRatio(aspectRatio, contentMode: .fit)
