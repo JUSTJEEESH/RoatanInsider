@@ -45,6 +45,7 @@
 		540B5A729ACCF687BC559A30 /* ContactActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433AD38C22538BD20ED17140 /* ContactActions.swift */; };
 		19F7FBB198B344D7EC5D410D /* MiniMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678158A014617021CE7178F9 /* MiniMapView.swift */; };
 		2036FA4962F442AB4653B5DD /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337FBFA3BB1CD2AA9D61C79 /* PhotoGallery.swift */; };
+		A1B2C3D4E5F6789012345678 /* MenuGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E2D3C4B5A6978012345678 /* MenuGalleryView.swift */; };
 		291CB24F07D41C591ADF523B /* EmptyFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A34E71D29D6C01B7CD60A3C /* EmptyFavoritesView.swift */; };
 		17244D9C3B9E2A6BF017F1DC /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888163E8C724F9CA9520D6A9 /* SavedView.swift */; };
 		CC364EC124A93F0D71B42785 /* CurrencyConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9242610978DC3254B2295A95 /* CurrencyConverterView.swift */; };
@@ -132,6 +133,7 @@
 		433AD38C22538BD20ED17140 /* ContactActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContactActions.swift"; sourceTree = "<group>"; };
 		678158A014617021CE7178F9 /* MiniMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MiniMapView.swift"; sourceTree = "<group>"; };
 		8337FBFA3BB1CD2AA9D61C79 /* PhotoGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoGallery.swift"; sourceTree = "<group>"; };
+		F1E2D3C4B5A6978012345678 /* MenuGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuGalleryView.swift"; sourceTree = "<group>"; };
 		4A34E71D29D6C01B7CD60A3C /* EmptyFavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EmptyFavoritesView.swift"; sourceTree = "<group>"; };
 		888163E8C724F9CA9520D6A9 /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SavedView.swift"; sourceTree = "<group>"; };
 		9242610978DC3254B2295A95 /* CurrencyConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyConverterView.swift"; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 				433AD38C22538BD20ED17140 /* ContactActions.swift */,
 				678158A014617021CE7178F9 /* MiniMapView.swift */,
 				8337FBFA3BB1CD2AA9D61C79 /* PhotoGallery.swift */,
+				F1E2D3C4B5A6978012345678 /* MenuGalleryView.swift */,
 			);
 			path = "Detail";
 			sourceTree = "<group>";
@@ -541,6 +544,7 @@
 				540B5A729ACCF687BC559A30 /* ContactActions.swift in Sources */,
 				19F7FBB198B344D7EC5D410D /* MiniMapView.swift in Sources */,
 				2036FA4962F442AB4653B5DD /* PhotoGallery.swift in Sources */,
+				A1B2C3D4E5F6789012345678 /* MenuGalleryView.swift in Sources */,
 				291CB24F07D41C591ADF523B /* EmptyFavoritesView.swift in Sources */,
 				17244D9C3B9E2A6BF017F1DC /* SavedView.swift in Sources */,
 				CC364EC124A93F0D71B42785 /* CurrencyConverterView.swift in Sources */,
