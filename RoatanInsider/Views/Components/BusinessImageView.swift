@@ -41,15 +41,13 @@ struct BusinessImageView: View {
         }
     }
 
-    /// Creates a container with the desired aspect ratio, fills it with the image content, and clips overflow.
-    /// This prevents distortion — the image scales to fill and excess is cropped.
     private func imageContainer<Content: View>(@ViewBuilder content: () -> Content) -> some View {
-        Color.clear
-            .aspectRatio(aspectRatio, contentMode: .fit)
-            .overlay {
-                content()
-            }
-            .clipped()
+        GeometryReader { geo in
+            content()
+                .frame(width: geo.size.width, height: geo.size.height)
+        }
+        .aspectRatio(aspectRatio, contentMode: .fit)
+        .clipped()
     }
 
     private var supabaseURL: URL? {
