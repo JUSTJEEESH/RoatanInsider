@@ -10,9 +10,14 @@ struct BusinessCard: View {
     var body: some View {
         NavigationLink(value: business) {
             VStack(alignment: .leading, spacing: 0) {
-                // Photo
+                // Photo — full width, 16:9 aspect ratio, image fills and crops
                 ZStack(alignment: .topTrailing) {
-                    BusinessImageView(business: business, aspectRatio: 16/9)
+                    Color.clear
+                        .aspectRatio(16/9, contentMode: .fit)
+                        .background {
+                            BusinessImageView(business: business, aspectRatio: 16/9)
+                        }
+                        .clipped()
 
                     FavoriteButton(businessId: business.id)
                         .padding(12)
@@ -133,7 +138,12 @@ struct BusinessCardGrid: View {
         NavigationLink(value: business) {
             VStack(alignment: .leading, spacing: 0) {
                 ZStack(alignment: .topTrailing) {
-                    BusinessImageView(business: business, aspectRatio: 4/3)
+                    Color.clear
+                        .aspectRatio(4/3, contentMode: .fit)
+                        .background {
+                            BusinessImageView(business: business, aspectRatio: 4/3)
+                        }
+                        .clipped()
 
                     FavoriteButton(businessId: business.id)
                         .padding(8)

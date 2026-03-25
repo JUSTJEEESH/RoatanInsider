@@ -1,6 +1,7 @@
 import SwiftUI
 
 /// Displays a business photo from Supabase storage, local asset catalog, or a styled category-aware placeholder.
+/// Returns a resizable, scaledToFill image. The CALLER is responsible for framing and clipping.
 struct BusinessImageView: View {
     let business: Business
     var aspectRatio: CGFloat = 16/9
@@ -10,20 +11,16 @@ struct BusinessImageView: View {
         let hasLocalImage = UIImage(named: imageName) != nil
 
         if hasLocalImage {
-            imageContainer {
-                Image(imageName)
-                    .resizable()
-                    .scaledToFill()
-            }
+            Image(imageName)
+                .resizable()
+                .scaledToFill()
         } else if let url = supabaseURL {
             AsyncImage(url: url) { phase in
                 switch phase {
                 case .success(let image):
-                    imageContainer {
-                        image
-                            .resizable()
-                            .scaledToFill()
-                    }
+                    image
+                        .resizable()
+                        .scaledToFill()
                 case .failure:
                     categoryPlaceholder
                 case .empty:
@@ -39,16 +36,6 @@ struct BusinessImageView: View {
         } else {
             categoryPlaceholder
         }
-    }
-
-    private func imageContainer<Content: View>(@ViewBuilder content: () -> Content) -> some View {
-        let resolved = content()
-        return GeometryReader { geo in
-            resolved
-                .frame(width: geo.size.width, height: geo.size.height)
-        }
-        .aspectRatio(aspectRatio, contentMode: .fit)
-        .clipped()
     }
 
     private var supabaseURL: URL? {
