@@ -53,6 +53,9 @@ struct ContentView: View {
         .onAppear {
             configureTabBarAppearance()
         }
+        .task {
+            await dataManager.checkForUpdates()
+        }
     }
 
     private func configureTabBarAppearance() {

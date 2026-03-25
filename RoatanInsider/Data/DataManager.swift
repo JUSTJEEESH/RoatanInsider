@@ -13,16 +13,17 @@ final class DataManager {
     }
 
     private func loadBusinesses() {
-        guard let url = Bundle.main.url(forResource: "businesses", withExtension: "json") else {
-            print("⚠️ DataManager: businesses.json not found in bundle")
-            return
-        }
-        do {
-            let data = try Data(contentsOf: url)
-            businesses = try JSONDecoder().decode([Business].self, from: data)
-            print("✅ Loaded \(businesses.count) businesses")
-        } catch {
-            print("⚠️ DataManager: Failed to decode businesses.json: \(error)")
+        businesses = BusinessDataService.loadCachedOrBundled()
+    }
+
+    /// Checks Supabase for updated business data in the background.
+    /// If newer data is found, the businesses array updates and all views refresh automatically.
+    func checkForUpdates() async {
+        if let updated = await BusinessDataService.fetchRemoteIfNeeded() {
+            await MainActor.run {
+                self.businesses = updated
+                print("✅ Views updated with \(updated.count) businesses from remote")
+            }
         }
     }
 

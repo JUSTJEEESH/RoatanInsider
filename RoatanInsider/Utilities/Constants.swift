@@ -19,6 +19,12 @@ enum AppConstants {
     // Supabase Storage
     static let supabaseStorageBaseURL = "https://vbxmmslzanixvqswtnnv.supabase.co/storage/v1/object/public/business-photos/"
 
+    // Remote data (Supabase Storage bucket: app-data)
+    static let supabaseDataBaseURL = "https://vbxmmslzanixvqswtnnv.supabase.co/storage/v1/object/public/app-data/"
+    static let remoteManifestURL = supabaseDataBaseURL + "manifest.json"
+    static let remoteBusinessesURL = supabaseDataBaseURL + "businesses.json"
+    static let dataRefreshMinInterval: TimeInterval = 900 // 15 minutes
+
     // Design
     static let cardCornerRadius: CGFloat = 16
     static let buttonCornerRadius: CGFloat = 16
