@@ -80,6 +80,7 @@ struct MapTabView: View {
                         } else if isOffline {
                             let businesses = viewModel.filteredBusinesses(from: dataManager.businesses)
                             ForEach(businesses) { business in
+                                // Primary location pin
                                 Annotation(business.name, coordinate: business.coordinate) {
                                     MapPinView(
                                         business: business,
@@ -89,6 +90,21 @@ struct MapTabView: View {
                                         withAnimation(.easeInOut(duration: 0.2)) {
                                             viewModel.selectedBusiness = business
                                             viewModel.selectedMapItem = nil
+                                        }
+                                    }
+                                }
+                                // Additional location pins
+                                ForEach(business.additionalLocations, id: \.self) { location in
+                                    Annotation(business.name, coordinate: location.coordinate) {
+                                        MapPinView(
+                                            business: business,
+                                            isSelected: viewModel.selectedBusiness?.id == business.id
+                                        )
+                                        .onTapGesture {
+                                            withAnimation(.easeInOut(duration: 0.2)) {
+                                                viewModel.selectedBusiness = business
+                                                viewModel.selectedMapItem = nil
+                                            }
                                         }
                                     }
                                 }

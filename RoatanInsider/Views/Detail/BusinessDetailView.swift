@@ -25,14 +25,30 @@ struct BusinessDetailView: View {
                         }
 
                         HStack(spacing: 6) {
-                            Text(business.category.displayName)
+                            Text(business.allCategories.map { "\($0.category.displayName)" }.joined(separator: " · "))
                             Text("·")
-                            Text(business.subcategory)
-                            Text("·")
-                            Text(business.area.displayName)
+                            Text(business.allAreas.map(\.displayName).joined(separator: " · "))
                         }
                         .font(.riCaption(14))
                         .foregroundStyle(Color.riLightGray)
+
+                        if business.allCategories.count > 1 {
+                            FlowLayout(spacing: 6) {
+                                ForEach(business.allCategories, id: \.self) { entry in
+                                    HStack(spacing: 4) {
+                                        Image(systemName: entry.category.iconName)
+                                            .font(.system(size: 11))
+                                        Text(entry.subcategory)
+                                    }
+                                    .font(.riCaption(12))
+                                    .foregroundStyle(Color.riMediumGray)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 5)
+                                    .background(Color.riOffWhite)
+                                    .clipShape(Capsule())
+                                }
+                            }
+                        }
 
                         HStack(spacing: 12) {
                             if let rating = business.rating {
@@ -117,19 +133,29 @@ struct BusinessDetailView: View {
                         }
                     }
 
-                    // Location
+                    // Location(s)
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Location")
+                        Text(business.allLocations.count > 1 ? "Locations" : "Location")
                             .font(.system(size: 16, weight: .semibold))
                             .foregroundStyle(Color.riDark)
 
-                        Text(business.addressDescription)
-                            .font(.riCaption(14))
-                            .foregroundStyle(Color.riMediumGray)
+                        ForEach(business.allLocations, id: \.self) { location in
+                            VStack(alignment: .leading, spacing: 8) {
+                                if business.allLocations.count > 1 {
+                                    Text(location.area.displayName)
+                                        .font(.system(size: 14, weight: .medium))
+                                        .foregroundStyle(Color.riDark)
+                                }
 
-                        MiniMapView(coordinate: business.coordinate, name: business.name)
-                            .frame(height: 180)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                                Text(location.addressDescription)
+                                    .font(.riCaption(14))
+                                    .foregroundStyle(Color.riMediumGray)
+
+                                MiniMapView(coordinate: location.coordinate, name: business.name)
+                                    .frame(height: 180)
+                                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                            }
+                        }
                     }
                 }
                 .padding(20)
