@@ -134,6 +134,7 @@ struct CruiseModeView: View {
     private var portSelector: some View {
         HStack(spacing: 10) {
             ForEach(CruiseViewModel.CruisePort.allCases) { port in
+                let isSelected = viewModel.selectedPort == port
                 Button {
                     Haptics.select()
                     withAnimation(.easeInOut(duration: 0.2)) {
@@ -151,12 +152,16 @@ struct CruiseModeView: View {
                             .lineLimit(2)
                             .multilineTextAlignment(.center)
                     }
-                    .foregroundStyle(viewModel.selectedPort == port ? .white : Color.riDark)
-                    .frame(maxWidth: .infinity)
+                    .foregroundStyle(isSelected ? .white : Color.riDark)
+                    .frame(maxWidth: .infinity, minHeight: 80)
                     .padding(.vertical, 14)
                     .padding(.horizontal, 8)
-                    .background(viewModel.selectedPort == port ? Color.riFixedDark : Color.riOffWhite)
+                    .background(isSelected ? Color.riFixedDark : Color.riOffWhite)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color.riMint, lineWidth: isSelected ? 2 : 0)
+                    )
                 }
                 .buttonStyle(.plain)
             }
