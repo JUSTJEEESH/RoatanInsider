@@ -66,7 +66,7 @@ struct BusinessImageView: View {
                         .tracking(1.5)
                 }
             }
-            .aspectRatio(aspectRatio, contentMode: .fit)
+            .aspectRatio(aspectRatio, contentMode: .fill)
     }
 }
 
