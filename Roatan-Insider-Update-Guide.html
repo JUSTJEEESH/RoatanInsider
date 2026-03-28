@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Roatán Insider — Business Update Guide</title>
+<style>
+  body { font-family: -apple-system, Helvetica Neue, sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; color: #2D2D2D; line-height: 1.6; }
+  h1 { font-size: 28px; margin-bottom: 4px; }
+  h2 { font-size: 20px; margin-top: 36px; border-bottom: 2px solid #E31B4E; padding-bottom: 6px; color: #E31B4E; }
+  h3 { font-size: 16px; margin-top: 20px; }
+  code { background: #F0F0F0; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+  pre { background: #1A1A1A; color: #fff; padding: 14px 18px; border-radius: 10px; font-size: 13px; overflow-x: auto; }
+  .step { background: #F8F8F8; border-radius: 12px; padding: 20px 24px; margin: 16px 0; }
+  .step-num { display: inline-block; background: #E31B4E; color: white; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: 700; font-size: 14px; margin-right: 8px; }
+  .warning { background: #FFF3F5; border-left: 4px solid #E31B4E; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .success { background: #F0FBF9; border-left: 4px solid #4ECDC4; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+  th { background: #2D2D2D; color: white; padding: 10px 14px; text-align: left; font-size: 13px; }
+  td { padding: 10px 14px; border-bottom: 1px solid #eee; font-size: 13px; }
+  tr:nth-child(even) { background: #F8F8F8; }
+  .subtitle { color: #999; font-size: 16px; margin-top: 0; }
+  @media print { body { margin: 20px; } .step { break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<h1>Roatán Insider</h1>
+<p class="subtitle">Business Update Guide — Daily Workflow</p>
+
+<h2><span class="step-num">1</span> Get the Latest CSV</h2>
+<div class="step">
+  <p>Open <strong>Terminal</strong> (Cmd + Space → type Terminal → Enter)</p>
+  <p>Paste these two lines and hit Enter:</p>
+  <pre>cd ~/Documents/RoatanInsider
+python3 tools/export_csv.py</pre>
+  <p>You'll see: <code>✅ Exported businesses to businesses_edit.csv</code></p>
+</div>
+
+<h2><span class="step-num">2</span> Edit in Google Sheets</h2>
+<div class="step">
+  <p><strong>Open:</strong> Go to <strong>sheets.google.com</strong></p>
+  <p><strong>Import:</strong> File → Import → Upload → drag in <code>businesses_edit.csv</code> from Finder (Documents → RoatanInsider)</p>
+  <p><strong>Choose:</strong> Replace spreadsheet → Import</p>
+
+  <h3>Common edits:</h3>
+  <table>
+    <tr><th>To do this...</th><th>Change this column</th></tr>
+    <tr><td>Edit a name, description, tip</td><td><strong>Name</strong>, <strong>Description</strong>, <strong>Insider Tip</strong></td></tr>
+    <tr><td>Update contact info</td><td><strong>Phone</strong>, <strong>WhatsApp</strong>, <strong>Website</strong>, <strong>Instagram</strong></td></tr>
+    <tr><td>Feature a business</td><td><strong>Featured</strong> → <code>yes</code></td></tr>
+    <tr><td>Make it an Insider Pick</td><td><strong>Insider Pick</strong> → <code>yes</code></td></tr>
+    <tr><td>Remove a business</td><td><strong>Status</strong> → <code>inactive</code></td></tr>
+    <tr><td>Add a business</td><td>New row with <strong>ID</strong> (e.g. b202), <strong>Name</strong>, <strong>Category</strong>, <strong>Area</strong>, <strong>Status</strong> = <code>active</code></td></tr>
+    <tr><td>Change hours</td><td><strong>Hours Text</strong> (e.g. "Daily 11am–10pm")</td></tr>
+  </table>
+
+  <h3>Valid categories:</h3>
+  <p>Eat · Drink · Dive · Tours · Shop · Stay · Rentals · Transport · Beaches · Nightlife</p>
+
+  <h3>Valid areas:</h3>
+  <p>West Bay · West End · Sandy Bay · Coxen Hole · Flowers Bay · French Harbour · Oak Ridge · Punta Gorda · Port Royal · Camp Bay</p>
+
+  <p><strong>When done:</strong> File → Download → Comma Separated Values (.csv)</p>
+</div>
+
+<h2><span class="step-num">3</span> Move the File Back</h2>
+<div class="step">
+  <p>In Terminal, paste:</p>
+  <pre>mv ~/Downloads/businesses_edit.csv ~/Documents/RoatanInsider/businesses_edit.csv</pre>
+  <p><em>If it says "No such file", your download may have a different name like <code>businesses_edit (1).csv</code>. Check your Downloads folder.</em></p>
+</div>
+
+<h2><span class="step-num">4</span> Convert to JSON</h2>
+<div class="step">
+  <p>In Terminal, paste:</p>
+  <pre>cd ~/Documents/RoatanInsider
+python3 tools/import_csv.py --bump-version</pre>
+  <p>You'll see a summary with business counts. Make sure the numbers look right.</p>
+</div>
+
+<h2><span class="step-num">5</span> Upload to Supabase</h2>
+<div class="step">
+  <p>Go to <strong>Supabase Dashboard → Storage → app-data</strong></p>
+
+  <h3>Upload #1 — businesses.json</h3>
+  <ol>
+    <li>Delete the old <code>businesses.json</code> (three dots → Delete)</li>
+    <li>Click <strong>Upload files</strong></li>
+    <li>Navigate to: <strong>Documents → RoatanInsider → RoatanInsider → Data → businesses.json</strong></li>
+  </ol>
+
+  <h3>Upload #2 — manifest.json</h3>
+  <ol>
+    <li>Delete the old <code>manifest.json</code> (three dots → Delete)</li>
+    <li>Click <strong>Upload files</strong></li>
+    <li>Navigate to: <strong>Documents → RoatanInsider → manifest.json</strong></li>
+  </ol>
+
+  <div class="warning">
+    <strong>⚠️ businesses.json</strong> is inside: Documents → RoatanInsider → <strong>RoatanInsider → Data</strong><br>
+    <strong>⚠️ manifest.json</strong> is inside: Documents → RoatanInsider (root folder)
+  </div>
+</div>
+
+<h2><span class="step-num">6</span> Test</h2>
+<div class="step">
+  <ol>
+    <li>Fully close the app (swipe up in app switcher)</li>
+    <li>Reopen the app</li>
+    <li>Your changes should appear</li>
+  </ol>
+</div>
+
+<h2>Quick Reference</h2>
+
+<div class="success">
+  <strong>✅ Always upload these to Supabase:</strong><br>
+  • <code>businesses.json</code> — from RoatanInsider → RoatanInsider → Data<br>
+  • <code>manifest.json</code> — from RoatanInsider root folder
+</div>
+
+<div class="warning">
+  <strong>❌ Never upload these:</strong><br>
+  • <code>businesses_edit.csv</code> — editing file only<br>
+  • Anything from the <code>tools/</code> folder
+</div>
+
+<h2>All Terminal Commands (Copy & Paste)</h2>
+<div class="step">
+  <p><strong>Export CSV:</strong></p>
+  <pre>cd ~/Documents/RoatanInsider && python3 tools/export_csv.py</pre>
+  <p><strong>Move file back after editing:</strong></p>
+  <pre>mv ~/Downloads/businesses_edit.csv ~/Documents/RoatanInsider/businesses_edit.csv</pre>
+  <p><strong>Convert to JSON:</strong></p>
+  <pre>cd ~/Documents/RoatanInsider && python3 tools/import_csv.py --bump-version</pre>
+</div>
+
+</body>
+</html>
