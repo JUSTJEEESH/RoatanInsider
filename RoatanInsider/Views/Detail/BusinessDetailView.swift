@@ -4,37 +4,43 @@ import MapKit
 struct BusinessDetailView: View {
     let business: Business
     @Environment(FavoritesStore.self) private var favoritesStore
+    @Environment(DataManager.self) private var dataManager
+
+    /// Always use the latest version from DataManager (picks up remote updates)
+    private var b: Business {
+        dataManager.business(withId: business.id) ?? business
+    }
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 0) {
                 // Hero image
-                PhotoGallery(images: business.images, category: business.category, slug: business.slug)
+                PhotoGallery(images: b.images, category: b.category, slug: b.slug)
 
                 VStack(alignment: .leading, spacing: 20) {
                     // Title section
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
-                            Text(business.name)
+                            Text(b.name)
                                 .riHeadlineStyle(26)
                                 .foregroundStyle(Color.riDark)
 
                             Spacer()
 
-                            FavoriteButton(businessId: business.id, onPhoto: false)
+                            FavoriteButton(businessId: b.id, onPhoto: false)
                         }
 
                         HStack(spacing: 6) {
-                            Text(business.allCategories.map { "\($0.category.displayName)" }.joined(separator: " · "))
+                            Text(b.allCategories.map { "\($0.category.displayName)" }.joined(separator: " · "))
                             Text("·")
-                            Text(business.allAreas.map(\.displayName).joined(separator: " · "))
+                            Text(b.allAreas.map(\.displayName).joined(separator: " · "))
                         }
                         .font(.riCaption(14))
                         .foregroundStyle(Color.riLightGray)
 
-                        if business.allCategories.count > 1 {
+                        if b.allCategories.count > 1 {
                             FlowLayout(spacing: 6) {
-                                ForEach(business.allCategories, id: \.self) { entry in
+                                ForEach(b.allCategories, id: \.self) { entry in
                                     HStack(spacing: 4) {
                                         Image(systemName: entry.category.iconName)
                                             .font(.system(size: 11))
@@ -51,30 +57,30 @@ struct BusinessDetailView: View {
                         }
 
                         HStack(spacing: 12) {
-                            if let rating = business.rating {
+                            if let rating = b.rating {
                                 HStack(spacing: 4) {
                                     RatingView(rating: rating, size: 14)
 
-                                    if let count = business.reviewCount, count > 0 {
+                                    if let count = b.reviewCount, count > 0 {
                                         Text("(\(count))")
                                             .font(.riCaption(13))
                                             .foregroundStyle(Color.riLightGray)
                                     }
                                 }
                             }
-                            PriceRangeView(priceRange: business.priceRange)
-                            OpenStatusBadge(business: business)
+                            PriceRangeView(priceRange: b.priceRange)
+                            OpenStatusBadge(business: b)
                         }
                     }
 
                     // Description
-                    Text(business.description)
+                    Text(b.description)
                         .font(.riBody)
                         .foregroundStyle(Color.riMediumGray)
                         .lineSpacing(6)
 
                     // Insider Tip
-                    if let tip = business.insiderTip {
+                    if let tip = b.insiderTip {
                         HStack(spacing: 0) {
                             Rectangle()
                                 .fill(Color.riMint)
@@ -95,14 +101,14 @@ struct BusinessDetailView: View {
                     }
 
                     // Features
-                    if !business.features.isEmpty {
+                    if !b.features.isEmpty {
                         VStack(alignment: .leading, spacing: 10) {
                             Text("Features")
                                 .font(.system(size: 16, weight: .semibold))
                                 .foregroundStyle(Color.riDark)
 
                             FlowLayout(spacing: 8) {
-                                ForEach(business.features, id: \.self) { feature in
+                                ForEach(b.features, id: \.self) { feature in
                                     Text(feature)
                                         .font(.riCaption(13))
                                         .foregroundStyle(Color.riMediumGray)
@@ -116,12 +122,12 @@ struct BusinessDetailView: View {
                     }
 
                     // Contact actions
-                    ContactActions(business: business)
+                    ContactActions(business: b)
 
                     // Hours
-                    if !business.hours.isEmpty {
+                    if !b.hours.isEmpty {
                         hoursSection
-                    } else if let hoursText = business.hoursText {
+                    } else if let hoursText = b.hoursText {
                         VStack(alignment: .leading, spacing: 10) {
                             Text("Hours")
                                 .font(.system(size: 16, weight: .semibold))
@@ -135,13 +141,13 @@ struct BusinessDetailView: View {
 
                     // Location(s)
                     VStack(alignment: .leading, spacing: 12) {
-                        Text(business.allLocations.count > 1 ? "Locations" : "Location")
+                        Text(b.allLocations.count > 1 ? "Locations" : "Location")
                             .font(.system(size: 16, weight: .semibold))
                             .foregroundStyle(Color.riDark)
 
-                        ForEach(business.allLocations, id: \.self) { location in
+                        ForEach(b.allLocations, id: \.self) { location in
                             VStack(alignment: .leading, spacing: 8) {
-                                if business.allLocations.count > 1 {
+                                if b.allLocations.count > 1 {
                                     Text(location.area.displayName)
                                         .font(.system(size: 14, weight: .medium))
                                         .foregroundStyle(Color.riDark)
@@ -151,7 +157,7 @@ struct BusinessDetailView: View {
                                     .font(.riCaption(14))
                                     .foregroundStyle(Color.riMediumGray)
 
-                                MiniMapView(coordinate: location.coordinate, name: business.name)
+                                MiniMapView(coordinate: location.coordinate, name: b.name)
                                     .frame(height: 180)
                                     .clipShape(RoundedRectangle(cornerRadius: 12))
                             }
@@ -174,17 +180,17 @@ struct BusinessDetailView: View {
                         .font(.system(size: 16, weight: .medium))
                         .foregroundStyle(Color.riDark)
                 }
-                .accessibilityLabel("Share \(business.name)")
+                .accessibilityLabel("Share \(b.name)")
             }
         }
     }
 
     private func shareBusiness() {
-        let shareText = "\(business.name) — \(business.category.displayName) in \(business.area.displayName). \(business.insiderTip ?? business.description.prefix(100).description)"
+        let shareText = "\(b.name) — \(b.category.displayName) in \(b.area.displayName). \(b.insiderTip ?? b.description.prefix(100).description)"
 
         var items: [Any] = [shareText]
 
-        if let image = ShareHelper.shareImage(for: business) {
+        if let image = ShareHelper.shareImage(for: b) {
             items.insert(image, at: 0)
         }
 
@@ -205,17 +211,21 @@ struct BusinessDetailView: View {
             let today = Date().currentDayKey
 
             ForEach(days, id: \.self) { day in
-                if let hours = business.hours[day] ?? nil {
-                    HStack {
-                        Text(day.capitalized)
-                            .font(.riCaption(14))
-                            .fontWeight(day == today ? .semibold : .regular)
-                            .foregroundStyle(day == today ? Color.riDark : Color.riMediumGray)
-                            .frame(width: 100, alignment: .leading)
+                HStack {
+                    Text(day.capitalized)
+                        .font(.riCaption(14))
+                        .fontWeight(day == today ? .semibold : .regular)
+                        .foregroundStyle(day == today ? Color.riDark : Color.riMediumGray)
+                        .frame(width: 100, alignment: .leading)
 
+                    if let hours = b.hours[day] ?? nil {
                         Text("\(hours.open) – \(hours.close)")
                             .font(.riCaption(14))
                             .foregroundStyle(day == today ? Color.riDark : Color.riLightGray)
+                    } else {
+                        Text("Closed")
+                            .font(.riCaption(14))
+                            .foregroundStyle(Color.riLightGray)
                     }
                 }
             }

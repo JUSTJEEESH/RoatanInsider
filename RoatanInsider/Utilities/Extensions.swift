@@ -45,4 +45,11 @@ extension Date {
         formatter.dateFormat = "HH:mm"
         return formatter.string(from: self)
     }
+
+    var previousDayKey: String {
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: self) ?? self
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE"
+        return formatter.string(from: yesterday).lowercased()
+    }
 }

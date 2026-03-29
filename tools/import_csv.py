@@ -168,6 +168,150 @@ def parse_int(s):
         return None
 
 
+DAYS_OF_WEEK = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+
+# Map day abbreviations to full names
+DAY_ABBREV = {
+    "mon": "monday", "tue": "tuesday", "tues": "tuesday", "wed": "wednesday",
+    "thu": "thursday", "thur": "thursday", "thurs": "thursday",
+    "fri": "friday", "sat": "saturday", "sun": "sunday",
+}
+
+
+def parse_time_12h(s):
+    """Convert '8am', '3pm', '11:30am', '12pm', '6:30pm' to 24h 'HH:MM'."""
+    s = s.strip().lower().replace(".", "")
+    is_pm = "pm" in s
+    is_am = "am" in s
+    s = s.replace("am", "").replace("pm", "").strip()
+
+    if ":" in s:
+        parts = s.split(":")
+        hour = int(parts[0])
+        minute = int(parts[1])
+    else:
+        hour = int(s)
+        minute = 0
+
+    if is_pm and hour != 12:
+        hour += 12
+    if is_am and hour == 12:
+        hour = 0
+
+    return f"{hour:02d}:{minute:02d}"
+
+
+def expand_day_range(range_str):
+    """Expand 'Mon-Fri' to ['monday','tuesday','wednesday','thursday','friday']."""
+    range_str = range_str.strip().lower()
+
+    # Check for "daily"
+    if range_str == "daily":
+        return list(DAYS_OF_WEEK)
+
+    # Single day
+    if range_str in DAY_ABBREV:
+        return [DAY_ABBREV[range_str]]
+    if range_str in DAYS_OF_WEEK:
+        return [range_str]
+
+    # Range like "Mon-Fri" or "Tue-Sun"
+    for sep in ["–", "-", "—"]:
+        if sep in range_str:
+            parts = range_str.split(sep)
+            if len(parts) == 2:
+                start = parts[0].strip()
+                end = parts[1].strip()
+                start_name = DAY_ABBREV.get(start, start)
+                end_name = DAY_ABBREV.get(end, end)
+                if start_name in DAYS_OF_WEEK and end_name in DAYS_OF_WEEK:
+                    si = DAYS_OF_WEEK.index(start_name)
+                    ei = DAYS_OF_WEEK.index(end_name)
+                    if ei >= si:
+                        return DAYS_OF_WEEK[si:ei + 1]
+                    else:
+                        # Wraps around: e.g. Fri-Mon
+                        return DAYS_OF_WEEK[si:] + DAYS_OF_WEEK[:ei + 1]
+            break
+
+    return []
+
+
+def parse_hours_text(hours_text):
+    """
+    Parse human-readable hours into structured format.
+
+    Examples:
+        "Daily 11am-10pm"
+        "Mon-Fri 8am-3pm; Sat 8am-6pm; Closed Sun"
+        "Tue-Sun 3pm-9pm; Closed Mon"
+        "Mon-Sat 7am-10pm; Closed Sun"
+        "Daily 24 hours"
+    """
+    if not hours_text:
+        return None
+
+    hours = {day: None for day in DAYS_OF_WEEK}
+    segments = [seg.strip() for seg in hours_text.replace(",", ";").split(";")]
+
+    for segment in segments:
+        segment = segment.strip()
+        if not segment:
+            continue
+
+        lower = segment.lower()
+
+        # "Closed Mon" or "Closed Sunday"
+        if lower.startswith("closed"):
+            rest = lower.replace("closed", "").strip()
+            if rest:
+                days = expand_day_range(rest)
+                for d in days:
+                    hours[d] = None
+            continue
+
+        # Try to split into days + times
+        # "Daily 11am-10pm", "Mon-Fri 8am-3pm", "Sat 8am-6pm"
+        parts = segment.split(" ", 1)
+        if len(parts) < 2:
+            continue
+
+        day_part = parts[0]
+        time_part = parts[1].strip()
+
+        # Handle "24 hours"
+        if "24" in time_part.lower() and "hour" in time_part.lower():
+            days = expand_day_range(day_part)
+            for d in days:
+                hours[d] = {"open": "00:00", "close": "23:59"}
+            continue
+
+        # Parse time range "8am-3pm" or "8am–3pm"
+        time_range = None
+        for sep in ["–", "-", "—", "to"]:
+            if sep in time_part:
+                time_parts = time_part.split(sep, 1)
+                if len(time_parts) == 2:
+                    try:
+                        open_time = parse_time_12h(time_parts[0])
+                        close_time = parse_time_12h(time_parts[1])
+                        time_range = {"open": open_time, "close": close_time}
+                    except (ValueError, IndexError):
+                        pass
+                break
+
+        if time_range:
+            days = expand_day_range(day_part)
+            for d in days:
+                hours[d] = time_range
+
+    # Only return if we successfully parsed at least one day
+    if any(v is not None for v in hours.values()):
+        return hours
+
+    return None
+
+
 def row_to_business(row, existing_by_id):
     """Convert a CSV row to a business dict, preserving structured hours from existing JSON."""
     bid = val(row, "ID")
@@ -202,8 +346,8 @@ def row_to_business(row, existing_by_id):
         "facebook": val(row, "Facebook") or None,
         "instagram": val(row, "Instagram") or None,
         "priceRange": parse_price(val(row, "Price Range")),
-        # Preserve structured hours from existing JSON; update hoursText from CSV
-        "hours": existing.get("hours", {}),
+        # Parse hours from CSV Hours Text; fall back to existing structured hours
+        "hours": parse_hours_text(val(row, "Hours Text")) or existing.get("hours", {}),
         "hoursText": val(row, "Hours Text") or existing.get("hoursText") or None,
         "features": parse_list(val(row, "Features")),
         "images": parse_list(val(row, "Images")) or existing.get("images", ["business_placeholder"]),

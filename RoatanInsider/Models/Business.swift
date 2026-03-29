@@ -154,9 +154,34 @@ struct Business: Identifiable, Codable, Hashable {
     func isOpenNow() -> Bool {
         let now = Date()
         let dayKey = now.currentDayKey
-        guard let dayHours = hours[dayKey] ?? nil else { return false }
-
         let timeString = now.currentTimeString
-        return timeString >= dayHours.open && timeString <= dayHours.close
+
+        // Check today's hours
+        if let dayHours = hours[dayKey] ?? nil {
+            if dayHours.close >= dayHours.open {
+                // Normal hours (e.g., 08:00–22:00)
+                if timeString >= dayHours.open && timeString <= dayHours.close {
+                    return true
+                }
+            } else {
+                // Past-midnight hours (e.g., 18:00–02:00) — open from open until midnight
+                if timeString >= dayHours.open {
+                    return true
+                }
+            }
+        }
+
+        // Check if yesterday's hours extend past midnight into now
+        let yesterdayKey = now.previousDayKey
+        if let yesterdayHours = hours[yesterdayKey] ?? nil {
+            if yesterdayHours.close < yesterdayHours.open {
+                // Yesterday had past-midnight hours — check if we're still in the closing window
+                if timeString <= yesterdayHours.close {
+                    return true
+                }
+            }
+        }
+
+        return false
     }
 }
