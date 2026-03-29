@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Roatán Insider — Complete Content Update Guide</title>
+<style>
+  body { font-family: -apple-system, Helvetica Neue, sans-serif; max-width: 750px; margin: 40px auto; padding: 0 20px; color: #2D2D2D; line-height: 1.6; font-size: 14px; }
+  h1 { font-size: 28px; margin-bottom: 4px; }
+  h2 { font-size: 20px; margin-top: 40px; border-bottom: 2px solid #E31B4E; padding-bottom: 6px; color: #E31B4E; }
+  h3 { font-size: 16px; margin-top: 24px; color: #2D2D2D; }
+  code { background: #F0F0F0; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+  pre { background: #1A1A1A; color: #fff; padding: 14px 18px; border-radius: 10px; font-size: 12px; overflow-x: auto; }
+  .step { background: #F8F8F8; border-radius: 12px; padding: 16px 20px; margin: 12px 0; }
+  .step-num { display: inline-block; background: #E31B4E; color: white; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; font-weight: 700; font-size: 13px; margin-right: 6px; }
+  .warning { background: #FFF3F5; border-left: 4px solid #E31B4E; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 13px; }
+  .success { background: #F0FBF9; border-left: 4px solid #4ECDC4; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 13px; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 13px; }
+  th { background: #2D2D2D; color: white; padding: 8px 12px; text-align: left; }
+  td { padding: 8px 12px; border-bottom: 1px solid #eee; }
+  tr:nth-child(even) { background: #F8F8F8; }
+  .subtitle { color: #999; font-size: 16px; margin-top: 0; }
+  .section-box { border: 1px solid #eee; border-radius: 12px; padding: 16px 20px; margin: 16px 0; }
+  hr { border: none; border-top: 1px solid #eee; margin: 32px 0; }
+  @media print { body { margin: 20px; font-size: 12px; } .step { break-inside: avoid; } .section-box { break-inside: avoid; } h2 { break-after: avoid; } }
+</style>
+</head>
+<body>
+
+<h1>Roatán Insider</h1>
+<p class="subtitle">Complete Content Update Guide</p>
+
+<hr>
+
+<h2>The 3-Step Pattern (Same for Everything)</h2>
+
+<div class="step">
+<p><span class="step-num">1</span> <strong>Export</strong> — In Terminal:</p>
+<pre>cd ~/Documents/RoatanInsider
+python3 tools/export_all.py</pre>
+<p>This creates CSV files for everything in the app.</p>
+</div>
+
+<div class="step">
+<p><span class="step-num">2</span> <strong>Edit</strong> — Open the CSV(s) you want to change in Google Sheets, Numbers, or Excel. Save when done.</p>
+<p><em>If using Google Sheets: File → Download → CSV, then in Terminal:</em></p>
+<pre>mv ~/Downloads/FILENAME.csv ~/Documents/RoatanInsider/FILENAME.csv</pre>
+</div>
+
+<div class="step">
+<p><span class="step-num">3</span> <strong>Import & Upload</strong> — In Terminal:</p>
+<pre>python3 tools/import_all.py --bump-version</pre>
+<p>Then upload the changed JSON files + <code>manifest.json</code> to Supabase → Storage → app-data bucket.</p>
+</div>
+
+<hr>
+
+<h2>1. Businesses</h2>
+<p><strong>CSV file:</strong> <code>businesses_edit.csv</code></p>
+
+<table>
+<tr><th>Column</th><th>What It Does</th><th>Example</th></tr>
+<tr><td>Name</td><td>Business name</td><td>Sundowners Bar & Grill</td></tr>
+<tr><td>Status</td><td>Show or hide</td><td><code>active</code> or <code>inactive</code></td></tr>
+<tr><td>Category</td><td>Main category</td><td>Eat, Drink, Dive, Tours, Shop, Stay, Rentals, Transport, Beaches, Nightlife</td></tr>
+<tr><td>Subcategory</td><td>Specific type</td><td>Seafood, Beach Bar, PADI Center</td></tr>
+<tr><td>Area</td><td>Location</td><td>West Bay, West End, Sandy Bay, Coxen Hole, French Harbour, etc.</td></tr>
+<tr><td>Price Range</td><td>Price level</td><td>$, $$, $$$, $$$$</td></tr>
+<tr><td>Featured</td><td>Shows in Featured section</td><td><code>yes</code> or <code>no</code></td></tr>
+<tr><td>Insider Pick</td><td>Shows in Insider Picks</td><td><code>yes</code> or <code>no</code></td></tr>
+<tr><td>Best Of</td><td>Shows in Best Of</td><td><code>yes</code> or <code>no</code></td></tr>
+<tr><td>Description</td><td>Full description paragraph</td><td></td></tr>
+<tr><td>Insider Tip</td><td>Italic tip with mint bar</td><td>Grab a seat by 4:30pm for sunset</td></tr>
+<tr><td>Hours Text</td><td>Business hours</td><td>Mon–Fri 8am–3pm; Sat 8am–6pm; Closed Sun</td></tr>
+<tr><td>Phone</td><td>Phone number</td><td>+504-9876-5432</td></tr>
+<tr><td>WhatsApp</td><td>WhatsApp number</td><td>50498765432</td></tr>
+<tr><td>Website</td><td>Full URL</td><td>https://example.com</td></tr>
+<tr><td>Instagram</td><td>Handle with @</td><td>@sundowners_roatan</td></tr>
+<tr><td>Features</td><td>Tags (comma-separated)</td><td>Waterfront, WiFi, Live Music</td></tr>
+<tr><td>Latitude / Longitude</td><td>GPS coordinates</td><td>16.306575 / -86.592659</td></tr>
+<tr><td>Rating</td><td>Google rating</td><td>4.8</td></tr>
+<tr><td>Review Count</td><td>Number of reviews</td><td>1562</td></tr>
+</table>
+
+<h3>Hours Text Formats</h3>
+<table>
+<tr><th>Format</th><th>Example</th></tr>
+<tr><td>Every day same</td><td><code>Daily 11am–10pm</code></td></tr>
+<tr><td>Weekdays + weekend</td><td><code>Mon–Fri 8am–3pm; Sat 8am–6pm; Closed Sun</code></td></tr>
+<tr><td>Closed one day</td><td><code>Tue–Sun 3pm–9pm; Closed Mon</code></td></tr>
+<tr><td>Different Fri/Sat</td><td><code>Mon–Thu 11am–9pm; Fri–Sat 11am–11pm; Closed Sun</code></td></tr>
+<tr><td>Always open</td><td><code>Daily 24 hours</code></td></tr>
+</table>
+
+<p><strong>Add a business:</strong> New row at bottom with next ID (e.g. <code>b215</code>), fill in Name, Category, Area, Status = <code>active</code></p>
+<p><strong>Remove a business:</strong> Change Status to <code>inactive</code></p>
+
+<div class="success"><strong>Upload to Supabase:</strong> <code>businesses.json</code> from RoatanInsider → RoatanInsider → Data</div>
+
+<hr>
+
+<h2>2. Area Guides</h2>
+<p><strong>CSV file:</strong> <code>areas_edit.csv</code></p>
+
+<table>
+<tr><th>Column</th><th>What It Does</th><th>Example</th></tr>
+<tr><td>Display Name</td><td>Area name in app</td><td>West Bay</td></tr>
+<tr><td>Overview</td><td>Main description</td><td>The main tourist beach area...</td></tr>
+<tr><td>Vibe</td><td>Character of the area</td><td>Bohemian dive village</td></tr>
+<tr><td>Best For</td><td>Who should visit</td><td>Divers, backpackers, nightlife</td></tr>
+<tr><td>Top Picks</td><td>Business IDs (comma-separated)</td><td>b001, b003, b009</td></tr>
+<tr><td>Getting There</td><td>Transportation info</td><td>15 min taxi from airport, $20</td></tr>
+</table>
+
+<div class="success"><strong>Upload to Supabase:</strong> <code>areas.json</code> from RoatanInsider → RoatanInsider → Data</div>
+
+<hr>
+
+<h2>3. Island Essentials</h2>
+<p><strong>CSV file:</strong> <code>essentials_edit.csv</code></p>
+
+<table>
+<tr><th>Column</th><th>What It Does</th><th>Example</th></tr>
+<tr><td>Title</td><td>Topic name</td><td>Money & Payments</td></tr>
+<tr><td>Icon</td><td>SF Symbol name</td><td>dollarsign.circle</td></tr>
+<tr><td>Content</td><td>Full guide text</td><td>USD is accepted almost everywhere...</td></tr>
+<tr><td>Tips</td><td>Tips (pipe-separated)</td><td>Carry small bills | ATMs dispense Lempiras | Tip in USD</td></tr>
+</table>
+
+<p><strong>Add a topic:</strong> New row with unique ID</p>
+
+<div class="success"><strong>Upload to Supabase:</strong> <code>essentials.json</code> from RoatanInsider → RoatanInsider → Data → guides</div>
+
+<hr>
+
+<h2>4. Ask a Local Q&A</h2>
+<p><strong>CSV file:</strong> <code>ask_a_local_edit.csv</code></p>
+
+<table>
+<tr><th>Column</th><th>What It Does</th><th>Example</th></tr>
+<tr><td>ID</td><td>Unique identifier</td><td>safe, money, snorkel</td></tr>
+<tr><td>Question</td><td>The question</td><td>Is Roatán safe?</td></tr>
+<tr><td>Answer</td><td>Your full answer</td><td>The tourist areas are very safe...</td></tr>
+</table>
+
+<p><strong>Add a question:</strong> New row with unique ID (e.g. <code>best-restaurant</code>)</p>
+<p><strong>Remove a question:</strong> Delete the row</p>
+
+<div class="success"><strong>Upload to Supabase:</strong> <code>ask-a-local.json</code> from RoatanInsider → RoatanInsider → Data → guides</div>
+
+<hr>
+
+<h2>5. Cruise Guides</h2>
+<p><strong>CSV files:</strong> <code>cruise_mahogany_edit.csv</code> and <code>cruise_coxen_edit.csv</code></p>
+
+<p>These use a Section / Field / Value format:</p>
+
+<table>
+<tr><th>Section</th><th>Field</th><th>What It Does</th></tr>
+<tr><td>PORT</td><td>Port Name</td><td>Name of the port</td></tr>
+<tr><td>PORT</td><td>Description</td><td>Port overview text</td></tr>
+<tr><td>PORT</td><td>Return Reminder</td><td>Warning about getting back to ship</td></tr>
+<tr><td>SAFETY</td><td>Tip 1, Tip 2...</td><td>Safety tips</td></tr>
+<tr><td>ITINERARY: id</td><td>Duration</td><td>e.g. "4 Hours"</td></tr>
+<tr><td>ITINERARY: id</td><td>Title</td><td>e.g. "Quick Beach Day"</td></tr>
+<tr><td>STEP: id</td><td>Time</td><td>e.g. "0:00"</td></tr>
+<tr><td>STEP: id</td><td>Title</td><td>Step title</td></tr>
+<tr><td>STEP: id</td><td>Description</td><td>Step details</td></tr>
+<tr><td>STEP: id</td><td>Estimated Cost</td><td>e.g. "$5-8"</td></tr>
+<tr><td>STEP: id</td><td>Tip</td><td>Pro tip for this step</td></tr>
+</table>
+
+<div class="success">
+<strong>Upload to Supabase:</strong><br>
+• <code>cruise-mahogany-bay.json</code> from RoatanInsider → RoatanInsider → Data → guides<br>
+• <code>cruise-coxen-hole.json</code> from RoatanInsider → RoatanInsider → Data → guides
+</div>
+
+<hr>
+
+<h2>Supabase Upload Cheat Sheet</h2>
+
+<p><strong>Always upload <code>manifest.json</code></strong> (from Documents → RoatanInsider root) plus whichever files you changed:</p>
+
+<table>
+<tr><th>What You Changed</th><th>Upload This File</th><th>From This Folder</th></tr>
+<tr><td style="background:#E31B4E;color:white">Always</td><td><strong>manifest.json</strong></td><td>Documents → RoatanInsider</td></tr>
+<tr><td>Businesses</td><td>businesses.json</td><td>RoatanInsider → RoatanInsider → Data</td></tr>
+<tr><td>Area guides</td><td>areas.json</td><td>RoatanInsider → RoatanInsider → Data</td></tr>
+<tr><td>Essentials</td><td>essentials.json</td><td>RoatanInsider → RoatanInsider → Data → guides</td></tr>
+<tr><td>Ask a Local</td><td>ask-a-local.json</td><td>RoatanInsider → RoatanInsider → Data → guides</td></tr>
+<tr><td>Cruise (Mahogany)</td><td>cruise-mahogany-bay.json</td><td>RoatanInsider → RoatanInsider → Data → guides</td></tr>
+<tr><td>Cruise (Coxen Hole)</td><td>cruise-coxen-hole.json</td><td>RoatanInsider → RoatanInsider → Data → guides</td></tr>
+</table>
+
+<div class="warning">
+<strong>❌ Never upload these to Supabase:</strong><br>
+• Any <code>.csv</code> file<br>
+• Anything from the <code>tools/</code> folder
+</div>
+
+<hr>
+
+<h2>All Terminal Commands (Copy & Paste)</h2>
+
+<div class="step">
+<p><strong>Export all content to CSVs:</strong></p>
+<pre>cd ~/Documents/RoatanInsider
+python3 tools/export_all.py</pre>
+
+<p><strong>Move edited CSV back from Downloads:</strong></p>
+<pre>mv ~/Downloads/FILENAME.csv ~/Documents/RoatanInsider/FILENAME.csv</pre>
+
+<p><strong>Import all CSVs and bump version:</strong></p>
+<pre>cd ~/Documents/RoatanInsider
+python3 tools/import_all.py --bump-version</pre>
+
+<p><strong>Preview without writing (dry run):</strong></p>
+<pre>python3 tools/import_all.py --dry-run</pre>
+
+<p><strong>Pull latest code updates:</strong></p>
+<pre>cd ~/Documents/RoatanInsider
+git pull origin claude/curate-business-list-r77Mw</pre>
+</div>
+
+<hr>
+
+<h2>Testing Changes</h2>
+<ol>
+<li>Upload files to Supabase</li>
+<li>Fully close the app on your phone (swipe up in app switcher)</li>
+<li>Wait 5 seconds</li>
+<li>Reopen the app</li>
+<li>Your changes should appear</li>
+</ol>
+
+<p><em>If changes don't appear, make sure you uploaded <strong>manifest.json</strong> — the app only downloads new data when the manifest version increases.</em></p>
+
+</body>
+</html>
