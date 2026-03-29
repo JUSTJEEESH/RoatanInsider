@@ -6,64 +6,107 @@ final class DataManager {
     var cruiseGuides: [CruiseGuide] = []
     var areaGuides: [AreaGuide] = []
     var essentials: EssentialsGuide?
+    var askALocalQuestions: [LocalQA] = []
 
     init() {
-        loadBusinesses()
-        loadGuides()
+        loadAll()
     }
 
-    private func loadBusinesses() {
-        businesses = BusinessDataService.loadCachedOrBundled()
-    }
-
-    /// Checks Supabase for updated business data in the background.
-    /// If newer data is found, the businesses array updates and all views refresh automatically.
-    func checkForUpdates() async {
-        if let updated = await BusinessDataService.fetchRemoteIfNeeded() {
-            await MainActor.run {
-                self.businesses = updated
-                print("✅ Views updated with \(updated.count) businesses from remote")
-            }
-        }
-    }
-
-    private func loadGuides() {
-        // Cruise guides
-        for filename in ["cruise-mahogany-bay", "cruise-coxen-hole"] {
-            if let url = Bundle.main.url(forResource: filename, withExtension: "json") {
-                do {
-                    let data = try Data(contentsOf: url)
-                    let guide = try JSONDecoder().decode(CruiseGuide.self, from: data)
-                    cruiseGuides.append(guide)
-                    print("✅ Loaded cruise guide: \(filename)")
-                } catch {
-                    print("⚠️ Failed to decode \(filename): \(error)")
-                }
-            } else {
-                print("⚠️ \(filename).json not found in bundle")
-            }
+    private func loadAll() {
+        // Businesses
+        if let data: [Business] = RemoteDataService.loadCachedOrBundled(
+            filename: "businesses.json", bundleName: "businesses", type: [Business].self
+        ) {
+            businesses = data
         }
 
         // Area guides
-        if let url = Bundle.main.url(forResource: "areas", withExtension: "json") {
-            do {
-                let data = try Data(contentsOf: url)
-                areaGuides = try JSONDecoder().decode([AreaGuide].self, from: data)
-                print("✅ Loaded \(areaGuides.count) area guides")
-            } catch {
-                print("⚠️ Failed to decode areas.json: \(error)")
-            }
+        if let data: [AreaGuide] = RemoteDataService.loadCachedOrBundled(
+            filename: "areas.json", bundleName: "areas", type: [AreaGuide].self
+        ) {
+            areaGuides = data
         }
 
         // Essentials
-        if let url = Bundle.main.url(forResource: "essentials", withExtension: "json") {
-            do {
-                let data = try Data(contentsOf: url)
-                essentials = try JSONDecoder().decode(EssentialsGuide.self, from: data)
-                print("✅ Loaded essentials guide")
-            } catch {
-                print("⚠️ Failed to decode essentials.json: \(error)")
+        if let data: EssentialsGuide = RemoteDataService.loadCachedOrBundled(
+            filename: "essentials.json", bundleName: "essentials", type: EssentialsGuide.self
+        ) {
+            essentials = data
+        }
+
+        // Cruise guides
+        for filename in ["cruise-mahogany-bay", "cruise-coxen-hole"] {
+            if let guide: CruiseGuide = RemoteDataService.loadCachedOrBundled(
+                filename: "\(filename).json", bundleName: filename, type: CruiseGuide.self
+            ) {
+                cruiseGuides.append(guide)
             }
+        }
+
+        // Ask a Local
+        if let data: [LocalQA] = RemoteDataService.loadCachedOrBundled(
+            filename: "ask-a-local.json", bundleName: "ask-a-local", type: [LocalQA].self
+        ) {
+            askALocalQuestions = data
+        }
+    }
+
+    /// Checks Supabase for updated data across all content types.
+    func checkForUpdates() async {
+        guard let manifest = await RemoteDataService.fetchUpdates() else { return }
+
+        // Businesses
+        let bizVersion = manifest.businessVersion
+        if bizVersion > 0,
+           let updated: [Business] = await RemoteDataService.fetchIfNewer(
+            filename: "businesses.json", remoteVersion: bizVersion, type: [Business].self
+           ), updated.count >= 10 {
+            await MainActor.run { self.businesses = updated }
+        }
+
+        // Areas
+        if let v = manifest.areas?.version,
+           let updated: [AreaGuide] = await RemoteDataService.fetchIfNewer(
+            filename: manifest.areas!.file, remoteVersion: v, type: [AreaGuide].self
+           ) {
+            await MainActor.run { self.areaGuides = updated }
+        }
+
+        // Essentials
+        if let v = manifest.essentials?.version,
+           let updated: EssentialsGuide = await RemoteDataService.fetchIfNewer(
+            filename: manifest.essentials!.file, remoteVersion: v, type: EssentialsGuide.self
+           ) {
+            await MainActor.run { self.essentials = updated }
+        }
+
+        // Cruise guides
+        if let v = manifest.cruiseMahoganyBay?.version,
+           let updated: CruiseGuide = await RemoteDataService.fetchIfNewer(
+            filename: manifest.cruiseMahoganyBay!.file, remoteVersion: v, type: CruiseGuide.self
+           ) {
+            await MainActor.run {
+                self.cruiseGuides.removeAll { $0.id == updated.id }
+                self.cruiseGuides.append(updated)
+            }
+        }
+
+        if let v = manifest.cruiseCoxenHole?.version,
+           let updated: CruiseGuide = await RemoteDataService.fetchIfNewer(
+            filename: manifest.cruiseCoxenHole!.file, remoteVersion: v, type: CruiseGuide.self
+           ) {
+            await MainActor.run {
+                self.cruiseGuides.removeAll { $0.id == updated.id }
+                self.cruiseGuides.append(updated)
+            }
+        }
+
+        // Ask a Local
+        if let v = manifest.askALocal?.version,
+           let updated: [LocalQA] = await RemoteDataService.fetchIfNewer(
+            filename: manifest.askALocal!.file, remoteVersion: v, type: [LocalQA].self
+           ) {
+            await MainActor.run { self.askALocalQuestions = updated }
         }
     }
 
