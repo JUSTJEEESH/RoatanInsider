@@ -1,0 +1,113 @@
+Section,Field,Value
+PORT,Port Name,The Port of Roatán
+PORT,Description,"The Port of Roatán is located in Coxen Hole, Roatán's main town and commercial hub. Unlike the private Mahogany Bay facility, this port drops you right into the heart of the island's capital. It's more authentic but less polished — and you're closer to local life, markets, and the road network to the rest of the island."
+PORT,Latitude,16.304
+PORT,Longitude,-86.556
+PORT,Return Reminder,"Set an alarm for 45 minutes before all-aboard. Traffic heading back to the Port of Roatán can be heavy on cruise ship days, and the drive is longer than you'd expect on island roads."
+SAFETY,Tip 1,"Coxen Hole is a working town, not a tourist resort. Stay alert, keep valuables out of sight, and stick to main roads if walking around town."
+SAFETY,Tip 2,Use official port taxis only. They have visible identification and regulated rates. Avoid accepting rides from unofficial vehicles outside the port area.
+SAFETY,Tip 3,"Carry small bills in USD for tips and purchases. Many vendors can't break a $50 or $100. ATMs in Coxen Hole dispense Lempiras, which are useful for local shops."
+SAFETY,Tip 4,Drink bottled water exclusively. Buy a couple of bottles at the port before heading out for the day. Dehydration in the tropical heat sneaks up fast.
+SAFETY,Tip 5,Wear reef-safe sunscreen to protect the Mesoamerican Barrier Reef — the second largest in the world. Roatán's economy depends on healthy coral.
+SAFETY,Tip 6,"If exploring Coxen Hole on foot, avoid side streets away from the main commercial area. The market and main road are perfectly fine during daylight hours."
+ITINERARY: coxen-4hr,Duration,4 Hours
+ITINERARY: coxen-4hr,Title,Quick Beach Escape
+STEP: c4-1,Time,0:00
+STEP: c4-1,Title,Taxi Straight to West Bay Beach
+STEP: c4-1,Description,"Don't linger at the port — grab a taxi immediately to West Bay Beach. From Coxen Hole, it's about a 20-minute drive. The taxi stand is right outside the port gates. Share a van with other passengers to keep costs down."
+STEP: c4-1,Estimated Cost,$8-12 per person
+STEP: c4-1,Tip,The port has a posted rate board for taxis. Check it before negotiating. Van taxis that hold 6-8 people are the cheapest option.
+STEP: c4-2,Time,0:25
+STEP: c4-2,Title,Set Up on the Beach
+STEP: c4-2,Description,"West Bay Beach is consistently rated one of the best beaches in Central America. The sand is white, the water is impossibly blue, and the reef is right offshore. Rent chairs and an umbrella, slather on sunscreen, and settle in."
+STEP: c4-2,Estimated Cost,$10-15 for chairs and umbrella
+STEP: c4-2,Tip,Head to the far south end of the beach for the quietest spot. Most cruise passengers cluster near where the taxis drop off.
+STEP: c4-3,Time,1:00
+STEP: c4-3,Title,Snorkel and Swim
+STEP: c4-3,Description,"Rent snorkel gear from a beach vendor and swim out to the reef. It starts about 30 yards from shore. The reef runs the entire length of the beach and you'll see a stunning variety of tropical fish, sea fans, and brain coral."
+STEP: c4-3,Estimated Cost,$10 for gear rental
+STEP: c4-3,Tip,Swim along the reef rather than over it. You'll see more and you won't risk standing on the coral. It's alive — treat it with respect.
+STEP: c4-4,Time,2:00
+STEP: c4-4,Title,Quick Lunch on the Beach
+STEP: c4-4,Description,"Grab lunch at one of the beachfront spots. Fresh grilled fish, shrimp baskets, and fish tacos are the way to go. Most places accept USD and serve tropical cocktails alongside the food."
+STEP: c4-4,Estimated Cost,$15-25
+STEP: c4-4,Tip,Service can be slow on cruise ship days. Order as soon as you sit down if you're on a tight schedule.
+STEP: c4-5,Time,3:00
+STEP: c4-5,Title,Taxi Back to the Port
+STEP: c4-5,Description,"Hail a taxi from the beach road and head back to the Port of Roatán in Coxen Hole. The drive is 20 minutes without traffic, but allow 30-35 minutes on cruise days. Security lines at the Port of Roatán are usually shorter than Mahogany Bay."
+STEP: c4-5,Estimated Cost,$8-12 per person
+STEP: c4-5,Tip,Leave at least 45 minutes before all-aboard. The road from West Bay to Coxen Hole has one lane each way and cruise day traffic can be unpredictable.
+ITINERARY: coxen-6hr,Duration,6 Hours
+ITINERARY: coxen-6hr,Title,"Town, Beach & Culture"
+STEP: c6-1,Time,0:00
+STEP: c6-1,Title,Explore Coxen Hole Town
+STEP: c6-1,Description,"Before racing to the beach, spend 30-40 minutes walking through Coxen Hole itself. This is real Honduran island life — the central market, colorful shops, street food vendors, and the main square. Most tourists skip it entirely, but it gives you a genuine sense of the island."
+STEP: c6-1,Estimated Cost,Free
+STEP: c6-1,Tip,"The central market has the best prices for souvenirs on the entire island. Handmade bracelets, Honduran cigars, and local coffee cost a fraction of what they charge at the port shops."
+STEP: c6-2,Time,0:40
+STEP: c6-2,Title,Grab a Local Breakfast
+STEP: c6-2,Description,"Find a local comedor (small restaurant) in town and have a traditional Honduran breakfast — baleadas, scrambled eggs with beans, fried plantains, and strong Honduran coffee. It's cheap, filling, and delicious."
+STEP: c6-2,Estimated Cost,$4-8
+STEP: c6-2,Tip,"Look for the places where locals are eating. If the tables are full of Hondurans, the food is good. Avoid the places with English menus and high prices near the port."
+STEP: c6-3,Time,1:15
+STEP: c6-3,Title,Taxi to West Bay Beach
+STEP: c6-3,Description,"Now head to West Bay Beach for your beach time. With 6 hours, you have a comfortable window to enjoy the water without rushing. Grab a taxi from the main road in Coxen Hole."
+STEP: c6-3,Estimated Cost,$8-12 per person
+STEP: c6-3,Tip,Tell the driver you want to go to the south end of West Bay Beach — it's quieter and the snorkeling is just as good.
+STEP: c6-4,Time,1:40
+STEP: c6-4,Title,Beach Time & Snorkeling
+STEP: c6-4,Description,"Spend a solid couple of hours on the beach. Swim, snorkel the reef, float in the warm Caribbean water. This is what you came for. The water temperature hovers around 82°F year-round, so you don't need a wetsuit."
+STEP: c6-4,Estimated Cost,"$10-15 for chairs, $10 for snorkel gear"
+STEP: c6-4,Tip,"If you see a sea turtle, keep your distance and don't touch. They're protected and surprisingly common along this stretch of reef."
+STEP: c6-5,Time,3:30
+STEP: c6-5,Title,Lunch and West End Stroll
+STEP: c6-5,Description,"Take a water taxi from West Bay to West End ($3 per person, 5 minutes) and have lunch in the village. Then wander through the shops and galleries along the main road. West End has the best souvenir shopping on the island — local art, handmade crafts, and unique finds."
+STEP: c6-5,Estimated Cost,"$15-25 for lunch, $10-30 for shopping"
+STEP: c6-5,Tip,The water taxi between West Bay and West End runs constantly during cruise ship hours. Just walk to the dock and flag one down.
+STEP: c6-6,Time,5:00
+STEP: c6-6,Title,Return to the Port of Roatán
+STEP: c6-6,Description,"Taxi from West End back to the Port of Roatán in Coxen Hole. The drive is about 15 minutes. Allow 30 minutes total to account for traffic and security. The Port of Roatán is more compact than Mahogany Bay, so boarding is usually quicker."
+STEP: c6-6,Estimated Cost,$8-10 per person
+STEP: c6-6,Tip,West End taxis know the cruise ship schedules. Tell them your all-aboard time and they'll make sure you get back.
+ITINERARY: coxen-8hr,Duration,8 Hours
+ITINERARY: coxen-8hr,Title,Full Island Adventure
+STEP: c8-1,Time,0:00
+STEP: c8-1,Title,Hire a Local Guide & Driver
+STEP: c8-1,Description,"With 8 hours from Coxen Hole, you can see the entire island. Hire a driver-guide right at the port for a full-day tour. Coxen Hole is centrally located on the island, so you can easily go east or west. Negotiate a flat rate before departing."
+STEP: c8-1,Estimated Cost,$80-120 for the full day (up to 4 people)
+STEP: c8-1,Tip,Ask for a driver who speaks English well and has lived on the island their whole life. The best ones are unofficial historians who know every backroad and hidden beach.
+STEP: c8-2,Time,0:30
+STEP: c8-2,Title,Drive East to Oak Ridge
+STEP: c8-2,Description,"Head east along the main highway to Oak Ridge, one of the oldest settlements on Roatán. The town is built entirely on stilts over the water, connected by boardwalks and accessed by small boats. It's like nowhere else you've seen."
+STEP: c8-2,Estimated Cost,Included in driver fee
+STEP: c8-2,Tip,The drive to Oak Ridge takes about 45 minutes and passes through Roatán's less-touristy communities. Keep your camera ready.
+STEP: c8-3,Time,1:30
+STEP: c8-3,Title,Mangrove Tunnel Boat Tour
+STEP: c8-3,Description,"In Oak Ridge, take a small boat through the mangrove tunnels. The canopy closes in overhead and the water turns crystal clear. Your boat captain will point out birds, crabs, and the ecosystem that protects the island from hurricanes. It's magical and most cruise passengers never see it."
+STEP: c8-3,Estimated Cost,$15-20 per person
+STEP: c8-3,Tip,"Bring bug spray for the mangrove tour. The mosquitoes are aggressive in the tunnels, especially in the early morning."
+STEP: c8-4,Time,2:30
+STEP: c8-4,Title,Visit Punta Gorda Garifuna Village
+STEP: c8-4,Description,"Continue east to Punta Gorda, the oldest community on Roatán and home to the Garifuna people. This Afro-Caribbean culture has its own language, music, dance, and cuisine. If you're lucky, you'll hear drumming. Visit during a cultural presentation or just walk through the village and talk to residents."
+STEP: c8-4,Estimated Cost,$5-10 donation appreciated
+STEP: c8-4,Tip,Try machuca if it's offered — mashed green plantains with a rich coconut seafood soup. It's the signature Garifuna dish and it's incredible.
+STEP: c8-5,Time,3:30
+STEP: c8-5,Title,Lunch at a Local Seafood Spot
+STEP: c8-5,Description,"Have your driver take you to their favorite seafood restaurant — it'll probably be somewhere in French Harbour or along the main road that you'd never find on your own. Expect king crab, whole fried fish, conch soup, or garlic shrimp at prices way below the tourist restaurants."
+STEP: c8-5,Estimated Cost,$12-20
+STEP: c8-5,Tip,"Order the king crab when it's in season (usually available year-round but best from June to February). Roatán king crab is sweet, tender, and nothing like what you get on the mainland."
+STEP: c8-6,Time,4:30
+STEP: c8-6,Title,Zipline or Iguana Farm
+STEP: c8-6,Description,"On the way back west, stop for an activity. The zipline canopy tours near French Harbour are world-class — you'll fly above the jungle with ocean views. Or visit Arch's Iguana Farm for a more laid-back experience where iguanas climb all over you for photos."
+STEP: c8-6,Estimated Cost,"$35-50 for zipline, $10 for iguana farm"
+STEP: c8-6,Tip,"The zipline takes about 45 minutes total. If you're short on time, the iguana farm is a 20-minute stop and kids love it."
+STEP: c8-7,Time,5:30
+STEP: c8-7,Title,Afternoon at West Bay Beach
+STEP: c8-7,Description,"End the day with beach time at West Bay. After a full day of exploring, floating in the warm Caribbean water feels even better. Your driver will wait or come back for you at an agreed time."
+STEP: c8-7,Estimated Cost,$10-15 for chairs and snorkel gear
+STEP: c8-7,Tip,The late afternoon is actually one of the best times at West Bay Beach. The morning cruise crowds have thinned out and the light is golden.
+STEP: c8-8,Time,7:00
+STEP: c8-8,Title,Return to the Port of Roatán
+STEP: c8-8,Description,"Your driver takes you directly back to the Port of Roatán in Coxen Hole. From West Bay, it's about 20-25 minutes. Clear security and reboard with time to spare. You've just seen more of Roatán than 95% of cruise passengers ever do."
+STEP: c8-8,Estimated Cost,Included in driver fee
+STEP: c8-8,Tip,Tip your driver generously — $15-20 on top of the agreed rate if they did a great job. They earn the majority of their income during cruise season.
