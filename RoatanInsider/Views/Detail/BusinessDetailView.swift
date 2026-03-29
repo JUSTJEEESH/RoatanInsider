@@ -219,7 +219,7 @@ struct BusinessDetailView: View {
                         .frame(width: 100, alignment: .leading)
 
                     if let hours = b.hours[day] ?? nil {
-                        Text("\(hours.open) – \(hours.close)")
+                        Text("\(formatTime(hours.open)) – \(formatTime(hours.close))")
                             .font(.riCaption(14))
                             .foregroundStyle(day == today ? Color.riDark : Color.riLightGray)
                     } else {
@@ -230,6 +230,19 @@ struct BusinessDetailView: View {
                 }
             }
         }
+    }
+
+    /// Converts "14:00" to "2:00 PM", "08:00" to "8:00 AM"
+    private func formatTime(_ time: String) -> String {
+        let parts = time.split(separator: ":")
+        guard parts.count == 2, let hour = Int(parts[0]), let minute = Int(parts[1]) else { return time }
+
+        let period = hour >= 12 ? "PM" : "AM"
+        let displayHour = hour == 0 ? 12 : (hour > 12 ? hour - 12 : hour)
+        if minute == 0 {
+            return "\(displayHour) \(period)"
+        }
+        return "\(displayHour):\(String(format: "%02d", minute)) \(period)"
     }
 }
 
