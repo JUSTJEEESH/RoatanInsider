@@ -15,7 +15,7 @@ struct BusinessDetailView: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 0) {
                 // Hero image
-                PhotoGallery(images: b.images, category: b.category, slug: b.slug)
+                PhotoGallery(images: b.images, categoryIconName: b.categoryIconName, categoryDisplayName: b.categoryDisplayName, slug: b.slug)
 
                 VStack(alignment: .leading, spacing: 20) {
                     // Title section
@@ -31,7 +31,7 @@ struct BusinessDetailView: View {
                         }
 
                         HStack(spacing: 6) {
-                            Text(b.allCategories.map { "\($0.category.displayName)" }.joined(separator: " · "))
+                            Text(b.allCategories.map { $0.categoryDisplayName }.joined(separator: " · "))
                             Text("·")
                             Text(b.allAreas.map(\.displayName).joined(separator: " · "))
                         }
@@ -42,7 +42,7 @@ struct BusinessDetailView: View {
                             FlowLayout(spacing: 6) {
                                 ForEach(b.allCategories, id: \.self) { entry in
                                     HStack(spacing: 4) {
-                                        Image(systemName: entry.category.iconName)
+                                        Image(systemName: entry.categoryIconName)
                                             .font(.system(size: 11))
                                         Text(entry.subcategory)
                                     }
@@ -186,7 +186,7 @@ struct BusinessDetailView: View {
     }
 
     private func shareBusiness() {
-        let shareText = "\(b.name) — \(b.category.displayName) in \(b.areaDisplayName). \(b.insiderTip ?? b.description.prefix(100).description)"
+        let shareText = "\(b.name) — \(b.categoryDisplayName) in \(b.areaDisplayName). \(b.insiderTip ?? b.description.prefix(100).description)"
 
         var items: [Any] = [shareText]
 

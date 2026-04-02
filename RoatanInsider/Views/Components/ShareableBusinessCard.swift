@@ -8,9 +8,9 @@ struct ShareableBusinessCard: View {
         VStack(alignment: .leading, spacing: 0) {
             // Category placeholder as hero
             ZStack(alignment: .bottomLeading) {
-                business.category.placeholderColor
+                Color.riMint.opacity(0.15)
                     .overlay {
-                        Image(systemName: business.category.iconName)
+                        Image(systemName: business.categoryIconName)
                             .font(.system(size: 60, weight: .ultraLight))
                             .foregroundStyle(Color.riMint.opacity(0.3))
                     }
@@ -36,11 +36,11 @@ struct ShareableBusinessCard: View {
             // Info section
             VStack(alignment: .leading, spacing: 10) {
                 HStack(spacing: 6) {
-                    Image(systemName: business.category.iconName)
+                    Image(systemName: business.categoryIconName)
                         .font(.system(size: 13, weight: .medium))
                         .foregroundStyle(Color.riMint)
 
-                    Text(business.category.displayName)
+                    Text(business.categoryDisplayName)
                         .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(Color.riMediumGray)
 

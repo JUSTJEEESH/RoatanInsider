@@ -4,7 +4,7 @@ import CoreLocation
 @Observable
 final class SearchEngine {
     var searchText: String = ""
-    var selectedCategories: Set<Category> = []
+    var selectedCategories: Set<String> = []
     var selectedAreas: Set<String> = []
     var selectedPriceRanges: Set<Int> = []
     var selectedFeatures: Set<String> = []
@@ -52,7 +52,7 @@ final class SearchEngine {
 
         if !selectedCategories.isEmpty {
             results = results.filter { biz in
-                selectedCategories.contains { biz.hasCategory($0) }
+                selectedCategories.contains { catId in biz.hasCategory(catId) }
             }
         }
 

@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct CategoryGridSection: View {
+    @Environment(DataManager.self) private var dataManager
     let columns = Array(repeating: GridItem(.flexible(), spacing: 16), count: 5)
 
     var body: some View {
@@ -8,12 +9,12 @@ struct CategoryGridSection: View {
             SectionHeader(title: "Browse by Category", lightText: true)
 
             LazyVGrid(columns: columns, spacing: 20) {
-                ForEach(Category.allCases) { category in
-                    NavigationLink(value: category) {
-                        CategoryIcon(category: category, lightText: true)
+                ForEach(dataManager.categoryInfos) { info in
+                    NavigationLink(value: CategoryNavID(id: info.id)) {
+                        CategoryIcon(categoryInfo: info, lightText: true)
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel(category.displayName)
+                    .accessibilityLabel(info.displayName)
                 }
             }
             .padding(.horizontal, 20)

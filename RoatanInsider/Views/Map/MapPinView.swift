@@ -11,7 +11,7 @@ struct MapPinView: View {
                     .fill(Color.riPink)
                     .frame(width: isSelected ? 36 : 28, height: isSelected ? 36 : 28)
 
-                Image(systemName: business.category.iconName)
+                Image(systemName: business.categoryIconName)
                     .font(.system(size: isSelected ? 16 : 12, weight: .medium))
                     .foregroundStyle(.white)
             }

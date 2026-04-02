@@ -7,12 +7,19 @@ final class DataManager {
     var areaGuides: [AreaGuide] = []
     var essentials: EssentialsGuide?
     var askALocalQuestions: [LocalQA] = []
+    var categoryInfos: [CategoryInfo] = CategoryInfo.defaults
 
     init() {
         loadAll()
     }
 
     private func loadAll() {
+        // Categories
+        if let data: [CategoryInfo] = RemoteDataService.loadCachedOrBundled(
+            filename: "categories.json", bundleName: "categories", type: [CategoryInfo].self
+        ) {
+            categoryInfos = data.sorted { $0.sortOrder < $1.sortOrder }
+        }
         // Businesses
         if let data: [Business] = RemoteDataService.loadCachedOrBundled(
             filename: "businesses.json", bundleName: "businesses", type: [Business].self
@@ -54,6 +61,14 @@ final class DataManager {
     /// Checks Supabase for updated data across all content types.
     func checkForUpdates() async {
         guard let manifest = await RemoteDataService.fetchUpdates() else { return }
+
+        // Categories
+        if let v = manifest.categories?.version,
+           let updated: [CategoryInfo] = await RemoteDataService.fetchIfNewer(
+            filename: manifest.categories!.file, remoteVersion: v, type: [CategoryInfo].self
+           ) {
+            await MainActor.run { self.categoryInfos = updated.sorted { $0.sortOrder < $1.sortOrder } }
+        }
 
         // Businesses
         let bizVersion = manifest.businessVersion
@@ -122,6 +137,14 @@ final class DataManager {
 
     func businesses(for category: Category) -> [Business] {
         activeBusinesses.filter { $0.hasCategory(category) }.smartSorted()
+    }
+
+    func businesses(forCategoryId id: String) -> [Business] {
+        activeBusinesses.filter { $0.hasCategory(id) }.smartSorted()
+    }
+
+    func categoryInfo(for id: String) -> CategoryInfo? {
+        categoryInfos.first { $0.id == id }
     }
 
     func businesses(for area: Area) -> [Business] {

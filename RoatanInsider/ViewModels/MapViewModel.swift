@@ -3,7 +3,7 @@ import MapKit
 
 @Observable
 final class MapViewModel {
-    var selectedCategory: Category?
+    var selectedCategory: String?
     var selectedBusiness: Business?
     var selectedMapItem: MKMapItem?
     var searchQuery = ""
@@ -29,21 +29,21 @@ final class MapViewModel {
 
     func filteredBusinesses(from businesses: [Business]) -> [Business] {
         let active = businesses.filter { $0.isActive }
-        if let cat = selectedCategory {
-            return active.filter { $0.hasCategory(cat) }
+        if let catId = selectedCategory {
+            return active.filter { $0.hasCategory(catId) }
         }
         return active
     }
 
     // MARK: - Category selection
 
-    func selectCategory(_ category: Category?) {
-        selectedCategory = category
+    func selectCategory(_ categoryId: String?) {
+        selectedCategory = categoryId
         selectedMapItem = nil
         selectedBusiness = nil
 
-        if let category {
-            searchWithCategory(category)
+        if let categoryId {
+            searchWithCategory(categoryId)
         } else {
             clearSearchResults()
         }
@@ -92,8 +92,14 @@ final class MapViewModel {
         }
     }
 
-    private func searchWithCategory(_ category: Category) {
-        let terms = category.mapSearchTerms
+    private func searchWithCategory(_ categoryId: String) {
+        let terms: [String]
+        if let cat = Category(rawValue: categoryId) {
+            terms = cat.mapSearchTerms
+        } else {
+            // For data-driven categories without enum cases, use the category ID as search term
+            terms = [categoryId.replacingOccurrences(of: "_", with: " ")]
+        }
         isSearching = true
         searchResults = []
 

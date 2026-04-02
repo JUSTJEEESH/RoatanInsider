@@ -101,7 +101,7 @@ struct AreaGuideDetailView: View {
                                             .font(.system(size: 15, weight: .semibold))
                                             .foregroundStyle(Color.riDark)
 
-                                        Text(business.category.displayName)
+                                        Text(business.categoryDisplayName)
                                             .font(.riCaption(13))
                                             .foregroundStyle(Color.riLightGray)
                                     }

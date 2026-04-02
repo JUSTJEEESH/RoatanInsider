@@ -18,7 +18,7 @@ struct MapPopupCard: View {
                         .foregroundStyle(Color.riDark)
                         .lineLimit(1)
 
-                    Text(business.category.displayName)
+                    Text(business.categoryDisplayName)
                         .font(.riCaption(13))
                         .foregroundStyle(Color.riLightGray)
 

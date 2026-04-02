@@ -1,0 +1,22 @@
+[
+  {"id": "eat", "displayName": "Eat", "iconName": "fork.knife", "sortOrder": 0},
+  {"id": "drink", "displayName": "Drink", "iconName": "wineglass", "sortOrder": 1},
+  {"id": "dive", "displayName": "Dive", "iconName": "figure.pool.swim", "sortOrder": 2},
+  {"id": "tours", "displayName": "Tours", "iconName": "binoculars", "sortOrder": 3},
+  {"id": "shop", "displayName": "Shop", "iconName": "bag", "sortOrder": 4},
+  {"id": "stay", "displayName": "Stay", "iconName": "bed.double", "sortOrder": 5},
+  {"id": "rentals", "displayName": "Rentals", "iconName": "key", "sortOrder": 6},
+  {"id": "transport", "displayName": "Transport", "iconName": "car", "sortOrder": 7},
+  {"id": "beaches", "displayName": "Beaches", "iconName": "beach.umbrella", "sortOrder": 8},
+  {"id": "nightlife", "displayName": "Nightlife", "iconName": "music.note", "sortOrder": 9},
+  {"id": "real_estate", "displayName": "Real Estate", "iconName": "house.and.flag", "sortOrder": 10},
+  {"id": "services", "displayName": "Services", "iconName": "scissors", "sortOrder": 11},
+  {"id": "wellness", "displayName": "Wellness", "iconName": "leaf.circle", "sortOrder": 12},
+  {"id": "groceries", "displayName": "Groceries", "iconName": "cart", "sortOrder": 13},
+  {"id": "photography", "displayName": "Photography", "iconName": "camera.aperture", "sortOrder": 14},
+  {"id": "health", "displayName": "Health & Medical", "iconName": "cross.case", "sortOrder": 15},
+  {"id": "fitness", "displayName": "Fitness & Gym", "iconName": "dumbbell", "sortOrder": 16},
+  {"id": "marina", "displayName": "Marina & Boating", "iconName": "sailboat", "sortOrder": 17},
+  {"id": "events", "displayName": "Events & Weddings", "iconName": "party.popper", "sortOrder": 18},
+  {"id": "family", "displayName": "Kids & Family", "iconName": "figure.2.and.child.holdinghands", "sortOrder": 19}
+]

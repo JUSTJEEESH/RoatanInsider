@@ -42,7 +42,7 @@ struct InsiderPickCard: View {
                         .foregroundStyle(.white)
 
                     HStack(spacing: 4) {
-                        Text(business.category.displayName)
+                        Text(business.categoryDisplayName)
                         Text("·")
                         Text(business.areaDisplayName)
                         Text("·")

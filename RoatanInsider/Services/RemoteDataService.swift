@@ -127,6 +127,7 @@ final class RemoteDataService {
 
 struct RemoteManifest: Decodable {
     let businesses: FileVersion?
+    let categories: FileVersion?
     let areas: FileVersion?
     let essentials: FileVersion?
     let cruiseMahoganyBay: FileVersion?
