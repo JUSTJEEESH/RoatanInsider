@@ -45,7 +45,7 @@ final class CruiseViewModel {
         var nearbyAreas: [Area] {
             switch self {
             case .mahoganyBay:
-                return [.dixonCove, .frenchHarbour, .coxenHole, .palmettoBay, .sandyBay, .flowersBay]
+                return [.dixonCove, .westBay, .westEnd, .sandyBay, .coxenHole, .frenchHarbour, .palmettoBay, .flowersBay]
             case .coxenHole:
                 return [.coxenHole, .sandyBay, .flowersBay, .westEnd, .westBay, .dixonCove]
             }
@@ -126,12 +126,13 @@ final class CruiseViewModel {
 
     // MARK: - Business Filtering
 
-    func filteredBusinesses(_ businesses: [Business]) -> [Business] {
+    func filteredBusinesses(_ businesses: [Business], nearbyAreaIds: [String]? = nil) -> [Business] {
         let portLocation = selectedPort.location
+        let areaIds = nearbyAreaIds ?? selectedPort.nearbyAreas.map { $0.rawValue }
 
         var result = businesses
             .filter { $0.isActive }
-            .filter { biz in selectedPort.nearbyAreas.contains { $0.rawValue == biz.area } }
+            .filter { biz in areaIds.contains(biz.area) }
 
         // When time is short, restrict to closer businesses only
         if timeRemaining < 3600 {

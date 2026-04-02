@@ -6,6 +6,23 @@ struct CurrencyConverterView: View {
 
     var body: some View {
         VStack(spacing: 32) {
+            // Header
+            VStack(spacing: 8) {
+                Image(systemName: "coloncurrencysign.arrow.circlepath")
+                    .font(.system(size: 36, weight: .medium))
+                    .foregroundStyle(Color.riMint)
+
+                Text("Currency Converter")
+                    .font(.system(size: 22, weight: .bold))
+                    .foregroundStyle(Color.riDark)
+
+                Text("USD and Honduran Lempira — updated daily")
+                    .font(.riCaption(14))
+                    .foregroundStyle(Color.riMediumGray)
+                    .multilineTextAlignment(.center)
+            }
+            .padding(.top, 28)
+
             // Currency display
             VStack(spacing: 20) {
                 // From

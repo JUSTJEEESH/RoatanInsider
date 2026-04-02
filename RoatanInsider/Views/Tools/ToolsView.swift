@@ -2,7 +2,6 @@ import SwiftUI
 
 struct ToolsView: View {
     @State private var viewModel = ToolsViewModel()
-    @Environment(UnitPreference.self) private var unitPreference
 
     var body: some View {
         NavigationStack {
@@ -18,19 +17,6 @@ struct ToolsView: View {
                             .foregroundStyle(Color.riLightGray)
                     }
                     Spacer()
-                    Button {
-                        Haptics.select()
-                        unitPreference.useMetric.toggle()
-                    } label: {
-                        HStack(spacing: 4) {
-                            Image(systemName: "ruler")
-                                .font(.system(size: 14, weight: .medium))
-                            Text(unitPreference.useMetric ? "km" : "mi")
-                                .font(.system(size: 14, weight: .bold))
-                        }
-                        .foregroundStyle(Color.riMint)
-                    }
-                    .padding(.bottom, 4)
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 12)

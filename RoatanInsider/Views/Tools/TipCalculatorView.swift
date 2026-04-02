@@ -6,6 +6,23 @@ struct TipCalculatorView: View {
 
     var body: some View {
         VStack(spacing: 28) {
+            // Header
+            VStack(spacing: 8) {
+                Image(systemName: "hand.thumbsup")
+                    .font(.system(size: 36, weight: .medium))
+                    .foregroundStyle(Color.riMint)
+
+                Text("Tip Calculator")
+                    .font(.system(size: 22, weight: .bold))
+                    .foregroundStyle(Color.riDark)
+
+                Text("Calculate tips in USD and Lempiras — split with your group")
+                    .font(.riCaption(14))
+                    .foregroundStyle(Color.riMediumGray)
+                    .multilineTextAlignment(.center)
+            }
+            .padding(.top, 28)
+
             // Bill amount
             VStack(spacing: 8) {
                 Text("Bill Amount (USD)")

@@ -65,7 +65,7 @@ struct MenuGalleryView: View {
         // Fall back to Supabase URLs
         if !slug.isEmpty && !menuImages.isEmpty {
             return menuImages.map { name in
-                .remote(AppConstants.supabaseStorageBaseURL + name + ".jpg")
+                .remote(AppConstants.supabaseStorageBaseURL + (name.hasSuffix(".jpg") || name.hasSuffix(".png") ? name : name + ".jpg"))
             }
         }
 

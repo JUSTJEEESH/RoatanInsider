@@ -155,6 +155,11 @@ final class DataManager {
         activeBusinesses.filter { $0.isInArea(areaId) }.smartSorted()
     }
 
+    /// Area IDs near a given cruise port (e.g., "mahogany_bay" or "coxen_hole")
+    func areaIds(nearPort portId: String) -> [String] {
+        areaGuides.filter { $0.nearbyPorts.contains(portId) }.map { $0.area }
+    }
+
     func business(withId id: String) -> Business? {
         businesses.first { $0.id == id }
     }
