@@ -191,7 +191,9 @@ struct CruiseModeView: View {
     // MARK: - Business List
 
     private var businessList: some View {
-        let allFiltered = viewModel.filteredBusinesses(dataManager.businesses)
+        let portId = viewModel.selectedPort == .mahoganyBay ? "mahogany_bay" : "coxen_hole"
+        let remoteAreaIds = dataManager.areaIds(nearPort: portId)
+        let allFiltered = viewModel.filteredBusinesses(dataManager.businesses, nearbyAreaIds: remoteAreaIds.isEmpty ? nil : remoteAreaIds)
         let businesses = selectedCategory == nil
             ? allFiltered
             : allFiltered.filter { $0.hasCategory(selectedCategory!) }

@@ -40,6 +40,7 @@ struct AreaGuide: Codable, Identifiable, Hashable {
     let latitude: Double?
     let longitude: Double?
     let areaDescription: String?
+    let nearbyPorts: [String]
 
     /// The Area enum value, if this is a known area
     var areaEnum: Area? { Area(rawValue: area) }
@@ -77,6 +78,7 @@ struct AreaGuide: Codable, Identifiable, Hashable {
         latitude = try? container.decode(Double.self, forKey: .latitude)
         longitude = try? container.decode(Double.self, forKey: .longitude)
         areaDescription = try? container.decode(String.self, forKey: .areaDescription)
+        nearbyPorts = (try? container.decode([String].self, forKey: .nearbyPorts)) ?? []
     }
 }
 
