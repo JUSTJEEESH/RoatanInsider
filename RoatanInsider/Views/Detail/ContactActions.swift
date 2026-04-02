@@ -15,15 +15,10 @@ struct ContactActions: View {
 
             if let whatsapp = business.whatsapp {
                 contactButton(icon: "message", label: "WhatsApp") {
-                    if let url = URL(string: "https://wa.me/\(whatsapp.replacingOccurrences(of: "+", with: ""))") {
-                        UIApplication.shared.open(url)
-                    }
-                }
-            }
-
-            if let website = business.website {
-                contactButton(icon: "safari", label: "Website") {
-                    if let url = URL(string: website) {
+                    let cleaned = whatsapp.replacingOccurrences(of: "+", with: "")
+                        .replacingOccurrences(of: " ", with: "")
+                        .replacingOccurrences(of: "-", with: "")
+                    if let url = URL(string: "https://wa.me/\(cleaned)") {
                         UIApplication.shared.open(url)
                     }
                 }
@@ -34,6 +29,30 @@ struct ContactActions: View {
                 let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate))
                 mapItem.name = business.name
                 mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+            }
+
+            if let website = business.website {
+                contactButton(icon: "safari", label: "Website") {
+                    if let url = URL(string: website) {
+                        UIApplication.shared.open(url)
+                    }
+                }
+            }
+
+            if let facebook = business.facebook {
+                contactButton(icon: "hand.thumbsup", label: "Facebook") {
+                    if let url = URL(string: facebook) {
+                        UIApplication.shared.open(url)
+                    }
+                }
+            }
+
+            if let instagram = business.instagram {
+                contactButton(icon: "camera", label: "Instagram") {
+                    if let url = URL(string: instagram) {
+                        UIApplication.shared.open(url)
+                    }
+                }
             }
 
             Spacer()

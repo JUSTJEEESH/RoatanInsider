@@ -8,15 +8,26 @@ struct AreaGuideDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                // Area map
-                Map {
-                    Marker(area.displayName, coordinate: area.coordinate)
-                        .tint(Color.riPink)
+                // Area hero image or map fallback
+                let imageURL = URL(string: AppConstants.supabaseStorageBaseURL.replacingOccurrences(of: "business-photos/", with: "area-photos/") + area.rawValue + ".jpg")
+
+                if let url = imageURL {
+                    AsyncImage(url: url) { phase in
+                        switch phase {
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(height: 200)
+                                .frame(maxWidth: .infinity)
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                        default:
+                            areaMap
+                        }
+                    }
+                } else {
+                    areaMap
                 }
-                .mapStyle(.standard)
-                .frame(height: 200)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-                .disabled(true)
 
                 // Description
                 Text(area.description)
@@ -46,9 +57,7 @@ struct AreaGuideDetailView: View {
                         ForEach(areaBusinesses.prefix(5)) { business in
                             NavigationLink(value: business) {
                                 HStack(spacing: 12) {
-                                    Image(business.images.first ?? "business_placeholder")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
+                                    BusinessImageView(business: business)
                                         .frame(width: 60, height: 60)
                                         .clipShape(RoundedRectangle(cornerRadius: 8))
 
@@ -82,5 +91,16 @@ struct AreaGuideDetailView: View {
         .navigationDestination(for: Business.self) { business in
             BusinessDetailView(business: business)
         }
+    }
+
+    private var areaMap: some View {
+        Map {
+            Marker(area.displayName, coordinate: area.coordinate)
+                .tint(Color.riPink)
+        }
+        .mapStyle(.standard)
+        .frame(height: 200)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .disabled(true)
     }
 }
