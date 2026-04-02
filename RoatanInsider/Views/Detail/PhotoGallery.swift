@@ -30,8 +30,12 @@ struct PhotoGallery: View {
             return localImages
         }
 
-        // Fall back to Supabase URL using slug
+        // Fall back to Supabase URL using slug or image filename
         if !slug.isEmpty {
+            let firstName = images.first ?? ""
+            if firstName.contains(".") && firstName != "business_placeholder" {
+                return [.remote(AppConstants.supabaseStorageBaseURL + firstName)]
+            }
             return [.remote(AppConstants.supabaseStorageBaseURL + slug + ".jpg")]
         }
 
