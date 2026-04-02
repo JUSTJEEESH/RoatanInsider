@@ -165,9 +165,11 @@ struct BusinessDetailView: View {
                         }
                     }
                 }
-                .padding(20)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 20)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(maxWidth: .infinity)
         }
         .background(Color.riWhite)
         .navigationBarTitleDisplayMode(.inline)
