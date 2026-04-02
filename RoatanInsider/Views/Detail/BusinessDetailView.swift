@@ -33,7 +33,7 @@ struct BusinessDetailView: View {
                         HStack(spacing: 6) {
                             Text(b.allCategories.map { $0.categoryDisplayName }.joined(separator: " · "))
                             Text("·")
-                            Text(b.allAreas.map(\.displayName).joined(separator: " · "))
+                            Text(b.allAreaStrings.map { $0.replacingOccurrences(of: "_", with: " ").capitalized }.joined(separator: " · "))
                         }
                         .font(.riCaption(14))
                         .foregroundStyle(Color.riLightGray)
