@@ -45,7 +45,7 @@ final class CruiseViewModel {
         var nearbyAreas: [Area] {
             switch self {
             case .mahoganyBay:
-                return [.dixonCove, .frenchHarbour, .coxenHole, .palmettoBay, .sandyBay, .flowersBay]
+                return [.dixonCove, .westBay, .westEnd, .sandyBay, .coxenHole, .frenchHarbour, .palmettoBay, .flowersBay]
             case .coxenHole:
                 return [.coxenHole, .sandyBay, .flowersBay, .westEnd, .westBay, .dixonCove]
             }
