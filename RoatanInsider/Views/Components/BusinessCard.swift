@@ -52,7 +52,7 @@ struct BusinessCard: View {
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(business.name), \(business.category.displayName) in \(business.areaDisplayName), \(business.priceLabel)")
+        .accessibilityLabel("\(business.name), \(business.categoryDisplayName) in \(business.areaDisplayName), \(business.priceLabel)")
     }
 
     private var distanceText: String? {

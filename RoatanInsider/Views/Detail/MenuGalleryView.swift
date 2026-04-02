@@ -3,7 +3,6 @@ import SwiftUI
 struct MenuGalleryView: View {
     let businessName: String
     let menuImages: [String]
-    let category: Category
     let slug: String
     @Environment(\.dismiss) private var dismiss
     @State private var currentIndex = 0

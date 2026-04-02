@@ -8,7 +8,7 @@ struct CuratedCollection: Identifiable {
     let subtitle: String
     let icon: String
     let coverImage: String
-    let coverCategory: Category
+    let coverCategory: String
     let filter: (Business) -> Bool
 
     /// Supabase storage URL for the collection cover image.
@@ -23,7 +23,7 @@ struct CuratedCollection: Identifiable {
             subtitle: "Chase the golden hour",
             icon: "sunset.fill",
             coverImage: "collection_sunset_spots.jpg",
-            coverCategory: .drink
+            coverCategory: "drink"
         ) { business in
             business.collections.contains("sunset_spots") && business.isActive
         },
@@ -32,7 +32,7 @@ struct CuratedCollection: Identifiable {
             subtitle: "Fun for the whole crew",
             icon: "figure.2.and.child.holdinghands",
             coverImage: "collection_families.jpg",
-            coverCategory: .tours
+            coverCategory: "tours"
         ) { business in
             business.collections.contains("families") && business.isActive
         },
@@ -41,7 +41,7 @@ struct CuratedCollection: Identifiable {
             subtitle: "Great food, easy prices",
             icon: "fork.knife",
             coverImage: "collection_cheap_eats.jpg",
-            coverCategory: .eat
+            coverCategory: "eat"
         ) { business in
             business.collections.contains("cheap_eats") && business.isActive
         },
@@ -50,7 +50,7 @@ struct CuratedCollection: Identifiable {
             subtitle: "Feet in the sand, drink in hand",
             icon: "wineglass.fill",
             coverImage: "collection_beach_bars.jpg",
-            coverCategory: .drink
+            coverCategory: "drink"
         ) { business in
             business.collections.contains("beach_bars") && business.isActive
         },
@@ -59,7 +59,7 @@ struct CuratedCollection: Identifiable {
             subtitle: "Beyond the tourist zone",
             icon: "map.fill",
             coverImage: "collection_off_beaten_path.jpg",
-            coverCategory: .tours
+            coverCategory: "tours"
         ) { business in
             business.collections.contains("off_beaten_path") && business.isActive
         },
@@ -68,7 +68,7 @@ struct CuratedCollection: Identifiable {
             subtitle: "Make the most of your port day",
             icon: "ferry.fill",
             coverImage: "collection_cruise_must_dos.jpg",
-            coverCategory: .tours
+            coverCategory: "tours"
         ) { business in
             business.collections.contains("cruise_must_dos") && business.isActive
         },
@@ -77,7 +77,7 @@ struct CuratedCollection: Identifiable {
             subtitle: "Where the island comes alive after dark",
             icon: "moon.stars.fill",
             coverImage: "collection_late_night.jpg",
-            coverCategory: .nightlife
+            coverCategory: "nightlife"
         ) { business in
             business.collections.contains("late_night") && business.isActive
         }
@@ -178,7 +178,7 @@ struct CollectionCard: View {
     }
 
     private var coverPlaceholder: some View {
-        collection.coverCategory.placeholderColor
+        Color.riMint.opacity(0.15)
             .overlay {
                 Image(systemName: collection.icon)
                     .font(.system(size: 40, weight: .light))

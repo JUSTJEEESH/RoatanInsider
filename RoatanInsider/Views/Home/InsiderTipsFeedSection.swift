@@ -32,7 +32,7 @@ struct InsiderTipsFeedSection: View {
                                 TipCard(
                                     tip: item.tip,
                                     businessName: item.business.name,
-                                    category: item.business.category,
+                                    categoryIconName: item.business.categoryIconName,
                                     area: item.business.area
                                 )
                             }
@@ -51,7 +51,7 @@ struct InsiderTipsFeedSection: View {
 struct TipCard: View {
     let tip: String
     let businessName: String
-    let category: Category
+    let categoryIconName: String
     let area: String
 
     var body: some View {
@@ -78,7 +78,7 @@ struct TipCard: View {
                     .lineLimit(1)
 
                 HStack(spacing: 4) {
-                    Image(systemName: category.iconName)
+                    Image(systemName: categoryIconName)
                         .font(.system(size: 11, weight: .medium))
                     Text(area.replacingOccurrences(of: "_", with: " ").capitalized)
                         .font(.riCaption(12))

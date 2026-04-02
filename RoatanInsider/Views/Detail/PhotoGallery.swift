@@ -2,7 +2,8 @@ import SwiftUI
 
 struct PhotoGallery: View {
     let images: [String]
-    let category: Category
+    let categoryIconName: String
+    let categoryDisplayName: String
     var slug: String = ""
     @State private var currentIndex = 0
 
@@ -76,14 +77,14 @@ struct PhotoGallery: View {
 
     private var placeholderView: some View {
         ZStack {
-            category.placeholderColor
+            Color.riMint.opacity(0.15)
 
             VStack(spacing: 12) {
-                Image(systemName: category.iconName)
+                Image(systemName: categoryIconName)
                     .font(.system(size: 48, weight: .medium))
                     .foregroundStyle(Color.riMint)
 
-                Text(category.displayName.uppercased())
+                Text(categoryDisplayName.uppercased())
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundStyle(Color.riMint.opacity(0.7))
                     .tracking(2)

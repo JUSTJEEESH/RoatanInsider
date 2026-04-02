@@ -97,6 +97,13 @@ enum Category: String, Codable, CaseIterable, Identifiable {
     }
 }
 
+// MARK: - CategoryNavID (wrapper for NavigationStack destinations)
+
+/// A lightweight wrapper so that category navigation doesn't collide with other String-based destinations.
+struct CategoryNavID: Hashable {
+    let id: String
+}
+
 // MARK: - CategoryInfo (data-driven category from Supabase)
 
 struct CategoryInfo: Codable, Identifiable, Hashable {

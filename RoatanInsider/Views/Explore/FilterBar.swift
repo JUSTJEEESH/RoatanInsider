@@ -2,6 +2,7 @@ import SwiftUI
 
 struct FilterBar: View {
     @Bindable var searchEngine: SearchEngine
+    @Environment(DataManager.self) private var dataManager
     var allFeatures: [String] = []
     @State private var showAreaSheet = false
     @State private var showFeatureSheet = false
@@ -21,15 +22,15 @@ struct FilterBar: View {
             // Primary row: Categories + Open Now + Price
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
-                    ForEach(Category.allCases) { category in
+                    ForEach(dataManager.categoryInfos) { info in
                         FilterChip(
-                            label: category.displayName,
-                            isSelected: searchEngine.selectedCategories.contains(category)
+                            label: info.displayName,
+                            isSelected: searchEngine.selectedCategories.contains(info.id)
                         ) {
-                            if searchEngine.selectedCategories.contains(category) {
-                                searchEngine.selectedCategories.remove(category)
+                            if searchEngine.selectedCategories.contains(info.id) {
+                                searchEngine.selectedCategories.remove(info.id)
                             } else {
-                                searchEngine.selectedCategories.insert(category)
+                                searchEngine.selectedCategories.insert(info.id)
                             }
                         }
                     }

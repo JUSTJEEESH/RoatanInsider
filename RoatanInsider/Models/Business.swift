@@ -7,8 +7,18 @@ struct DayHours: Codable, Hashable {
 }
 
 struct CategoryEntry: Codable, Hashable {
-    let category: Category
+    let category: String
     let subcategory: String
+
+    var categoryEnum: Category? { Category(rawValue: category) }
+
+    var categoryDisplayName: String {
+        categoryEnum?.displayName ?? category.replacingOccurrences(of: "_", with: " ").capitalized
+    }
+
+    var categoryIconName: String {
+        categoryEnum?.iconName ?? "questionmark.circle"
+    }
 }
 
 struct BusinessLocation: Codable, Hashable {
@@ -28,9 +38,18 @@ struct Business: Identifiable, Codable, Hashable {
     let name: String
     let description: String
     let insiderTip: String?
-    let category: Category
+    let category: String
     let subcategory: String
     let area: String
+
+    var categoryEnum: Category? { Category(rawValue: category) }
+    var categoryDisplayName: String {
+        categoryEnum?.displayName ?? category.replacingOccurrences(of: "_", with: " ").capitalized
+    }
+    var categoryIconName: String {
+        categoryEnum?.iconName ?? "questionmark.circle"
+    }
+
     var areaEnum: Area? { Area(rawValue: area) }
     var areaDisplayName: String {
         areaEnum?.displayName ?? area.replacingOccurrences(of: "_", with: " ").capitalized
@@ -68,7 +87,7 @@ struct Business: Identifiable, Codable, Hashable {
         name = try container.decode(String.self, forKey: .name)
         description = try container.decode(String.self, forKey: .description)
         insiderTip = try container.decodeIfPresent(String.self, forKey: .insiderTip)
-        category = try container.decode(Category.self, forKey: .category)
+        category = try container.decode(String.self, forKey: .category)
         subcategory = try container.decode(String.self, forKey: .subcategory)
         area = try container.decode(String.self, forKey: .area)
         latitude = try container.decode(Double.self, forKey: .latitude)
@@ -106,15 +125,25 @@ struct Business: Identifiable, Codable, Hashable {
         return result
     }
 
-    /// Check if this business belongs to a given category
-    func hasCategory(_ cat: Category) -> Bool {
-        category == cat || additionalCategories.contains { $0.category == cat }
+    /// Check if this business belongs to a given category (by string ID)
+    func hasCategory(_ catId: String) -> Bool {
+        category == catId || additionalCategories.contains { $0.category == catId }
     }
 
-    /// Get the subcategory label for a specific category context
+    /// Check if this business belongs to a given category (by enum, for backward compat)
+    func hasCategory(_ cat: Category) -> Bool {
+        hasCategory(cat.rawValue)
+    }
+
+    /// Get the subcategory label for a specific category context (by string ID)
+    func subcategory(for catId: String) -> String {
+        if category == catId { return subcategory }
+        return additionalCategories.first { $0.category == catId }?.subcategory ?? subcategory
+    }
+
+    /// Get the subcategory label for a specific category context (by enum)
     func subcategory(for cat: Category) -> String {
-        if category == cat { return subcategory }
-        return additionalCategories.first { $0.category == cat }?.subcategory ?? subcategory
+        subcategory(for: cat.rawValue)
     }
 
     // MARK: - All locations (primary + additional)

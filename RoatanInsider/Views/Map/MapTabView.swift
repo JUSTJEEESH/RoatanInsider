@@ -46,12 +46,12 @@ struct MapTabView: View {
                             viewModel.selectCategory(nil)
                         }
 
-                        ForEach(Category.allCases) { category in
+                        ForEach(dataManager.categoryInfos) { info in
                             FilterChip(
-                                label: category.displayName,
-                                isSelected: viewModel.selectedCategory == category
+                                label: info.displayName,
+                                isSelected: viewModel.selectedCategory == info.id
                             ) {
-                                viewModel.selectCategory(category)
+                                viewModel.selectCategory(info.id)
                             }
                         }
                     }
@@ -157,8 +157,11 @@ struct MapTabView: View {
         }
     }
 
-    private func pinIcon(for category: Category?) -> String {
-        category?.iconName ?? "mappin"
+    private func pinIcon(for categoryId: String?) -> String {
+        guard let id = categoryId else { return "mappin" }
+        return dataManager.categoryInfo(for: id)?.iconName
+            ?? Category(rawValue: id)?.iconName
+            ?? "mappin"
     }
 }
 

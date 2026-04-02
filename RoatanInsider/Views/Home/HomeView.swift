@@ -68,8 +68,8 @@ struct HomeView: View {
             .navigationDestination(for: Business.self) { business in
                 BusinessDetailView(business: business)
             }
-            .navigationDestination(for: Category.self) { category in
-                CategoryListView(category: category)
+            .navigationDestination(for: CategoryNavID.self) { navID in
+                CategoryListView(categoryId: navID.id)
             }
             .fullScreenCover(isPresented: $showCruiseMode) {
                 CruiseModeView(viewModel: cruiseViewModel)
@@ -81,13 +81,19 @@ struct HomeView: View {
 }
 
 struct CategoryListView: View {
-    let category: Category
+    let categoryId: String
     @Environment(DataManager.self) private var dataManager
+
+    private var displayName: String {
+        dataManager.categoryInfo(for: categoryId)?.displayName
+            ?? Category(rawValue: categoryId)?.displayName
+            ?? categoryId.replacingOccurrences(of: "_", with: " ").capitalized
+    }
 
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 16) {
-                ForEach(dataManager.businesses(for: category)) { business in
+                ForEach(dataManager.businesses(forCategoryId: categoryId)) { business in
                     NavigationLink(value: business) {
                         BusinessCard(business: business)
                     }
@@ -96,7 +102,7 @@ struct CategoryListView: View {
             }
             .padding(20)
         }
-        .navigationTitle(category.displayName)
+        .navigationTitle(displayName)
         .background(Color.riWhite)
     }
 }

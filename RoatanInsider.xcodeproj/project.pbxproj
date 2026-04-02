@@ -86,6 +86,7 @@
 		EE66FF77880099AA11220003 /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220004 /* SpeechService.swift */; };
 		EE66FF77880099AA11220005 /* PhrasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220006 /* PhrasesView.swift */; };
 		AC57565D7F0EE0912A57CC03 /* areas.json in Resources */ = {isa = PBXBuildFile; fileRef = 184A4AB40EF1F2D2FE0EAB19 /* areas.json */; };
+		CATE60R1E500000000000001 /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = CATE60R1E500000000000002 /* categories.json */; };
 		4AE8A7EDB3949FC07ACDF38E /* businesses.json in Resources */ = {isa = PBXBuildFile; fileRef = 179BA40591A489E6690226B8 /* businesses.json */; };
 		B3063911EAE150C625BEEDFA /* cruise-coxen-hole.json in Resources */ = {isa = PBXBuildFile; fileRef = 52133D52DF9293C51F2C38DF /* cruise-coxen-hole.json */; };
 		14FA262B52372AF12B6DC719 /* cruise-mahogany-bay.json in Resources */ = {isa = PBXBuildFile; fileRef = A7242144E4B8E49A85DEFD47 /* cruise-mahogany-bay.json */; };
@@ -176,6 +177,7 @@
 		91A9A634F3CE5F95335B4A75 /* SearchEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchEngine.swift"; sourceTree = "<group>"; };
 		184A4AB40EF1F2D2FE0EAB19 /* areas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "areas.json"; sourceTree = "<group>"; };
 		179BA40591A489E6690226B8 /* businesses.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "businesses.json"; sourceTree = "<group>"; };
+		CATE60R1E500000000000002 /* categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "categories.json"; sourceTree = "<group>"; };
 		52133D52DF9293C51F2C38DF /* cruise-coxen-hole.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "cruise-coxen-hole.json"; sourceTree = "<group>"; };
 		A7242144E4B8E49A85DEFD47 /* cruise-mahogany-bay.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "cruise-mahogany-bay.json"; sourceTree = "<group>"; };
 		6ED16F04793732E4FF32E158 /* essentials.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "essentials.json"; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				D2E0F4681191E58B2BA47750 /* DataManager.swift */,
 				184A4AB40EF1F2D2FE0EAB19 /* areas.json */,
 				179BA40591A489E6690226B8 /* businesses.json */,
+				CATE60R1E500000000000002 /* categories.json */,
 			);
 			path = "Data";
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC57565D7F0EE0912A57CC03 /* areas.json in Resources */,
+				CATE60R1E500000000000001 /* categories.json in Resources */,
 				4AE8A7EDB3949FC07ACDF38E /* businesses.json in Resources */,
 				B3063911EAE150C625BEEDFA /* cruise-coxen-hole.json in Resources */,
 				14FA262B52372AF12B6DC719 /* cruise-mahogany-bay.json in Resources */,

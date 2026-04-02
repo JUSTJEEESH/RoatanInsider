@@ -65,7 +65,7 @@ struct RightNowSection: View {
         let pool = open.isEmpty ? active : open
 
         let filtered = pool.filter { business in
-            context.categories.contains(business.category)
+            context.categoryIds.contains(business.category)
         }
 
         return filtered.isEmpty ? Array(pool.prefix(8)) : Array(filtered.shuffled().prefix(8))
@@ -132,15 +132,15 @@ enum TimeContext {
         }
     }
 
-    var categories: [Category] {
+    var categoryIds: [String] {
         switch self {
-        case .earlyMorning: return [.eat, .dive, .tours, .beaches]
-        case .morning:      return [.dive, .tours, .beaches, .eat]
-        case .lunchtime:    return [.eat, .drink, .beaches]
-        case .afternoon:    return [.beaches, .shop, .tours, .dive, .drink]
-        case .goldenHour:   return [.drink, .eat, .beaches]
-        case .evening:      return [.eat, .drink, .nightlife]
-        case .lateNight:    return [.nightlife, .drink]
+        case .earlyMorning: return ["eat", "dive", "tours", "beaches"]
+        case .morning:      return ["dive", "tours", "beaches", "eat"]
+        case .lunchtime:    return ["eat", "drink", "beaches"]
+        case .afternoon:    return ["beaches", "shop", "tours", "dive", "drink"]
+        case .goldenHour:   return ["drink", "eat", "beaches"]
+        case .evening:      return ["eat", "drink", "nightlife"]
+        case .lateNight:    return ["nightlife", "drink"]
         }
     }
 }

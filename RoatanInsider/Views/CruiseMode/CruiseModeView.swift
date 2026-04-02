@@ -5,7 +5,7 @@ struct CruiseModeView: View {
     @Environment(DataManager.self) private var dataManager
     @Environment(UnitPreference.self) private var unitPreference
     @Environment(\.dismiss) private var dismiss
-    @State private var selectedCategory: Category?
+    @State private var selectedCategory: String?
     @State private var tick = 0
     private let timer = Timer.publish(every: 15, on: .main, in: .common).autoconnect()
 
@@ -177,9 +177,10 @@ struct CruiseModeView: View {
                     selectedCategory = nil
                 }
 
-                ForEach([Category.eat, .drink, .beaches, .dive, .shop, .tours], id: \.self) { category in
-                    FilterChip(label: category.displayName, isSelected: selectedCategory == category) {
-                        selectedCategory = selectedCategory == category ? nil : category
+                ForEach(["eat", "drink", "beaches", "dive", "shop", "tours"], id: \.self) { catId in
+                    let displayName = Category(rawValue: catId)?.displayName ?? catId.capitalized
+                    FilterChip(label: displayName, isSelected: selectedCategory == catId) {
+                        selectedCategory = selectedCategory == catId ? nil : catId
                     }
                 }
             }
@@ -193,7 +194,7 @@ struct CruiseModeView: View {
         let allFiltered = viewModel.filteredBusinesses(dataManager.businesses)
         let businesses = selectedCategory == nil
             ? allFiltered
-            : allFiltered.filter { $0.category == selectedCategory }
+            : allFiltered.filter { $0.hasCategory(selectedCategory!) }
         let visitable = businesses.filter { viewModel.canVisitAndReturn($0) }
         let tooFar = businesses.filter { !viewModel.canVisitAndReturn($0) }
 
@@ -298,7 +299,7 @@ private struct CruiseBusinessRow: View {
                         .lineLimit(1)
 
                     HStack(spacing: 4) {
-                        Text(business.category.displayName)
+                        Text(business.categoryDisplayName)
                         Text("·")
                         Text(business.areaDisplayName)
                     }

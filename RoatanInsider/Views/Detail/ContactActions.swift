@@ -61,7 +61,6 @@ struct ContactActions: View {
             MenuGalleryView(
                 businessName: business.name,
                 menuImages: business.menuImages ?? [],
-                category: business.category,
                 slug: business.slug
             )
         }
