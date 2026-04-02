@@ -80,10 +80,10 @@ struct Business: Identifiable, Codable, Hashable {
         hours = try container.decode([String: DayHours?].self, forKey: .hours)
         features = try container.decode([String].self, forKey: .features)
         images = try container.decode([String].self, forKey: .images)
-        isVerified = try container.decode(Bool.self, forKey: .isVerified)
-        isFeatured = try container.decode(Bool.self, forKey: .isFeatured)
-        isInsiderPick = try container.decode(Bool.self, forKey: .isInsiderPick)
-        isBestOf = try container.decode(Bool.self, forKey: .isBestOf)
+        isVerified = (try? container.decode(Bool.self, forKey: .isVerified)) ?? false
+        isFeatured = (try? container.decode(Bool.self, forKey: .isFeatured)) ?? false
+        isInsiderPick = (try? container.decode(Bool.self, forKey: .isInsiderPick)) ?? false
+        isBestOf = (try? container.decode(Bool.self, forKey: .isBestOf)) ?? false
         rating = try container.decodeIfPresent(Double.self, forKey: .rating)
         reviewCount = try container.decodeIfPresent(Int.self, forKey: .reviewCount)
         hoursText = try container.decodeIfPresent(String.self, forKey: .hoursText)
