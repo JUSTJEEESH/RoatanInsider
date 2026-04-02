@@ -17,7 +17,7 @@ struct MenuGalleryView: View {
                 } else {
                     TabView(selection: $currentIndex) {
                         ForEach(Array(displaySources.enumerated()), id: \.offset) { index, source in
-                            menuImageView(for: source)
+                            ZoomableMenuImage(source: source)
                                 .tag(index)
                         }
                     }
@@ -62,18 +62,92 @@ struct MenuGalleryView: View {
             return localImages
         }
 
-        // Fall back to Supabase URLs
         if !slug.isEmpty && !menuImages.isEmpty {
             return menuImages.map { name in
-                .remote(AppConstants.supabaseStorageBaseURL + (name.hasSuffix(".jpg") || name.hasSuffix(".png") ? name : name + ".jpg"))
+                let hasExtension = name.contains(".")
+                let url = AppConstants.supabaseStorageBaseURL + (hasExtension ? name : name + ".jpg")
+                return .remote(url)
             }
         }
 
         return []
     }
 
+    private var emptyState: some View {
+        VStack(spacing: 16) {
+            Image(systemName: "menucard")
+                .font(.system(size: 48, weight: .light))
+                .foregroundStyle(.white.opacity(0.3))
+            Text("No menu available")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundStyle(.white.opacity(0.5))
+        }
+    }
+}
+
+// MARK: - Zoomable Menu Image
+
+struct ZoomableMenuImage: View {
+    let source: MenuImageSource
+    @State private var scale: CGFloat = 1.0
+    @State private var lastScale: CGFloat = 1.0
+    @State private var offset: CGSize = .zero
+    @State private var lastOffset: CGSize = .zero
+
+    var body: some View {
+        GeometryReader { geometry in
+            menuContent
+                .scaleEffect(scale)
+                .offset(offset)
+                .gesture(
+                    MagnifyGesture()
+                        .onChanged { value in
+                            let newScale = lastScale * value.magnification
+                            scale = min(max(newScale, 1.0), 5.0)
+                        }
+                        .onEnded { _ in
+                            lastScale = scale
+                            if scale <= 1.0 {
+                                withAnimation(.easeOut(duration: 0.2)) {
+                                    offset = .zero
+                                    lastOffset = .zero
+                                }
+                            }
+                        }
+                )
+                .gesture(
+                    DragGesture()
+                        .onChanged { value in
+                            if scale > 1.0 {
+                                offset = CGSize(
+                                    width: lastOffset.width + value.translation.width,
+                                    height: lastOffset.height + value.translation.height
+                                )
+                            }
+                        }
+                        .onEnded { _ in
+                            lastOffset = offset
+                        }
+                )
+                .onTapGesture(count: 2) {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        if scale > 1.0 {
+                            scale = 1.0
+                            lastScale = 1.0
+                            offset = .zero
+                            lastOffset = .zero
+                        } else {
+                            scale = 2.5
+                            lastScale = 2.5
+                        }
+                    }
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
+        }
+    }
+
     @ViewBuilder
-    private func menuImageView(for source: MenuImageSource) -> some View {
+    private var menuContent: some View {
         switch source {
         case .local(let name):
             Image(name)
@@ -116,20 +190,9 @@ struct MenuGalleryView: View {
                 .foregroundStyle(.white.opacity(0.4))
         }
     }
-
-    private var emptyState: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "menucard")
-                .font(.system(size: 48, weight: .light))
-                .foregroundStyle(.white.opacity(0.3))
-            Text("No menu available")
-                .font(.system(size: 16, weight: .medium))
-                .foregroundStyle(.white.opacity(0.5))
-        }
-    }
 }
 
-private enum MenuImageSource {
+enum MenuImageSource {
     case local(String)
     case remote(String)
 }
