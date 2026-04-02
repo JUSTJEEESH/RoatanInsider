@@ -67,7 +67,10 @@
     "rating": 4.6,
     "reviewCount": 1562,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "sunset_spots",
+      "beach_bars"
+    ],
     "menuImages": null,
     "additionalCategories": [
       {
@@ -280,7 +283,9 @@
     "rating": 4.5,
     "reviewCount": 377,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "cheap_eats"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -350,7 +355,9 @@
     "rating": 4.7,
     "reviewCount": 465,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "cheap_eats"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -487,7 +494,9 @@
     "rating": 4.5,
     "reviewCount": 69,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "sunset_spots"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -554,7 +563,9 @@
     "rating": 4.3,
     "reviewCount": 236,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "sunset_spots"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -624,7 +635,9 @@
     "rating": 4.7,
     "reviewCount": 106,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "cheap_eats"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -691,7 +704,9 @@
     "rating": 4.7,
     "reviewCount": 368,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "cheap_eats"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -761,7 +776,9 @@
     "rating": 4.6,
     "reviewCount": 183,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "cheap_eats"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -831,7 +848,9 @@
     "rating": 4.4,
     "reviewCount": 289,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "families"
+    ],
     "menuImages": null,
     "additionalCategories": [
       {
@@ -1046,7 +1065,10 @@
     "rating": 4.6,
     "reviewCount": 140,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "cheap_eats",
+      "beach_bars"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -1116,7 +1138,9 @@
     "rating": 4.6,
     "reviewCount": 246,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "cheap_eats"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -1390,7 +1414,9 @@
     "rating": 4.3,
     "reviewCount": 590,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "off_beaten_path"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -1607,7 +1633,9 @@
     "rating": 4.5,
     "reviewCount": 50,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "off_beaten_path"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -1677,7 +1705,10 @@
     "rating": 4.2,
     "reviewCount": 975,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "beach_bars",
+      "late_night"
+    ],
     "menuImages": null,
     "additionalCategories": [
       {
@@ -1752,7 +1783,9 @@
     "rating": 4.3,
     "reviewCount": 147,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "late_night"
+    ],
     "menuImages": null,
     "additionalCategories": [
       {
@@ -1897,7 +1930,9 @@
     "rating": 4.6,
     "reviewCount": 78,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "sunset_spots"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -1968,7 +2003,9 @@
     "rating": 4.7,
     "reviewCount": 149,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "late_night"
+    ],
     "menuImages": null,
     "additionalCategories": [
       {
@@ -2080,7 +2117,9 @@
     "rating": 4.4,
     "reviewCount": 604,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "late_night"
+    ],
     "menuImages": null,
     "additionalCategories": [
       {
@@ -2162,7 +2201,10 @@
     "rating": 4.3,
     "reviewCount": 1782,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "sunset_spots",
+      "beach_bars"
+    ],
     "menuImages": null,
     "additionalCategories": [
       {
@@ -2237,7 +2279,10 @@
     "rating": 4.2,
     "reviewCount": 224,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "sunset_spots",
+      "beach_bars"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -2307,7 +2352,9 @@
     "rating": null,
     "reviewCount": null,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "off_beaten_path"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -2377,7 +2424,9 @@
     "rating": 4.5,
     "reviewCount": 50,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "off_beaten_path"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -2447,7 +2496,10 @@
     "rating": 5.0,
     "reviewCount": 4,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "beach_bars",
+      "off_beaten_path"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -2873,7 +2925,10 @@
     "rating": 4.8,
     "reviewCount": 944,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "families",
+      "cruise_must_dos"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -2944,7 +2999,10 @@
     "rating": 4.5,
     "reviewCount": 100,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "families",
+      "cruise_must_dos"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -3228,7 +3286,9 @@
     "rating": 4.5,
     "reviewCount": 50,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "off_beaten_path"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -3284,7 +3344,9 @@
     "rating": null,
     "reviewCount": null,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "late_night"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -3343,7 +3405,9 @@
     "rating": 4.5,
     "reviewCount": 50,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "late_night"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -3414,7 +3478,9 @@
     "rating": null,
     "reviewCount": null,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "late_night"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -3467,7 +3533,10 @@
     "rating": 4.5,
     "reviewCount": 50,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "off_beaten_path",
+      "late_night"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -3538,7 +3607,10 @@
     "rating": 4.8,
     "reviewCount": 500,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "families",
+      "cruise_must_dos"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -3609,7 +3681,10 @@
     "rating": 4.7,
     "reviewCount": 574,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "families",
+      "cruise_must_dos"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -3677,7 +3752,10 @@
     "rating": 4.8,
     "reviewCount": 1000,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "families",
+      "cruise_must_dos"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -3748,7 +3826,10 @@
     "rating": 4.5,
     "reviewCount": 1023,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "families",
+      "cruise_must_dos"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -3890,7 +3971,9 @@
     "rating": 4.8,
     "reviewCount": 300,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "families"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -3954,7 +4037,9 @@
     "rating": 4.5,
     "reviewCount": 300,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "cruise_must_dos"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -4025,7 +4110,9 @@
     "rating": 4.5,
     "reviewCount": 100,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "off_beaten_path"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -4096,7 +4183,10 @@
     "rating": 4.5,
     "reviewCount": 100,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "sunset_spots",
+      "families"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -4167,7 +4257,9 @@
     "rating": 4.5,
     "reviewCount": 50,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "off_beaten_path"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -4309,7 +4401,9 @@
     "rating": 4.0,
     "reviewCount": 7,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "off_beaten_path"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -4380,7 +4474,9 @@
     "rating": null,
     "reviewCount": null,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "cruise_must_dos"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -4451,7 +4547,9 @@
     "rating": null,
     "reviewCount": null,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "off_beaten_path"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -5403,7 +5501,9 @@
     "rating": 4.8,
     "reviewCount": 500,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "sunset_spots"
+    ],
     "menuImages": null,
     "additionalCategories": [
       {
@@ -5486,7 +5586,9 @@
     "rating": 4.7,
     "reviewCount": 1789,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "families"
+    ],
     "menuImages": null,
     "additionalCategories": [
       {
@@ -5641,7 +5743,9 @@
     "rating": 4.0,
     "reviewCount": 717,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "off_beaten_path"
+    ],
     "menuImages": null,
     "additionalCategories": [
       {
@@ -5717,7 +5821,9 @@
     "rating": 4.0,
     "reviewCount": 221,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "off_beaten_path"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -6143,7 +6249,10 @@
     "rating": 4.8,
     "reviewCount": 5000,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "families",
+      "cruise_must_dos"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -6214,7 +6323,9 @@
     "rating": 4.5,
     "reviewCount": 500,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "families"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -6285,7 +6396,9 @@
     "rating": 4.0,
     "reviewCount": 200,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "sunset_spots"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -6356,7 +6469,9 @@
     "rating": 4.5,
     "reviewCount": 1000,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "cruise_must_dos"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -6427,7 +6542,9 @@
     "rating": 4.5,
     "reviewCount": 100,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "off_beaten_path"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -6569,7 +6686,9 @@
     "rating": 4.0,
     "reviewCount": 50,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "off_beaten_path"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
@@ -6640,7 +6759,10 @@
     "rating": null,
     "reviewCount": null,
     "status": "active",
-    "collections": [],
+    "collections": [
+      "families",
+      "cruise_must_dos"
+    ],
     "menuImages": null,
     "additionalCategories": [],
     "additionalLocations": []
