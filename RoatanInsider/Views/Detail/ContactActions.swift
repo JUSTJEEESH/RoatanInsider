@@ -6,7 +6,8 @@ struct ContactActions: View {
     @State private var showingMenu = false
 
     var body: some View {
-        HStack(spacing: 20) {
+        ScrollView(.horizontal, showsIndicators: false) {
+        HStack(spacing: 16) {
             if let menuImages = business.menuImages, !menuImages.isEmpty {
                 contactButton(icon: "menucard", label: "Menu") {
                     showingMenu = true
@@ -55,7 +56,7 @@ struct ContactActions: View {
                 }
             }
 
-            Spacer()
+        }
         }
         .fullScreenCover(isPresented: $showingMenu) {
             MenuGalleryView(
