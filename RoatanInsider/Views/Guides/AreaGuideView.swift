@@ -30,17 +30,30 @@ struct AreaGuideView: View {
 struct AreaCard: View {
     let area: Area
 
+    private var imageURL: URL? {
+        URL(string: AppConstants.supabaseStorageBaseURL.replacingOccurrences(of: "business-photos/", with: "area-photos/") + area.rawValue + ".jpg")
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             ZStack(alignment: .bottomLeading) {
-                // Satellite map of the area
-                Map(initialPosition: .region(MKCoordinateRegion(
-                    center: area.coordinate,
-                    span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015)
-                ))) {}
-                .mapStyle(.imagery)
-                .disabled(true)
-                .allowsHitTesting(false)
+                // Try remote photo first, fall back to satellite map
+                if let url = imageURL {
+                    AsyncImage(url: url) { phase in
+                        switch phase {
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                                .clipped()
+                        default:
+                            satelliteMap
+                        }
+                    }
+                } else {
+                    satelliteMap
+                }
 
                 // Dark scrim for text readability
                 Rectangle()
@@ -65,5 +78,15 @@ struct AreaCard: View {
                 .foregroundStyle(Color.riLightGray)
                 .lineLimit(2)
         }
+    }
+
+    private var satelliteMap: some View {
+        Map(initialPosition: .region(MKCoordinateRegion(
+            center: area.coordinate,
+            span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015)
+        ))) {}
+        .mapStyle(.imagery)
+        .disabled(true)
+        .allowsHitTesting(false)
     }
 }

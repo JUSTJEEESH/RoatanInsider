@@ -55,6 +55,15 @@ final class RemoteDataService {
 
     // MARK: - Remote check (async, background)
 
+    /// URLSession configured to bypass HTTP caching so we always get the latest
+    /// files from Supabase Storage.
+    private static let noCacheSession: URLSession = {
+        let config = URLSessionConfiguration.default
+        config.requestCachePolicy = .reloadIgnoringLocalCacheData
+        config.urlCache = nil
+        return URLSession(configuration: config)
+    }()
+
     /// Fetches manifest, checks versions, downloads updated files.
     /// Returns a dictionary of filename → Data for files that were updated.
     static func fetchUpdates() async -> RemoteManifest? {
@@ -70,7 +79,7 @@ final class RemoteDataService {
         guard let url = URL(string: AppConstants.remoteManifestURL) else { return nil }
 
         do {
-            let (data, response) = try await URLSession.shared.data(from: url)
+            let (data, response) = try await noCacheSession.data(from: url)
             guard let http = response as? HTTPURLResponse, http.statusCode == 200 else { return nil }
             let manifest = try JSONDecoder().decode(RemoteManifest.self, from: data)
             UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: "remoteDataLastFetch")
@@ -96,7 +105,7 @@ final class RemoteDataService {
         guard let url = URL(string: AppConstants.supabaseDataBaseURL + filename) else { return nil }
 
         do {
-            let (data, response) = try await URLSession.shared.data(from: url)
+            let (data, response) = try await noCacheSession.data(from: url)
             guard let http = response as? HTTPURLResponse, http.statusCode == 200 else { return nil }
             let decoded = try JSONDecoder().decode(T.self, from: data)
 
