@@ -149,7 +149,8 @@ struct Business: Identifiable, Codable, Hashable {
     // MARK: - All locations (primary + additional)
 
     var allLocations: [BusinessLocation] {
-        var result = [BusinessLocation(area: area, latitude: latitude, longitude: longitude, addressDescription: addressDescription)]
+        let primaryArea = areaEnum ?? .westBay
+        var result = [BusinessLocation(area: primaryArea, latitude: latitude, longitude: longitude, addressDescription: addressDescription)]
         result.append(contentsOf: additionalLocations)
         return result
     }
