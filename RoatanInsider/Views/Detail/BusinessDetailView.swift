@@ -16,6 +16,7 @@ struct BusinessDetailView: View {
             VStack(alignment: .leading, spacing: 0) {
                 // Hero image
                 PhotoGallery(images: b.images, categoryIconName: b.categoryIconName, categoryDisplayName: b.categoryDisplayName, slug: b.slug)
+                    .frame(maxWidth: .infinity)
 
                 VStack(alignment: .leading, spacing: 20) {
                     // Title section
@@ -166,6 +167,7 @@ struct BusinessDetailView: View {
                 }
                 .padding(20)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .background(Color.riWhite)
         .navigationBarTitleDisplayMode(.inline)
