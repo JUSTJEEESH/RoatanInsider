@@ -47,7 +47,7 @@ struct ShareableBusinessCard: View {
                     Text("·")
                         .foregroundStyle(Color.riLightGray)
 
-                    Text(business.area.displayName)
+                    Text(business.areaDisplayName)
                         .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(Color.riMediumGray)
 

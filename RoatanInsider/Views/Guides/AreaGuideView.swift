@@ -2,6 +2,8 @@ import SwiftUI
 import MapKit
 
 struct AreaGuideView: View {
+    @Environment(DataManager.self) private var dataManager
+
     let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
@@ -10,11 +12,11 @@ struct AreaGuideView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 16) {
-                ForEach(Area.allCases) { area in
+                ForEach(dataManager.areaGuides) { guide in
                     NavigationLink {
-                        AreaGuideDetailView(area: area)
+                        AreaGuideDetailView(guide: guide)
                     } label: {
-                        AreaCard(area: area)
+                        AreaCard(guide: guide)
                     }
                     .buttonStyle(.plain)
                 }
@@ -28,16 +30,15 @@ struct AreaGuideView: View {
 }
 
 struct AreaCard: View {
-    let area: Area
+    let guide: AreaGuide
 
     private var imageURL: URL? {
-        URL(string: AppConstants.supabaseStorageBaseURL.replacingOccurrences(of: "business-photos/", with: "area-photos/") + area.rawValue + ".jpg")
+        URL(string: AppConstants.supabaseStorageBaseURL.replacingOccurrences(of: "business-photos/", with: "area-photos/") + guide.area + ".jpg")
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             ZStack(alignment: .bottomLeading) {
-                // Try remote photo first, fall back to satellite map
                 if let url = imageURL {
                     AsyncImage(url: url) { phase in
                         switch phase {
@@ -55,7 +56,6 @@ struct AreaCard: View {
                     satelliteMap
                 }
 
-                // Dark scrim for text readability
                 Rectangle()
                     .fill(
                         .linearGradient(
@@ -65,7 +65,7 @@ struct AreaCard: View {
                         )
                     )
 
-                Text(area.displayName)
+                Text(guide.name)
                     .font(.system(size: 16, weight: .bold))
                     .foregroundStyle(.white)
                     .padding(12)
@@ -73,7 +73,7 @@ struct AreaCard: View {
             .frame(height: 120)
             .clipShape(RoundedRectangle(cornerRadius: 12))
 
-            Text(area.bestFor)
+            Text(guide.bestFor)
                 .font(.riCaption(12))
                 .foregroundStyle(Color.riLightGray)
                 .lineLimit(2)
@@ -82,7 +82,7 @@ struct AreaCard: View {
 
     private var satelliteMap: some View {
         Map(initialPosition: .region(MKCoordinateRegion(
-            center: area.coordinate,
+            center: guide.coordinate,
             span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015)
         ))) {}
         .mapStyle(.imagery)

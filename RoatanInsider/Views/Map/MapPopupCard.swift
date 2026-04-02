@@ -23,7 +23,7 @@ struct MapPopupCard: View {
                         .foregroundStyle(Color.riLightGray)
 
                     HStack(spacing: 4) {
-                        Text(business.area.displayName)
+                        Text(business.areaDisplayName)
                         Text("·")
                         Text(business.priceLabel)
                     }

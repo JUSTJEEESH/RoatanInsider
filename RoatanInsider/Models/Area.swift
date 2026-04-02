@@ -1,7 +1,7 @@
 import Foundation
 import CoreLocation
 
-enum Area: String, Codable, CaseIterable, Identifiable {
+enum Area: String, Codable, CaseIterable, Identifiable, Hashable {
     case westBay = "west_bay"
     case westEnd = "west_end"
     case sandyBay = "sandy_bay"
@@ -20,6 +20,16 @@ enum Area: String, Codable, CaseIterable, Identifiable {
     var id: String { rawValue }
 
     var imageName: String { "area_\(rawValue)" }
+
+    /// Initialize from any string, returning nil for unknown values.
+    /// This allows businesses with new area values to still decode.
+    init?(string: String) {
+        if let known = Area(rawValue: string) {
+            self = known
+        } else {
+            return nil
+        }
+    }
 
     var displayName: String {
         switch self {

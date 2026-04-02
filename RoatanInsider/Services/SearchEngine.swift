@@ -5,7 +5,7 @@ import CoreLocation
 final class SearchEngine {
     var searchText: String = ""
     var selectedCategories: Set<Category> = []
-    var selectedAreas: Set<Area> = []
+    var selectedAreas: Set<String> = []
     var selectedPriceRanges: Set<Int> = []
     var selectedFeatures: Set<String> = []
     var showOpenNow: Bool = false
@@ -45,7 +45,7 @@ final class SearchEngine {
                 biz.name.lowercased().contains(query) ||
                 biz.description.lowercased().contains(query) ||
                 biz.allCategories.contains { $0.subcategory.lowercased().contains(query) } ||
-                biz.allAreas.contains { $0.displayName.lowercased().contains(query) } ||
+                biz.allAreaStrings.contains { $0.replacingOccurrences(of: "_", with: " ").lowercased().contains(query) } ||
                 biz.features.contains { $0.lowercased().contains(query) }
             }
         }
@@ -61,6 +61,7 @@ final class SearchEngine {
                 selectedAreas.contains { biz.isInArea($0) }
             }
         }
+
 
         if !selectedPriceRanges.isEmpty {
             results = results.filter { selectedPriceRanges.contains($0.priceRange) }
