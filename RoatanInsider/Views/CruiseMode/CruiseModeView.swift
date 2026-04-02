@@ -300,7 +300,7 @@ private struct CruiseBusinessRow: View {
                     HStack(spacing: 4) {
                         Text(business.category.displayName)
                         Text("·")
-                        Text(business.area.displayName)
+                        Text(business.areaDisplayName)
                     }
                     .font(.riCaption(13))
                     .foregroundStyle(Color.riLightGray)

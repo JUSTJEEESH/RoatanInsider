@@ -44,7 +44,7 @@ struct InsiderPickCard: View {
                     HStack(spacing: 4) {
                         Text(business.category.displayName)
                         Text("·")
-                        Text(business.area.displayName)
+                        Text(business.areaDisplayName)
                         Text("·")
                         Text(business.priceLabel)
                     }

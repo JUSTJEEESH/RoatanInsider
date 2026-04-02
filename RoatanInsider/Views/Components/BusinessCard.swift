@@ -31,7 +31,7 @@ struct BusinessCard: View {
                         if let rating = business.rating {
                             RatingView(rating: rating, size: 12)
                         }
-                        Text(business.area.displayName)
+                        Text(business.areaDisplayName)
                         Text("·")
                         Text(business.priceLabel)
 
@@ -52,7 +52,7 @@ struct BusinessCard: View {
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(business.name), \(business.category.displayName) in \(business.area.displayName), \(business.priceLabel)")
+        .accessibilityLabel("\(business.name), \(business.category.displayName) in \(business.areaDisplayName), \(business.priceLabel)")
     }
 
     private var distanceText: String? {
@@ -92,7 +92,7 @@ struct BusinessCardCompact: View {
                         if let rating = business.rating {
                             RatingView(rating: rating, size: 11)
                         }
-                        Text(business.area.displayName)
+                        Text(business.areaDisplayName)
                         Text("·")
                         Text(business.priceLabel)
 
@@ -113,7 +113,7 @@ struct BusinessCardCompact: View {
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(business.name), \(business.area.displayName), \(business.priceLabel)")
+        .accessibilityLabel("\(business.name), \(business.areaDisplayName), \(business.priceLabel)")
     }
 
     private var distanceText: String? {
@@ -153,7 +153,7 @@ struct BusinessCardGrid: View {
                         if let rating = business.rating {
                             RatingView(rating: rating, size: 10)
                         }
-                        Text(business.area.displayName)
+                        Text(business.areaDisplayName)
                         Text("·")
                         Text(business.priceLabel)
 
@@ -174,7 +174,7 @@ struct BusinessCardGrid: View {
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(business.name), \(business.area.displayName)")
+        .accessibilityLabel("\(business.name), \(business.areaDisplayName)")
     }
 
     private var distanceText: String? {

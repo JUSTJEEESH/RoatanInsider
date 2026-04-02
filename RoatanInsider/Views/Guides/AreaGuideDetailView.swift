@@ -2,14 +2,14 @@ import SwiftUI
 import MapKit
 
 struct AreaGuideDetailView: View {
-    let area: Area
+    let guide: AreaGuide
     @Environment(DataManager.self) private var dataManager
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 // Area hero image or map fallback
-                let imageURL = URL(string: AppConstants.supabaseStorageBaseURL.replacingOccurrences(of: "business-photos/", with: "area-photos/") + area.rawValue + ".jpg")
+                let imageURL = URL(string: AppConstants.supabaseStorageBaseURL.replacingOccurrences(of: "business-photos/", with: "area-photos/") + guide.area + ".jpg")
 
                 if let url = imageURL {
                     AsyncImage(url: url) { phase in
@@ -30,24 +30,59 @@ struct AreaGuideDetailView: View {
                 }
 
                 // Description
-                Text(area.description)
+                Text(guide.descriptionText)
                     .font(.riBody)
                     .foregroundStyle(Color.riMediumGray)
                     .lineSpacing(4)
 
-                // Best For
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Best For")
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundStyle(Color.riDark)
-
-                    Text(area.bestFor)
+                if !guide.overview.isEmpty && guide.overview != guide.descriptionText {
+                    Text(guide.overview)
                         .font(.riBody)
                         .foregroundStyle(Color.riMediumGray)
+                        .lineSpacing(4)
+                }
+
+                // Best For
+                if !guide.bestFor.isEmpty {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Best For")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundStyle(Color.riDark)
+
+                        Text(guide.bestFor)
+                            .font(.riBody)
+                            .foregroundStyle(Color.riMediumGray)
+                    }
+                }
+
+                // Vibe
+                if !guide.vibe.isEmpty {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Vibe")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundStyle(Color.riDark)
+
+                        Text(guide.vibe)
+                            .font(.riBody)
+                            .foregroundStyle(Color.riMediumGray)
+                    }
+                }
+
+                // Getting There
+                if !guide.gettingThere.isEmpty {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Getting There")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundStyle(Color.riDark)
+
+                        Text(guide.gettingThere)
+                            .font(.riBody)
+                            .foregroundStyle(Color.riMediumGray)
+                    }
                 }
 
                 // Top picks from this area
-                let areaBusinesses = dataManager.businesses(for: area)
+                let areaBusinesses = dataManager.businesses(forAreaId: guide.area)
                 if !areaBusinesses.isEmpty {
                     VStack(alignment: .leading, spacing: 16) {
                         Text("Top Picks")
@@ -86,7 +121,7 @@ struct AreaGuideDetailView: View {
             .padding(20)
         }
         .background(Color.riWhite)
-        .navigationTitle(area.displayName)
+        .navigationTitle(guide.name)
         .navigationBarTitleDisplayMode(.large)
         .navigationDestination(for: Business.self) { business in
             BusinessDetailView(business: business)
@@ -95,7 +130,7 @@ struct AreaGuideDetailView: View {
 
     private var areaMap: some View {
         Map {
-            Marker(area.displayName, coordinate: area.coordinate)
+            Marker(guide.name, coordinate: guide.coordinate)
                 .tint(Color.riPink)
         }
         .mapStyle(.standard)

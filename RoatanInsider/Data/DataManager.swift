@@ -128,6 +128,10 @@ final class DataManager {
         activeBusinesses.filter { $0.isInArea(area) }.smartSorted()
     }
 
+    func businesses(forAreaId areaId: String) -> [Business] {
+        activeBusinesses.filter { $0.isInArea(areaId) }.smartSorted()
+    }
+
     func business(withId id: String) -> Business? {
         businesses.first { $0.id == id }
     }

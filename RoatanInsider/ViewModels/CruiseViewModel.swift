@@ -131,7 +131,7 @@ final class CruiseViewModel {
 
         var result = businesses
             .filter { $0.isActive }
-            .filter { selectedPort.nearbyAreas.contains($0.area) }
+            .filter { biz in selectedPort.nearbyAreas.contains { $0.rawValue == biz.area } }
 
         // When time is short, restrict to closer businesses only
         if timeRemaining < 3600 {

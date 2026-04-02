@@ -30,7 +30,11 @@ struct Business: Identifiable, Codable, Hashable {
     let insiderTip: String?
     let category: Category
     let subcategory: String
-    let area: Area
+    let area: String
+    var areaEnum: Area? { Area(rawValue: area) }
+    var areaDisplayName: String {
+        areaEnum?.displayName ?? area.replacingOccurrences(of: "_", with: " ").capitalized
+    }
     let latitude: Double
     let longitude: Double
     let addressDescription: String
@@ -66,7 +70,7 @@ struct Business: Identifiable, Codable, Hashable {
         insiderTip = try container.decodeIfPresent(String.self, forKey: .insiderTip)
         category = try container.decode(Category.self, forKey: .category)
         subcategory = try container.decode(String.self, forKey: .subcategory)
-        area = try container.decode(Area.self, forKey: .area)
+        area = try container.decode(String.self, forKey: .area)
         latitude = try container.decode(Double.self, forKey: .latitude)
         longitude = try container.decode(Double.self, forKey: .longitude)
         addressDescription = try container.decode(String.self, forKey: .addressDescription)
@@ -121,20 +125,26 @@ struct Business: Identifiable, Codable, Hashable {
         return result
     }
 
-    /// All unique areas this business is in
-    var allAreas: [Area] {
+    /// All unique area strings this business is in
+    var allAreaStrings: [String] {
         var areas = [area]
         for loc in additionalLocations {
-            if !areas.contains(loc.area) {
-                areas.append(loc.area)
+            let locArea = loc.area.rawValue
+            if !areas.contains(locArea) {
+                areas.append(locArea)
             }
         }
         return areas
     }
 
-    /// Check if this business is in a given area
+    /// Check if this business is in a given area (by enum)
     func isInArea(_ a: Area) -> Bool {
-        area == a || additionalLocations.contains { $0.area == a }
+        area == a.rawValue || additionalLocations.contains { $0.area == a }
+    }
+
+    /// Check if this business is in a given area (by string)
+    func isInArea(_ areaId: String) -> Bool {
+        area == areaId || additionalLocations.contains { $0.area.rawValue == areaId }
     }
 
     // MARK: - Existing computed properties

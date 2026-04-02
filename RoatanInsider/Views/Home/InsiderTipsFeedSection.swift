@@ -52,7 +52,7 @@ struct TipCard: View {
     let tip: String
     let businessName: String
     let category: Category
-    let area: Area
+    let area: String
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -80,7 +80,7 @@ struct TipCard: View {
                 HStack(spacing: 4) {
                     Image(systemName: category.iconName)
                         .font(.system(size: 11, weight: .medium))
-                    Text(area.displayName)
+                    Text(area.replacingOccurrences(of: "_", with: " ").capitalized)
                         .font(.riCaption(12))
                 }
                 .foregroundStyle(Color.riMint)

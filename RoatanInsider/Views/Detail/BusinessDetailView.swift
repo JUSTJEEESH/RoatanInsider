@@ -186,7 +186,7 @@ struct BusinessDetailView: View {
     }
 
     private func shareBusiness() {
-        let shareText = "\(b.name) — \(b.category.displayName) in \(b.area.displayName). \(b.insiderTip ?? b.description.prefix(100).description)"
+        let shareText = "\(b.name) — \(b.category.displayName) in \(b.areaDisplayName). \(b.insiderTip ?? b.description.prefix(100).description)"
 
         var items: [Any] = [shareText]
 

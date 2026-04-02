@@ -139,27 +139,28 @@ struct FilterBar: View {
 
 struct AreaFilterSheet: View {
     @Bindable var searchEngine: SearchEngine
+    @Environment(DataManager.self) private var dataManager
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         NavigationStack {
             List {
-                ForEach(Area.allCases) { area in
+                ForEach(dataManager.areaGuides) { guide in
                     Button {
                         Haptics.tap()
-                        if searchEngine.selectedAreas.contains(area) {
-                            searchEngine.selectedAreas.remove(area)
+                        if searchEngine.selectedAreas.contains(guide.area) {
+                            searchEngine.selectedAreas.remove(guide.area)
                         } else {
-                            searchEngine.selectedAreas.insert(area)
+                            searchEngine.selectedAreas.insert(guide.area)
                         }
                     } label: {
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text(area.displayName)
+                                Text(guide.name)
                                     .font(.system(size: 16, weight: .medium))
                                     .foregroundStyle(Color.riDark)
 
-                                Text(area.bestFor)
+                                Text(guide.bestFor)
                                     .font(.riCaption(13))
                                     .foregroundStyle(Color.riLightGray)
                                     .lineLimit(1)
@@ -167,7 +168,7 @@ struct AreaFilterSheet: View {
 
                             Spacer()
 
-                            if searchEngine.selectedAreas.contains(area) {
+                            if searchEngine.selectedAreas.contains(guide.area) {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundStyle(Color.riMint)
                             }
