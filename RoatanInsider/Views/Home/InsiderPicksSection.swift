@@ -4,18 +4,20 @@ struct InsiderPicksSection: View {
     let businesses: [Business]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            SectionHeader(
-                title: "Insider Picks",
-                subtitle: "Curated by locals who know the island best"
-            )
+        if !businesses.isEmpty {
+            VStack(alignment: .leading, spacing: 20) {
+                SectionHeader(
+                    title: "Insider Picks",
+                    subtitle: "Curated by locals who know the island best"
+                )
 
-            VStack(spacing: 24) {
-                ForEach(businesses.prefix(4)) { business in
-                    InsiderPickCard(business: business)
+                VStack(spacing: 24) {
+                    ForEach(businesses.prefix(4)) { business in
+                        InsiderPickCard(business: business)
+                    }
                 }
+                .padding(.horizontal, 20)
             }
-            .padding(.horizontal, 20)
         }
     }
 }
