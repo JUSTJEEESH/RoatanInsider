@@ -47,6 +47,12 @@ struct BusinessImageView: View {
     }
 
     private var supabaseURL: URL? {
+        let imageName = business.images.first ?? ""
+        // If the image name has a file extension, use it directly
+        if imageName.contains(".") && imageName != "business_placeholder" {
+            return URL(string: AppConstants.supabaseStorageBaseURL + imageName)
+        }
+        // Fall back to slug-based .jpg lookup
         let slug = business.slug
         guard !slug.isEmpty else { return nil }
         return URL(string: AppConstants.supabaseStorageBaseURL + slug + ".jpg")
