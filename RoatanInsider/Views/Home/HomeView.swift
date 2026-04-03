@@ -71,6 +71,12 @@ struct HomeView: View {
             .navigationDestination(for: CategoryNavID.self) { navID in
                 CategoryListView(categoryId: navID.id)
             }
+            .navigationDestination(for: CuratedCollection.self) { collection in
+                CollectionDetailView(
+                    collection: collection,
+                    businesses: dataManager.activeBusinesses.filter(collection.filter).smartSorted()
+                )
+            }
             .fullScreenCover(isPresented: $showCruiseMode) {
                 CruiseModeView(viewModel: cruiseViewModel)
             }
