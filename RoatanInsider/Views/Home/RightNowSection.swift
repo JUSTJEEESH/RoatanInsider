@@ -62,63 +62,111 @@ struct RightNowSection: View {
     private var recommendedBusinesses: [Business] {
         let active = businesses.filter { $0.isActive }
 
-        // Tourist-heavy areas that most visitors are in
+        // Tourist-heavy areas
         let touristAreas: Set<String> = ["west_bay", "west_end", "sandy_bay", "coxen_hole", "dixon_cove"]
 
-        let scored = active.map { business -> (Business, Double) in
+        // Categories that should NEVER appear in Right Now (not activity-based)
+        let excludedCategories: Set<String> = ["stay", "real_estate", "health", "services", "transport", "rentals"]
+
+        // West-facing sunset areas
+        let sunsetAreas: Set<String> = ["west_bay", "west_end", "sandy_bay"]
+        let sunsetFeatures: Set<String> = ["Sunset Views", "Waterfront", "Ocean View", "Beachfront"]
+
+        let scored = active.compactMap { business -> (Business, Double)? in
+            // Hard exclude categories that don't belong in "what to do right now"
+            if excludedCategories.contains(business.category) { return nil }
+
             var score: Double = 0
 
-            // Currently open is the strongest signal
+            // --- OPEN/CLOSED (most important) ---
+            let hasHoursData = !business.hours.isEmpty && business.hours.values.contains(where: { $0 != nil })
             if business.isOpenNow() {
                 score += 50
+            } else if hasHoursData {
+                return nil // Confirmed closed — exclude entirely
             } else {
-                // If we have hours data and it's closed, heavily penalize
-                let hasHoursData = !business.hours.isEmpty && business.hours.values.contains(where: { $0 != nil })
-                if hasHoursData {
-                    score -= 100 // Don't show closed businesses
+                score -= 20 // Unknown hours — penalize but don't exclude
+            }
+
+            // --- CATEGORY RELEVANCE (very important) ---
+            let matchingCategory = context.categoryIds.contains(business.category)
+            if matchingCategory {
+                score += 30 // Strong boost for right category at right time
+            } else {
+                score -= 15 // Wrong category for this time — penalize
+            }
+
+            // --- TIME-SPECIFIC BONUSES ---
+            switch context {
+            case .goldenHour:
+                // Sunset time: heavily prefer west-facing waterfront spots
+                if sunsetAreas.contains(business.area) {
+                    score += 15
                 }
-                // No hours data = uncertain, small penalty
-                score -= 10
+                if !sunsetFeatures.isDisjoint(with: Set(business.features)) {
+                    score += 20
+                }
+                // Bars and restaurants with views are ideal
+                if business.category == "drink" { score += 10 }
+
+            case .earlyMorning:
+                // Coffee shops, bakeries, dive shops prepping
+                if business.features.contains("Coffee") || business.features.contains("Breakfast") {
+                    score += 20
+                }
+                if business.category == "dive" { score += 10 }
+
+            case .morning:
+                // Dive, tours, active stuff
+                if business.category == "dive" || business.category == "tours" {
+                    score += 15
+                }
+
+            case .lunchtime:
+                // Restaurants are king
+                if business.category == "eat" { score += 15 }
+                if business.features.contains("Lunch") { score += 10 }
+
+            case .afternoon:
+                // Beaches, snorkeling, shopping, frozen drinks
+                if business.category == "beaches" { score += 15 }
+                if business.category == "shop" { score += 5 }
+
+            case .evening:
+                // Dinner restaurants, live music, bars
+                if business.category == "eat" { score += 15 }
+                if business.features.contains("Live Music") { score += 15 }
+                if business.category == "nightlife" { score += 10 }
+                if business.features.contains("Dinner") || business.features.contains("Date Night") {
+                    score += 10
+                }
+
+            case .lateNight:
+                // Bars and nightlife only
+                if business.category == "nightlife" { score += 20 }
+                if business.category == "drink" { score += 15 }
+                if business.features.contains("Late Night") { score += 10 }
             }
 
-            // Prefer tourist areas where most visitors are
+            // --- LOCATION ---
             if touristAreas.contains(business.area) {
-                score += 20
+                score += 15
             }
 
-            // Featured and insider picks are curated quality
-            if business.isFeatured { score += 15 }
-            if business.isInsiderPick { score += 10 }
+            // --- QUALITY SIGNALS ---
+            if business.isFeatured { score += 12 }
+            if business.isInsiderPick { score += 8 }
+            if let rating = business.rating { score += rating }
+            if let reviews = business.reviewCount, reviews > 50 { score += 3 }
 
-            // Has verified hours data — more trustworthy
-            if !business.hours.isEmpty {
-                score += 10
-            }
-
-            // Matching category for time of day
-            if context.categoryIds.contains(business.category) {
-                score += 10
-            }
-
-            // Has a real photo (not placeholder)
+            // Has a real photo (looks better in the card)
             if let img = business.images.first, img != "business_placeholder" {
-                score += 5
-            }
-
-            // Higher rated businesses bubble up
-            if let rating = business.rating {
-                score += rating // adds 0-5
-            }
-
-            // Review count as tiebreaker (popular places)
-            if let reviews = business.reviewCount, reviews > 50 {
                 score += 3
             }
 
             return (business, score)
         }
 
-        // Sort by score descending, take top 8
         return scored
             .sorted { $0.1 > $1.1 }
             .prefix(8)
