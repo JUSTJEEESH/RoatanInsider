@@ -61,14 +61,68 @@ struct RightNowSection: View {
 
     private var recommendedBusinesses: [Business] {
         let active = businesses.filter { $0.isActive }
-        let open = active.filter { $0.isOpenNow() }
-        let pool = open.isEmpty ? active : open
 
-        let filtered = pool.filter { business in
-            context.categoryIds.contains(business.category)
+        // Tourist-heavy areas that most visitors are in
+        let touristAreas: Set<String> = ["west_bay", "west_end", "sandy_bay", "coxen_hole", "dixon_cove"]
+
+        let scored = active.map { business -> (Business, Double) in
+            var score: Double = 0
+
+            // Currently open is the strongest signal
+            if business.isOpenNow() {
+                score += 50
+            } else {
+                // If we have hours data and it's closed, heavily penalize
+                let hasHoursData = !business.hours.isEmpty && business.hours.values.contains(where: { $0 != nil })
+                if hasHoursData {
+                    score -= 100 // Don't show closed businesses
+                }
+                // No hours data = uncertain, small penalty
+                score -= 10
+            }
+
+            // Prefer tourist areas where most visitors are
+            if touristAreas.contains(business.area) {
+                score += 20
+            }
+
+            // Featured and insider picks are curated quality
+            if business.isFeatured { score += 15 }
+            if business.isInsiderPick { score += 10 }
+
+            // Has verified hours data — more trustworthy
+            if !business.hours.isEmpty {
+                score += 10
+            }
+
+            // Matching category for time of day
+            if context.categoryIds.contains(business.category) {
+                score += 10
+            }
+
+            // Has a real photo (not placeholder)
+            if let img = business.images.first, img != "business_placeholder" {
+                score += 5
+            }
+
+            // Higher rated businesses bubble up
+            if let rating = business.rating {
+                score += rating // adds 0-5
+            }
+
+            // Review count as tiebreaker (popular places)
+            if let reviews = business.reviewCount, reviews > 50 {
+                score += 3
+            }
+
+            return (business, score)
         }
 
-        return filtered.isEmpty ? Array(pool.prefix(8)) : Array(filtered.shuffled().prefix(8))
+        // Sort by score descending, take top 8
+        return scored
+            .sorted { $0.1 > $1.1 }
+            .prefix(8)
+            .map { $0.0 }
     }
 }
 
