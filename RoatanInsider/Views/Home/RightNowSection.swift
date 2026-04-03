@@ -66,7 +66,7 @@ struct RightNowSection: View {
         let touristAreas: Set<String> = ["west_bay", "west_end", "sandy_bay", "coxen_hole", "dixon_cove"]
 
         // Categories that should NEVER appear in Right Now (not activity-based)
-        let excludedCategories: Set<String> = ["stay", "real_estate", "health", "services", "transport", "rentals"]
+        let excludedCategories = context.excludedCategories
 
         // West-facing sunset areas
         let sunsetAreas: Set<String> = ["west_bay", "west_end", "sandy_bay"]
@@ -243,6 +243,36 @@ enum TimeContext {
         case .goldenHour:   return ["drink", "eat", "beaches"]
         case .evening:      return ["eat", "drink", "nightlife"]
         case .lateNight:    return ["nightlife", "drink"]
+        }
+    }
+
+    /// Categories that should NEVER appear for this time slot
+    var excludedCategories: Set<String> {
+        // These never make sense in "Right Now" regardless of time
+        let always: Set<String> = ["stay", "real_estate", "health", "services", "transport", "rentals"]
+
+        switch self {
+        case .earlyMorning:
+            // Sunrise: no nightlife, bars, shopping, events, fitness, marina, photography
+            return always.union(["nightlife", "drink", "shop", "events", "fitness", "marina", "photography", "groceries", "family"])
+        case .morning:
+            // Morning: no nightlife, late-night stuff
+            return always.union(["nightlife"])
+        case .lunchtime:
+            // Lunchtime: no nightlife, dive (they're already out)
+            return always.union(["nightlife"])
+        case .afternoon:
+            // Afternoon: no nightlife
+            return always.union(["nightlife"])
+        case .goldenHour:
+            // Sunset: focused on drinks, food, views — no dive, tours, shopping
+            return always.union(["dive", "tours", "shop", "groceries", "fitness", "marina", "photography", "family"])
+        case .evening:
+            // Dinner/nightlife: no dive, tours, beaches, shopping
+            return always.union(["dive", "tours", "beaches", "shop", "groceries", "fitness", "marina", "photography"])
+        case .lateNight:
+            // Late night: only bars and nightlife — exclude everything else
+            return always.union(["eat", "dive", "tours", "beaches", "shop", "groceries", "fitness", "marina", "photography", "events", "family", "wellness"])
         }
     }
 }
