@@ -2,14 +2,29 @@ import SwiftUI
 
 // MARK: - Collection Definition
 
-struct CuratedCollection: Identifiable {
-    let id = UUID()
+struct CuratedCollection: Identifiable, Hashable {
+    let id: String
     let title: String
     let subtitle: String
     let icon: String
     let coverImage: String
     let coverCategory: String
-    let filter: (Business) -> Bool
+    let collectionKey: String
+
+    var filter: (Business) -> Bool {
+        let key = collectionKey
+        return { business in
+            business.collections.contains(key) && business.isActive
+        }
+    }
+
+    static func == (lhs: CuratedCollection, rhs: CuratedCollection) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 
     /// Supabase storage URL for the collection cover image.
     var coverImageURL: URL? {
@@ -18,69 +33,13 @@ struct CuratedCollection: Identifiable {
     }
 
     static let all: [CuratedCollection] = [
-        CuratedCollection(
-            title: "Best Sunset Spots",
-            subtitle: "Chase the golden hour",
-            icon: "sunset.fill",
-            coverImage: "collection_sunset_spots.jpg",
-            coverCategory: "drink"
-        ) { business in
-            business.collections.contains("sunset_spots") && business.isActive
-        },
-        CuratedCollection(
-            title: "Best for Families",
-            subtitle: "Fun for the whole crew",
-            icon: "figure.2.and.child.holdinghands",
-            coverImage: "collection_families.jpg",
-            coverCategory: "tours"
-        ) { business in
-            business.collections.contains("families") && business.isActive
-        },
-        CuratedCollection(
-            title: "Cheap Eats",
-            subtitle: "Great food, easy prices",
-            icon: "fork.knife",
-            coverImage: "collection_cheap_eats.jpg",
-            coverCategory: "eat"
-        ) { business in
-            business.collections.contains("cheap_eats") && business.isActive
-        },
-        CuratedCollection(
-            title: "Beach Bars",
-            subtitle: "Feet in the sand, drink in hand",
-            icon: "wineglass.fill",
-            coverImage: "collection_beach_bars.jpg",
-            coverCategory: "drink"
-        ) { business in
-            business.collections.contains("beach_bars") && business.isActive
-        },
-        CuratedCollection(
-            title: "Off the Beaten Path",
-            subtitle: "Beyond the tourist zone",
-            icon: "map.fill",
-            coverImage: "collection_off_beaten_path.jpg",
-            coverCategory: "tours"
-        ) { business in
-            business.collections.contains("off_beaten_path") && business.isActive
-        },
-        CuratedCollection(
-            title: "Cruise Day Must-Dos",
-            subtitle: "Make the most of your port day",
-            icon: "ferry.fill",
-            coverImage: "collection_cruise_must_dos.jpg",
-            coverCategory: "tours"
-        ) { business in
-            business.collections.contains("cruise_must_dos") && business.isActive
-        },
-        CuratedCollection(
-            title: "Late Night",
-            subtitle: "Where the island comes alive after dark",
-            icon: "moon.stars.fill",
-            coverImage: "collection_late_night.jpg",
-            coverCategory: "nightlife"
-        ) { business in
-            business.collections.contains("late_night") && business.isActive
-        }
+        CuratedCollection(id: "sunset_spots", title: "Best Sunset Spots", subtitle: "Chase the golden hour", icon: "sunset.fill", coverImage: "collection_sunset_spots.jpg", coverCategory: "drink", collectionKey: "sunset_spots"),
+        CuratedCollection(id: "families", title: "Best for Families", subtitle: "Fun for the whole crew", icon: "figure.2.and.child.holdinghands", coverImage: "collection_families.jpg", coverCategory: "tours", collectionKey: "families"),
+        CuratedCollection(id: "cheap_eats", title: "Cheap Eats", subtitle: "Great food, easy prices", icon: "fork.knife", coverImage: "collection_cheap_eats.jpg", coverCategory: "eat", collectionKey: "cheap_eats"),
+        CuratedCollection(id: "beach_bars", title: "Beach Bars", subtitle: "Feet in the sand, drink in hand", icon: "wineglass.fill", coverImage: "collection_beach_bars.jpg", coverCategory: "drink", collectionKey: "beach_bars"),
+        CuratedCollection(id: "off_beaten_path", title: "Off the Beaten Path", subtitle: "Beyond the tourist zone", icon: "map.fill", coverImage: "collection_off_beaten_path.jpg", coverCategory: "tours", collectionKey: "off_beaten_path"),
+        CuratedCollection(id: "cruise_must_dos", title: "Cruise Day Must-Dos", subtitle: "Make the most of your port day", icon: "ferry.fill", coverImage: "collection_cruise_must_dos.jpg", coverCategory: "tours", collectionKey: "cruise_must_dos"),
+        CuratedCollection(id: "late_night", title: "Late Night", subtitle: "Where the island comes alive after dark", icon: "moon.stars.fill", coverImage: "collection_late_night.jpg", coverCategory: "nightlife", collectionKey: "late_night"),
     ]
 }
 
@@ -104,12 +63,7 @@ struct CollectionsSection: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 16) {
                         ForEach(collections) { collection in
-                            NavigationLink {
-                                CollectionDetailView(
-                                    collection: collection,
-                                    businesses: businesses.filter(collection.filter).smartSorted()
-                                )
-                            } label: {
+                            NavigationLink(value: collection) {
                                 CollectionCard(collection: collection)
                             }
                             .buttonStyle(.plain)
@@ -232,8 +186,5 @@ struct CollectionDetailView: View {
         }
         .background(Color.riWhite)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationDestination(for: Business.self) { business in
-            BusinessDetailView(business: business)
-        }
     }
 }
