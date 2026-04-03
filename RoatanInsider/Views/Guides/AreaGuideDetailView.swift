@@ -4,13 +4,16 @@ import MapKit
 struct AreaGuideDetailView: View {
     let guide: AreaGuide
     @Environment(DataManager.self) private var dataManager
+    @State private var selectedBusiness: Business?
+
+    private var imageURL: URL? {
+        URL(string: AppConstants.supabaseStorageBaseURL.replacingOccurrences(of: "business-photos/", with: "area-photos/") + guide.area + ".jpg")
+    }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                // Area hero image or map fallback
-                let imageURL = URL(string: AppConstants.supabaseStorageBaseURL.replacingOccurrences(of: "business-photos/", with: "area-photos/") + guide.area + ".jpg")
-
+                // Area hero image
                 if let url = imageURL {
                     AsyncImage(url: url) { phase in
                         switch phase {
@@ -18,15 +21,15 @@ struct AreaGuideDetailView: View {
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(height: 200)
+                                .frame(height: 220)
                                 .frame(maxWidth: .infinity)
                                 .clipShape(RoundedRectangle(cornerRadius: 16))
                         default:
-                            areaMap
+                            heroPlaceholder
                         }
                     }
                 } else {
-                    areaMap
+                    heroPlaceholder
                 }
 
                 // Description
@@ -90,7 +93,9 @@ struct AreaGuideDetailView: View {
                             .foregroundStyle(Color.riDark)
 
                         ForEach(areaBusinesses.prefix(5)) { business in
-                            NavigationLink(value: business) {
+                            Button {
+                                selectedBusiness = business
+                            } label: {
                                 HStack(spacing: 12) {
                                     BusinessImageView(business: business)
                                         .frame(width: 60, height: 60)
@@ -123,16 +128,27 @@ struct AreaGuideDetailView: View {
         .background(Color.riWhite)
         .navigationTitle(guide.name)
         .navigationBarTitleDisplayMode(.large)
+        .navigationDestination(item: $selectedBusiness) { business in
+            BusinessDetailView(business: business)
+        }
     }
 
-    private var areaMap: some View {
-        Map {
-            Marker(guide.name, coordinate: guide.coordinate)
-                .tint(Color.riPink)
+    private var heroPlaceholder: some View {
+        ZStack {
+            Color.riMint.opacity(0.15)
+
+            VStack(spacing: 12) {
+                Image(systemName: "photo")
+                    .font(.system(size: 36, weight: .light))
+                    .foregroundStyle(Color.riMint.opacity(0.5))
+
+                Text(guide.name)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(Color.riMint.opacity(0.7))
+            }
         }
-        .mapStyle(.standard)
-        .frame(height: 200)
+        .frame(height: 220)
+        .frame(maxWidth: .infinity)
         .clipShape(RoundedRectangle(cornerRadius: 16))
-        .disabled(true)
     }
 }
