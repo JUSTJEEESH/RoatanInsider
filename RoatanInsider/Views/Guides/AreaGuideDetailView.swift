@@ -123,9 +123,6 @@ struct AreaGuideDetailView: View {
         .background(Color.riWhite)
         .navigationTitle(guide.name)
         .navigationBarTitleDisplayMode(.large)
-        .navigationDestination(for: Business.self) { business in
-            BusinessDetailView(business: business)
-        }
     }
 
     private var areaMap: some View {
