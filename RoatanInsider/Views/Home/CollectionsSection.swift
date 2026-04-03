@@ -232,5 +232,8 @@ struct CollectionDetailView: View {
         }
         .background(Color.riWhite)
         .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(for: Business.self) { business in
+            BusinessDetailView(business: business)
+        }
     }
 }
