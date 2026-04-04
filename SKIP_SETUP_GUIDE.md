@@ -21,6 +21,14 @@ This installs Skip AND automatically installs:
 
 It takes a few minutes. Let it finish completely.
 
+After it finishes, verify the version:
+
+```bash
+skip version
+```
+
+You should see Skip 1.8.x or later.
+
 ### Step 2: Install Android Studio
 
 If you don't already have it:
@@ -57,9 +65,15 @@ This checks that you have:
 - Android SDK
 - A running Android emulator
 - Kotlin & Gradle
-- Java JDK
+- Java JDK 17 (bundled with Android Studio)
 
-**Fix any issues it flags before proceeding.** The output will tell you exactly what's missing.
+It also does a full test cycle: builds a test project, runs Swift AND Kotlin tests, and verifies APK output. **Fix any issues it flags before proceeding.** The output will tell you exactly what's missing.
+
+For more detail if something fails:
+
+```bash
+skip checkup --verbose
+```
 
 ### Step 5: Get a Google Maps API Key
 
@@ -370,6 +384,21 @@ I'll write detailed guides for each phase as we get there. Phase 1 is the gateke
 
 **Build is extremely slow**
 → First build is always slow (5-10 min). Subsequent builds use cache and are much faster.
+
+**"Trust and Enable" plugin prompt in Xcode**
+→ First time opening a Skip project, Xcode asks you to trust the skipstone plugin. Click "Trust & Enable" — it's safe. Easy to miss!
+
+**Environment variables not found by Xcode**
+→ If `skip checkup` passes in Terminal but Xcode builds fail, it's because Xcode launched from Finder doesn't inherit your shell environment. **Always open the project from Terminal:**
+```bash
+open Project.xcworkspace
+```
+
+**Java version mismatch**
+→ Skip requires JDK 17 (bundled with Android Studio). If `skip checkup` flags Java, check with `java -version`. If wrong version, set JAVA_HOME to Android Studio's bundled JDK.
+
+**"Do NOT add packages via Xcode's UI"**
+→ All dependencies must go in Package.swift directly. Do NOT use Xcode's File → Add Package Dependencies menu — it won't work with Skip.
 
 ---
 
