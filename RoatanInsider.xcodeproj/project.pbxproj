@@ -117,12 +117,14 @@
 		771325A05FD5B483C97C568D /* essentials.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED16F04793732E4FF32E158 /* essentials.json */; };
 		0A3C304657086C8DDAAB7EF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F73B201D3F8FCB88366DA9E3 /* Assets.xcassets */; };
 		AA00BB11CC22DD33EE44FF01 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = AA00BB11CC22DD33EE44FF02 /* PrivacyInfo.xcprivacy */; };
+		C1A2B3D4E5F60033023 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F60033024 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		510C3B6295519CEB5456C37E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView.swift"; sourceTree = "<group>"; };
 		C6258ED1366C00347B067090 /* RoatanInsiderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoatanInsiderApp.swift"; sourceTree = "<group>"; };
 		AA00BB11CC22DD33EE44FF02 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PrivacyInfo.xcprivacy"; sourceTree = "<group>"; };
+		C1A2B3D4E5F60033024 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = "Localizable.xcstrings"; path = "Resources/Localizable.xcstrings"; sourceTree = "<group>"; };
 		71DC0C34EBA248624D3A1D9A /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExploreViewModel.swift"; sourceTree = "<group>"; };
 		389B96AE42FCC81DEE6EF792 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoritesViewModel.swift"; sourceTree = "<group>"; };
 		92B8F61BC74788565AFEE3C1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewModel.swift"; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				C6258ED1366C00347B067090 /* RoatanInsiderApp.swift */,
 				F73B201D3F8FCB88366DA9E3 /* Assets.xcassets */,
 				AA00BB11CC22DD33EE44FF02 /* PrivacyInfo.xcprivacy */,
+				C1A2B3D4E5F60033024 /* Localizable.xcstrings */,
 			);
 			path = RoatanInsider;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				es,
 				Base,
 			);
 			mainGroup = 8EAA44BDA91D75EFD720DBE0;
@@ -591,6 +595,7 @@
 				AAFF1122334455660003 /* ask-a-local.json in Resources */,
 				0A3C304657086C8DDAAB7EF1 /* Assets.xcassets in Resources */,
 				AA00BB11CC22DD33EE44FF01 /* PrivacyInfo.xcprivacy in Resources */,
+				C1A2B3D4E5F60033023 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
