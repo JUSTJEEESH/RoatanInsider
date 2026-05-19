@@ -11,6 +11,7 @@ struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(LocationManager.self) private var locationManager
     @Environment(WeatherService.self) private var weatherService
+    @Environment(UserProfileStore.self) private var profileStore
     let favoritesStore: FavoritesStore
 
     var body: some View {
@@ -80,12 +81,17 @@ struct ContentView: View {
             Analytics.track(.appLaunched)
             await dataManager.checkForUpdates()
             prewarmFeaturedImages()
+            AppIntentDataBridge.shared.install(dataManager: dataManager, router: router)
+        }
+        .onChange(of: dataManager.businesses) { _, newValue in
+            AppIntentDataBridge.shared.refreshBusinesses(newValue)
         }
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {
                 Task {
                     await dataManager.checkForUpdates()
                     await weatherService.refreshIfNeeded()
+                    await NotificationManager.shared.scheduleAll(profile: profileStore.profile)
                 }
             }
         }
