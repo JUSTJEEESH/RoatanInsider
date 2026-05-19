@@ -13,6 +13,9 @@ struct HomeView: View {
                 LazyVStack(spacing: 0) {
                     HeroSection(selectedTab: $selectedTab)
 
+                    LiveConditionsStrip()
+                        .padding(.top, 20)
+
                     CruiseBanner(showCruiseMode: $showCruiseMode)
                         .padding(.top, 24)
 
