@@ -3,10 +3,21 @@ import CoreLocation
 
 @Observable
 final class CruiseViewModel {
-    var isActive = false
-    var selectedPort: CruisePort = .mahoganyBay
-    var boardingTime: Date = CruiseViewModel.defaultBoardingTime()
+    var isActive = false {
+        didSet { syncLiveActivity(prevActive: oldValue) }
+    }
+    var selectedPort: CruisePort = .mahoganyBay {
+        didSet { if isActive { updateLiveActivity() } }
+    }
+    var boardingTime: Date = CruiseViewModel.defaultBoardingTime() {
+        didSet { if isActive { updateLiveActivity() } }
+    }
     var showPortPicker = false
+
+    /// Total seconds budgeted for the cruise day. Used by the Live Activity
+    /// progress bar — captures the elapsed-vs-remaining ratio at start.
+    private var totalCruiseDuration: TimeInterval = 0
+    private var cruiseStartTime: Date = .now
 
     enum CruisePort: String, CaseIterable, Identifiable {
         case mahoganyBay = "mahogany_bay"
@@ -183,6 +194,45 @@ final class CruiseViewModel {
         // Round-trip travel + 30 min minimum at the location
         let minimumNeeded = Double(minutes * 2 + 30) * 60
         return timeRemaining > minimumNeeded
+    }
+
+    // MARK: - Live Activity
+
+    /// Refresh the lock-screen activity. Call once a minute from CruiseModeView
+    /// (it already has a 15-second timer; piggy-back on it).
+    func tickLiveActivity() {
+        guard isActive else { return }
+        updateLiveActivity()
+    }
+
+    @MainActor
+    private func syncLiveActivity(prevActive: Bool) {
+        // Activity authorization can fail silently (user disabled), so we
+        // gate behind isActive without checking — the manager handles that.
+        if isActive && !prevActive {
+            cruiseStartTime = .now
+            totalCruiseDuration = max(60, boardingTime.timeIntervalSince(cruiseStartTime))
+            LiveActivityManager.shared.startCruiseActivity(
+                boardingTime: boardingTime,
+                portName: selectedPort.displayName,
+                urgency: urgencyLevel.message,
+                elapsedFraction: 0
+            )
+        } else if !isActive && prevActive {
+            LiveActivityManager.shared.endCruiseActivity()
+        }
+    }
+
+    @MainActor
+    private func updateLiveActivity() {
+        let elapsed = max(0, Date().timeIntervalSince(cruiseStartTime))
+        let fraction = totalCruiseDuration > 0 ? min(1, elapsed / totalCruiseDuration) : 0
+        LiveActivityManager.shared.updateCruiseActivity(
+            boardingTime: boardingTime,
+            portName: selectedPort.displayName,
+            urgency: urgencyLevel.message,
+            elapsedFraction: fraction
+        )
     }
 
     // MARK: - Helpers

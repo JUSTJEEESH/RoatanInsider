@@ -63,6 +63,10 @@ struct CruiseModeView: View {
             }
             .onReceive(timer) { _ in
                 tick += 1
+                viewModel.tickLiveActivity()
+            }
+            .onAppear {
+                viewModel.isActive = true
             }
         }
     }
