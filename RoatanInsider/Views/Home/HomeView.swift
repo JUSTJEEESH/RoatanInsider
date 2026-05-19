@@ -19,8 +19,12 @@ struct HomeView: View {
                     CruiseBanner(showCruiseMode: $showCruiseMode)
                         .padding(.top, 24)
 
+                    RightNowFeedSection()
+                        .padding(.top, 28)
+                        .padding(.bottom, AppConstants.sectionPadding)
+
                     RightNowSection(businesses: dataManager.activeBusinesses)
-                        .padding(.vertical, AppConstants.sectionPadding)
+                        .padding(.bottom, AppConstants.sectionPadding)
 
                     ContinueBrowsingSection()
                         .padding(.vertical, AppConstants.sectionPadding)
