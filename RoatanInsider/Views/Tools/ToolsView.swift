@@ -4,6 +4,7 @@ struct ToolsView: View {
     @State private var viewModel = ToolsViewModel()
     @Environment(PurchaseManager.self) private var purchases
     @State private var showPaywall = false
+    @State private var showSettings = false
 
     var body: some View {
         NavigationStack {
@@ -21,6 +22,17 @@ struct ToolsView: View {
                     Spacer()
 
                     insiderPlusChip
+
+                    Button {
+                        Haptics.tap()
+                        showSettings = true
+                    } label: {
+                        Image(systemName: "gearshape")
+                            .font(.system(size: 17, weight: .medium))
+                            .foregroundStyle(Color.riMediumGray)
+                            .frame(width: 32, height: 32)
+                    }
+                    .accessibilityLabel("Settings")
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 12)
@@ -76,6 +88,9 @@ struct ToolsView: View {
             }
             .sheet(isPresented: $showPaywall) {
                 PaywallView()
+            }
+            .sheet(isPresented: $showSettings) {
+                SettingsView()
             }
         }
     }
