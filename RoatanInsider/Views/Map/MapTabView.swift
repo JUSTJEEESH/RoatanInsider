@@ -79,31 +79,29 @@ struct MapTabView: View {
                             }
                         } else if isOffline {
                             let businesses = viewModel.filteredBusinesses(from: dataManager.businesses)
-                            ForEach(businesses) { business in
-                                // Primary location pin
-                                Annotation(business.name, coordinate: business.coordinate) {
-                                    MapPinView(
-                                        business: business,
-                                        isSelected: viewModel.selectedBusiness?.id == business.id
-                                    )
-                                    .onTapGesture {
-                                        withAnimation(.easeInOut(duration: 0.2)) {
-                                            viewModel.selectedBusiness = business
-                                            viewModel.selectedMapItem = nil
-                                        }
-                                    }
-                                }
-                                // Additional location pins
-                                ForEach(business.additionalLocations, id: \.self) { location in
-                                    Annotation(business.name, coordinate: location.coordinate) {
-                                        MapPinView(
-                                            business: business,
-                                            isSelected: viewModel.selectedBusiness?.id == business.id
-                                        )
-                                        .onTapGesture {
-                                            withAnimation(.easeInOut(duration: 0.2)) {
-                                                viewModel.selectedBusiness = business
-                                                viewModel.selectedMapItem = nil
+                            let clusters = MapClusterer.cluster(businesses, span: viewModel.visibleSpan)
+                            ForEach(clusters) { pin in
+                                Annotation(pin.isCluster ? "\(pin.count) places" : pin.representative.name, coordinate: pin.coordinate) {
+                                    Group {
+                                        if pin.isCluster {
+                                            ClusterPinView(count: pin.count)
+                                                .onTapGesture {
+                                                    Haptics.tap()
+                                                    withAnimation(.easeInOut(duration: 0.35)) {
+                                                        viewModel.zoom(to: MapClusterer.zoomInRegion(for: pin, currentSpan: viewModel.visibleSpan))
+                                                    }
+                                                }
+                                        } else {
+                                            MapPinView(
+                                                business: pin.representative,
+                                                isSelected: viewModel.selectedBusiness?.id == pin.representative.id
+                                            )
+                                            .onTapGesture {
+                                                Analytics.track(.mapPinTapped(id: pin.representative.id))
+                                                withAnimation(.easeInOut(duration: 0.2)) {
+                                                    viewModel.selectedBusiness = pin.representative
+                                                    viewModel.selectedMapItem = nil
+                                                }
                                             }
                                         }
                                     }
@@ -118,6 +116,9 @@ struct MapTabView: View {
                         MapUserLocationButton()
                         MapCompass()
                         MapScaleView()
+                    }
+                    .onMapCameraChange(frequency: .onEnd) { context in
+                        viewModel.visibleSpan = context.region.span
                     }
                 }
                 .overlay(alignment: .bottom) {

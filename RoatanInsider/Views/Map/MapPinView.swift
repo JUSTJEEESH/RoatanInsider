@@ -49,6 +49,28 @@ struct AppleResultPinView: View {
     }
 }
 
+struct ClusterPinView: View {
+    let count: Int
+
+    var body: some View {
+        let size: CGFloat = count >= 30 ? 52 : (count >= 10 ? 46 : 40)
+
+        ZStack {
+            Circle()
+                .fill(Color.riPink)
+                .frame(width: size, height: size)
+            Circle()
+                .stroke(Color.white, lineWidth: 3)
+                .frame(width: size, height: size)
+            Text("\(count)")
+                .font(.system(size: count >= 100 ? 14 : 16, weight: .bold))
+                .foregroundStyle(.white)
+                .monospacedDigit()
+        }
+        .shadow(color: .black.opacity(0.25), radius: 4, x: 0, y: 2)
+    }
+}
+
 struct Triangle: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()

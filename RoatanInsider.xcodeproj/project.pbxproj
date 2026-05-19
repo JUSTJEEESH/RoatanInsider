@@ -85,6 +85,7 @@
 		C1A2B3D4E5F60023013 /* TripPlanStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F60023014 /* TripPlanStore.swift */; };
 		C1A2B3D4E5F60025015 /* TripItineraryGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F60025016 /* TripItineraryGenerator.swift */; };
 		C1A2B3D4E5F60027017 /* TripPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F60027018 /* TripPlanView.swift */; };
+		C1A2B3D4E5F6002B01B /* MapClusterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F6002B01C /* MapClusterer.swift */; };
 		AAFF1122334455660003 /* ask-a-local.json in Resources */ = {isa = PBXBuildFile; fileRef = AAFF1122334455660004 /* ask-a-local.json */; };
 		6744D1163A8FF348A5301C83 /* SearchEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A9A634F3CE5F95335B4A75 /* SearchEngine.swift */; };
 		AA22BB33CC44DD55EE66FF01 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA22BB33CC44DD55EE66FF02 /* Haptics.swift */; };
@@ -213,6 +214,7 @@
 		C1A2B3D4E5F60023014 /* TripPlanStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TripPlanStore.swift"; sourceTree = "<group>"; };
 		C1A2B3D4E5F60025016 /* TripItineraryGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TripItineraryGenerator.swift"; sourceTree = "<group>"; };
 		C1A2B3D4E5F60027018 /* TripPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TripPlanView.swift"; sourceTree = "<group>"; };
+		C1A2B3D4E5F6002B01C /* MapClusterer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapClusterer.swift"; sourceTree = "<group>"; };
 		AAFF1122334455660004 /* ask-a-local.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "ask-a-local.json"; sourceTree = "<group>"; };
 		91A9A634F3CE5F95335B4A75 /* SearchEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchEngine.swift"; sourceTree = "<group>"; };
 		184A4AB40EF1F2D2FE0EAB19 /* areas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "areas.json"; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				C1A2B3D4E5F6001B00C /* RecentlyViewedStore.swift */,
 				C1A2B3D4E5F60023014 /* TripPlanStore.swift */,
 				C1A2B3D4E5F60025016 /* TripItineraryGenerator.swift */,
+				C1A2B3D4E5F6002B01C /* MapClusterer.swift */,
 				EE66FF77880099AA11220004 /* SpeechService.swift */,
 				BB33CC44DD55EE66FF770012 /* SunsetCalculator.swift */,
 			);
@@ -667,6 +670,7 @@
 				C1A2B3D4E5F60023013 /* TripPlanStore.swift in Sources */,
 				C1A2B3D4E5F60025015 /* TripItineraryGenerator.swift in Sources */,
 				C1A2B3D4E5F60027017 /* TripPlanView.swift in Sources */,
+				C1A2B3D4E5F6002B01B /* MapClusterer.swift in Sources */,
 				6744D1163A8FF348A5301C83 /* SearchEngine.swift in Sources */,
 				E1A2B3C4D5E6F70819203142 /* UnitPreference.swift in Sources */,
 				AA22BB33CC44DD55EE66FF01 /* Haptics.swift in Sources */,

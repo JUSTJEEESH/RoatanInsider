@@ -10,6 +10,7 @@ final class MapViewModel {
     var searchResults: [MKMapItem] = []
     var isSearching = false
     var cameraPosition: MapCameraPosition = .region(roatanRegion)
+    var visibleSpan: MKCoordinateSpan = roatanRegion.span
 
     private var currentSearchTask: Task<Void, Never>?
 
@@ -23,6 +24,11 @@ final class MapViewModel {
 
     var isShowingAppleResults: Bool {
         !searchResults.isEmpty
+    }
+
+    /// Animate the camera to a target region (used when a user taps a cluster).
+    func zoom(to region: MKCoordinateRegion) {
+        cameraPosition = .region(region)
     }
 
     // MARK: - Offline fallback: bundled pins
