@@ -2,6 +2,8 @@ import SwiftUI
 
 struct ToolsView: View {
     @State private var viewModel = ToolsViewModel()
+    @Environment(PurchaseManager.self) private var purchases
+    @State private var showPaywall = false
 
     var body: some View {
         NavigationStack {
@@ -17,6 +19,8 @@ struct ToolsView: View {
                             .foregroundStyle(Color.riLightGray)
                     }
                     Spacer()
+
+                    insiderPlusChip
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 12)
@@ -70,6 +74,31 @@ struct ToolsView: View {
             .task {
                 await viewModel.exchangeRateService.fetchLatestRate()
             }
+            .sheet(isPresented: $showPaywall) {
+                PaywallView()
+            }
         }
+    }
+
+    @ViewBuilder
+    private var insiderPlusChip: some View {
+        Button {
+            Haptics.tap()
+            showPaywall = true
+        } label: {
+            HStack(spacing: 4) {
+                Image(systemName: purchases.hasPremium ? "checkmark.seal.fill" : "sparkles")
+                    .font(.system(size: 11, weight: .bold))
+                Text(purchases.hasPremium ? "Insider+" : "Try Insider+")
+                    .font(.system(size: 12, weight: .bold))
+                    .tracking(0.3)
+            }
+            .foregroundStyle(purchases.hasPremium ? Color.riMint : Color.riPink)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background((purchases.hasPremium ? Color.riMint : Color.riPink).opacity(0.12))
+            .clipShape(Capsule())
+        }
+        .accessibilityLabel(purchases.hasPremium ? "Insider+ member" : "Try Insider+")
     }
 }

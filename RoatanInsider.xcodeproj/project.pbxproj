@@ -73,6 +73,8 @@
 		C1A2B3D4E5F600090009 /* DeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F60009000A /* DeepLinkRouter.swift */; };
 		C1A2B3D4E5F6000B000B /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F6000B000C /* UserProfile.swift */; };
 		C1A2B3D4E5F6000D000D /* UserProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F6000D000E /* UserProfileStore.swift */; };
+		C1A2B3D4E5F6000F000F /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F6000F0010 /* PurchaseManager.swift */; };
+		C1A2B3D4E5F60011001 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F60011002 /* PaywallView.swift */; };
 		AAFF1122334455660003 /* ask-a-local.json in Resources */ = {isa = PBXBuildFile; fileRef = AAFF1122334455660004 /* ask-a-local.json */; };
 		6744D1163A8FF348A5301C83 /* SearchEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A9A634F3CE5F95335B4A75 /* SearchEngine.swift */; };
 		AA22BB33CC44DD55EE66FF01 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA22BB33CC44DD55EE66FF02 /* Haptics.swift */; };
@@ -189,6 +191,8 @@
 		C1A2B3D4E5F60009000A /* DeepLinkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeepLinkRouter.swift"; sourceTree = "<group>"; };
 		C1A2B3D4E5F6000B000C /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfile.swift"; sourceTree = "<group>"; };
 		C1A2B3D4E5F6000D000E /* UserProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileStore.swift"; sourceTree = "<group>"; };
+		C1A2B3D4E5F6000F0010 /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PurchaseManager.swift"; sourceTree = "<group>"; };
+		C1A2B3D4E5F60011002 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaywallView.swift"; sourceTree = "<group>"; };
 		AAFF1122334455660004 /* ask-a-local.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "ask-a-local.json"; sourceTree = "<group>"; };
 		91A9A634F3CE5F95335B4A75 /* SearchEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchEngine.swift"; sourceTree = "<group>"; };
 		184A4AB40EF1F2D2FE0EAB19 /* areas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "areas.json"; sourceTree = "<group>"; };
@@ -295,6 +299,7 @@
 				C1A2B3D4E5F600070008 /* SearchSynonyms.swift */,
 				C1A2B3D4E5F60009000A /* DeepLinkRouter.swift */,
 				C1A2B3D4E5F6000D000E /* UserProfileStore.swift */,
+				C1A2B3D4E5F6000F0010 /* PurchaseManager.swift */,
 				EE66FF77880099AA11220004 /* SpeechService.swift */,
 				BB33CC44DD55EE66FF770012 /* SunsetCalculator.swift */,
 			);
@@ -339,6 +344,7 @@
 				FACFED56E433978F4BC60FB2 /* Home */,
 				6102130A33B29F5DBD4CF5FB /* Map */,
 				AA22BB33CC44DD55EE66FF30 /* Onboarding */,
+				C1A2B3D4E5F60013003 /* Paywall */,
 				555846928AD3258E38C20C23 /* Saved */,
 				6AC5A770C379D07F61854276 /* Tools */,
 			);
@@ -463,6 +469,14 @@
 				AA22BB33CC44DD55EE66FF0E /* OnboardingView.swift */,
 			);
 			path = "Onboarding";
+			sourceTree = "<group>";
+		};
+		C1A2B3D4E5F60013003 /* Paywall */ = {
+			isa = PBXGroup;
+			children = (
+				C1A2B3D4E5F60011002 /* PaywallView.swift */,
+			);
+			path = "Paywall";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -603,6 +617,8 @@
 				C1A2B3D4E5F600090009 /* DeepLinkRouter.swift in Sources */,
 				C1A2B3D4E5F6000B000B /* UserProfile.swift in Sources */,
 				C1A2B3D4E5F6000D000D /* UserProfileStore.swift in Sources */,
+				C1A2B3D4E5F6000F000F /* PurchaseManager.swift in Sources */,
+				C1A2B3D4E5F60011001 /* PaywallView.swift in Sources */,
 				6744D1163A8FF348A5301C83 /* SearchEngine.swift in Sources */,
 				E1A2B3C4D5E6F70819203142 /* UnitPreference.swift in Sources */,
 				AA22BB33CC44DD55EE66FF01 /* Haptics.swift in Sources */,
