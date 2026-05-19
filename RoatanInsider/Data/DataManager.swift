@@ -2,15 +2,30 @@ import Foundation
 
 @Observable
 final class DataManager {
-    var businesses: [Business] = []
+    var businesses: [Business] = [] {
+        didSet { rebuildDerived() }
+    }
     var cruiseGuides: [CruiseGuide] = []
     var areaGuides: [AreaGuide] = []
     var essentials: EssentialsGuide?
     var askALocalQuestions: [LocalQA] = []
     var categoryInfos: [CategoryInfo] = CategoryInfo.defaults
 
+    // Memoized derived collections — rebuilt only when `businesses` changes,
+    // not on every SwiftUI render. Home reads these 6+ times per frame.
+    private(set) var activeBusinesses: [Business] = []
+    private(set) var featuredBusinesses: [Business] = []
+    private(set) var bestOfBusinesses: [Business] = []
+
     init() {
         loadAll()
+        rebuildDerived()
+    }
+
+    private func rebuildDerived() {
+        activeBusinesses = businesses.filter { $0.isActive }
+        featuredBusinesses = activeBusinesses.filter { $0.isFeatured }
+        bestOfBusinesses = activeBusinesses.filter { $0.isBestOf }
     }
 
     private func loadAll() {
@@ -127,14 +142,6 @@ final class DataManager {
 
     // MARK: - Queries
 
-    var featuredBusinesses: [Business] {
-        businesses.filter { $0.isFeatured && $0.isActive }
-    }
-
-    var activeBusinesses: [Business] {
-        businesses.filter { $0.isActive }
-    }
-
     func businesses(for category: Category) -> [Business] {
         activeBusinesses.filter { $0.hasCategory(category) }.smartSorted()
     }
@@ -172,7 +179,4 @@ final class DataManager {
             .map { $0 }
     }
 
-    var bestOfBusinesses: [Business] {
-        businesses.filter { $0.isBestOf && $0.isActive }
-    }
 }

@@ -51,29 +51,10 @@ struct PhotoGallery: View {
                 .aspectRatio(contentMode: .fill)
                 .clipped()
         case .remote(let urlString):
-            if let url = URL(string: urlString) {
-                AsyncImage(url: url) { phase in
-                    switch phase {
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .clipped()
-                    case .failure:
-                        placeholderView
-                    case .empty:
-                        placeholderView
-                            .overlay {
-                                ProgressView()
-                                    .tint(Color.riMint)
-                            }
-                    @unknown default:
-                        placeholderView
-                    }
-                }
-            } else {
+            CachedRemoteImage(url: URL(string: urlString), contentMode: .fill) {
                 placeholderView
             }
+            .clipped()
         case .placeholder:
             placeholderView
         }

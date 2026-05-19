@@ -10,48 +10,39 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: 0) {
+                LazyVStack(spacing: 0) {
                     HeroSection(selectedTab: $selectedTab)
 
-                    // Cruise banner
                     CruiseBanner(showCruiseMode: $showCruiseMode)
                         .padding(.top, 24)
 
-                    // Right Now — white background (time-aware picks)
                     RightNowSection(businesses: dataManager.activeBusinesses)
                         .padding(.vertical, AppConstants.sectionPadding)
 
-                    // Featured — dark background
                     FeaturedSection(businesses: dataManager.featuredBusinesses)
                         .padding(.vertical, AppConstants.sectionPadding)
                         .frame(maxWidth: .infinity)
                         .background(Color.riFixedDark)
 
-                    // Best of Roatán — curated collections (white background)
                     CollectionsSection(businesses: dataManager.activeBusinesses)
                         .padding(.vertical, AppConstants.sectionPadding)
 
-                    // Categories — dark background
                     CategoryGridSection()
                         .padding(.vertical, AppConstants.sectionPadding)
                         .frame(maxWidth: .infinity)
                         .background(Color.riFixedDark)
 
-                    // Insider Picks — white background
                     InsiderPicksSection(businesses: dataManager.insiderPicks())
                         .padding(.vertical, AppConstants.sectionPadding)
 
-                    // Local Secrets (tips feed) — dark background
                     InsiderTipsFeedSection(businesses: dataManager.activeBusinesses)
                         .padding(.vertical, AppConstants.sectionPadding)
                         .frame(maxWidth: .infinity)
                         .background(Color.riFixedDark)
 
-                    // Quick Guides — white background
                     QuickGuidesSection()
                         .padding(.vertical, AppConstants.sectionPadding)
 
-                    // Business Owner CTA — dark background
                     BusinessCTASection()
                         .padding(.vertical, AppConstants.sectionPadding)
                         .frame(maxWidth: .infinity)

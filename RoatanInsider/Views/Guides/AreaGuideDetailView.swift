@@ -14,23 +14,12 @@ struct AreaGuideDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 // Area hero image
-                if let url = imageURL {
-                    AsyncImage(url: url) { phase in
-                        switch phase {
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(height: 220)
-                                .frame(maxWidth: .infinity)
-                                .clipShape(RoundedRectangle(cornerRadius: 16))
-                        default:
-                            heroPlaceholder
-                        }
-                    }
-                } else {
+                CachedRemoteImage(url: imageURL, contentMode: .fill) {
                     heroPlaceholder
                 }
+                .frame(height: 220)
+                .frame(maxWidth: .infinity)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
 
                 // Description
                 Text(guide.descriptionText)

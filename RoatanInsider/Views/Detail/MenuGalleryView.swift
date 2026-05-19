@@ -102,27 +102,7 @@ struct ZoomableImage: View {
                 }
             }
         case .remote(let urlString):
-            if let url = URL(string: urlString) {
-                AsyncImage(url: url) { phase in
-                    switch phase {
-                    case .success(let image):
-                        ZoomableScrollView {
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        }
-                    case .failure:
-                        menuPlaceholder
-                    case .empty:
-                        ProgressView()
-                            .tint(Color.riMint)
-                    @unknown default:
-                        menuPlaceholder
-                    }
-                }
-            } else {
-                menuPlaceholder
-            }
+            CachedMenuImage(url: URL(string: urlString), placeholder: { menuPlaceholder })
         }
     }
 
@@ -134,6 +114,39 @@ struct ZoomableImage: View {
             Text("Menu image unavailable")
                 .font(.riCaption(14))
                 .foregroundStyle(.white.opacity(0.4))
+        }
+    }
+}
+
+private struct CachedMenuImage<Placeholder: View>: View {
+    let url: URL?
+    @ViewBuilder let placeholder: () -> Placeholder
+
+    @State private var uiImage: UIImage?
+    @State private var didFail = false
+
+    var body: some View {
+        Group {
+            if let uiImage {
+                ZoomableScrollView {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                }
+            } else if didFail {
+                placeholder()
+            } else {
+                ProgressView()
+                    .tint(Color.riMint)
+            }
+        }
+        .task(id: url) {
+            guard let url else { didFail = true; return }
+            let loaded = await ImageCache.shared.image(for: url)
+            await MainActor.run {
+                self.uiImage = loaded
+                self.didFail = (loaded == nil)
+            }
         }
     }
 }

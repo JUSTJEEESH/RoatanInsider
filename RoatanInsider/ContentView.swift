@@ -55,7 +55,21 @@ struct ContentView: View {
         }
         .task {
             await dataManager.checkForUpdates()
+            prewarmFeaturedImages()
         }
+    }
+
+    private func prewarmFeaturedImages() {
+        let urls: [URL] = dataManager.featuredBusinesses.prefix(12).compactMap { business in
+            let first = business.images.first ?? ""
+            if UIImage(named: first) != nil { return nil }
+            if first.contains(".") && first != "business_placeholder" {
+                return URL(string: AppConstants.supabaseStorageBaseURL + first)
+            }
+            guard !business.slug.isEmpty else { return nil }
+            return URL(string: AppConstants.supabaseStorageBaseURL + business.slug + ".jpg")
+        }
+        Task { await ImageCache.shared.prefetch(urls) }
     }
 
     private func configureTabBarAppearance() {

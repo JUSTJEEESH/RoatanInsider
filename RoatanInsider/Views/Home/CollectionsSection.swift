@@ -86,26 +86,7 @@ struct CollectionCard: View {
             // Cover
             ZStack(alignment: .bottomLeading) {
                 // Cover image from Supabase, with category placeholder fallback
-                if let url = collection.coverImageURL {
-                    AsyncImage(url: url) { phase in
-                        switch phase {
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                        case .failure:
-                            coverPlaceholder
-                        case .empty:
-                            coverPlaceholder
-                                .overlay {
-                                    ProgressView()
-                                        .tint(Color.riMint)
-                                }
-                        @unknown default:
-                            coverPlaceholder
-                        }
-                    }
-                } else {
+                CachedRemoteImage(url: collection.coverImageURL, contentMode: .fill) {
                     coverPlaceholder
                 }
 
