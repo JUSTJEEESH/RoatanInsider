@@ -172,33 +172,33 @@ struct BusinessDetailView: View {
         .toolbarBackground(.hidden, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    Haptics.impact()
-                    shareBusiness()
-                } label: {
+                ShareLink(
+                    item: shareURL,
+                    subject: Text(b.name),
+                    message: Text(shareMessage),
+                    preview: SharePreview(b.name, image: shareCardImage ?? Image(systemName: "palm.tree"))
+                ) {
                     Image(systemName: "square.and.arrow.up")
                         .font(.system(size: 16, weight: .medium))
                         .foregroundStyle(Color.riDark)
                 }
                 .accessibilityLabel("Share \(b.name)")
+                .simultaneousGesture(TapGesture().onEnded { Haptics.impact() })
             }
         }
     }
 
-    private func shareBusiness() {
-        let shareText = "\(b.name) — \(b.categoryDisplayName) in \(b.areaDisplayName). \(b.insiderTip ?? b.description.prefix(100).description)"
+    private var shareURL: URL {
+        AppConstants.businessShareURL(slug: b.slug) ?? URL(string: AppConstants.webOrigin)!
+    }
 
-        var items: [Any] = [shareText]
+    private var shareMessage: String {
+        "\(b.name) — \(b.categoryDisplayName) in \(b.areaDisplayName). \(b.insiderTip ?? String(b.description.prefix(100)))"
+    }
 
-        if let image = ShareHelper.shareImage(for: b) {
-            items.insert(image, at: 0)
-        }
-
-        let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let rootVC = windowScene.windows.first?.rootViewController {
-            rootVC.present(activityVC, animated: true)
-        }
+    private var shareCardImage: Image? {
+        guard let ui = ShareHelper.shareImage(for: b) else { return nil }
+        return Image(uiImage: ui)
     }
 
     private var hoursSection: some View {

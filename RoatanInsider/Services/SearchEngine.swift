@@ -40,13 +40,12 @@ final class SearchEngine {
         var results = businesses.filter { $0.isActive }
 
         if !searchText.isEmpty {
-            let query = searchText.lowercased()
-            results = results.filter { biz in
-                biz.name.lowercased().contains(query) ||
-                biz.description.lowercased().contains(query) ||
-                biz.allCategories.contains { $0.subcategory.lowercased().contains(query) } ||
-                biz.allAreaStrings.contains { $0.replacingOccurrences(of: "_", with: " ").lowercased().contains(query) } ||
-                biz.features.contains { $0.lowercased().contains(query) }
+            let tokens = SearchSynonyms.expand(searchText)
+            if !tokens.isEmpty {
+                results = results.filter { biz in
+                    let haystack = biz.searchHaystack
+                    return tokens.contains { token in haystack.contains(token) }
+                }
             }
         }
 

@@ -7,6 +7,7 @@ struct ContentView: View {
     @State private var networkMonitor = NetworkMonitor()
     @State private var unitPreference = UnitPreference()
     @State private var selectedTab = 0
+    @Environment(\.scenePhase) private var scenePhase
     let favoritesStore: FavoritesStore
 
     var body: some View {
@@ -56,6 +57,13 @@ struct ContentView: View {
         .task {
             await dataManager.checkForUpdates()
             prewarmFeaturedImages()
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                Task {
+                    await dataManager.checkForUpdates()
+                }
+            }
         }
     }
 

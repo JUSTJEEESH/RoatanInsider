@@ -187,6 +187,13 @@ struct Business: Identifiable, Codable, Hashable {
         String(repeating: "$", count: priceRange)
     }
 
+    /// Diacritic-folded, lowercased blob containing everything we want to
+    /// search against. Built once via the cache below — `lowercased()` +
+    /// `folding()` on 200 businesses every keystroke is wasteful.
+    var searchHaystack: String {
+        BusinessSearchHaystackCache.shared.haystack(for: self)
+    }
+
     var isActive: Bool {
         status == "active"
     }
@@ -223,5 +230,36 @@ struct Business: Identifiable, Codable, Hashable {
         }
 
         return false
+    }
+}
+
+/// Per-business search haystack cache. Keyed on business id so a remote update
+/// can invalidate via `purgeAll()`. Diacritic-folded and lowercased once.
+final class BusinessSearchHaystackCache: @unchecked Sendable {
+    static let shared = BusinessSearchHaystackCache()
+    private var storage: [String: String] = [:]
+    private let queue = DispatchQueue(label: "ri.haystack", attributes: .concurrent)
+
+    private init() {}
+
+    func haystack(for business: Business) -> String {
+        if let cached = queue.sync(execute: { storage[business.id] }) {
+            return cached
+        }
+        let built = Self.build(for: business)
+        queue.async(flags: .barrier) { self.storage[business.id] = built }
+        return built
+    }
+
+    func purgeAll() {
+        queue.async(flags: .barrier) { self.storage.removeAll() }
+    }
+
+    private static func build(for b: Business) -> String {
+        var parts: [String] = [b.name, b.description, b.subcategory, b.area, b.addressDescription]
+        parts.append(contentsOf: b.features)
+        parts.append(contentsOf: b.allCategories.map { $0.subcategory })
+        parts.append(contentsOf: b.allAreaStrings.map { $0.replacingOccurrences(of: "_", with: " ") })
+        return parts.joined(separator: " ").normalisedForSearch
     }
 }

@@ -68,6 +68,8 @@
 		AAFF1122334455660001 /* RemoteDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFF1122334455660002 /* RemoteDataService.swift */; };
 		C1A2B3D4E5F600010001 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F600010002 /* ImageCache.swift */; };
 		C1A2B3D4E5F600030003 /* CachedRemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F600030004 /* CachedRemoteImage.swift */; };
+		C1A2B3D4E5F600050005 /* AppLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F600050006 /* AppLog.swift */; };
+		C1A2B3D4E5F600070007 /* SearchSynonyms.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F600070008 /* SearchSynonyms.swift */; };
 		AAFF1122334455660003 /* ask-a-local.json in Resources */ = {isa = PBXBuildFile; fileRef = AAFF1122334455660004 /* ask-a-local.json */; };
 		6744D1163A8FF348A5301C83 /* SearchEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A9A634F3CE5F95335B4A75 /* SearchEngine.swift */; };
 		AA22BB33CC44DD55EE66FF01 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA22BB33CC44DD55EE66FF02 /* Haptics.swift */; };
@@ -179,6 +181,8 @@
 		AAFF1122334455660002 /* RemoteDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataService.swift; sourceTree = "<group>"; };
 		C1A2B3D4E5F600010002 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageCache.swift"; sourceTree = "<group>"; };
 		C1A2B3D4E5F600030004 /* CachedRemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CachedRemoteImage.swift"; sourceTree = "<group>"; };
+		C1A2B3D4E5F600050006 /* AppLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppLog.swift"; sourceTree = "<group>"; };
+		C1A2B3D4E5F600070008 /* SearchSynonyms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchSynonyms.swift"; sourceTree = "<group>"; };
 		AAFF1122334455660004 /* ask-a-local.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "ask-a-local.json"; sourceTree = "<group>"; };
 		91A9A634F3CE5F95335B4A75 /* SearchEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchEngine.swift"; sourceTree = "<group>"; };
 		184A4AB40EF1F2D2FE0EAB19 /* areas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "areas.json"; sourceTree = "<group>"; };
@@ -281,6 +285,7 @@
 				AAFF1122334455660002 /* RemoteDataService.swift */,
 				C1A2B3D4E5F600010002 /* ImageCache.swift */,
 				91A9A634F3CE5F95335B4A75 /* SearchEngine.swift */,
+				C1A2B3D4E5F600070008 /* SearchSynonyms.swift */,
 				EE66FF77880099AA11220004 /* SpeechService.swift */,
 				BB33CC44DD55EE66FF770012 /* SunsetCalculator.swift */,
 			);
@@ -296,6 +301,7 @@
 				6E372D20A681F4605FF9F95E /* Fonts.swift */,
 				AA22BB33CC44DD55EE66FF02 /* Haptics.swift */,
 				F7A8B9C0D1E2F31425364758 /* UnitPreference.swift */,
+				C1A2B3D4E5F600050006 /* AppLog.swift */,
 			);
 			path = "Utilities";
 			sourceTree = "<group>";
@@ -583,6 +589,8 @@
 				AAFF1122334455660001 /* RemoteDataService.swift in Sources */,
 				C1A2B3D4E5F600010001 /* ImageCache.swift in Sources */,
 				C1A2B3D4E5F600030003 /* CachedRemoteImage.swift in Sources */,
+				C1A2B3D4E5F600050005 /* AppLog.swift in Sources */,
+				C1A2B3D4E5F600070007 /* SearchSynonyms.swift in Sources */,
 				6744D1163A8FF348A5301C83 /* SearchEngine.swift in Sources */,
 				E1A2B3C4D5E6F70819203142 /* UnitPreference.swift in Sources */,
 				AA22BB33CC44DD55EE66FF01 /* Haptics.swift in Sources */,

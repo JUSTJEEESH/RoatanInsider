@@ -26,6 +26,7 @@ final class DataManager {
         activeBusinesses = businesses.filter { $0.isActive }
         featuredBusinesses = activeBusinesses.filter { $0.isFeatured }
         bestOfBusinesses = activeBusinesses.filter { $0.isBestOf }
+        BusinessSearchHaystackCache.shared.purgeAll()
     }
 
     private func loadAll() {

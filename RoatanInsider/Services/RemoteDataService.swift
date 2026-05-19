@@ -29,10 +29,10 @@ final class RemoteDataService {
             do {
                 let data = try Data(contentsOf: cachedURL)
                 let result = try JSONDecoder().decode(T.self, from: data)
-                print("✅ Loaded \(filename) from cache")
+                AppLog.data.debug("Loaded \(filename, privacy: .public) from cache")
                 return result
             } catch {
-                print("⚠️ Failed to read cached \(filename): \(error.localizedDescription)")
+                AppLog.data.warning("Failed to read cached \(filename, privacy: .public): \(error.localizedDescription)")
                 try? FileManager.default.removeItem(at: cachedURL)
             }
         }
@@ -43,10 +43,10 @@ final class RemoteDataService {
             do {
                 let data = try Data(contentsOf: bundleURL)
                 let result = try JSONDecoder().decode(T.self, from: data)
-                print("✅ Loaded \(filename) from bundle")
+                AppLog.data.debug("Loaded \(filename, privacy: .public) from bundle")
                 return result
             } catch {
-                print("⚠️ Failed to decode bundled \(filename): \(error)")
+                AppLog.data.error("Failed to decode bundled \(filename, privacy: .public): \(String(describing: error))")
             }
         }
 
@@ -85,7 +85,7 @@ final class RemoteDataService {
             UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: "remoteDataLastFetch")
             return manifest
         } catch {
-            print("⚠️ Manifest fetch failed: \(error.localizedDescription)")
+            AppLog.network.warning("Manifest fetch failed: \(error.localizedDescription)")
             return nil
         }
     }
@@ -114,10 +114,10 @@ final class RemoteDataService {
             try data.write(to: cachedURL, options: .atomic)
             UserDefaults.standard.set(remoteVersion, forKey: versionKey)
 
-            print("✅ Updated \(filename) to v\(remoteVersion)")
+            AppLog.data.notice("Updated \(filename, privacy: .public) to v\(remoteVersion)")
             return decoded
         } catch {
-            print("⚠️ Failed to fetch \(filename): \(error.localizedDescription)")
+            AppLog.network.warning("Failed to fetch \(filename, privacy: .public): \(error.localizedDescription)")
             return nil
         }
     }

@@ -35,4 +35,14 @@ enum AppConstants {
     // Default tip percentages
     static let tipPercentages = [10, 15, 18, 20]
     static let quickAmounts = [5, 10, 20, 50, 100]
+
+    // Web / Universal Links — used by ShareLink, future notifications, widgets,
+    // and App Intents to deep-link into specific content. Update `webOrigin` to
+    // match the live AASA-registered domain.
+    static let webOrigin = "https://roataninsider.com"
+
+    static func businessShareURL(slug: String) -> URL? {
+        guard !slug.isEmpty else { return nil }
+        return URL(string: "\(webOrigin)/b/\(slug)")
+    }
 }
