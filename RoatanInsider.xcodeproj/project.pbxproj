@@ -80,6 +80,7 @@
 		C1A2B3D4E5F60019009 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F6001900A /* Analytics.swift */; };
 		C1A2B3D4E5F6001B00B /* RecentlyViewedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F6001B00C /* RecentlyViewedStore.swift */; };
 		C1A2B3D4E5F6001D00D /* ContinueBrowsingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F6001D00E /* ContinueBrowsingSection.swift */; };
+		C1A2B3D4E5F6001F00F /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F6001F010 /* EmptyStateView.swift */; };
 		AAFF1122334455660003 /* ask-a-local.json in Resources */ = {isa = PBXBuildFile; fileRef = AAFF1122334455660004 /* ask-a-local.json */; };
 		6744D1163A8FF348A5301C83 /* SearchEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A9A634F3CE5F95335B4A75 /* SearchEngine.swift */; };
 		AA22BB33CC44DD55EE66FF01 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA22BB33CC44DD55EE66FF02 /* Haptics.swift */; };
@@ -203,6 +204,7 @@
 		C1A2B3D4E5F6001900A /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics.swift"; sourceTree = "<group>"; };
 		C1A2B3D4E5F6001B00C /* RecentlyViewedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecentlyViewedStore.swift"; sourceTree = "<group>"; };
 		C1A2B3D4E5F6001D00E /* ContinueBrowsingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContinueBrowsingSection.swift"; sourceTree = "<group>"; };
+		C1A2B3D4E5F6001F010 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EmptyStateView.swift"; sourceTree = "<group>"; };
 		AAFF1122334455660004 /* ask-a-local.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "ask-a-local.json"; sourceTree = "<group>"; };
 		91A9A634F3CE5F95335B4A75 /* SearchEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchEngine.swift"; sourceTree = "<group>"; };
 		184A4AB40EF1F2D2FE0EAB19 /* areas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "areas.json"; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 				42DA2C4F7D608011B2EDFCD6 /* BusinessCard.swift */,
 				B2C3D4E5F6071829A3B4C5D6 /* BusinessImageView.swift */,
 				C1A2B3D4E5F600030004 /* CachedRemoteImage.swift */,
+				C1A2B3D4E5F6001F010 /* EmptyStateView.swift */,
 				92E96A2A0AF97CA265A823A1 /* CategoryIcon.swift */,
 				D3CC41408A026EF99B71056B /* FavoriteButton.swift */,
 				AEC204C0715C10682D6C667F /* OpenStatusBadge.swift */,
@@ -639,6 +642,7 @@
 				C1A2B3D4E5F60019009 /* Analytics.swift in Sources */,
 				C1A2B3D4E5F6001B00B /* RecentlyViewedStore.swift in Sources */,
 				C1A2B3D4E5F6001D00D /* ContinueBrowsingSection.swift in Sources */,
+				C1A2B3D4E5F6001F00F /* EmptyStateView.swift in Sources */,
 				6744D1163A8FF348A5301C83 /* SearchEngine.swift in Sources */,
 				E1A2B3C4D5E6F70819203142 /* UnitPreference.swift in Sources */,
 				AA22BB33CC44DD55EE66FF01 /* Haptics.swift in Sources */,

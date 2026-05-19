@@ -70,19 +70,10 @@ struct ExploreView: View {
     }
 
     private var emptyState: some View {
-        VStack(spacing: 12) {
-            Image(systemName: "magnifyingglass")
-                .font(.system(size: 40, weight: .light))
-                .foregroundStyle(Color.riLightGray)
-
-            Text("No results found")
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundStyle(Color.riDark)
-
-            Text("Try adjusting your search or filters")
-                .font(.riBody)
-                .foregroundStyle(Color.riLightGray)
-        }
-        .padding(.top, 60)
+        EmptyStateView(
+            symbol: "magnifyingglass",
+            title: "No results found",
+            message: "Try a different word, drop a filter, or zoom out the area."
+        )
     }
 }

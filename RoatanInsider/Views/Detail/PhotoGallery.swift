@@ -15,7 +15,16 @@ struct PhotoGallery: View {
             }
         }
         .tabViewStyle(.page(indexDisplayMode: displayImages.count > 1 ? .always : .never))
-        .frame(height: 320)
+        .frame(height: 360)
+        .overlay(alignment: .bottom) {
+            LinearGradient(
+                colors: [.clear, .black.opacity(0.5)],
+                startPoint: .center,
+                endPoint: .bottom
+            )
+            .frame(height: 140)
+            .allowsHitTesting(false)
+        }
     }
 
     /// Determines what images to show: local assets, or Supabase URLs via slug

@@ -15,8 +15,19 @@ struct BusinessDetailView: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 0) {
-                // Hero image
+                // Hero image — parallax: stretches when pulled, scrolls at
+                // half rate when reading. `.visualEffect` keeps layout stable
+                // (other content doesn't shift); only the rendered transform
+                // changes.
                 PhotoGallery(images: b.images, categoryIconName: b.categoryIconName, categoryDisplayName: b.categoryDisplayName, slug: b.slug)
+                    .visualEffect { content, proxy in
+                        let minY = proxy.frame(in: .scrollView).minY
+                        let stretch = max(0, minY)
+                        let parallax = min(0, minY) * 0.5
+                        return content
+                            .scaleEffect(1 + stretch / 600, anchor: .top)
+                            .offset(y: parallax)
+                    }
 
                 VStack(alignment: .leading, spacing: 20) {
                     // Title section
