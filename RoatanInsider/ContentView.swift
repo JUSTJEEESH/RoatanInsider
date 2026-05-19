@@ -39,9 +39,9 @@ struct ContentView: View {
                 }
                 .tag(3)
 
-            SavedView()
+            TripPlanView()
                 .tabItem {
-                    Label("Saved", systemImage: "heart.fill")
+                    Label("Trip", systemImage: "calendar.badge.clock")
                 }
                 .tag(4)
         }
@@ -92,7 +92,7 @@ struct ContentView: View {
     }
 
     private func tabName(_ index: Int) -> String {
-        let names = ["home", "explore", "map", "tools", "saved"]
+        let names = ["home", "explore", "map", "tools", "trip"]
         return (0..<names.count).contains(index) ? names[index] : "tab_\(index)"
     }
 
