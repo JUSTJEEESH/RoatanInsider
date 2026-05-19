@@ -22,6 +22,9 @@ struct HomeView: View {
                     RightNowSection(businesses: dataManager.activeBusinesses)
                         .padding(.vertical, AppConstants.sectionPadding)
 
+                    ContinueBrowsingSection()
+                        .padding(.vertical, AppConstants.sectionPadding)
+
                     FeaturedSection(businesses: dataManager.featuredBusinesses)
                         .padding(.vertical, AppConstants.sectionPadding)
                         .frame(maxWidth: .infinity)

@@ -10,6 +10,7 @@ struct RoatanInsiderApp: App {
     @State private var locationManager = LocationManager()
     @State private var purchaseManager = PurchaseManager()
     @State private var weatherService = WeatherService()
+    @State private var recentlyViewed = RecentlyViewedStore()
     private let modelContainer: ModelContainer
     private let favoritesStore: FavoritesStore
 
@@ -58,6 +59,7 @@ struct RoatanInsiderApp: App {
             .environment(locationManager)
             .environment(purchaseManager)
             .environment(weatherService)
+            .environment(recentlyViewed)
         }
         .modelContainer(modelContainer)
     }

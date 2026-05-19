@@ -49,6 +49,10 @@ struct PaywallView: View {
         .preferredColorScheme(.dark)
         .task {
             await purchases.refresh()
+            Analytics.track(.paywallShown(source: "tools_chip"))
+        }
+        .onDisappear {
+            Analytics.track(.paywallDismissed(source: "tools_chip"))
         }
     }
 
@@ -352,11 +356,17 @@ struct PaywallView: View {
 
     private func purchase() {
         guard let product = purchases.products.first(where: { $0.id == selectedProductID }) else { return }
+        Analytics.track(.paywallProductSelected(productId: product.id))
         Task {
             isPurchasing = true
             defer { isPurchasing = false }
             let ok = await purchases.purchase(product)
-            if ok { dismiss() }
+            if ok {
+                Analytics.track(.paywallPurchaseSucceeded(productId: product.id))
+                dismiss()
+            } else {
+                Analytics.track(.paywallPurchaseFailed(reason: purchases.lastError ?? "cancelled"))
+            }
         }
     }
 }

@@ -13,6 +13,7 @@ struct FavoriteButton: View {
             withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
                 favoritesStore.toggleFavorite(businessId)
             }
+            Analytics.track(.businessFavorited(id: businessId, isFavorite: favoritesStore.isFavorite(businessId)))
         } label: {
             Image(systemName: isSaved ? "heart.fill" : "heart")
                 .font(.system(size: 20, weight: .medium))

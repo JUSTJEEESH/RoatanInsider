@@ -5,6 +5,7 @@ struct BusinessDetailView: View {
     let business: Business
     @Environment(FavoritesStore.self) private var favoritesStore
     @Environment(DataManager.self) private var dataManager
+    @Environment(RecentlyViewedStore.self) private var recentlyViewed
 
     /// Always use the latest version from DataManager (picks up remote updates)
     private var b: Business {
@@ -170,6 +171,10 @@ struct BusinessDetailView: View {
         .background(Color.riWhite)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(.hidden, for: .navigationBar)
+        .onAppear {
+            recentlyViewed.record(b.id)
+            Analytics.track(.businessOpened(id: b.id, source: "detail"))
+        }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 ShareLink(

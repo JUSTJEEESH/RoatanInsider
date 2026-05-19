@@ -46,8 +46,9 @@ struct ContentView: View {
                 .tag(4)
         }
         .tint(.riPink)
-        .onChange(of: selectedTab) { _, _ in
+        .onChange(of: selectedTab) { _, newTab in
             Haptics.select()
+            Analytics.track(.tabSelected(name: tabName(newTab)))
         }
         .environment(dataManager)
         .environment(networkMonitor)
@@ -76,6 +77,7 @@ struct ContentView: View {
             configureTabBarAppearance()
         }
         .task {
+            Analytics.track(.appLaunched)
             await dataManager.checkForUpdates()
             prewarmFeaturedImages()
         }
@@ -87,6 +89,11 @@ struct ContentView: View {
                 }
             }
         }
+    }
+
+    private func tabName(_ index: Int) -> String {
+        let names = ["home", "explore", "map", "tools", "saved"]
+        return (0..<names.count).contains(index) ? names[index] : "tab_\(index)"
     }
 
     private func handle(route: DeepLinkRouter.Route) {
