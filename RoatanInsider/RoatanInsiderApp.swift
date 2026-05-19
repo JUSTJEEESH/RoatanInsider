@@ -6,6 +6,8 @@ import os
 struct RoatanInsiderApp: App {
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
     @State private var showLaunch = true
+    @State private var profileStore = UserProfileStore()
+    @State private var locationManager = LocationManager()
     private let modelContainer: ModelContainer
     private let favoritesStore: FavoritesStore
 
@@ -50,6 +52,8 @@ struct RoatanInsiderApp: App {
                     .zIndex(1)
                 }
             }
+            .environment(profileStore)
+            .environment(locationManager)
         }
         .modelContainer(modelContainer)
     }

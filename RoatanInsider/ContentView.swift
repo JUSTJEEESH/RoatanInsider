@@ -3,13 +3,13 @@ import SwiftData
 
 struct ContentView: View {
     @State private var dataManager = DataManager()
-    @State private var locationManager = LocationManager()
     @State private var networkMonitor = NetworkMonitor()
     @State private var unitPreference = UnitPreference()
     @State private var router = DeepLinkRouter()
     @State private var selectedTab = 0
     @State private var deepLinkedBusiness: Business?
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(LocationManager.self) private var locationManager
     let favoritesStore: FavoritesStore
 
     var body: some View {
@@ -49,7 +49,6 @@ struct ContentView: View {
             Haptics.select()
         }
         .environment(dataManager)
-        .environment(locationManager)
         .environment(networkMonitor)
         .environment(favoritesStore)
         .environment(unitPreference)
