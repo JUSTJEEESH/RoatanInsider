@@ -31,6 +31,8 @@ enum AppConstants {
     // the `SUPABASE_ANON_KEY` Info.plist key (preferred — keeps the key out
     // of source). Empty means reactions stay local-only; sync silently skips.
     static let supabaseRESTBaseURL = "https://vbxmmslzanixvqswtnnv.supabase.co/rest/v1"
+    static let supabaseFunctionsBaseURL = "https://vbxmmslzanixvqswtnnv.supabase.co/functions/v1"
+    static let generateItineraryURL = supabaseFunctionsBaseURL + "/generate-itinerary"
     static var supabaseAnonKey: String {
         if let key = Bundle.main.object(forInfoDictionaryKey: "SUPABASE_ANON_KEY") as? String, !key.isEmpty {
             return key

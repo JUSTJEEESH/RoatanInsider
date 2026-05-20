@@ -20,6 +20,32 @@ enum TripItineraryGenerator {
 
     static let itemsPerDayTarget = 5
 
+    /// Build a fresh schedule, preferring the Claude-backed remote
+    /// generator. Falls back to the local heuristic on any failure (no
+    /// anon key configured, network error, malformed response). Returns
+    /// the schedule plus an optional rationale string from Claude.
+    static func generateBestEffort(_ input: Input) async -> (schedule: [String: [String]], rationale: String?) {
+        do {
+            let remote = try await RemoteItineraryService.generate(input)
+            AppLog.network.info("Itinerary generated remotely (\(remote.schedule.values.map(\.count).reduce(0, +), privacy: .public) items)")
+            return (remote.schedule, remote.rationale)
+        } catch {
+            AppLog.network.info("Falling back to local itinerary generator: \(String(describing: error), privacy: .public)")
+            return (generate(input), nil)
+        }
+    }
+
+    /// Returns the local generator's ranked candidate pool — used by the
+    /// remote service to send Claude only high-quality candidates.
+    static func rankedCandidates(for input: Input, limit: Int) -> [Business] {
+        rankCandidates(
+            businesses: input.allBusinesses,
+            interests: input.profile.interests,
+            favoriteIds: input.favoriteIds,
+            limit: limit
+        )
+    }
+
     /// Build a fresh schedule. Returns a date-key → [businessId] dict ready
     /// for `TripPlanStore.replaceSchedule(_:)`.
     static func generate(_ input: Input) -> [String: [String]] {

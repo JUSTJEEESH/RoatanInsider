@@ -143,6 +143,9 @@ struct TripPlanView: View {
             ScrollView {
                 LazyVStack(spacing: 16) {
                     generatorBar
+                    if let rationale = tripStore.plan?.lastRationale, !rationale.isEmpty {
+                        rationaleCallout(rationale)
+                    }
                     ForEach(tripStore.plan!.days) { day in
                         dayCard(for: day)
                     }
@@ -192,6 +195,26 @@ struct TripPlanView: View {
         .padding(14)
         .background(Color.riOffWhite)
         .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+
+    private func rationaleCallout(_ text: String) -> some View {
+        HStack(alignment: .top, spacing: 10) {
+            Rectangle()
+                .fill(Color.riMint)
+                .frame(width: 3)
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Why these picks")
+                    .font(.system(size: 12, weight: .semibold))
+                    .tracking(0.5)
+                    .foregroundStyle(Color.riMint)
+                Text(text)
+                    .font(.riCaption(14))
+                    .foregroundStyle(Color.riMediumGray)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(.leading, 8)
+        }
+        .padding(.vertical, 6)
     }
 
     private var generatorPrimary: String {
@@ -354,9 +377,11 @@ struct TripPlanView: View {
             allBusinesses: dataManager.businesses,
             favoriteIds: Set(favoritesStore.allFavoriteIds())
         )
-        let schedule = TripItineraryGenerator.generate(input)
-        tripStore.replaceSchedule(schedule)
-        Analytics.track(.toolUsed(name: "itinerary_generated"))
+        Task { @MainActor in
+            let result = await TripItineraryGenerator.generateBestEffort(input)
+            tripStore.replaceSchedule(result.schedule, rationale: result.rationale)
+            Analytics.track(.toolUsed(name: result.rationale == nil ? "itinerary_generated_local" : "itinerary_generated_remote"))
+        }
     }
 }
 

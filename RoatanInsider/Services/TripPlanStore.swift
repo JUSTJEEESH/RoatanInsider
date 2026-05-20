@@ -42,7 +42,8 @@ final class TripPlanStore {
             arrivalDate: arrival,
             departureDate: departure,
             itemsByDate: preserved,
-            lastGenerated: nil
+            lastGenerated: nil,
+            lastRationale: nil
         )
         persist()
     }
@@ -74,10 +75,13 @@ final class TripPlanStore {
     }
 
     /// Replace the entire schedule (used by the itinerary generator).
-    func replaceSchedule(_ schedule: [String: [String]]) {
+    /// `rationale` is the optional "why these picks" string from the remote
+    /// Claude-backed generator; pass nil when the schedule was built locally.
+    func replaceSchedule(_ schedule: [String: [String]], rationale: String? = nil) {
         guard plan != nil else { return }
         plan!.itemsByDate = schedule
         plan!.lastGenerated = .now
+        plan!.lastRationale = rationale
         persist()
     }
 
@@ -85,6 +89,7 @@ final class TripPlanStore {
         guard plan != nil else { return }
         plan!.itemsByDate = [:]
         plan!.lastGenerated = nil
+        plan!.lastRationale = nil
         persist()
     }
 

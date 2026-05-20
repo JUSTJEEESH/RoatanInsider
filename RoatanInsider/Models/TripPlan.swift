@@ -13,6 +13,10 @@ struct TripPlan: Codable, Equatable {
     /// Keyed by `TripPlan.dateKey(for:)`. Value is an ordered list of business IDs.
     var itemsByDate: [String: [String]]
     var lastGenerated: Date?
+    /// Free-text "why these picks" blurb returned by the Claude-backed
+    /// itinerary generator. nil when the schedule was built locally or the
+    /// user manually arranged the plan.
+    var lastRationale: String?
 
     static func dateKey(for date: Date) -> String {
         let f = DateFormatter()
