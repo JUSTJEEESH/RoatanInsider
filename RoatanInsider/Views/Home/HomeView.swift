@@ -6,6 +6,7 @@ struct HomeView: View {
     @State private var viewModel = HomeViewModel()
     @State private var cruiseViewModel = CruiseViewModel()
     @State private var showCruiseMode = false
+    @Namespace private var zoomNS
 
     var body: some View {
         NavigationStack {
@@ -81,6 +82,7 @@ struct HomeView: View {
             .fullScreenCover(isPresented: $showCruiseMode) {
                 CruiseModeView(viewModel: cruiseViewModel)
             }
+            .environment(\.zoomNamespace, zoomNS)
         }
     }
 

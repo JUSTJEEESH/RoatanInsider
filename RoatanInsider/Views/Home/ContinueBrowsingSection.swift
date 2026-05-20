@@ -34,7 +34,7 @@ struct ContinueBrowsingSection: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 14) {
                         ForEach(recents.prefix(8)) { business in
-                            BusinessCardCompact(business: business)
+                            BusinessCard(business: business, style: .compact)
                         }
                     }
                     .padding(.horizontal, 20)

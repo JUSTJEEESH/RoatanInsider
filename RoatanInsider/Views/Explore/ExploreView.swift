@@ -3,6 +3,7 @@ import SwiftUI
 struct ExploreView: View {
     @Environment(DataManager.self) private var dataManager
     @State private var viewModel = ExploreViewModel()
+    @Namespace private var zoomNS
 
     private let columns = [
         GridItem(.flexible(), spacing: 12),
@@ -53,7 +54,7 @@ struct ExploreView: View {
 
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(results) { business in
-                                BusinessCardGrid(business: business)
+                                BusinessCard(business: business, style: .grid)
                             }
                         }
                         .padding(.horizontal, 16)
@@ -66,6 +67,7 @@ struct ExploreView: View {
             .navigationDestination(for: Business.self) { business in
                 BusinessDetailView(business: business)
             }
+            .environment(\.zoomNamespace, zoomNS)
         }
     }
 

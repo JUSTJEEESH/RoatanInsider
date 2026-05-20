@@ -6,6 +6,7 @@ struct BusinessDetailView: View {
     @Environment(FavoritesStore.self) private var favoritesStore
     @Environment(DataManager.self) private var dataManager
     @Environment(RecentlyViewedStore.self) private var recentlyViewed
+    @Environment(\.zoomNamespace) private var zoomNS
 
     /// Always use the latest version from DataManager (picks up remote updates)
     private var b: Business {
@@ -182,6 +183,7 @@ struct BusinessDetailView: View {
         .background(Color.riWhite)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(.hidden, for: .navigationBar)
+        .modifier(ZoomDestinationModifier(id: b.id, namespace: zoomNS))
         .onAppear {
             recentlyViewed.record(b.id)
             Analytics.track(.businessOpened(id: b.id, source: "detail"))

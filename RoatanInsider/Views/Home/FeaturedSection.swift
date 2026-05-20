@@ -10,7 +10,7 @@ struct FeaturedSection: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
                     ForEach(businesses.prefix(10)) { business in
-                        BusinessCardCompact(business: business)
+                        BusinessCard(business: business, style: .compact)
                     }
                 }
                 .padding(.horizontal, 20)

@@ -18,6 +18,7 @@ struct TripPlanView: View {
     @State private var showDatePicker = false
     @State private var showPaywall = false
     @State private var addingToDateKey: String?
+    @Namespace private var zoomNS
 
     enum Segment: String, CaseIterable, Identifiable {
         case plan = "Plan"
@@ -55,6 +56,7 @@ struct TripPlanView: View {
             .onAppear {
                 tripStore.sync(with: profileStore.profile)
             }
+            .environment(\.zoomNamespace, zoomNS)
         }
     }
 
