@@ -134,7 +134,7 @@
 		C1A2B3D4E5F60045036 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate.swift"; sourceTree = "<group>"; };
 		AA00BB11CC22DD33EE44FF02 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PrivacyInfo.xcprivacy"; sourceTree = "<group>"; };
 		C1A2B3D4E5F60033024 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = "Localizable.xcstrings"; path = "Resources/Localizable.xcstrings"; sourceTree = "<group>"; };
-		C1A2B3D4E5F60043033 /* InsiderPlus.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; name = "InsiderPlus.storekit"; path = "Resources/InsiderPlus.storekit"; sourceTree = "<group>"; };
+		C1A2B3D4E5F60043033 /* InsiderPlus.storekit */ = {isa = PBXFileReference; lastKnownFileType = file.storekit; name = "InsiderPlus.storekit"; path = "Resources/InsiderPlus.storekit"; sourceTree = "<group>"; };
 		C1A2B3D4E5F60035026 /* CruiseActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CruiseActivityAttributes.swift"; sourceTree = "<group>"; };
 		C1A2B3D4E5F60037028 /* LiveActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LiveActivityManager.swift"; sourceTree = "<group>"; };
 		C1A2B3D4E5F6003902A /* WidgetSharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WidgetSharedData.swift"; sourceTree = "<group>"; };
