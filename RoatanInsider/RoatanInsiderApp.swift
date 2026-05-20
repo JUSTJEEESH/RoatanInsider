@@ -19,35 +19,56 @@ struct RoatanInsiderApp: App {
     private let favoritesStore: FavoritesStore
 
     init() {
-        let schema = Schema(versionedSchema: FavoriteSchemaV1.self)
-        let persistentConfig = ModelConfiguration(schema: schema)
+        // Schema V2 is CloudKit-compatible. The migration plan carries forward
+        // any V1 favorites from existing installs without data loss.
+        let schema = Schema(versionedSchema: FavoriteSchemaV2.self)
+
+        // Try CloudKit first. If the iCloud entitlement is missing (e.g. the
+        // user is signed out of iCloud, or this is a dev build without the
+        // capability provisioned), SwiftData throws at container creation
+        // and we fall through to a local-only store. The user never sees
+        // a failure — favorites just don't sync.
+        let cloudConfig = ModelConfiguration(
+            schema: schema,
+            cloudKitDatabase: .automatic
+        )
+        let localConfig = ModelConfiguration(schema: schema)
+
         let container: ModelContainer
-        do {
-            container = try ModelContainer(
-                for: schema,
-                migrationPlan: FavoriteMigrationPlan.self,
-                configurations: [persistentConfig]
-            )
-        } catch {
-            // Persistent store unrecoverable (corrupt / migration failure).
-            // Fall back to in-memory so the app still runs; favorites won't
-            // persist across launches but the user can still use everything.
-            AppLog.persistence.error("SwiftData store failed (\(error.localizedDescription)) — falling back to in-memory.")
+        if let cloudContainer = try? ModelContainer(
+            for: schema,
+            migrationPlan: FavoriteMigrationPlan.self,
+            configurations: [cloudConfig]
+        ) {
+            AppLog.persistence.info("SwiftData store: CloudKit sync active.")
+            container = cloudContainer
+        } else if let localContainer = try? ModelContainer(
+            for: schema,
+            migrationPlan: FavoriteMigrationPlan.self,
+            configurations: [localConfig]
+        ) {
+            AppLog.persistence.info("SwiftData store: local-only (no CloudKit entitlement).")
+            container = localContainer
+        } else {
+            // Both persistent options exhausted — corruption or migration
+            // failure. In-memory keeps the app running for the session;
+            // favorites won't survive a relaunch but everything else works.
+            AppLog.persistence.error("SwiftData persistent store failed — falling back to in-memory.")
             let memoryConfig = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
-            container = try! ModelContainer(
-                for: schema,
-                configurations: [memoryConfig]
-            )
+            container = try! ModelContainer(for: schema, configurations: [memoryConfig])
         }
         self.modelContainer = container
         self.favoritesStore = FavoritesStore(modelContext: container.mainContext)
 
-        // Wire telemetry. Stays on LoggerBackend until a TelemetryDeck app ID
-        // is supplied (either via Info.plist `TELEMETRY_DECK_APP_ID` or by
-        // assigning `TelemetryDeckBackend.appID` before this point).
-        let resolvedID = (Bundle.main.object(forInfoDictionaryKey: "TELEMETRY_DECK_APP_ID") as? String) ?? TelemetryDeckBackend.appID ?? ""
-        if !resolvedID.isEmpty {
+        // Wire analytics. Stays on LoggerBackend (console logging only) until
+        // AppConstants.telemetryDeckAppID is set to a non-empty UUID, at
+        // which point real events flow to the TelemetryDeck dashboard.
+        if !AppConstants.telemetryDeckAppID.isEmpty {
+            TelemetryDeckBackend.appID = AppConstants.telemetryDeckAppID
             Analytics.backend = TelemetryDeckBackend()
+            AppLog.app.info("Analytics: TelemetryDeck backend active.")
+        } else {
+            AppLog.app.info("Analytics: LoggerBackend (TelemetryDeck app ID not set).")
         }
     }
 

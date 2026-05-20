@@ -1,7 +1,13 @@
 import Foundation
 import SwiftData
 
-// MARK: - Current Schema
+// MARK: - V1 — original local-only schema
+//
+// Held a `@Attribute(.unique)` constraint on businessId and non-optional
+// properties. Both are incompatible with CloudKit (CloudKit doesn't enforce
+// uniqueness across devices and SwiftData+CloudKit requires every property
+// to be optional OR have a default). V1 survives as the migration source so
+// existing on-device favorites carry forward intact.
 
 enum FavoriteSchemaV1: VersionedSchema {
     static var versionIdentifier = Schema.Version(1, 0, 0)
@@ -19,18 +25,49 @@ enum FavoriteSchemaV1: VersionedSchema {
     }
 }
 
-// Type alias so existing code continues to work
-typealias Favorite = FavoriteSchemaV1.Favorite
+// MARK: - V2 — CloudKit-compatible
+//
+// Drops `.unique` (uniqueness is now enforced in `FavoritesStore` via the
+// in-memory Set; CloudKit can't promise it across devices anyway). Both
+// properties get defaults so SwiftData+CloudKit's required-or-default
+// invariant is satisfied. Property names stay identical so call sites
+// don't need to change.
+
+enum FavoriteSchemaV2: VersionedSchema {
+    static var versionIdentifier = Schema.Version(2, 0, 0)
+    static var models: [any PersistentModel.Type] { [Favorite.self] }
+
+    @Model
+    final class Favorite {
+        var businessId: String = ""
+        var dateAdded: Date = .now
+
+        init(businessId: String, dateAdded: Date = .now) {
+            self.businessId = businessId
+            self.dateAdded = dateAdded
+        }
+    }
+}
+
+// Type alias points at the current schema. Call sites use `Favorite`
+// transparently — no churn at the use site when we bump versions again.
+typealias Favorite = FavoriteSchemaV2.Favorite
 
 // MARK: - Migration Plan
 
 enum FavoriteMigrationPlan: SchemaMigrationPlan {
     static var schemas: [any VersionedSchema.Type] {
-        [FavoriteSchemaV1.self]
+        [FavoriteSchemaV1.self, FavoriteSchemaV2.self]
     }
 
     static var stages: [MigrationStage] {
-        // No migrations yet — will be added when schema changes
-        []
+        [
+            // V1 → V2: lightweight. Same property names and types; we're only
+            // relaxing the unique constraint and adding default values, both
+            // of which Core Data handles automatically without a custom
+            // willMigrate/didMigrate.
+            .lightweight(fromVersion: FavoriteSchemaV1.self, toVersion: FavoriteSchemaV2.self)
+        ]
     }
 }
+

@@ -36,6 +36,17 @@ enum AppConstants {
     static let generateItineraryURL = supabaseFunctionsBaseURL + "/generate-itinerary"
     static let supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZieG1tc2x6YW5peHZxc3d0bm52Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MTQwODAsImV4cCI6MjA4ODM5MDA4MH0.pr7pUqefRULoNpIS-7b_HO7XlYskoLYYyuuI2uZZFoU"
 
+    // TelemetryDeck (privacy-first product analytics — https://telemetrydeck.com).
+    // Sign in → create app → copy the App ID UUID → paste below. Until this
+    // string is non-empty, Analytics stays on the local LoggerBackend (events
+    // print to the Xcode console only).
+    static let telemetryDeckAppID = ""
+
+    // Sentry (crash reporting — https://sentry.io). The DSN is paste-able once
+    // the Sentry SDK is added as a Swift Package (planned for next session).
+    // Stored here so wiring is ready when the package lands.
+    static let sentryDSN = ""
+
     // Design
     static let cardCornerRadius: CGFloat = 16
     static let buttonCornerRadius: CGFloat = 16
