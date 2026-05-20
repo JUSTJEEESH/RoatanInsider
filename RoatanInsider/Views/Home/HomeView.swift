@@ -82,8 +82,10 @@ struct HomeView: View {
             .fullScreenCover(isPresented: $showCruiseMode) {
                 CruiseModeView(viewModel: cruiseViewModel)
             }
-            .environment(\.zoomNamespace, zoomNS)
         }
+        // Applied on the NavigationStack (not its content) so navigationDestination
+        // children inherit the namespace.
+        .environment(\.zoomNamespace, zoomNS)
     }
 
 

@@ -67,8 +67,8 @@ struct ExploreView: View {
             .navigationDestination(for: Business.self) { business in
                 BusinessDetailView(business: business)
             }
-            .environment(\.zoomNamespace, zoomNS)
         }
+        .environment(\.zoomNamespace, zoomNS)
     }
 
     private var emptyState: some View {

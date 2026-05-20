@@ -56,8 +56,8 @@ struct TripPlanView: View {
             .onAppear {
                 tripStore.sync(with: profileStore.profile)
             }
-            .environment(\.zoomNamespace, zoomNS)
         }
+        .environment(\.zoomNamespace, zoomNS)
     }
 
     // MARK: - Header
