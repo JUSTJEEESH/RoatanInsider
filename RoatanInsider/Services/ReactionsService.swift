@@ -71,7 +71,6 @@ final class ReactionsService {
     init() {
         self.deviceID = Self.stableDeviceID()
         loadFromDisk()
-        print("[ReactionsService] anon key configured: \(!AppConstants.supabaseAnonKey.isEmpty)")
     }
 
     // MARK: - Public API

@@ -26,19 +26,15 @@ enum AppConstants {
     static let dataRefreshMinInterval: TimeInterval = 900 // 15 minutes
 
     // Supabase REST API (reactions + future user data).
-    // The base URL is constant; supply your project's **anon** public key
-    // either by setting `supabaseAnonKey` to a non-empty string below or via
-    // the `SUPABASE_ANON_KEY` Info.plist key (preferred — keeps the key out
-    // of source). Empty means reactions stay local-only; sync silently skips.
+    // The Supabase **anon** key is a public client key — protected by the
+    // database's RLS policies, not by secrecy. Embedding it in source is the
+    // standard pattern for Supabase apps, same as the Storage and Functions
+    // URLs above. Rotate via Supabase dashboard → Project Settings → API
+    // → "Generate new anon key" and update the constant below.
     static let supabaseRESTBaseURL = "https://vbxmmslzanixvqswtnnv.supabase.co/rest/v1"
     static let supabaseFunctionsBaseURL = "https://vbxmmslzanixvqswtnnv.supabase.co/functions/v1"
     static let generateItineraryURL = supabaseFunctionsBaseURL + "/generate-itinerary"
-    static var supabaseAnonKey: String {
-        if let key = Bundle.main.object(forInfoDictionaryKey: "SUPABASE_ANON_KEY") as? String, !key.isEmpty {
-            return key
-        }
-        return ""
-    }
+    static let supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZieG1tc2x6YW5peHZxc3d0bm52Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MTQwODAsImV4cCI6MjA4ODM5MDA4MH0.pr7pUqefRULoNpIS-7b_HO7XlYskoLYYyuuI2uZZFoU"
 
     // Design
     static let cardCornerRadius: CGFloat = 16
