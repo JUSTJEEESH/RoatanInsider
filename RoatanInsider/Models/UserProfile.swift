@@ -80,7 +80,7 @@ enum TravelerType: String, Codable, CaseIterable, Identifiable {
         case .vacationer: return "beach.umbrella.fill"
         case .longStay:   return "house.lodge.fill"
         case .expat:      return "house.fill"
-        case .local:      return "palm.tree.fill"
+        case .local:      return "mappin.and.ellipse"
         }
     }
 
