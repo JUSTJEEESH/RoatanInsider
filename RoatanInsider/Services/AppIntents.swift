@@ -31,7 +31,7 @@ struct BusinessAppEntity: AppEntity, Identifiable {
 
 struct BusinessEntityQuery: EntityQuery {
     func entities(for identifiers: [String]) async throws -> [BusinessAppEntity] {
-        let businesses = AppIntentDataBridge.shared.allBusinesses
+        let businesses = await AppIntentDataBridge.shared.allBusinesses
         return identifiers.compactMap { id in
             businesses.first(where: { $0.id == id }).map { Self.entity(from: $0) }
         }
@@ -39,7 +39,7 @@ struct BusinessEntityQuery: EntityQuery {
 
     func suggestedEntities() async throws -> [BusinessAppEntity] {
         // Surface featured + insider picks first in Shortcuts pickers.
-        let businesses = AppIntentDataBridge.shared.allBusinesses
+        let businesses = await AppIntentDataBridge.shared.allBusinesses
             .filter { $0.isActive && ($0.isFeatured || $0.isInsiderPick) }
             .prefix(20)
         return businesses.map { Self.entity(from: $0) }
@@ -57,7 +57,7 @@ struct BusinessEntityQuery: EntityQuery {
 
 extension BusinessEntityQuery: EntityStringQuery {
     func entities(matching string: String) async throws -> [BusinessAppEntity] {
-        let businesses = AppIntentDataBridge.shared.allBusinesses
+        let businesses = await AppIntentDataBridge.shared.allBusinesses
         let tokens = SearchSynonyms.expand(string)
         guard !tokens.isEmpty else { return [] }
         let matches = businesses.filter { biz in
