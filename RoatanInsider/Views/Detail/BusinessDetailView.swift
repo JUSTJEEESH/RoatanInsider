@@ -113,6 +113,9 @@ struct BusinessDetailView: View {
                         }
                     }
 
+                    // Reactions
+                    ReactionStrip(businessId: b.id)
+
                     // Features
                     if !b.features.isEmpty {
                         VStack(alignment: .leading, spacing: 10) {

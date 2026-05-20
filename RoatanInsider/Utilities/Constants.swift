@@ -25,6 +25,19 @@ enum AppConstants {
     static let remoteBusinessesURL = supabaseDataBaseURL + "businesses.json"
     static let dataRefreshMinInterval: TimeInterval = 900 // 15 minutes
 
+    // Supabase REST API (reactions + future user data).
+    // The base URL is constant; supply your project's **anon** public key
+    // either by setting `supabaseAnonKey` to a non-empty string below or via
+    // the `SUPABASE_ANON_KEY` Info.plist key (preferred — keeps the key out
+    // of source). Empty means reactions stay local-only; sync silently skips.
+    static let supabaseRESTBaseURL = "https://vbxmmslzanixvqswtnnv.supabase.co/rest/v1"
+    static var supabaseAnonKey: String {
+        if let key = Bundle.main.object(forInfoDictionaryKey: "SUPABASE_ANON_KEY") as? String, !key.isEmpty {
+            return key
+        }
+        return ""
+    }
+
     // Design
     static let cardCornerRadius: CGFloat = 16
     static let buttonCornerRadius: CGFloat = 16
