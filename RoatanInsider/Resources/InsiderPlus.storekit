@@ -1,0 +1,82 @@
+{
+  "identifier" : "F9A22C1D-INSIDER-PLUS-CONFIG",
+  "nonRenewingSubscriptions" : [],
+  "products" : [],
+  "settings" : {
+    "_applicationInternalID" : "0",
+    "_developerTeamID" : "",
+    "_disableDialogs" : false,
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 727200000,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : []
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "ri-insider-plus-group",
+      "localizations" : [
+        {
+          "description" : "Smart, live, offline-first Roatán companion.",
+          "displayName" : "Insider+",
+          "locale" : "en_US"
+        }
+      ],
+      "name" : "Insider+",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "14.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "ri-insider-plus-yearly",
+          "introductoryOffer" : {
+            "internalID" : "ri-insider-plus-yearly-trial",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P7D"
+          },
+          "localizations" : [
+            {
+              "description" : "Unlock AI itineraries, offline maps, Live Activities, and smart alerts.",
+              "displayName" : "Yearly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.roataninsider.app.insiderplus.yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Insider+ Yearly",
+          "subscriptionGroupID" : "ri-insider-plus-group",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : []
+        },
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "2.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "ri-insider-plus-monthly",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Unlock AI itineraries, offline maps, Live Activities, and smart alerts.",
+              "displayName" : "Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.roataninsider.app.insiderplus.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Insider+ Monthly",
+          "subscriptionGroupID" : "ri-insider-plus-group",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : []
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

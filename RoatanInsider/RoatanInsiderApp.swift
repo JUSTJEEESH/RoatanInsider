@@ -1,9 +1,11 @@
 import SwiftUI
 import SwiftData
+import UIKit
 import os
 
 @main
 struct RoatanInsiderApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
     @State private var showLaunch = true
     @State private var profileStore = UserProfileStore()
@@ -38,6 +40,14 @@ struct RoatanInsiderApp: App {
         }
         self.modelContainer = container
         self.favoritesStore = FavoritesStore(modelContext: container.mainContext)
+
+        // Wire telemetry. Stays on LoggerBackend until a TelemetryDeck app ID
+        // is supplied (either via Info.plist `TELEMETRY_DECK_APP_ID` or by
+        // assigning `TelemetryDeckBackend.appID` before this point).
+        let resolvedID = (Bundle.main.object(forInfoDictionaryKey: "TELEMETRY_DECK_APP_ID") as? String) ?? TelemetryDeckBackend.appID ?? ""
+        if !resolvedID.isEmpty {
+            Analytics.backend = TelemetryDeckBackend()
+        }
     }
 
     var body: some Scene {
