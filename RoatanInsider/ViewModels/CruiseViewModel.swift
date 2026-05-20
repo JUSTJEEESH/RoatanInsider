@@ -1,6 +1,7 @@
 import SwiftUI
 import CoreLocation
 
+@MainActor
 @Observable
 final class CruiseViewModel {
     var isActive = false {
