@@ -41,13 +41,17 @@ enum RemoteItineraryService {
         }
 
         // Candidate pre-filter: ask the local heuristic for its top-ranked
-        // businesses for this user, then send only those to Claude. Keeps
-        // the prompt small (each candidate is ~80 tokens) and tells Claude
-        // what we already know is high-quality. Capped at 40 for the same
-        // reason — past that, candidates are increasingly noisy.
+        // businesses, then send only those to Claude. Scaled to trip length
+        // so 10-day plans get enough breadth to fill every day (Claude won't
+        // reuse the same business across days, so a 10-day × 5-item plan
+        // needs at least 50 candidates to have a shot at filling everything).
+        // Capped at 80 — the edge function's hard limit, and past that the
+        // prompt gets too long for prompt caching to win.
+        let dayCount = input.plan.days.count
+        let candidateLimit = min(80, max(40, dayCount * 6))
         let candidates = TripItineraryGenerator.rankedCandidates(
             for: input,
-            limit: 40
+            limit: candidateLimit
         )
         guard !candidates.isEmpty else { throw RemoteError.empty }
 
