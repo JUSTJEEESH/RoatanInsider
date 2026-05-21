@@ -385,7 +385,15 @@ Deno.serve(async (_req) => {
     const arrivals = parseSchedule(html);
 
     if (arrivals.length === 0) {
-      throw new Error("Parsed zero arrivals — refusing to overwrite cruise_arrivals.json");
+      // Diagnostic: surface what we actually got so we can debug the parser
+      // without redeploying. The HTML snippet shows up in Supabase function logs.
+      const snippet = html.slice(0, 4000);
+      const tableCount = (html.match(/<table/gi) ?? []).length;
+      const trCount = (html.match(/<tr/gi) ?? []).length;
+      console.error("Zero arrivals parsed.");
+      console.error(`HTML length: ${html.length}, <table> count: ${tableCount}, <tr> count: ${trCount}`);
+      console.error(`First 4000 chars of HTML:\n${snippet}`);
+      throw new Error(`Parsed zero arrivals — see logs for HTML diagnostic. table=${tableCount} tr=${trCount} length=${html.length}`);
     }
 
     await uploadJson(arrivals);
