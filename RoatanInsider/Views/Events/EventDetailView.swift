@@ -1,10 +1,15 @@
 import SwiftUI
+import EventKit
 
-/// Event detail page. Phase 2: live-now indicator, share, directions
-/// link (opens Apple Maps with a venue search). Add-to-Calendar lands
-/// in Phase 3 when we wire up EventKit.
+/// Event detail page. Phase 3 actions: heart (save to favorites),
+/// add to calendar (native EventKit sheet), directions (Apple Maps),
+/// share (system share sheet).
 struct EventDetailView: View {
     let event: Event
+    @Environment(EventFavoritesStore.self) private var favorites
+    @State private var calendarEvent: EKEvent?
+    @State private var calendarStore = EKEventStore()
+    @State private var showCalendarSheet = false
 
     var body: some View {
         ScrollView {
@@ -38,6 +43,12 @@ struct EventDetailView: View {
         .navigationTitle(event.performer)
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.riWhite)
+        .sheet(isPresented: $showCalendarSheet) {
+            if let calendarEvent {
+                CalendarEventEditor(event: calendarEvent, eventStore: calendarStore)
+                    .ignoresSafeArea()
+            }
+        }
     }
 
     private var header: some View {
@@ -61,6 +72,8 @@ struct EventDetailView: View {
                             .foregroundStyle(Color.green)
                     }
                 }
+                Spacer()
+                heartButton
             }
 
             Text(event.performer)
@@ -77,20 +90,46 @@ struct EventDetailView: View {
         }
     }
 
-    private var actionRow: some View {
-        HStack(spacing: 10) {
-            Button {
-                Haptics.tap()
-                openDirections()
-            } label: {
-                actionLabel(icon: "location.fill", title: "Directions")
+    private var heartButton: some View {
+        Button {
+            withAnimation(.easeInOut(duration: 0.15)) {
+                favorites.toggle(event)
             }
-            .buttonStyle(.plain)
+            Haptics.tap()
+        } label: {
+            Image(systemName: favorites.isFavorited(event) ? "heart.fill" : "heart")
+                .font(.system(size: 20, weight: .semibold))
+                .foregroundStyle(favorites.isFavorited(event) ? Color.riPink : Color.riLightGray)
+                .frame(width: 36, height: 36)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(favorites.isFavorited(event) ? "Remove from favorites" : "Save to favorites")
+    }
 
-            ShareLink(item: shareText) {
-                actionLabel(icon: "square.and.arrow.up", title: "Share")
+    private var actionRow: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 10) {
+                Button {
+                    Haptics.tap()
+                    openCalendarSheet()
+                } label: {
+                    actionLabel(icon: "calendar.badge.plus", title: "Add to Calendar")
+                }
+                .buttonStyle(.plain)
+
+                Button {
+                    Haptics.tap()
+                    openDirections()
+                } label: {
+                    actionLabel(icon: "location.fill", title: "Directions")
+                }
+                .buttonStyle(.plain)
+
+                ShareLink(item: shareText) {
+                    actionLabel(icon: "square.and.arrow.up", title: "Share")
+                }
+                .buttonStyle(.plain)
             }
-            .buttonStyle(.plain)
         }
     }
 
@@ -100,9 +139,10 @@ struct EventDetailView: View {
                 .font(.system(size: 13, weight: .semibold))
             Text(title)
                 .font(.system(size: 13, weight: .semibold))
+                .lineLimit(1)
         }
         .foregroundStyle(Color.riPink)
-        .padding(.horizontal, 14)
+        .padding(.horizontal, 12)
         .padding(.vertical, 9)
         .background(Color.riPink.opacity(0.1))
         .clipShape(Capsule())
@@ -116,6 +156,14 @@ struct EventDetailView: View {
         }
         lines.append("— via Roatán Insider")
         return lines.joined(separator: "\n")
+    }
+
+    private func openCalendarSheet() {
+        guard let ek = EventCalendarHelper.makeEKEvent(from: event, store: calendarStore) else {
+            return
+        }
+        calendarEvent = ek
+        showCalendarSheet = true
     }
 
     private func openDirections() {
