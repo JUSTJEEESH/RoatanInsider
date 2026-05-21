@@ -39,8 +39,12 @@ enum FavoriteSchemaV2: VersionedSchema {
 
     @Model
     final class Favorite {
+        // SwiftData's @Model macro can't resolve `.now` at expansion time
+        // (it sees `.now` as `Any?` with no member), so defaults must be
+        // fully-qualified expressions. `Date()` gives us the same effective
+        // result (current time on first insert).
         var businessId: String = ""
-        var dateAdded: Date = .now
+        var dateAdded: Date = Date()
 
         init(businessId: String, dateAdded: Date = .now) {
             self.businessId = businessId
