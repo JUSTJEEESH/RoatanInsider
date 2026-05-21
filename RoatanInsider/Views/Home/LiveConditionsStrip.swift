@@ -12,7 +12,7 @@ struct LiveConditionsStrip: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
                 chip(symbol: weather.weatherSymbol, label: weather.temperatureLabel, sub: weather.weatherLabel)
-                chip(symbol: "sunset.fill", label: SunsetCalculator.sunsetTimeString(), sub: sunsetSubtitle)
+                horizonChip
                 chip(symbol: "water.waves", label: weather.snorkelLabel, sub: "Snorkel")
                 chip(symbol: "sun.max.trianglebadge.exclamationmark.fill", label: weather.uvLabel, sub: nil, compact: false)
             }
@@ -23,11 +23,13 @@ struct LiveConditionsStrip: View {
         }
     }
 
-    private var sunsetSubtitle: String {
-        if let countdown = SunsetCalculator.sunsetCountdown() {
-            return "in \(countdown)"
-        }
-        return "Tomorrow"
+    private var horizonChip: some View {
+        let event = SunsetCalculator.nextHorizonEvent()
+        return chip(
+            symbol: event.symbol,
+            label: event.timeString,
+            sub: event.countdown.map { "in \($0)" } ?? event.label
+        )
     }
 
     private func chip(symbol: String, label: String, sub: String?, compact: Bool = false) -> some View {

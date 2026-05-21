@@ -123,8 +123,9 @@ struct OnboardingView: View {
     /// Sets the tone: the app is alive and knows the island right now.
     private var liveTease: some View {
         HStack(spacing: 10) {
+            let horizon = SunsetCalculator.nextHorizonEvent()
             liveTeaseChip(icon: "thermometer.medium", value: weatherService.temperatureLabel + "F")
-            liveTeaseChip(icon: "sunset.fill", value: SunsetCalculator.sunsetTimeString())
+            liveTeaseChip(icon: horizon.symbol, value: horizon.timeString)
             liveTeaseChip(icon: "water.waves", value: weatherService.snorkelLabel)
         }
         .padding(.horizontal, 24)
