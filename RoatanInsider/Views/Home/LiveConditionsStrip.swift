@@ -16,7 +16,7 @@ struct LiveConditionsStrip: View {
             }
             GridRow {
                 chip(symbol: "water.waves", label: weather.snorkelLabel, sub: "Snorkel")
-                chip(symbol: "sun.max.trianglebadge.exclamationmark.fill", label: weather.uvLabel, sub: "UV")
+                uvChip
             }
         }
         .padding(.horizontal, 20)
@@ -34,11 +34,20 @@ struct LiveConditionsStrip: View {
         )
     }
 
-    private func chip(symbol: String, label: String, sub: String?) -> some View {
+    private var uvChip: some View {
+        chip(
+            symbol: "sun.max.trianglebadge.exclamationmark.fill",
+            iconColor: weather.uvBandColor,
+            label: "UV \(weather.uvIndexValue)",
+            sub: weather.uvBandLabel
+        )
+    }
+
+    private func chip(symbol: String, iconColor: Color = .riMint, label: String, sub: String?) -> some View {
         HStack(spacing: 10) {
             Image(systemName: symbol)
                 .font(.system(size: 16, weight: .medium))
-                .foregroundStyle(Color.riMint)
+                .foregroundStyle(iconColor)
 
             VStack(alignment: .leading, spacing: 1) {
                 Text(label)

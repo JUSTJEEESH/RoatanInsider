@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import SwiftUI
 
 /// Live weather + marine conditions for Roatán, fed by Open-Meteo
 /// (https://open-meteo.com). No API key, no rate limits at our volume, and
@@ -89,17 +90,33 @@ final class WeatherService {
     }
 
     var uvLabel: String {
-        guard let c = conditions else { return "—" }
-        let n = Int(c.uvIndex.rounded())
-        let band: String
-        switch n {
-        case 0..<3:   band = "Low"
-        case 3..<6:   band = "Moderate"
-        case 6..<8:   band = "High"
-        case 8..<11:  band = "Very High"
-        default:      band = "Extreme"
+        "UV \(uvIndexValue) · \(uvBandLabel)"
+    }
+
+    var uvIndexValue: Int {
+        guard let c = conditions else { return 0 }
+        return Int(c.uvIndex.rounded())
+    }
+
+    var uvBandLabel: String {
+        guard conditions != nil else { return "—" }
+        switch uvIndexValue {
+        case 0..<3:   return "Low"
+        case 3..<6:   return "Moderate"
+        case 6..<8:   return "High"
+        case 8..<11:  return "Very High"
+        default:      return "Extreme"
         }
-        return "UV \(n) · \(band)"
+    }
+
+    var uvBandColor: Color {
+        switch uvIndexValue {
+        case 0..<3:   return .green
+        case 3..<6:   return .yellow
+        case 6..<8:   return .orange
+        case 8..<11:  return .red
+        default:      return .purple
+        }
     }
 
     /// Composite reef/snorkel quality 0-100 from wave height + wind.

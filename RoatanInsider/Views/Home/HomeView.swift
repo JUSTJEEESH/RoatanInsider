@@ -3,10 +3,18 @@ import SwiftUI
 struct HomeView: View {
     @Binding var selectedTab: Int
     @Environment(DataManager.self) private var dataManager
+    @Environment(UserProfileStore.self) private var profileStore
     @State private var viewModel = HomeViewModel()
     @State private var cruiseViewModel = CruiseViewModel()
     @State private var showCruiseMode = false
     @Namespace private var zoomNS
+
+    private var showsCruiseBanner: Bool {
+        switch profileStore.profile.travelerType {
+        case .cruiser, nil: return true
+        case .local, .expat, .longStay, .vacationer: return false
+        }
+    }
 
     var body: some View {
         NavigationStack {
@@ -19,8 +27,10 @@ struct HomeView: View {
 
                     ArrivalBanner(showCruiseMode: $showCruiseMode)
 
-                    CruiseBanner(showCruiseMode: $showCruiseMode)
-                        .padding(.top, 24)
+                    if showsCruiseBanner {
+                        CruiseBanner(showCruiseMode: $showCruiseMode)
+                            .padding(.top, 24)
+                    }
 
                     RightNowFeedSection()
                         .padding(.top, 28)
@@ -69,8 +79,7 @@ struct HomeView: View {
             .palmRefresh {
                 try? await Task.sleep(for: .milliseconds(800))
             }
-            .ignoresSafeArea(edges: .top)
-            .background(.white)
+            .background(Color.white.ignoresSafeArea(edges: .top))
             .toolbar(.hidden, for: .navigationBar)
             .navigationDestination(for: Business.self) { business in
                 BusinessDetailView(business: business)

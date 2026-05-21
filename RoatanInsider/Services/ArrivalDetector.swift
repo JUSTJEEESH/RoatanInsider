@@ -32,12 +32,19 @@ final class ArrivalDetector {
         guard let location else { return false }
         guard Self.isInRoatan(location) else { return false }
 
+        // The banner copy assumes a cruise day — only fire for cruisers
+        // (and pre-onboarding users, who get a soft default nudge).
+        switch profile.travelerType {
+        case .local, .expat, .longStay, .vacationer:
+            return false
+        case .cruiser, nil:
+            break
+        }
+
         // Skip users with an active or future trip — they're already
         // planned. Only nudge the "arrived without a plan" case.
-        if let arrival = profile.arrivalDate,
-           let departure = profile.departureDate,
+        if let departure = profile.departureDate,
            Calendar.current.startOfDay(for: departure) >= Calendar.current.startOfDay(for: .now) {
-            _ = arrival
             return false
         }
         return true
