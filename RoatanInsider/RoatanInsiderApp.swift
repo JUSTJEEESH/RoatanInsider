@@ -16,6 +16,8 @@ struct RoatanInsiderApp: App {
     @State private var recentlyViewed = RecentlyViewedStore()
     @State private var tripStore = TripPlanStore()
     @State private var reactions = ReactionsService()
+    @State private var trending = TrendingReactionsService()
+    @State private var arrival = ArrivalDetector()
     private let modelContainer: ModelContainer
     private let favoritesStore: FavoritesStore
 
@@ -131,6 +133,8 @@ struct RoatanInsiderApp: App {
             .environment(recentlyViewed)
             .environment(tripStore)
             .environment(reactions)
+            .environment(trending)
+            .environment(arrival)
         }
         .modelContainer(modelContainer)
     }

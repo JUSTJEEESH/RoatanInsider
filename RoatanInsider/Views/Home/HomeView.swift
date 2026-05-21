@@ -17,6 +17,8 @@ struct HomeView: View {
                     LiveConditionsStrip()
                         .padding(.top, 20)
 
+                    ArrivalBanner(showCruiseMode: $showCruiseMode)
+
                     CruiseBanner(showCruiseMode: $showCruiseMode)
                         .padding(.top, 24)
 
@@ -25,6 +27,9 @@ struct HomeView: View {
                         .padding(.bottom, AppConstants.sectionPadding)
 
                     RightNowSection(businesses: dataManager.activeBusinesses)
+                        .padding(.bottom, AppConstants.sectionPadding)
+
+                    TrendingSection()
                         .padding(.bottom, AppConstants.sectionPadding)
 
                     ContinueBrowsingSection()
