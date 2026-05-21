@@ -27,8 +27,6 @@ struct ShipsInPortSection: View {
             if !tomorrow.isEmpty {
                 tomorrowPreview(count: tomorrow.count, passengers: cruise.totalPassengersTomorrow())
             }
-
-            attribution
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 20)
@@ -56,13 +54,6 @@ struct ShipsInPortSection: View {
         }
     }
 
-    private var attribution: some View {
-        Text("Data from The Roatán Directory · updated daily")
-            .font(.system(size: 10))
-            .foregroundStyle(Color.riLightGray)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.top, 2)
-    }
 
     private func header(passengers: Int, count: Int) -> some View {
         VStack(alignment: .leading, spacing: 4) {
