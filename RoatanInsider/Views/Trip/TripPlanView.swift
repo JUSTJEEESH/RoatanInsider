@@ -12,6 +12,8 @@ struct TripPlanView: View {
     @Environment(TripPlanStore.self) private var tripStore
     @Environment(DataManager.self) private var dataManager
     @Environment(FavoritesStore.self) private var favoritesStore
+    @Environment(EventsService.self) private var events
+    @Environment(EventFavoritesStore.self) private var eventFavorites
     @Environment(PurchaseManager.self) private var purchases
 
     @State private var segment: Segment = .plan
@@ -42,6 +44,9 @@ struct TripPlanView: View {
             .navigationBarHidden(true)
             .navigationDestination(for: Business.self) { business in
                 BusinessDetailView(business: business)
+            }
+            .navigationDestination(for: Event.self) { event in
+                EventDetailView(event: event)
             }
             .sheet(isPresented: $showDatePicker) {
                 TripDatesEditor()
@@ -317,35 +322,85 @@ struct TripPlanView: View {
     private var savedContent: some View {
         let favIds = favoritesStore.allFavoriteIds()
         let favorites = favIds.compactMap { id in dataManager.businesses.first(where: { $0.id == id }) }
+        let savedEvents = events.events
+            .filter { eventFavorites.isFavorited($0) }
+            .sorted { $0.startTime < $1.startTime }
 
         return Group {
-            if favorites.isEmpty {
+            if favorites.isEmpty && savedEvents.isEmpty {
                 ScrollView {
                     EmptyStateView(
                         symbol: "heart",
                         title: "No favorites yet",
-                        message: "Tap the heart on any place to save it here — and pull it into your itinerary later."
+                        message: "Tap the heart on any place or event to save it here — pull places into your itinerary later, and your events live alongside them."
                     )
                 }
             } else {
                 ScrollView {
-                    LazyVStack(spacing: 16) {
-                        ForEach(favorites) { business in
-                            BusinessCard(business: business)
-                                .contextMenu {
-                                    Button(role: .destructive) {
-                                        favoritesStore.removeFavorite(business.id)
-                                    } label: {
-                                        Label("Remove from Favorites", systemImage: "heart.slash")
-                                    }
-                                }
+                    LazyVStack(spacing: 24) {
+                        if !savedEvents.isEmpty {
+                            savedEventsSection(savedEvents)
+                        }
+                        if !favorites.isEmpty {
+                            savedPlacesSection(favorites)
                         }
                     }
-                    .padding(.horizontal, 20)
                     .padding(.vertical, 16)
                 }
             }
         }
+    }
+
+    private func savedEventsSection(_ savedEvents: [Event]) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            sectionLabel("EVENTS", count: savedEvents.count)
+            VStack(spacing: 8) {
+                ForEach(savedEvents) { event in
+                    EventRow(event: event)
+                        .contextMenu {
+                            Button(role: .destructive) {
+                                eventFavorites.remove(id: event.id)
+                            } label: {
+                                Label("Remove from Saved", systemImage: "heart.slash")
+                            }
+                        }
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+
+    private func savedPlacesSection(_ favorites: [Business]) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            sectionLabel("PLACES", count: favorites.count)
+            LazyVStack(spacing: 16) {
+                ForEach(favorites) { business in
+                    BusinessCard(business: business)
+                        .contextMenu {
+                            Button(role: .destructive) {
+                                favoritesStore.removeFavorite(business.id)
+                            } label: {
+                                Label("Remove from Favorites", systemImage: "heart.slash")
+                            }
+                        }
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+
+    private func sectionLabel(_ title: String, count: Int) -> some View {
+        HStack {
+            Text(title)
+                .font(.system(size: 11, weight: .bold))
+                .tracking(1.2)
+                .foregroundStyle(Color.riMint)
+            Spacer()
+            Text("\(count)")
+                .font(.system(size: 11, weight: .semibold))
+                .foregroundStyle(Color.riLightGray)
+        }
+        .padding(.horizontal, 24)
     }
 
     // MARK: - Helpers
