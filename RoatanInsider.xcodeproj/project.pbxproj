@@ -130,6 +130,7 @@
 		0A3C304657086C8DDAAB7EF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F73B201D3F8FCB88366DA9E3 /* Assets.xcassets */; };
 		AA00BB11CC22DD33EE44FF01 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = AA00BB11CC22DD33EE44FF02 /* PrivacyInfo.xcprivacy */; };
 		C1A2B3D4E5F60033023 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C1A2B3D4E5F60033024 /* Localizable.xcstrings */; };
+		3430D22E527A455DAB8AF544 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = CDBC5B115FE54B17B0506FC8 /* Sentry */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -265,6 +266,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3430D22E527A455DAB8AF544 /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +590,7 @@
 				CCD263A97826EA86191156DC /* Sources */,
 				D4C45C4C609CA7330BD15454 /* Frameworks */,
 				E1C4B5DFC8AF55049EA2E25D /* Resources */,
+				4424242DFDCC4F32B9655E9B /* Upload Debug Symbols to Sentry */,
 			);
 			buildRules = (
 			);
@@ -597,6 +600,9 @@
 			productName = RoatanInsider;
 			productReference = 4536C00FCFCC7EE02B6191F8 /* RoatanInsider.app */;
 			productType = "com.apple.product-type.application";
+			packageProductDependencies = (
+				CDBC5B115FE54B17B0506FC8 /* Sentry */,
+			);
 		};
 /* End PBXNativeTarget section */
 
@@ -623,6 +629,9 @@
 			projectRoot = "";
 			targets = (
 				B59D87CA94FBA14BEE5F2244 /* RoatanInsider */,
+			);
+			packageReferences = (
+				8489365BC51E432994A17B6D /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 		};
 /* End PBXProject section */
@@ -774,7 +783,6 @@
 		F98A07DE38A9079D3D46F76C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -838,7 +846,6 @@
 		114251414E79CC55E940517D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -888,7 +895,6 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -900,7 +906,6 @@
 		8176CAB4B8C6D5616227B63A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -931,13 +936,14 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_USER_SCRIPT_SANDBOXING = "NO";
 			};
 			name = Debug;
 		};
 		263D60BF8562B8B3A2AE60CE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -968,6 +974,8 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_USER_SCRIPT_SANDBOXING = "NO";
 			};
 			name = Release;
 		};
@@ -994,6 +1002,53 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4424242DFDCC4F32B9655E9B /* Upload Debug Symbols to Sentry */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This script is responsible for uploading debug symbols and source context for Sentry.
+if which sentry-cli >/dev/null; then
+  export SENTRY_ORG=jeeeshua
+  export SENTRY_PROJECT=apple-ios
+  ERROR=$(sentry-cli debug-files upload --include-sources \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)
+  if [ ! $? -eq 0 ]; then
+    echo \"warning: sentry-cli - $ERROR\"
+  fi
+else
+  echo \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"
+fi
+";
+			name = "Upload Debug Symbols to Sentry";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8489365BC51E432994A17B6D /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/getsentry/sentry-cocoa/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CDBC5B115FE54B17B0506FC8 /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8489365BC51E432994A17B6D /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 075399145CD9F9A8A4421C6C /* Project object */;
 }

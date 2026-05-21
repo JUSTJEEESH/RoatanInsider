@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1500"
-   version = "1.7">
+   version = "1.8">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6816B98BFC7BE0AF56BB60BC"
+               BlueprintIdentifier = "B59D87CA94FBA14BEE5F2244"
                BuildableName = "RoatanInsider.app"
                BlueprintName = "RoatanInsider"
                ReferencedContainer = "container:RoatanInsider.xcodeproj">
@@ -44,12 +44,15 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6816B98BFC7BE0AF56BB60BC"
+            BlueprintIdentifier = "B59D87CA94FBA14BEE5F2244"
             BuildableName = "RoatanInsider.app"
             BlueprintName = "RoatanInsider"
             ReferencedContainer = "container:RoatanInsider.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <StoreKitConfigurationFileReference
+         identifier = "../../RoatanInsider/Resources/InsiderPlus.storekit">
+      </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -61,7 +64,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6816B98BFC7BE0AF56BB60BC"
+            BlueprintIdentifier = "B59D87CA94FBA14BEE5F2244"
             BuildableName = "RoatanInsider.app"
             BlueprintName = "RoatanInsider"
             ReferencedContainer = "container:RoatanInsider.xcodeproj">
