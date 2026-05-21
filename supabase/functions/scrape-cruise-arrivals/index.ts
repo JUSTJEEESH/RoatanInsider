@@ -173,42 +173,52 @@ const BROWSER_HEADERS = {
 };
 
 async function fetchPage(): Promise<string> {
-  // Try 1: direct fetch with browser headers.
+  // Try 1: direct fetch with browser headers. The page itself returns 200
+  // but it's a JS shell — the schedule loads via JavaScript on page load.
+  // We accept the response ONLY if it looks like the data has actually rendered
+  // (more than a few <tr>s). Otherwise fall through to ScrapingBee's JS-render.
   try {
     const res = await fetch(SOURCE_URL, { headers: BROWSER_HEADERS });
     if (res.ok) {
       const html = await res.text();
       if (looksLikeRealPage(html)) return html;
+      console.log(`Direct fetch returned 200 but page looks like a JS shell — trying ScrapingBee with render_js=true`);
+    } else {
+      console.log(`Direct fetch returned ${res.status}; trying ScrapingBee fallback`);
     }
-    console.log(`Direct fetch returned ${res.status}; trying ScrapingBee fallback`);
   } catch (err) {
     console.log(`Direct fetch failed: ${err}; trying ScrapingBee fallback`);
   }
 
-  // Try 2: ScrapingBee (residential proxy + Cloudflare bypass).
+  // Try 2: ScrapingBee with JS rendering — runs a real headless Chrome,
+  // waits 4 seconds for the schedule to populate, then returns the
+  // rendered HTML. Costs ~5 credits per call; free tier is 1000/mo so
+  // we can run this daily for ~6 years on the free tier alone.
   const apiKey = Deno.env.get("SCRAPINGBEE_API_KEY");
   if (!apiKey) {
-    throw new Error("Direct fetch blocked AND no SCRAPINGBEE_API_KEY configured");
+    throw new Error("Direct fetch returned an empty JS shell AND no SCRAPINGBEE_API_KEY configured");
   }
-  const sbUrl = `https://app.scrapingbee.com/api/v1/?api_key=${apiKey}&url=${encodeURIComponent(SOURCE_URL)}&render_js=false`;
+  const sbUrl = `https://app.scrapingbee.com/api/v1/?api_key=${apiKey}&url=${encodeURIComponent(SOURCE_URL)}&render_js=true&wait=4000`;
   const res = await fetch(sbUrl);
   if (!res.ok) {
     throw new Error(`ScrapingBee returned ${res.status}: ${await res.text()}`);
   }
   const html = await res.text();
   if (!looksLikeRealPage(html)) {
-    throw new Error("ScrapingBee returned HTML but it doesn't look like the schedule page");
+    throw new Error("ScrapingBee returned HTML but still looks like the JS shell — increase wait time or inspect");
   }
   return html;
 }
 
 function looksLikeRealPage(html: string): boolean {
   const lower = html.toLowerCase();
-  // Cloudflare challenge / Just-a-moment pages.
   if (lower.includes("just a moment") || lower.includes("attention required")) return false;
-  // Should mention Roatán somewhere.
   if (!lower.includes("roatan") && !lower.includes("roatán")) return false;
-  return html.length > 1000;
+  if (html.length < 1000) return false;
+  // The JS-shell version has 1 table / 1 tr. A populated schedule has dozens.
+  // Reject anything under 10 <tr> elements as still-loading or empty.
+  const trCount = (html.match(/<tr/gi) ?? []).length;
+  return trCount >= 10;
 }
 
 // --- Parsing ----------------------------------------------------------------
