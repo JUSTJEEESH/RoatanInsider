@@ -12,6 +12,7 @@ final class CruiseArrivalsService {
 
     init() {
         load()
+        Task { await refreshFromRemoteIfNeeded() }
     }
 
     private func load() {
@@ -21,6 +22,18 @@ final class CruiseArrivalsService {
             type: [CruiseArrival].self
         ) {
             arrivals = data
+        }
+    }
+
+    /// Pulls a fresh copy from Supabase Storage if our cache is >6h old.
+    /// The Edge Function `scrape-cruise-arrivals` regenerates the file
+    /// nightly from cruisetimetables.com.
+    func refreshFromRemoteIfNeeded() async {
+        if let fresh: [CruiseArrival] = await RemoteDataService.fetchLatest(
+            filename: "cruise_arrivals.json",
+            type: [CruiseArrival].self
+        ) {
+            await MainActor.run { self.arrivals = fresh }
         }
     }
 

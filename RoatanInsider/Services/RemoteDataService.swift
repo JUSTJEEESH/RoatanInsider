@@ -90,6 +90,42 @@ final class RemoteDataService {
         }
     }
 
+    /// Downloads the latest version of a file from Supabase Storage if the
+    /// cached copy is older than `maxAge`. Manifest-free — designed for
+    /// files that are regenerated server-side on a schedule (e.g. cruise
+    /// arrivals scraped daily). Returns decoded data on successful refresh,
+    /// nil if the cache is still fresh or the request failed.
+    static func fetchLatest<T: Decodable>(
+        filename: String,
+        maxAge: TimeInterval = 6 * 3600,
+        type: T.Type
+    ) async -> T? {
+        let lastFetchKey = "remoteDataLastFetch_\(filename)"
+        let lastFetch = UserDefaults.standard.double(forKey: lastFetchKey)
+        if lastFetch > 0 {
+            let elapsed = Date().timeIntervalSince1970 - lastFetch
+            if elapsed < maxAge { return nil }
+        }
+
+        guard let url = URL(string: AppConstants.supabaseDataBaseURL + filename) else { return nil }
+
+        do {
+            let (data, response) = try await noCacheSession.data(from: url)
+            guard let http = response as? HTTPURLResponse, http.statusCode == 200 else { return nil }
+            let decoded = try JSONDecoder().decode(T.self, from: data)
+
+            let cachedURL = cacheDirectory.appendingPathComponent(filename)
+            try data.write(to: cachedURL, options: .atomic)
+            UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: lastFetchKey)
+
+            AppLog.data.notice("Refreshed \(filename, privacy: .public) from Supabase")
+            return decoded
+        } catch {
+            AppLog.network.warning("fetchLatest \(filename, privacy: .public) failed: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
     /// Downloads a file from Supabase if its remote version is newer than cached.
     /// Returns decoded data if updated, nil if no update needed.
     static func fetchIfNewer<T: Codable>(
