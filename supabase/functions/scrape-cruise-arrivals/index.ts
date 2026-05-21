@@ -162,7 +162,11 @@ const SHIP_CAPACITY: Record<string, { capacity: number; line: string }> = {
 
 // --- Fetching ---------------------------------------------------------------
 
+// theroatandirectory.com is maintained daily by Keith Roberts (Blue Wave
+// Radio); Josh has explicit permission to use his data. Try this first;
+// fall back to public aggregators only if his site is unreachable.
 const SOURCE_CANDIDATES = [
+  "https://www.theroatandirectory.com/roatandailyevents",
   "https://cruisedig.com/ports/roatan-honduras",
   "https://www.cruisemapper.com/ports/roatan-island-port-29",
   "https://www.anacaribe.net/itinerary",
