@@ -12,7 +12,7 @@ struct QuickGuidesSection: View {
                     GuideRow(
                         icon: "ferry",
                         title: "Cruise Day Guide",
-                        subtitle: "Plan your perfect port day"
+                        subtitle: "Plan your port day."
                     )
                 }
 
@@ -22,7 +22,7 @@ struct QuickGuidesSection: View {
                     GuideRow(
                         icon: "map",
                         title: "Area Guides",
-                        subtitle: "Explore all 10 areas of Roatán"
+                        subtitle: "All 10 island areas."
                     )
                 }
 
@@ -32,7 +32,7 @@ struct QuickGuidesSection: View {
                     GuideRow(
                         icon: "lightbulb",
                         title: "Island Essentials",
-                        subtitle: "Money, safety, tips, and more"
+                        subtitle: "Money, safety, water, language."
                     )
                 }
 

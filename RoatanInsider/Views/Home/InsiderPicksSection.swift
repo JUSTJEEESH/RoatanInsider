@@ -7,7 +7,7 @@ struct InsiderPicksSection: View {
         VStack(alignment: .leading, spacing: 20) {
             SectionHeader(
                 title: "Insider Picks",
-                subtitle: "Curated by locals who know the island best"
+                subtitle: "Picks from people who live here."
             )
 
             VStack(spacing: 24) {

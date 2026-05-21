@@ -155,7 +155,7 @@ struct SettingsView: View {
         } header: {
             Text("Interests")
         } footer: {
-            Text("We prioritise these across the home feed and itinerary suggestions.")
+            Text("We use these to shape the home feed and your itinerary.")
         }
     }
 

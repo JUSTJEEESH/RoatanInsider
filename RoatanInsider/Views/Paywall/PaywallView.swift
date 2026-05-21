@@ -110,13 +110,13 @@ struct PaywallView: View {
                     .foregroundStyle(Color.riPink)
             }
 
-            Text("Smarter than every other meal.")
+            Text("Roatán, dialed in.")
                 .riDisplayStyle(30)
                 .foregroundStyle(.white)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 8)
 
-            Text("Insider+ unlocks the live, intelligent, offline-first parts of Roatán Insider.")
+            Text("Plans, alerts, offline maps, and member discounts.")
                 .font(.riBody)
                 .foregroundStyle(Color.riLightGray)
                 .multilineTextAlignment(.center)

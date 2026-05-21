@@ -15,7 +15,7 @@ struct ToolsView: View {
                         Text("Tools")
                             .riDisplayStyle(34)
                             .foregroundStyle(Color.riDark)
-                        Text("Everything you need on the go")
+                        Text("Currency, tips, Spanish, safety — quick references.")
                             .font(.riCaption(15))
                             .foregroundStyle(Color.riLightGray)
                     }
