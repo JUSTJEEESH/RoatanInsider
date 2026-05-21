@@ -1,8 +1,8 @@
 import SwiftUI
 
-/// Minimal V1 event detail page. Phase 2 will add: venue lookup,
-/// map mini-view, directions button, saved-event favorites,
-/// "Add to Calendar," share, and notification reminders.
+/// Event detail page. Phase 2: live-now indicator, share, directions
+/// link (opens Apple Maps with a venue search). Add-to-Calendar lands
+/// in Phase 3 when we wire up EventKit.
 struct EventDetailView: View {
     let event: Event
 
@@ -10,6 +10,8 @@ struct EventDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 header
+
+                actionRow
 
                 if let genre = event.genre {
                     detailRow(icon: "music.quarternote.3", label: "Genre", value: genre)
@@ -48,6 +50,17 @@ struct EventDetailView: View {
                     .font(.system(size: 11, weight: .bold))
                     .tracking(1.2)
                     .foregroundStyle(Color.riMint)
+                if event.isLiveNow() {
+                    HStack(spacing: 4) {
+                        Circle()
+                            .fill(Color.green)
+                            .frame(width: 6, height: 6)
+                        Text("LIVE NOW")
+                            .font(.system(size: 11, weight: .bold))
+                            .tracking(1.2)
+                            .foregroundStyle(Color.green)
+                    }
+                }
             }
 
             Text(event.performer)
@@ -62,6 +75,54 @@ struct EventDetailView: View {
             }
             .foregroundStyle(Color.riMediumGray)
         }
+    }
+
+    private var actionRow: some View {
+        HStack(spacing: 10) {
+            Button {
+                Haptics.tap()
+                openDirections()
+            } label: {
+                actionLabel(icon: "location.fill", title: "Directions")
+            }
+            .buttonStyle(.plain)
+
+            ShareLink(item: shareText) {
+                actionLabel(icon: "square.and.arrow.up", title: "Share")
+            }
+            .buttonStyle(.plain)
+        }
+    }
+
+    private func actionLabel(icon: String, title: String) -> some View {
+        HStack(spacing: 6) {
+            Image(systemName: icon)
+                .font(.system(size: 13, weight: .semibold))
+            Text(title)
+                .font(.system(size: 13, weight: .semibold))
+        }
+        .foregroundStyle(Color.riPink)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 9)
+        .background(Color.riPink.opacity(0.1))
+        .clipShape(Capsule())
+    }
+
+    private var shareText: String {
+        var lines = ["\(event.performer) at \(event.venue), \(event.area)"]
+        lines.append("\(event.displayTime)")
+        if let rule = event.recurringRule {
+            lines.append(rule)
+        }
+        lines.append("— via Roatán Insider")
+        return lines.joined(separator: "\n")
+    }
+
+    private func openDirections() {
+        let query = "\(event.venue) \(event.area) Roatán Honduras"
+        guard let encoded = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let url = URL(string: "http://maps.apple.com/?q=\(encoded)") else { return }
+        UIApplication.shared.open(url)
     }
 
     private func detailRow(icon: String, label: String, value: String) -> some View {

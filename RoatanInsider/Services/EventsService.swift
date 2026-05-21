@@ -79,4 +79,39 @@ final class EventsService {
     func events(inArea area: String) -> [Event] {
         events.filter { $0.area.caseInsensitiveCompare(area) == .orderedSame }
     }
+
+    /// Unified filter+search. If `query` or `category` is non-empty, returns
+    /// matching events across ALL weekdays. Otherwise scopes by the
+    /// passed-in day.
+    func filtered(query: String, category: EventCategory?, day: Weekday?) -> [Event] {
+        let hasActiveFilter = !query.isEmpty || category != nil
+        var result = events.filter { $0.isRecurring }
+
+        if hasActiveFilter {
+            if let category {
+                result = result.filter { $0.category == category }
+            }
+            if !query.isEmpty {
+                let q = query.lowercased()
+                result = result.filter { event in
+                    event.venue.lowercased().contains(q)
+                        || event.performer.lowercased().contains(q)
+                        || event.area.lowercased().contains(q)
+                        || event.category.rawValue.lowercased().contains(q)
+                        || (event.genre?.lowercased().contains(q) ?? false)
+                }
+            }
+        } else if let day {
+            result = result.filter { $0.day == day }
+        }
+
+        return result.sorted(by: Self.featuredFirst)
+    }
+
+    /// The set of categories that actually appear in the loaded events —
+    /// avoids showing filter chips that match nothing.
+    func availableCategories() -> [EventCategory] {
+        let present = Set(events.compactMap { $0.isRecurring ? $0.category : nil })
+        return EventCategory.allCases.filter { present.contains($0) }
+    }
 }

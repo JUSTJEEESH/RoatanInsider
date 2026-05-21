@@ -33,6 +33,28 @@ struct Event: Identifiable, Codable, Hashable {
     var isWeatherDependent: Bool { weatherDependent ?? false }
     var isActive: Bool          { active ?? true }
 
+    /// True when this event started within the last `durationHours` and is
+    /// likely still going. Used for the 'LIVE NOW' badge on rows.
+    func isLiveNow(now: Date = .now, durationHours: Int = 3, calendar: Calendar = .current) -> Bool {
+        // Only events scheduled for today.
+        if let date {
+            guard calendar.isDate(date, inSameDayAs: now) else { return false }
+        } else if let day, let today = Weekday.from(calendarWeekday: calendar.component(.weekday, from: now)) {
+            guard day == today else { return false }
+        } else {
+            return false
+        }
+
+        // Today's start time as a Date.
+        guard let yesterday = calendar.date(byAdding: .day, value: -1, to: now),
+              let start = nextOccurrence(after: yesterday, calendar: calendar),
+              calendar.isDate(start, inSameDayAs: now) else {
+            return false
+        }
+        let elapsed = now.timeIntervalSince(start)
+        return elapsed >= 0 && elapsed < TimeInterval(durationHours * 3600)
+    }
+
     /// Start time of THIS event today, anchored to current calendar day.
     /// For recurring events without a specific date, returns the next
     /// occurrence on the matching weekday.

@@ -122,11 +122,24 @@ struct EventRow: View {
                     .clipShape(Circle())
 
                 VStack(alignment: .leading, spacing: 3) {
-                    if event.isFeatured {
-                        Text("DON'T MISS")
-                            .font(.system(size: 9, weight: .heavy))
-                            .tracking(1.0)
-                            .foregroundStyle(Color.riPink)
+                    HStack(spacing: 8) {
+                        if event.isFeatured {
+                            Text("DON'T MISS")
+                                .font(.system(size: 9, weight: .heavy))
+                                .tracking(1.0)
+                                .foregroundStyle(Color.riPink)
+                        }
+                        if event.isLiveNow() {
+                            HStack(spacing: 4) {
+                                Circle()
+                                    .fill(Color.green)
+                                    .frame(width: 6, height: 6)
+                                Text("LIVE NOW")
+                                    .font(.system(size: 9, weight: .heavy))
+                                    .tracking(1.0)
+                                    .foregroundStyle(Color.green)
+                            }
+                        }
                     }
                     HStack(spacing: 5) {
                         Text(event.performer)
