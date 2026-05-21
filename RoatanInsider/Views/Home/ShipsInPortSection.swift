@@ -48,9 +48,10 @@ struct ShipsInPortSection: View {
     }
 
     private func tomorrowLabel(count: Int, passengers: Int) -> String {
+        let rounded = CruiseArrival.roundedToNearest500(passengers).commaFormatted
         switch count {
-        case 1: return "Tomorrow: 1 ship · \(passengers.commaFormatted) visitors"
-        default: return "Tomorrow: \(count) ships · \(passengers.commaFormatted) visitors"
+        case 1: return "Tomorrow: 1 ship · \(rounded) visitors"
+        default: return "Tomorrow: \(count) ships · \(rounded) visitors"
         }
     }
 
@@ -82,10 +83,11 @@ struct ShipsInPortSection: View {
     }
 
     private func headline(passengers: Int, count: Int) -> String {
+        let rounded = CruiseArrival.roundedToNearest500(passengers).commaFormatted
         switch count {
         case 0: return "Quiet day on the island"
-        case 1: return "\(passengers.commaFormatted) cruise visitors today"
-        default: return "\(count) ships · \(passengers.commaFormatted) visitors today"
+        case 1: return "\(rounded) cruise visitors today"
+        default: return "\(count) ships · \(rounded) visitors today"
         }
     }
 
@@ -112,7 +114,7 @@ struct ShipsInPortSection: View {
             Spacer(minLength: 8)
 
             VStack(alignment: .trailing, spacing: 1) {
-                Text(ship.passengerCount.commaFormatted)
+                Text(ship.displayPassengerCount.commaFormatted)
                     .font(.system(size: 14, weight: .bold))
                     .foregroundStyle(Color.riDark)
                     .monospacedDigit()

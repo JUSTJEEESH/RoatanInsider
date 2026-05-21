@@ -18,6 +18,16 @@ struct CruiseArrival: Identifiable, Codable, Hashable {
     let passengerCount: Int
     let notes: String?
 
+    /// Display-friendly passenger count, rounded to the nearest 500.
+    /// Exact ship capacity is misleading anyway — not everyone disembarks.
+    var displayPassengerCount: Int {
+        Self.roundedToNearest500(passengerCount)
+    }
+
+    static func roundedToNearest500(_ n: Int) -> Int {
+        Int((Double(n) / 500.0).rounded()) * 500
+    }
+
     /// Today's calendar date matches this row's date string.
     var isToday: Bool {
         let formatter = DateFormatter()
