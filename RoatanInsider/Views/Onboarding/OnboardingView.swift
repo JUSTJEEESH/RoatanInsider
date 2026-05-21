@@ -28,6 +28,7 @@ struct OnboardingView: View {
     @State private var step: Step = .welcome
 
     // Draft state — committed to UserProfile on advance().
+    @State private var draftFirstName: String = ""
     @State private var draftType: TravelerType?
     @State private var draftArrival: Date?
     @State private var draftDeparture: Date?
@@ -79,6 +80,7 @@ struct OnboardingView: View {
     private var content: some View {
         switch step {
         case .welcome:       welcomeStep
+        case .name:          nameStep
         case .travelerType:  travelerTypeStep
         case .context:       contextStep
         case .interests:     interestsStep
@@ -152,6 +154,40 @@ struct OnboardingView: View {
         .frame(maxWidth: .infinity)
         .background(Color.white.opacity(0.08))
         .clipShape(Capsule())
+    }
+
+    // MARK: - Name
+
+    @FocusState private var nameFieldFocused: Bool
+
+    private var nameStep: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            stepHeader(
+                title: "What can we call you?",
+                subtitle: "We'll use your name to greet you when you open the app. Skip if you'd rather not."
+            )
+
+            TextField("", text: $draftFirstName, prompt: Text("First name").foregroundStyle(Color.riLightGray))
+                .font(.system(size: 22, weight: .semibold))
+                .foregroundStyle(.white)
+                .textInputAutocapitalization(.words)
+                .autocorrectionDisabled(true)
+                .submitLabel(.done)
+                .focused($nameFieldFocused)
+                .onSubmit { advance() }
+                .padding(.horizontal, 16)
+                .frame(height: 56)
+                .background(Color.white.opacity(0.08))
+                .clipShape(RoundedRectangle(cornerRadius: 14))
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                        nameFieldFocused = true
+                    }
+                }
+
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 24)
     }
 
     // MARK: - Traveler type
@@ -952,6 +988,7 @@ struct OnboardingView: View {
     private var primaryButtonLabel: String {
         switch step {
         case .welcome:       return "Get started"
+        case .name:          return "Continue"
         case .travelerType:  return "Continue"
         case .context:       return "Continue"
         case .interests:     return "Continue"
@@ -963,7 +1000,7 @@ struct OnboardingView: View {
 
     private var canAdvance: Bool {
         switch step {
-        case .welcome, .preview, .permissions, .ready: return true
+        case .welcome, .name, .preview, .permissions, .ready: return true
         case .travelerType: return draftType != nil
         case .context:
             // Each branch has its own minimum-info bar:
@@ -983,6 +1020,9 @@ struct OnboardingView: View {
     private func advance(skip: Bool = false) {
         // Persist whatever we've gathered at this step.
         switch step {
+        case .name:
+            if !skip { profileStore.setFirstName(draftFirstName) }
+            nameFieldFocused = false
         case .travelerType:
             if let t = draftType { profileStore.setTravelerType(t) }
         case .context:
@@ -1033,6 +1073,7 @@ struct OnboardingView: View {
 extension OnboardingView {
     enum Step: Int, CaseIterable, Identifiable {
         case welcome
+        case name
         case travelerType
         case context
         case interests

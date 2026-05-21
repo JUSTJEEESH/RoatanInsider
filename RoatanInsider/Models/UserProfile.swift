@@ -4,6 +4,7 @@ import Foundation
 /// Powers personalised home sections, smarter "Right Now" recommendations,
 /// trip-aware notifications, and ASO-relevant retention loops.
 struct UserProfile: Codable, Equatable {
+    var firstName: String?
     var travelerType: TravelerType?
     var arrivalDate: Date?
     var departureDate: Date?
@@ -36,6 +37,7 @@ struct UserProfile: Codable, Equatable {
     var contributesContent: Bool
 
     static let empty = UserProfile(
+        firstName: nil,
         travelerType: nil,
         arrivalDate: nil,
         departureDate: nil,

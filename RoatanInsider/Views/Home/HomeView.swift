@@ -12,10 +12,10 @@ struct HomeView: View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVStack(spacing: 0) {
-                    HeroSection(selectedTab: $selectedTab)
+                    HomeGreeting()
 
                     LiveConditionsStrip()
-                        .padding(.top, 20)
+                        .padding(.top, 16)
 
                     ArrivalBanner(showCruiseMode: $showCruiseMode)
 

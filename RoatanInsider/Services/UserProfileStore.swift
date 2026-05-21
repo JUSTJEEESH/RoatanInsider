@@ -40,6 +40,11 @@ final class UserProfileStore {
 
     // MARK: - Convenience mutators
 
+    func setFirstName(_ name: String?) {
+        let trimmed = name?.trimmingCharacters(in: .whitespacesAndNewlines)
+        profile.firstName = (trimmed?.isEmpty == false) ? trimmed : nil
+    }
+
     func setTravelerType(_ type: TravelerType) {
         profile.travelerType = type
         if profile.interests.isEmpty {
