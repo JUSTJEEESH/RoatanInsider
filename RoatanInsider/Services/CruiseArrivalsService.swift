@@ -41,21 +41,34 @@ final class CruiseArrivalsService {
         arrivals.filter { $0.isToday }.sorted { $0.arrivalTime < $1.arrivalTime }
     }
 
-    func upcomingArrivals(days: Int = 7) -> [CruiseArrival] {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        formatter.timeZone = TimeZone(secondsFromGMT: -6 * 3600)
-        let today = formatter.string(from: .now)
-        guard let horizon = Calendar.current.date(byAdding: .day, value: days, to: .now) else {
-            return []
-        }
-        let horizonStr = formatter.string(from: horizon)
+    func arrivalsTomorrow() -> [CruiseArrival] {
+        let tomorrow = Self.dateString(daysFromNow: 1)
         return arrivals
-            .filter { $0.date >= today && $0.date <= horizonStr }
+            .filter { $0.date == tomorrow }
+            .sorted { $0.arrivalTime < $1.arrivalTime }
+    }
+
+    func upcomingArrivals(days: Int = 7) -> [CruiseArrival] {
+        let today = Self.dateString(daysFromNow: 0)
+        let horizon = Self.dateString(daysFromNow: days)
+        return arrivals
+            .filter { $0.date >= today && $0.date <= horizon }
             .sorted { ($0.date, $0.arrivalTime) < ($1.date, $1.arrivalTime) }
     }
 
     func totalPassengersToday() -> Int {
         arrivalsToday().reduce(0) { $0 + $1.passengerCount }
+    }
+
+    func totalPassengersTomorrow() -> Int {
+        arrivalsTomorrow().reduce(0) { $0 + $1.passengerCount }
+    }
+
+    private static func dateString(daysFromNow days: Int) -> String {
+        let date = Calendar.current.date(byAdding: .day, value: days, to: .now) ?? .now
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone(secondsFromGMT: -6 * 3600)
+        return formatter.string(from: date)
     }
 }

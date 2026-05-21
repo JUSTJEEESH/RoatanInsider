@@ -9,6 +9,7 @@ struct ShipsInPortSection: View {
 
     var body: some View {
         let ships = cruise.arrivalsToday()
+        let tomorrow = cruise.arrivalsTomorrow()
 
         VStack(alignment: .leading, spacing: 14) {
             header(passengers: cruise.totalPassengersToday(), count: ships.count)
@@ -22,12 +23,45 @@ struct ShipsInPortSection: View {
                     }
                 }
             }
+
+            if !tomorrow.isEmpty {
+                tomorrowPreview(count: tomorrow.count, passengers: cruise.totalPassengersTomorrow())
+            }
+
+            attribution
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 20)
         .background(Color.riOffWhite)
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .padding(.horizontal, 20)
+    }
+
+    private func tomorrowPreview(count: Int, passengers: Int) -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: "calendar")
+                .font(.system(size: 11, weight: .semibold))
+                .foregroundStyle(Color.riLightGray)
+            Text(tomorrowLabel(count: count, passengers: passengers))
+                .font(.system(size: 12, weight: .medium))
+                .foregroundStyle(Color.riMediumGray)
+        }
+        .padding(.top, 4)
+    }
+
+    private func tomorrowLabel(count: Int, passengers: Int) -> String {
+        switch count {
+        case 1: return "Tomorrow: 1 ship · \(passengers.commaFormatted) visitors"
+        default: return "Tomorrow: \(count) ships · \(passengers.commaFormatted) visitors"
+        }
+    }
+
+    private var attribution: some View {
+        Text("Data from The Roatán Directory · updated daily")
+            .font(.system(size: 10))
+            .foregroundStyle(Color.riLightGray)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.top, 2)
     }
 
     private func header(passengers: Int, count: Int) -> some View {
