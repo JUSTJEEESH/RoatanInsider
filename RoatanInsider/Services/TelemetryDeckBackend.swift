@@ -63,7 +63,7 @@ final class TelemetryDeckBackend: AnalyticsBackend {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown"
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "unknown"
 
-        var floatValue: Double = 0
+        let floatValue: Double = 0
         var stringPayload: [String] = []
         for (k, v) in properties.sorted(by: { $0.key < $1.key }) {
             stringPayload.append("\(k):\(v)")
