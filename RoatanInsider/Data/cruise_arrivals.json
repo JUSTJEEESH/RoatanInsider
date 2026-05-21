@@ -1,0 +1,18 @@
+[
+  { "id": "2026-05-21-carnival-vista-mahogany", "shipName": "Carnival Vista", "cruiseLine": "Carnival", "port": "Mahogany Bay", "date": "2026-05-21", "arrivalTime": "08:00", "departureTime": "17:00", "passengerCount": 3934 },
+  { "id": "2026-05-22-carnival-magic-mahogany", "shipName": "Carnival Magic", "cruiseLine": "Carnival", "port": "Mahogany Bay", "date": "2026-05-22", "arrivalTime": "08:00", "departureTime": "17:00", "passengerCount": 3690 },
+  { "id": "2026-05-22-allure-coxen", "shipName": "Allure of the Seas", "cruiseLine": "Royal Caribbean", "port": "Port of Roatán", "date": "2026-05-22", "arrivalTime": "09:00", "departureTime": "18:00", "passengerCount": 5484 },
+  { "id": "2026-05-24-norwegian-joy-coxen", "shipName": "Norwegian Joy", "cruiseLine": "Norwegian", "port": "Port of Roatán", "date": "2026-05-24", "arrivalTime": "09:00", "departureTime": "18:00", "passengerCount": 3804 },
+  { "id": "2026-05-25-carnival-dream-mahogany", "shipName": "Carnival Dream", "cruiseLine": "Carnival", "port": "Mahogany Bay", "date": "2026-05-25", "arrivalTime": "08:00", "departureTime": "17:00", "passengerCount": 3646 },
+  { "id": "2026-05-26-mardi-gras-mahogany", "shipName": "Mardi Gras", "cruiseLine": "Carnival", "port": "Mahogany Bay", "date": "2026-05-26", "arrivalTime": "08:00", "departureTime": "17:00", "passengerCount": 5282 },
+  { "id": "2026-05-26-msc-seascape-coxen", "shipName": "MSC Seascape", "cruiseLine": "MSC", "port": "Port of Roatán", "date": "2026-05-26", "arrivalTime": "09:00", "departureTime": "18:00", "passengerCount": 4540 },
+  { "id": "2026-05-28-liberty-coxen", "shipName": "Liberty of the Seas", "cruiseLine": "Royal Caribbean", "port": "Port of Roatán", "date": "2026-05-28", "arrivalTime": "09:00", "departureTime": "18:00", "passengerCount": 3634 },
+  { "id": "2026-05-29-carnival-vista-mahogany", "shipName": "Carnival Vista", "cruiseLine": "Carnival", "port": "Mahogany Bay", "date": "2026-05-29", "arrivalTime": "08:00", "departureTime": "17:00", "passengerCount": 3934 },
+  { "id": "2026-05-29-norwegian-encore-coxen", "shipName": "Norwegian Encore", "cruiseLine": "Norwegian", "port": "Port of Roatán", "date": "2026-05-29", "arrivalTime": "09:00", "departureTime": "18:00", "passengerCount": 3998 },
+  { "id": "2026-05-31-symphony-coxen", "shipName": "Symphony of the Seas", "cruiseLine": "Royal Caribbean", "port": "Port of Roatán", "date": "2026-05-31", "arrivalTime": "09:00", "departureTime": "18:00", "passengerCount": 5518 },
+  { "id": "2026-06-01-carnival-glory-mahogany", "shipName": "Carnival Glory", "cruiseLine": "Carnival", "port": "Mahogany Bay", "date": "2026-06-01", "arrivalTime": "08:00", "departureTime": "17:00", "passengerCount": 2974 },
+  { "id": "2026-06-02-voyager-coxen", "shipName": "Voyager of the Seas", "cruiseLine": "Royal Caribbean", "port": "Port of Roatán", "date": "2026-06-02", "arrivalTime": "09:00", "departureTime": "18:00", "passengerCount": 3286 },
+  { "id": "2026-06-03-carnival-magic-mahogany", "shipName": "Carnival Magic", "cruiseLine": "Carnival", "port": "Mahogany Bay", "date": "2026-06-03", "arrivalTime": "08:00", "departureTime": "17:00", "passengerCount": 3690 },
+  { "id": "2026-06-05-carnival-vista-mahogany", "shipName": "Carnival Vista", "cruiseLine": "Carnival", "port": "Mahogany Bay", "date": "2026-06-05", "arrivalTime": "08:00", "departureTime": "17:00", "passengerCount": 3934 },
+  { "id": "2026-06-05-adventure-coxen", "shipName": "Adventure of the Seas", "cruiseLine": "Royal Caribbean", "port": "Port of Roatán", "date": "2026-06-05", "arrivalTime": "09:00", "departureTime": "18:00", "passengerCount": 3114 }
+]

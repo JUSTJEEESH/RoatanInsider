@@ -25,6 +25,9 @@ struct HomeView: View {
                     LiveConditionsStrip()
                         .padding(.top, 16)
 
+                    ShipsInPortSection()
+                        .padding(.top, 20)
+
                     ArrivalBanner(showCruiseMode: $showCruiseMode)
 
                     if showsCruiseBanner {
