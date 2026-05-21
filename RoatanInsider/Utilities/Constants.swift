@@ -42,10 +42,11 @@ enum AppConstants {
     // print to the Xcode console only).
     static let telemetryDeckAppID = "1AAD1B5F-E28F-4C1C-84FB-E79D23BAD654"
 
-    // Sentry (crash reporting — https://sentry.io). The DSN is paste-able once
-    // the Sentry SDK is added as a Swift Package (planned for next session).
-    // Stored here so wiring is ready when the package lands.
-    static let sentryDSN = ""
+    // Sentry (crash reporting + perf — https://sentry.io). DSN is a public
+    // identifier safe to commit (it routes events to our project; you can't
+    // read events back from it). Auth token for dSYM upload lives in
+    // .sentryclirc which is gitignored.
+    static let sentryDSN = "https://2fae8a0d2affb47b0f9dfa47cf522505@o4511424942374912.ingest.us.sentry.io/4511424946503680"
 
     // Design
     static let cardCornerRadius: CGFloat = 16

@@ -1,8 +1,7 @@
 import SwiftUI
-import Sentry
-
 import SwiftData
 import UIKit
+import Sentry
 import os
 
 @main
@@ -21,32 +20,40 @@ struct RoatanInsiderApp: App {
     private let favoritesStore: FavoritesStore
 
     init() {
-        SentrySDK.start { options in
-            options.dsn = "https://2fae8a0d2affb47b0f9dfa47cf522505@o4511424942374912.ingest.us.sentry.io/4511424946503680"
-
-            // Adds IP for users.
-            // For more information, visit: https://docs.sentry.io/platforms/apple/data-management/data-collected/
-            options.sendDefaultPii = true
-
-            // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
-            // We recommend adjusting this value in production.
-            options.tracesSampleRate = 1.0
-
-            // Configure profiling. Visit https://docs.sentry.io/platforms/apple/profiling/ to learn more.
-            options.configureProfiling = {
-                $0.sessionSampleRate = 1.0 // We recommend adjusting this value in production.
-                $0.lifecycle = .trace
+        // Sentry: crashes + performance + profiling. Guarded so the app
+        // gracefully degrades if the DSN constant is ever cleared (e.g.
+        // for a build that intentionally doesn't report to Sentry).
+        //
+        // Sample rates: 100% in DEBUG so we can see everything while
+        // developing; 20% in RELEASE to keep production transaction
+        // volume + cost reasonable. Crashes are sent 100% regardless of
+        // the traces rate — that's a separate sampler controlled by the
+        // SDK internals.
+        if !AppConstants.sentryDSN.isEmpty {
+            SentrySDK.start { options in
+                options.dsn = AppConstants.sentryDSN
+                options.sendDefaultPii = true
+                #if DEBUG
+                options.environment = "debug"
+                options.tracesSampleRate = 1.0
+                options.configureProfiling = {
+                    $0.sessionSampleRate = 1.0
+                    $0.lifecycle = .trace
+                }
+                #else
+                options.environment = "release"
+                options.tracesSampleRate = 0.2
+                options.configureProfiling = {
+                    $0.sessionSampleRate = 0.2
+                    $0.lifecycle = .trace
+                }
+                #endif
+                options.attachScreenshot = true
+                options.attachViewHierarchy = true
+                options.experimental.enableLogs = true
             }
-
-            // Uncomment the following lines to add more data to your events
-            // options.attachScreenshot = true // This adds a screenshot to the error events
-            // options.attachViewHierarchy = true // This adds the view hierarchy to the error events
-            
-            // Enable experimental logging features
-            options.experimental.enableLogs = true
+            AppLog.app.info("Sentry: crash reporting + perf active.")
         }
-        // Remove the next line after confirming that your Sentry integration is working.
-        SentrySDK.capture(message: "This app uses Sentry! :)")
 
         // Schema V2 is CloudKit-compatible. The migration plan carries forward
         // any V1 favorites from existing installs without data loss.
