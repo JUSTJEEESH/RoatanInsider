@@ -357,6 +357,22 @@ function slug(s: string): string {
 
 // --- Upload -----------------------------------------------------------------
 
+async function uploadDebug(html: string): Promise<void> {
+  const supabaseUrl = Deno.env.get("SUPABASE_URL");
+  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  if (!supabaseUrl || !serviceKey) return;
+  const supabase = createClient(supabaseUrl, serviceKey);
+  const { error } = await supabase.storage
+    .from("app-data")
+    .upload("cruise_arrivals_debug.html", new Blob([html], { type: "text/html" }), {
+      upsert: true,
+      cacheControl: "60",
+      contentType: "text/html",
+    });
+  if (error) throw new Error(error.message);
+  console.log("Debug HTML uploaded to app-data/cruise_arrivals_debug.html");
+}
+
 async function uploadJson(arrivals: CruiseArrival[]): Promise<void> {
   const supabaseUrl = Deno.env.get("SUPABASE_URL");
   const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
@@ -393,6 +409,14 @@ Deno.serve(async (_req) => {
       console.error("Zero arrivals parsed.");
       console.error(`HTML length: ${html.length}, <table> count: ${tableCount}, <tr> count: ${trCount}`);
       console.error(`First 4000 chars of HTML:\n${snippet}`);
+
+      // Also dump the full HTML to storage so we can download + inspect it.
+      try {
+        await uploadDebug(html);
+      } catch (uploadErr) {
+        console.error(`Failed to upload debug HTML: ${uploadErr}`);
+      }
+
       throw new Error(`Parsed zero arrivals — see logs for HTML diagnostic. table=${tableCount} tr=${trCount} length=${html.length}`);
     }
 
