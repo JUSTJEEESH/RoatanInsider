@@ -162,7 +162,12 @@ const SHIP_CAPACITY: Record<string, { capacity: number; line: string }> = {
 
 // --- Fetching ---------------------------------------------------------------
 
-const SOURCE_URL = "https://www.cruisetimetables.com/cruises-from-roatan-honduras.html";
+const SOURCE_CANDIDATES = [
+  "https://cruisedig.com/ports/roatan-honduras",
+  "https://www.cruisemapper.com/ports/roatan-island-port-29",
+  "https://www.anacaribe.net/itinerary",
+];
+
 const BROWSER_HEADERS = {
   "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
   "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -172,57 +177,75 @@ const BROWSER_HEADERS = {
   "Upgrade-Insecure-Requests": "1",
 };
 
-async function fetchPage(): Promise<string> {
-  // Try 1: direct fetch with browser headers. The page itself returns 200
-  // but it's a JS shell — the schedule loads via JavaScript on page load.
-  // We accept the response ONLY if it looks like the data has actually rendered
-  // (more than a few <tr>s). Otherwise fall through to ScrapingBee's JS-render.
-  try {
-    const res = await fetch(SOURCE_URL, { headers: BROWSER_HEADERS });
-    if (res.ok) {
-      const html = await res.text();
-      if (looksLikeRealPage(html)) return html;
-      console.log(`Direct fetch returned 200 but page looks like a JS shell — trying ScrapingBee with render_js=true`);
-    } else {
-      console.log(`Direct fetch returned ${res.status}; trying ScrapingBee fallback`);
+interface FetchResult {
+  url: string;
+  html: string;
+  via: "direct" | "scrapingbee";
+}
+
+async function fetchPage(): Promise<FetchResult> {
+  const errors: string[] = [];
+
+  for (const url of SOURCE_CANDIDATES) {
+    // Try 1: direct fetch with browser headers.
+    try {
+      const res = await fetch(url, { headers: BROWSER_HEADERS });
+      if (res.ok) {
+        const html = await res.text();
+        if (looksLikeRealPage(html)) {
+          console.log(`Direct fetch succeeded: ${url}`);
+          return { url, html, via: "direct" };
+        }
+      }
+      errors.push(`${url} (direct): ${res.status} or empty`);
+    } catch (err) {
+      errors.push(`${url} (direct): ${err}`);
     }
-  } catch (err) {
-    console.log(`Direct fetch failed: ${err}; trying ScrapingBee fallback`);
+
+    // Try 2: ScrapingBee with JS rendering.
+    const apiKey = Deno.env.get("SCRAPINGBEE_API_KEY");
+    if (!apiKey) {
+      errors.push(`${url} (scrapingbee): no API key configured`);
+      continue;
+    }
+    try {
+      const sbUrl = `https://app.scrapingbee.com/api/v1/?api_key=${apiKey}&url=${encodeURIComponent(url)}&render_js=true&wait=5000`;
+      const res = await fetch(sbUrl);
+      if (res.ok) {
+        const html = await res.text();
+        if (looksLikeRealPage(html)) {
+          console.log(`ScrapingBee succeeded: ${url}`);
+          return { url, html, via: "scrapingbee" };
+        }
+        errors.push(`${url} (scrapingbee): empty/shell after JS render`);
+      } else {
+        errors.push(`${url} (scrapingbee): ${res.status}`);
+      }
+    } catch (err) {
+      errors.push(`${url} (scrapingbee): ${err}`);
+    }
   }
 
-  // Try 2: ScrapingBee with JS rendering — runs a real headless Chrome,
-  // waits 4 seconds for the schedule to populate, then returns the
-  // rendered HTML. Costs ~5 credits per call; free tier is 1000/mo so
-  // we can run this daily for ~6 years on the free tier alone.
-  const apiKey = Deno.env.get("SCRAPINGBEE_API_KEY");
-  if (!apiKey) {
-    throw new Error("Direct fetch returned an empty JS shell AND no SCRAPINGBEE_API_KEY configured");
-  }
-  const sbUrl = `https://app.scrapingbee.com/api/v1/?api_key=${apiKey}&url=${encodeURIComponent(SOURCE_URL)}&render_js=true&wait=4000`;
-  const res = await fetch(sbUrl);
-  if (!res.ok) {
-    throw new Error(`ScrapingBee returned ${res.status}: ${await res.text()}`);
-  }
-  const html = await res.text();
-  if (!looksLikeRealPage(html)) {
-    // Upload the ScrapingBee response so we can inspect what its
-    // headless browser actually saw.
-    try { await uploadDebug(html); } catch (_) { /* best-effort */ }
-    const trCount = (html.match(/<tr/gi) ?? []).length;
-    throw new Error(`ScrapingBee response still looks like JS shell (length=${html.length}, tr=${trCount}). Debug uploaded.`);
-  }
-  return html;
+  throw new Error(`All sources failed: ${errors.join(" | ")}`);
 }
 
 function looksLikeRealPage(html: string): boolean {
   const lower = html.toLowerCase();
   if (lower.includes("just a moment") || lower.includes("attention required")) return false;
+  if (lower.includes("unlock more content") || lower.includes("view a short ad")) return false; // paywall
   if (!lower.includes("roatan") && !lower.includes("roatán")) return false;
-  if (html.length < 1000) return false;
-  // The JS-shell version has 1 table / 1 tr. A populated schedule has dozens.
-  // Reject anything under 10 <tr> elements as still-loading or empty.
-  const trCount = (html.match(/<tr/gi) ?? []).length;
-  return trCount >= 10;
+  if (html.length < 5000) return false;
+
+  // Must mention multiple cruise ships we recognize — otherwise it's a
+  // generic 'about this port' page without a schedule.
+  let shipMentions = 0;
+  for (const ship of Object.keys(SHIP_CAPACITY)) {
+    if (html.includes(ship)) {
+      shipMentions++;
+      if (shipMentions >= 3) return true;
+    }
+  }
+  return false;
 }
 
 // --- Parsing ----------------------------------------------------------------
@@ -411,33 +434,31 @@ async function uploadJson(arrivals: CruiseArrival[]): Promise<void> {
 
 Deno.serve(async (_req) => {
   try {
-    const html = await fetchPage();
-    const arrivals = parseSchedule(html);
+    const result = await fetchPage();
+    const arrivals = parseSchedule(result.html);
 
     if (arrivals.length === 0) {
-      // Diagnostic: surface what we actually got so we can debug the parser
-      // without redeploying. The HTML snippet shows up in Supabase function logs.
-      const snippet = html.slice(0, 4000);
-      const tableCount = (html.match(/<table/gi) ?? []).length;
-      const trCount = (html.match(/<tr/gi) ?? []).length;
-      console.error("Zero arrivals parsed.");
-      console.error(`HTML length: ${html.length}, <table> count: ${tableCount}, <tr> count: ${trCount}`);
-      console.error(`First 4000 chars of HTML:\n${snippet}`);
-
-      // Also dump the full HTML to storage so we can download + inspect it.
-      try {
-        await uploadDebug(html);
-      } catch (uploadErr) {
+      const tableCount = (result.html.match(/<table/gi) ?? []).length;
+      const trCount = (result.html.match(/<tr/gi) ?? []).length;
+      console.error(`Zero arrivals parsed from ${result.url} (via ${result.via})`);
+      console.error(`HTML length: ${result.html.length}, <table>: ${tableCount}, <tr>: ${trCount}`);
+      try { await uploadDebug(result.html); } catch (uploadErr) {
         console.error(`Failed to upload debug HTML: ${uploadErr}`);
       }
-
-      throw new Error(`Parsed zero arrivals — see logs for HTML diagnostic. table=${tableCount} tr=${trCount} length=${html.length}`);
+      throw new Error(`Parsed zero arrivals from ${result.url}. Debug uploaded. table=${tableCount} tr=${trCount} length=${result.html.length}`);
     }
 
     await uploadJson(arrivals);
 
     return new Response(
-      JSON.stringify({ ok: true, count: arrivals.length, firstDate: arrivals[0].date, lastDate: arrivals[arrivals.length - 1].date }),
+      JSON.stringify({
+        ok: true,
+        source: result.url,
+        via: result.via,
+        count: arrivals.length,
+        firstDate: arrivals[0].date,
+        lastDate: arrivals[arrivals.length - 1].date,
+      }),
       { headers: { "Content-Type": "application/json" } }
     );
   } catch (err) {
