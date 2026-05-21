@@ -32,6 +32,10 @@ struct HomeView: View {
                             .padding(.top, 24)
                     }
 
+                    TonightSection()
+                        .padding(.top, 28)
+                        .padding(.bottom, AppConstants.sectionPadding)
+
                     RightNowFeedSection()
                         .padding(.top, 28)
                         .padding(.bottom, AppConstants.sectionPadding)
@@ -92,6 +96,12 @@ struct HomeView: View {
                     collection: collection,
                     businesses: dataManager.activeBusinesses.filter(collection.filter).smartSorted()
                 )
+            }
+            .navigationDestination(for: EventsListDestination.self) { _ in
+                EventsListView()
+            }
+            .navigationDestination(for: Event.self) { event in
+                EventDetailView(event: event)
             }
             .fullScreenCover(isPresented: $showCruiseMode) {
                 CruiseModeView(viewModel: cruiseViewModel)

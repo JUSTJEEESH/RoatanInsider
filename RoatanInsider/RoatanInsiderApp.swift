@@ -19,6 +19,7 @@ struct RoatanInsiderApp: App {
     @State private var trending = TrendingReactionsService()
     @State private var arrival = ArrivalDetector()
     @State private var dataManager = DataManager()
+    @State private var eventsService = EventsService()
     private let modelContainer: ModelContainer
     private let favoritesStore: FavoritesStore
 
@@ -137,6 +138,7 @@ struct RoatanInsiderApp: App {
             .environment(trending)
             .environment(arrival)
             .environment(dataManager)
+            .environment(eventsService)
             .environment(favoritesStore)
         }
         .modelContainer(modelContainer)
