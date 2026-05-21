@@ -15,7 +15,7 @@ import Observation
 @Observable
 final class TrendingReactionsService {
 
-    struct TrendingEntry: Identifiable, Decodable, Hashable {
+    struct TrendingEntry: Identifiable, Codable, Hashable {
         let business_id: String
         let total_reactions: Int
         let heart_count: Int
