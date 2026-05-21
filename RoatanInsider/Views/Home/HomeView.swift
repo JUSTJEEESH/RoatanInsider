@@ -33,8 +33,6 @@ struct HomeView: View {
                     }
 
                     TonightSection()
-                        .padding(.top, 28)
-                        .padding(.bottom, AppConstants.sectionPadding)
 
                     RightNowFeedSection()
                         .padding(.top, 28)

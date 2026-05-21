@@ -1,9 +1,9 @@
 import SwiftUI
 
-/// "Tonight on Roatán" — the highest-priority answer to the question every
-/// tourist asks. Shows the next 5 events starting from now (or already
-/// in progress within the last hour) and a See-all link to the full
-/// week's list.
+/// "Tonight on the island" — the highest-priority answer to the question
+/// every tourist asks. Lives in its own dark section on Home, framed as
+/// live music + DJs + trivia + more so it doesn't feel like a hidden
+/// directory.
 struct TonightSection: View {
     @Environment(EventsService.self) private var events
 
@@ -12,7 +12,7 @@ struct TonightSection: View {
     var body: some View {
         let tonight = events.eventsTonight()
 
-        VStack(alignment: .leading, spacing: 14) {
+        VStack(alignment: .leading, spacing: 18) {
             header(count: tonight.count)
 
             if tonight.isEmpty {
@@ -25,46 +25,39 @@ struct TonightSection: View {
                 }
                 .padding(.horizontal, 20)
 
-                if tonight.count > Self.previewLimit {
-                    NavigationLink(value: EventsListDestination()) {
-                        HStack(spacing: 6) {
-                            Text("See all \(tonight.count) tonight")
-                                .font(.system(size: 14, weight: .semibold))
-                            Image(systemName: "arrow.right")
-                                .font(.system(size: 12, weight: .bold))
-                        }
-                        .foregroundStyle(Color.riPink)
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 4)
-                }
+                seeAllLink(totalCount: tonight.count)
             }
         }
+        .padding(.vertical, AppConstants.sectionPadding)
+        .frame(maxWidth: .infinity)
+        .background(Color.riFixedDark)
     }
 
     private func header(count: Int) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text("TONIGHT ON ROATÁN")
-                .font(.system(size: 12, weight: .bold))
-                .tracking(1.4)
-                .foregroundStyle(Color.riMint)
-
-            HStack(alignment: .firstTextBaseline) {
-                Text(headlineForToday)
-                    .font(.system(size: 24, weight: .bold))
-                    .foregroundStyle(Color.riDark)
-                Spacer()
-                NavigationLink(value: EventsListDestination()) {
-                    Text("This week")
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(Color.riPink)
-                }
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 8) {
+                Image(systemName: "moon.stars.fill")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundStyle(Color.riMint)
+                Text("TONIGHT ON THE ISLAND")
+                    .font(.system(size: 12, weight: .bold))
+                    .tracking(1.4)
+                    .foregroundStyle(Color.riMint)
             }
+
+            Text(headline)
+                .font(.system(size: 26, weight: .bold))
+                .foregroundStyle(.white)
+
+            Text("Live music, DJs, trivia, and the spots locals are at right now.")
+                .font(.system(size: 14))
+                .foregroundStyle(Color.white.opacity(0.6))
+                .lineSpacing(2)
         }
         .padding(.horizontal, 20)
     }
 
-    private var headlineForToday: String {
+    private var headline: String {
         switch Weekday.today {
         case .friday:    return "Friday night line-up"
         case .saturday:  return "Saturday night line-up"
@@ -78,15 +71,42 @@ struct TonightSection: View {
     }
 
     private var emptyState: some View {
-        Text("Quiet night on the island. Pull up the week to plan ahead.")
+        Text("Quiet night. Pull up the week to see what's coming.")
             .font(.system(size: 14))
-            .foregroundStyle(Color.riLightGray)
+            .foregroundStyle(Color.white.opacity(0.6))
             .padding(.horizontal, 20)
+    }
+
+    private func seeAllLink(totalCount: Int) -> some View {
+        NavigationLink(value: EventsListDestination()) {
+            HStack(spacing: 8) {
+                Text(linkLabel(totalCount: totalCount))
+                    .font(.system(size: 14, weight: .bold))
+                Image(systemName: "arrow.right")
+                    .font(.system(size: 12, weight: .bold))
+            }
+            .foregroundStyle(.white)
+            .padding(.horizontal, 18)
+            .padding(.vertical, 12)
+            .frame(maxWidth: .infinity)
+            .background(Color.riPink)
+            .clipShape(Capsule())
+        }
+        .padding(.horizontal, 20)
+        .padding(.top, 4)
+    }
+
+    private func linkLabel(totalCount: Int) -> String {
+        if totalCount > Self.previewLimit {
+            return "See all \(totalCount) tonight"
+        }
+        return "Browse the whole week"
     }
 }
 
 /// Compact single-line event row used in TonightSection and the
 /// full-week list. Three columns — performer/event, venue+area, time.
+/// White card on whatever background — works on light or dark sections.
 struct EventRow: View {
     let event: Event
 
@@ -96,7 +116,7 @@ struct EventRow: View {
                 Image(systemName: event.category.iconName)
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundStyle(Color.riMint)
-                    .frame(width: 32, height: 32)
+                    .frame(width: 34, height: 34)
                     .background(Color.riMint.opacity(0.12))
                     .clipShape(Circle())
 
@@ -118,9 +138,9 @@ struct EventRow: View {
                     .foregroundStyle(Color.riDark)
                     .monospacedDigit()
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 10)
-            .background(Color.riOffWhite)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 12)
+            .background(.white)
             .clipShape(RoundedRectangle(cornerRadius: 12))
         }
         .buttonStyle(.plain)
