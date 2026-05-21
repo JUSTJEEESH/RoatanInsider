@@ -49,6 +49,8 @@ struct EventsListView: View {
 
         if results.isEmpty {
             emptyState
+        } else if hasFilter {
+            groupedResults(results)
         } else {
             VStack(spacing: 8) {
                 ForEach(results) { event in
@@ -58,6 +60,75 @@ struct EventsListView: View {
             .padding(.horizontal, 20)
             .padding(.top, 4)
             .padding(.bottom, 32)
+        }
+    }
+
+    @ViewBuilder
+    private func groupedResults(_ matches: [Event]) -> some View {
+        let groups = Self.groupByDay(matches)
+        VStack(alignment: .leading, spacing: 20) {
+            ForEach(groups) { group in
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(spacing: 6) {
+                        Text(group.day.displayName.uppercased())
+                            .font(.system(size: 11, weight: .bold))
+                            .tracking(1.2)
+                            .foregroundStyle(Color.riMint)
+                        if group.day == Weekday.today {
+                            Text("· Today")
+                                .font(.system(size: 11, weight: .semibold))
+                                .foregroundStyle(Color.riLightGray)
+                        } else if group.isTomorrow {
+                            Text("· Tomorrow")
+                                .font(.system(size: 11, weight: .semibold))
+                                .foregroundStyle(Color.riLightGray)
+                        }
+                        Spacer()
+                        Text("\(group.events.count) \(group.events.count == 1 ? "spot" : "spots")")
+                            .font(.system(size: 11))
+                            .foregroundStyle(Color.riLightGray)
+                    }
+                    .padding(.horizontal, 4)
+
+                    VStack(spacing: 8) {
+                        ForEach(group.events) { event in
+                            EventRow(event: event)
+                        }
+                    }
+                }
+            }
+        }
+        .padding(.horizontal, 20)
+        .padding(.top, 4)
+        .padding(.bottom, 32)
+    }
+
+    /// Groups events by weekday, ordered starting from today and wrapping
+    /// forward through the week. Empty days are dropped.
+    private static func groupByDay(_ events: [Event]) -> [DayGroup] {
+        let buckets = Dictionary(grouping: events) { $0.day ?? .monday }
+        let today = Weekday.today ?? .monday
+        return Weekday.allCases
+            .sorted { a, b in
+                let aOffset = (a.calendarWeekday - today.calendarWeekday + 7) % 7
+                let bOffset = (b.calendarWeekday - today.calendarWeekday + 7) % 7
+                return aOffset < bOffset
+            }
+            .compactMap { day -> DayGroup? in
+                guard let dayEvents = buckets[day], !dayEvents.isEmpty else { return nil }
+                return DayGroup(day: day, events: dayEvents)
+            }
+    }
+
+    private struct DayGroup: Identifiable {
+        let day: Weekday
+        let events: [Event]
+        var id: Weekday { day }
+
+        var isTomorrow: Bool {
+            let today = Weekday.today ?? .monday
+            let tomorrowWD = (today.calendarWeekday % 7) + 1
+            return day.calendarWeekday == tomorrowWD
         }
     }
 
