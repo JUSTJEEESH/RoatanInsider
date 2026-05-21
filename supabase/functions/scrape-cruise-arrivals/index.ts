@@ -205,7 +205,11 @@ async function fetchPage(): Promise<string> {
   }
   const html = await res.text();
   if (!looksLikeRealPage(html)) {
-    throw new Error("ScrapingBee returned HTML but still looks like the JS shell — increase wait time or inspect");
+    // Upload the ScrapingBee response so we can inspect what its
+    // headless browser actually saw.
+    try { await uploadDebug(html); } catch (_) { /* best-effort */ }
+    const trCount = (html.match(/<tr/gi) ?? []).length;
+    throw new Error(`ScrapingBee response still looks like JS shell (length=${html.length}, tr=${trCount}). Debug uploaded.`);
   }
   return html;
 }
