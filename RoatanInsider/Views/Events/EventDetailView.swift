@@ -35,7 +35,7 @@ struct EventDetailView: View {
         }
         .navigationTitle(event.performer)
         .navigationBarTitleDisplayMode(.inline)
-        .background(Color.white)
+        .background(Color.riWhite)
     }
 
     private var header: some View {

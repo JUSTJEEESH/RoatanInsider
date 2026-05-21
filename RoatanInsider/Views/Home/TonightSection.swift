@@ -140,7 +140,7 @@ struct EventRow: View {
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 12)
-            .background(.white)
+            .background(Color.riOffWhite)
             .clipShape(RoundedRectangle(cornerRadius: 12))
         }
         .buttonStyle(.plain)
