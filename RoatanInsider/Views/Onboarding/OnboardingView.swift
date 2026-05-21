@@ -106,7 +106,7 @@ struct OnboardingView: View {
                     .foregroundStyle(.white)
                     .multilineTextAlignment(.center)
 
-                Text("The only guide you need for Honduras's most beautiful island — curated by people who actually live here.")
+                Text("Roatán, by the people who live here.")
                     .font(.riBody)
                     .foregroundStyle(Color.riLightGray)
                     .multilineTextAlignment(.center)
@@ -164,7 +164,7 @@ struct OnboardingView: View {
         VStack(alignment: .leading, spacing: 24) {
             stepHeader(
                 title: "What can we call you?",
-                subtitle: "We'll use your name to greet you when you open the app. Skip if you'd rather not."
+                subtitle: "So we can say hi when you open the app."
             )
 
             TextField("", text: $draftFirstName, prompt: Text("First name").foregroundStyle(Color.riLightGray))
@@ -276,7 +276,7 @@ struct OnboardingView: View {
         VStack(alignment: .leading, spacing: 24) {
             stepHeader(
                 title: "Your cruise day",
-                subtitle: "Tell us your port and boarding time — we'll put a countdown on your lock screen and sort everything by walking distance."
+                subtitle: "Countdown to boarding, with everything sorted by distance to your ship."
             )
 
             VStack(alignment: .leading, spacing: 12) {
@@ -388,14 +388,14 @@ struct OnboardingView: View {
         if draftType == .longStay {
             return "We'll tune recommendations for longer-term living — wifi, weekly events, local prices."
         }
-        return "Dates power your countdown and itinerary. Stay area shapes every recommendation."
+        return "Dates power your countdown. Stay area shapes every recommendation."
     }
 
     private var expatContext: some View {
         VStack(alignment: .leading, spacing: 22) {
             stepHeader(
                 title: "Your home",
-                subtitle: "Tells us how to surface the right kind of recommendations — new arrivals get essentials, longtime residents get what's new this week."
+                subtitle: "New arrivals get essentials. Longtime residents get what's new."
             )
 
             ScrollView(showsIndicators: false) {
@@ -456,7 +456,7 @@ struct OnboardingView: View {
         VStack(alignment: .leading, spacing: 22) {
             stepHeader(
                 title: "Where in Roatán?",
-                subtitle: "We're building this with locals. Your knowledge is what makes the app real."
+                subtitle: "We're building this with locals. Your knowledge makes it real."
             )
 
             ScrollView(showsIndicators: false) {
@@ -547,7 +547,7 @@ struct OnboardingView: View {
         VStack(alignment: .leading, spacing: 20) {
             stepHeader(
                 title: "What are you into?",
-                subtitle: "We'll prioritise these across the app. Already pre-selected a few based on your traveler type — tweak as you like."
+                subtitle: "We'll lean into these. We've pre-selected some — tweak as you like."
             )
 
             ScrollView(showsIndicators: false) {
@@ -598,7 +598,7 @@ struct OnboardingView: View {
         VStack(alignment: .leading, spacing: 20) {
             stepHeader(
                 title: "Three places to start",
-                subtitle: "Tailored to what you just told us. Tap the heart to save — they'll be waiting in your Trip tab."
+                subtitle: "Picked just for you. Tap the heart to save."
             )
 
             ScrollView(showsIndicators: false) {
@@ -758,7 +758,7 @@ struct OnboardingView: View {
     }
     private var notificationsCopy: String {
         switch draftType {
-        case .cruiser: return "Live activity ticking down to your boarding time. Plus a heads-up 30 minutes before sunset on the beach."
+        case .cruiser: return "A countdown on your lock screen so you don't miss the ship."
         default: return "Optional reminders for sunset, live music, and places you've saved. Once a week, max."
         }
     }
@@ -916,16 +916,16 @@ struct OnboardingView: View {
     private var readyFooter: String {
         switch draftType {
         case .cruiser:
-            return "Cruise mode opens automatically from the home screen. Your countdown is on the lock screen the whole day."
+            return "Cruise mode kicks in the moment you open the app. Your countdown stays on the lock screen all day."
         case .vacationer, .longStay:
             if let days = arrivalDaysFromNow(), days > 0 {
-                return "\(days) days from now you'll land. We'll surface what's worth your time when you're closer."
+                return "In \(days) days you're on Roatán. We'll sharpen the picks as you get closer."
             }
             return "Pull down on Home for the freshest picks."
         case .expat:
-            return "Home is tuned to surface new openings and what's happening this week — not the same tourist circuit."
+            return "Home is tuned for new openings and what's happening this week. No tourist circuit."
         case .local:
-            return "Welcome home. Tap any spot to tell us what's true."
+            return "Welcome home. Tap any spot to tell us what's off."
         case nil:
             return "Pull down on Home to see what's open right now."
         }
