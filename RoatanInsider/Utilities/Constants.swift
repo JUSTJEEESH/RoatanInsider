@@ -40,7 +40,7 @@ enum AppConstants {
     // Sign in → create app → copy the App ID UUID → paste below. Until this
     // string is non-empty, Analytics stays on the local LoggerBackend (events
     // print to the Xcode console only).
-    static let telemetryDeckAppID = ""
+    static let telemetryDeckAppID = "1AAD1B5F-E28F-4C1C-84FB-E79D23BAD654"
 
     // Sentry (crash reporting — https://sentry.io). The DSN is paste-able once
     // the Sentry SDK is added as a Swift Package (planned for next session).
