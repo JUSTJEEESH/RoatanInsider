@@ -19,6 +19,7 @@ struct Event: Identifiable, Codable, Hashable {
     let recurring: Bool?
     let recurringRule: String?
     let specialEvent: Bool?
+    let featured: Bool?
     let cruiseShipDayOnly: Bool?
     let weatherDependent: Bool?
     let contact: String?
@@ -27,6 +28,7 @@ struct Event: Identifiable, Codable, Hashable {
 
     var isRecurring: Bool       { recurring ?? false }
     var isSpecial: Bool         { specialEvent ?? false }
+    var isFeatured: Bool        { featured ?? false }
     var isCruiseDayOnly: Bool   { cruiseShipDayOnly ?? false }
     var isWeatherDependent: Bool { weatherDependent ?? false }
     var isActive: Bool          { active ?? true }

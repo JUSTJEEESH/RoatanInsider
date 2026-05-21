@@ -105,8 +105,9 @@ struct TonightSection: View {
 }
 
 /// Compact single-line event row used in TonightSection and the
-/// full-week list. Three columns — performer/event, venue+area, time.
-/// White card on whatever background — works on light or dark sections.
+/// full-week list. Adapts colors to light/dark mode. Featured events
+/// (the local 'don't miss' picks) get a pink star next to the performer
+/// name and a small DON'T MISS pill above the venue line.
 struct EventRow: View {
     let event: Event
 
@@ -120,11 +121,24 @@ struct EventRow: View {
                     .background(Color.riMint.opacity(0.12))
                     .clipShape(Circle())
 
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(event.performer)
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundStyle(Color.riDark)
-                        .lineLimit(1)
+                VStack(alignment: .leading, spacing: 3) {
+                    if event.isFeatured {
+                        Text("DON'T MISS")
+                            .font(.system(size: 9, weight: .heavy))
+                            .tracking(1.0)
+                            .foregroundStyle(Color.riPink)
+                    }
+                    HStack(spacing: 5) {
+                        Text(event.performer)
+                            .font(.system(size: 15, weight: event.isFeatured ? .bold : .semibold))
+                            .foregroundStyle(Color.riDark)
+                            .lineLimit(1)
+                        if event.isFeatured {
+                            Image(systemName: "star.fill")
+                                .font(.system(size: 11, weight: .bold))
+                                .foregroundStyle(Color.riPink)
+                        }
+                    }
                     Text("\(event.venue) · \(event.area)")
                         .font(.system(size: 12))
                         .foregroundStyle(Color.riLightGray)

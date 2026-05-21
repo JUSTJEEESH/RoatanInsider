@@ -28,13 +28,13 @@ final class EventsService {
 
     // MARK: - Queries
 
-    /// Events happening today, sorted by start time. Includes events
-    /// already in progress (started in the past hour) plus upcoming.
+    /// Events happening today. Featured 'Don't Miss' events bubble to the
+    /// top; the rest sort by start time.
     func eventsToday(now: Date = .now) -> [Event] {
         guard let today = Weekday.today else { return [] }
         return events
             .filter { $0.isRecurring && $0.day == today || ($0.date.map(Calendar.current.isDateInToday) ?? false) }
-            .sorted { $0.startTime < $1.startTime }
+            .sorted(by: Self.featuredFirst)
     }
 
     /// Events that haven't started yet today, plus those started in the
@@ -63,7 +63,13 @@ final class EventsService {
     func events(for day: Weekday) -> [Event] {
         events
             .filter { $0.isRecurring && $0.day == day }
-            .sorted { $0.startTime < $1.startTime }
+            .sorted(by: Self.featuredFirst)
+    }
+
+    /// Featured events bubble up; everything else sorts by start time.
+    private static func featuredFirst(_ a: Event, _ b: Event) -> Bool {
+        if a.isFeatured != b.isFeatured { return a.isFeatured && !b.isFeatured }
+        return a.startTime < b.startTime
     }
 
     func events(in category: EventCategory) -> [Event] {
