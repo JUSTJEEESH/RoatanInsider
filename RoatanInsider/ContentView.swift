@@ -2,7 +2,6 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @State private var dataManager = DataManager()
     @State private var networkMonitor = NetworkMonitor()
     @State private var unitPreference = UnitPreference()
     @State private var router = DeepLinkRouter()
@@ -12,7 +11,8 @@ struct ContentView: View {
     @Environment(LocationManager.self) private var locationManager
     @Environment(WeatherService.self) private var weatherService
     @Environment(UserProfileStore.self) private var profileStore
-    let favoritesStore: FavoritesStore
+    @Environment(DataManager.self) private var dataManager
+    @Environment(FavoritesStore.self) private var favoritesStore
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -51,9 +51,7 @@ struct ContentView: View {
             Haptics.select()
             Analytics.track(.tabSelected(name: tabName(newTab)))
         }
-        .environment(dataManager)
         .environment(networkMonitor)
-        .environment(favoritesStore)
         .environment(unitPreference)
         .environment(router)
         .onOpenURL { url in

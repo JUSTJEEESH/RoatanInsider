@@ -18,6 +18,7 @@ struct RoatanInsiderApp: App {
     @State private var reactions = ReactionsService()
     @State private var trending = TrendingReactionsService()
     @State private var arrival = ArrivalDetector()
+    @State private var dataManager = DataManager()
     private let modelContainer: ModelContainer
     private let favoritesStore: FavoritesStore
 
@@ -114,7 +115,7 @@ struct RoatanInsiderApp: App {
         WindowGroup {
             ZStack {
                 if hasCompletedOnboarding {
-                    ContentView(favoritesStore: favoritesStore)
+                    ContentView()
                 } else {
                     OnboardingView(hasCompletedOnboarding: $hasCompletedOnboarding)
                 }
@@ -135,6 +136,8 @@ struct RoatanInsiderApp: App {
             .environment(reactions)
             .environment(trending)
             .environment(arrival)
+            .environment(dataManager)
+            .environment(favoritesStore)
         }
         .modelContainer(modelContainer)
     }

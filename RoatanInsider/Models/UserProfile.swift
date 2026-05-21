@@ -16,6 +16,25 @@ struct UserProfile: Codable, Equatable {
     /// CFBundleShortVersionString of the first install — set once, never changes.
     var firstLaunchAppVersion: String
 
+    // Onboarding 3.0 — context-aware fields. All optional; nil means
+    // "the user is the kind of traveler who doesn't need this question."
+    /// Where the traveler is staying (vacationer/longStay), where they live
+    /// (expat/local), or unset (cruiser — they're on a ship). Powers stay-area
+    /// weighted recommendations across the app.
+    var stayArea: Area?
+    /// Cruise day port. Only relevant for `.cruiser`. Pre-populates Cruise Mode.
+    var cruisePortRawValue: String?
+    /// Cruise day boarding deadline. Drives the Live Activity countdown.
+    var cruiseBoardingTime: Date?
+    /// How long an expat has lived on the island. Tunes the home feed —
+    /// new arrivals get more "essentials"; longtime residents get more
+    /// "what's new this week".
+    var expatTenureRawValue: String?
+    /// Local resident opt-in to contributing tips / photos. We don't have
+    /// the contribution UI yet, but the flag lets us segment messaging
+    /// (e.g., "Got a new place to share?" only fires for opted-in locals).
+    var contributesContent: Bool
+
     static let empty = UserProfile(
         travelerType: nil,
         arrivalDate: nil,
@@ -25,7 +44,12 @@ struct UserProfile: Codable, Equatable {
         hasGrantedNotifications: false,
         hasCompletedOnboarding: false,
         firstLaunchDate: .now,
-        firstLaunchAppVersion: ""
+        firstLaunchAppVersion: "",
+        stayArea: nil,
+        cruisePortRawValue: nil,
+        cruiseBoardingTime: nil,
+        expatTenureRawValue: nil,
+        contributesContent: false
     )
 
     var daysUntilArrival: Int? {
@@ -92,6 +116,30 @@ enum TravelerType: String, Codable, CaseIterable, Identifiable {
         case .longStay:   return [.eat, .wellness, .nature]
         case .expat:      return [.eat, .drink, .wellness]
         case .local:      return [.eat, .drink, .nightlife]
+        }
+    }
+}
+
+enum ExpatTenure: String, Codable, CaseIterable, Identifiable {
+    case newArrival     // < 1 year
+    case establishing   // 1-3 years
+    case longtime       // 3+ years
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .newArrival:   return "Just moved here"
+        case .establishing: return "Been here a while"
+        case .longtime:     return "I know everyone"
+        }
+    }
+
+    var subtitle: String {
+        switch self {
+        case .newArrival:   return "Less than a year"
+        case .establishing: return "1 to 3 years"
+        case .longtime:     return "More than 3 years"
         }
     }
 }

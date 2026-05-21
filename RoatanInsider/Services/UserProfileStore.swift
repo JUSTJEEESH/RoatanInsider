@@ -56,6 +56,23 @@ final class UserProfileStore {
         profile.departureDate = departure
     }
 
+    func setStayArea(_ area: Area?) {
+        profile.stayArea = area
+    }
+
+    func setCruiseContext(portRawValue: String?, boardingTime: Date?) {
+        profile.cruisePortRawValue = portRawValue
+        profile.cruiseBoardingTime = boardingTime
+    }
+
+    func setExpatTenure(_ tenure: ExpatTenure?) {
+        profile.expatTenureRawValue = tenure?.rawValue
+    }
+
+    func setContributesContent(_ contributes: Bool) {
+        profile.contributesContent = contributes
+    }
+
     func markOnboardingComplete() {
         profile.hasCompletedOnboarding = true
     }
