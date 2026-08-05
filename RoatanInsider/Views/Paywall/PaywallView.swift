@@ -116,7 +116,7 @@ struct PaywallView: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 8)
 
-            Text("Plans, alerts, offline maps, and member discounts.")
+            Text("Your trip, planned by the island's smartest local.")
                 .font(.riBody)
                 .foregroundStyle(Color.riLightGray)
                 .multilineTextAlignment(.center)
@@ -127,15 +127,16 @@ struct PaywallView: View {
     }
 
     // MARK: - Benefits
+    // Only claim what ships today. As real Insider+ features land (offline
+    // maps, partner discounts, saved-spot alerts), add them back here —
+    // App Review compares this list against the app.
 
     private var benefits: some View {
         VStack(alignment: .leading, spacing: 14) {
-            benefit(icon: "sparkles", title: "AI itinerary builder", detail: "A day-by-day plan tailored to you, in seconds.")
-            benefit(icon: "timer", title: "Cruise Day Live Activity", detail: "Lock-screen countdown so you never miss the ship.")
-            benefit(icon: "wifi.slash", title: "Offline map tiles", detail: "Full island map without signal, anywhere on Roatán.")
-            benefit(icon: "bell.badge", title: "Smart alerts", detail: "Sunset, happy hours, and live music at the spots you save.")
-            benefit(icon: "icloud.fill", title: "Cloud-synced favorites", detail: "Saved places follow you across iPhone and iPad.")
-            benefit(icon: "tag.fill", title: "Insider Pass discounts", detail: "Real money off at participating businesses across the island.")
+            benefit(icon: "sparkles", title: "AI itinerary builder", detail: "A day-by-day plan built around your dates, pace, and interests — in seconds.")
+            benefit(icon: "arrow.trianglehead.2.clockwise", title: "Unlimited replanning", detail: "Weather turned? Ship delayed? Rebuild the day as many times as you need.")
+            benefit(icon: "heart.fill", title: "Keep the guide independent", detail: "Insider+ funds the curation. No ads, no pay-to-play listings, ever.")
+            benefit(icon: "hammer.fill", title: "Everything Insider next", detail: "New member features land here first as they ship.")
         }
         .padding(20)
         .background(Color.white.opacity(0.04))

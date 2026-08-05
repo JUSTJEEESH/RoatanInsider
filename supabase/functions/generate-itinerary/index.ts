@@ -11,19 +11,47 @@
 // the first within a 5-minute window.
 //
 // Auth: the iOS app sends the Supabase anon key in the `apikey` header.
-// verify_jwt is off (matches sync-app-data + resolve-gmaps). If this ever
-// becomes a budget concern, flip verify_jwt on or rate-limit by deviceId.
+// verify_jwt is off (matches sync-app-data + resolve-gmaps). Anthropic
+// spend is capped by a daily rate limit: 10 plans per device and 300
+// globally, tracked in public.itinerary_usage via bump_itinerary_usage().
+// Over-limit requests get a 429; the iOS client falls back to its local
+// heuristic planner, so the feature degrades instead of breaking.
 //
 // Secrets required (set via Supabase dashboard → Edge Functions → Secrets):
 //   ANTHROPIC_API_KEY   — your Anthropic API key (sk-ant-...).
 
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.0";
 
 const ANTHROPIC_API_KEY = Deno.env.get("ANTHROPIC_API_KEY") ?? "";
 const MODEL = "claude-sonnet-4-6";
 const ANTHROPIC_VERSION = "2023-06-01";
 const MAX_CANDIDATES = 80;
 const MAX_DAYS = 14;
+const DAILY_DEVICE_LIMIT = 10;
+const DAILY_GLOBAL_LIMIT = 300;
+
+/// Bump today's usage counters and refuse when over budget. Fails OPEN on
+/// infrastructure errors — a broken limiter should never take the feature
+/// down — but Anthropic calls stay bounded whenever the database is healthy.
+async function overRateLimit(deviceId: string): Promise<boolean> {
+  const url = Deno.env.get("SUPABASE_URL") ?? "";
+  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+  if (!url || !serviceKey) return false;
+  try {
+    const admin = createClient(url, serviceKey);
+    const { data, error } = await admin.rpc("bump_itinerary_usage", { p_device: deviceId });
+    if (error || !data || data.length === 0) {
+      console.error(`rate-limit check failed (failing open): ${error?.message}`);
+      return false;
+    }
+    const { device_count, global_count } = data[0];
+    return device_count > DAILY_DEVICE_LIMIT || Number(global_count) > DAILY_GLOBAL_LIMIT;
+  } catch (err) {
+    console.error(`rate-limit check threw (failing open): ${err}`);
+    return false;
+  }
+}
 
 // JSON schema enforced via output_config.format. We model `schedule` as an
 // ARRAY of {dateKey, businessIds} objects, not a dict keyed by date, because
@@ -118,6 +146,7 @@ interface RequestPayload {
   days: DayInfo[];
   itemsPerDay?: number;
   candidates: Candidate[];
+  deviceId?: string;
 }
 
 Deno.serve(async (req: Request) => {
@@ -152,6 +181,14 @@ Deno.serve(async (req: Request) => {
   }
   if (body.days.length > MAX_DAYS) {
     return jsonResponse({ error: "too_many_days", max: MAX_DAYS }, 400);
+  }
+
+  // Spend cap — clients without a deviceId share one strict "anon" bucket.
+  const deviceId = typeof body.deviceId === "string" && body.deviceId.length > 0
+    ? String(body.deviceId).slice(0, 64)
+    : "anon";
+  if (await overRateLimit(deviceId)) {
+    return jsonResponse({ error: "rate_limited", detail: "Daily plan limit reached. Try again tomorrow." }, 429);
   }
 
   const userMessage = JSON.stringify({

@@ -27,13 +27,11 @@
 		0F759DDE306FE66F8930527F /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389B96AE42FCC81DEE6EF792 /* FavoritesViewModel.swift */; };
 		14FA262B52372AF12B6DC719 /* cruise-mahogany-bay.json in Resources */ = {isa = PBXBuildFile; fileRef = A7242144E4B8E49A85DEFD47 /* cruise-mahogany-bay.json */; };
 		16B0AD0D383892CC2B8A5085 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CBE2E226575D5AA1E8F25D /* LocationManager.swift */; };
-		17244D9C3B9E2A6BF017F1DC /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888163E8C724F9CA9520D6A9 /* SavedView.swift */; };
 		19F7FBB198B344D7EC5D410D /* MiniMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678158A014617021CE7178F9 /* MiniMapView.swift */; };
 		1AE9C4081261D4DB4583A7F6 /* Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB8B7661998E6D132F5842E /* Area.swift */; };
 		1ED3BD4B5112114A89AF816D /* BusinessListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B1BDC2CA53C5FEA26298E9 /* BusinessListView.swift */; };
 		2036FA4962F442AB4653B5DD /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337FBFA3BB1CD2AA9D61C79 /* PhotoGallery.swift */; };
 		24F3EEA9160E17F92D89827A /* ToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18F1A4D4896C2BD9A9358BB /* ToolsViewModel.swift */; };
-		291CB24F07D41C591ADF523B /* EmptyFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A34E71D29D6C01B7CD60A3C /* EmptyFavoritesView.swift */; };
 		2B86D6D82F50122DD8BAACFA /* TipCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ACB383FC33499CC46A8D24 /* TipCalculatorView.swift */; };
 		3430D22E527A455DAB8AF544 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = CDBC5B115FE54B17B0506FC8 /* Sentry */; };
 		3CFE3A24C4878E0F6442401B /* MapPopupCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0195FA7066564444A2AD86C1 /* MapPopupCard.swift */; };
@@ -208,7 +206,6 @@
 		4536C00FCFCC7EE02B6191F8 /* RoatanInsider.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoatanInsider.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4611149A9B0F906F8558EE2F /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		47B1BDC2CA53C5FEA26298E9 /* BusinessListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessListView.swift; sourceTree = "<group>"; };
-		4A34E71D29D6C01B7CD60A3C /* EmptyFavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFavoritesView.swift; sourceTree = "<group>"; };
 		4AFD388052EE78CC8C0AFACD /* FeaturedSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedSection.swift; sourceTree = "<group>"; };
 		510C3B6295519CEB5456C37E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		52133D52DF9293C51F2C38DF /* cruise-coxen-hole.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "cruise-coxen-hole.json"; sourceTree = "<group>"; };
@@ -229,7 +226,6 @@
 		78C31DA567C4344BAAEA4422 /* ToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsView.swift; sourceTree = "<group>"; };
 		8337FBFA3BB1CD2AA9D61C79 /* PhotoGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallery.swift; sourceTree = "<group>"; };
 		84CC167DE37EDF72F3690359 /* FilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBar.swift; sourceTree = "<group>"; };
-		888163E8C724F9CA9520D6A9 /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
 		8B708D588E7F11A4C26B7999 /* IslandEssentialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IslandEssentialsView.swift; sourceTree = "<group>"; };
 		8EEC4EF8709E310E256F3EFE /* CruiseDayGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CruiseDayGuideView.swift; sourceTree = "<group>"; };
 		91A9A634F3CE5F95335B4A75 /* SearchEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEngine.swift; sourceTree = "<group>"; };
@@ -415,15 +411,6 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		555846928AD3258E38C20C23 /* Saved */ = {
-			isa = PBXGroup;
-			children = (
-				4A34E71D29D6C01B7CD60A3C /* EmptyFavoritesView.swift */,
-				888163E8C724F9CA9520D6A9 /* SavedView.swift */,
-			);
-			path = Saved;
-			sourceTree = "<group>";
-		};
 		5F98C5777FDE51D00E6CC5D6 /* RoatanInsider */ = {
 			isa = PBXGroup;
 			children = (
@@ -599,7 +586,6 @@
 				6102130A33B29F5DBD4CF5FB /* Map */,
 				AA22BB33CC44DD55EE66FF30 /* Onboarding */,
 				C1A2B3D4E5F60013003 /* Paywall */,
-				555846928AD3258E38C20C23 /* Saved */,
 				6AC5A770C379D07F61854276 /* Tools */,
 				C1A2B3D4E5F60029019 /* Trip */,
 				C1A2B3D4E5F60041031 /* Settings */,
@@ -917,8 +903,6 @@
 				19F7FBB198B344D7EC5D410D /* MiniMapView.swift in Sources */,
 				2036FA4962F442AB4653B5DD /* PhotoGallery.swift in Sources */,
 				A1B2C3D4E5F6789012345678 /* MenuGalleryView.swift in Sources */,
-				291CB24F07D41C591ADF523B /* EmptyFavoritesView.swift in Sources */,
-				17244D9C3B9E2A6BF017F1DC /* SavedView.swift in Sources */,
 				CC364EC124A93F0D71B42785 /* CurrencyConverterView.swift in Sources */,
 				2B86D6D82F50122DD8BAACFA /* TipCalculatorView.swift in Sources */,
 				D8C3343F54904A0EE13A261E /* ToolsView.swift in Sources */,

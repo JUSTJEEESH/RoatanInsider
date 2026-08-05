@@ -74,7 +74,7 @@ struct SettingsView: View {
     private var membershipSubtitle: String {
         if purchases.isGrandfathered { return "Thanks for being an early supporter — unlocked forever." }
         if purchases.hasPremium { return "All features unlocked. Manage in Settings → Apple ID." }
-        return "AI itineraries, offline maps, sunset alerts."
+        return "AI trip planning, unlimited replans, and what's next."
     }
 
     private var profileSection: some View {

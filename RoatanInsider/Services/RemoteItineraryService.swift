@@ -154,7 +154,18 @@ enum RemoteItineraryService {
             "interests": input.profile.interests.map(\.rawValue).sorted(),
             "itemsPerDay": TripItineraryGenerator.itemsPerDayTarget,
             "days": days,
-            "candidates": candidatePayload
+            "candidates": candidatePayload,
+            "deviceId": anonymousDeviceId
         ]
+    }
+
+    /// Stable anonymous id for server-side rate limiting. Not tied to the
+    /// user or any Apple identifier — a random UUID minted once per install.
+    private static var anonymousDeviceId: String {
+        let key = "ri.anon.deviceId"
+        if let existing = UserDefaults.standard.string(forKey: key) { return existing }
+        let fresh = UUID().uuidString
+        UserDefaults.standard.set(fresh, forKey: key)
+        return fresh
     }
 }

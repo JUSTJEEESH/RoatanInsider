@@ -3,13 +3,15 @@ import StoreKit
 
 /// Centralised subscription state and StoreKit 2 plumbing for Insider+.
 ///
-/// Business model (May 2026 onward):
-///   - Free tier:        directory, map, search, favorites, currency/tip,
-///                       basic guides.
-///   - Insider+:         $2.99/month or $14.99/year. AI itinerary, cruise Live
-///                       Activity, offline map tiles, "Right Now" feed, sunset
-///                       and happy-hour notifications, cloud-sync favorites,
-///                       Insider Pass discounts.
+/// Business model (Aug 2026):
+///   - Free tier:        everything except the AI itinerary builder —
+///                       directory, map, search, events, ships in port,
+///                       favorites (CloudKit-synced), Live Activity, alerts,
+///                       currency/tip, guides.
+///   - Insider+:         $2.99/month or $14.99/year. Gates the AI itinerary
+///                       builder today; future member features (offline maps,
+///                       partner discounts) land behind it as they actually
+///                       ship. The paywall may only claim what exists.
 ///
 /// Grandfather guarantee:
 ///   Users who originally bought the app at $4.99 get Insider+ for free,

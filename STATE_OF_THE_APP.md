@@ -29,8 +29,16 @@ this document is now on `main`. Changes since:
   Aug 5 live data (offline/first-launch fallback only).
 - The "watch out" items below have moved: TelemetryDeck ✅ live, Sentry ✅
   installed, CloudKit favorites ✅ built, Trending ✅ shipped. Still open:
-  offline-map-tiles paywall claim, uncapped Anthropic billing on
-  `generate-itinerary`, Spanish UI coverage, east-side content fill.
+  Spanish UI coverage, east-side content fill.
+- **Declutter/hardening pass (later Aug 5):** paywall and Settings now claim
+  only what ships (AI itinerary builder is the sole real gate; offline maps /
+  Insider Pass discounts / saved-spot alerts copy removed until built) —
+  clears the App Review risk. `generate-itinerary` Anthropic spend is capped:
+  10 plans/device/day, 300/day global via `public.itinerary_usage` +
+  `bump_itinerary_usage()` (429 over limit → app falls back to the local
+  heuristic; fails open on infra errors). The app sends a random per-install
+  `deviceId` for this — no user identifiers. Dead `SavedView` /
+  `EmptyFavoritesView` deleted (Saved lives in the Trip tab).
 
 *Original document (May 20, 2026) follows.*
 
