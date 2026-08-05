@@ -11,6 +11,60 @@
 
 ---
 
+## CURRENT STATE (August 2026) — READ BEFORE THE REST OF THIS DOC
+
+The sections below this one describe the original V1 launch spec. The app has
+shipped and evolved well past it. Where they conflict, THIS section and the
+actual code win. See `STATE_OF_THE_APP.md` for the full picture.
+
+**What's different from the spec below:**
+
+- **App is live on the App Store at $4.99** (paid up front). An Insider+
+  subscription scaffold (StoreKit 2, paywall, founding-member grandfathering
+  for pre-2.0 buyers) exists but has not shipped.
+- **Five tabs, but not the original five:** Home, Explore, Map, Tools,
+  **Trip** (day-by-day planner + Claude-backed AI itinerary generator).
+  Saved/favorites now live inside the Trip tab.
+- **Data is remote-first, not bundle-only.** Supabase project
+  `vbxmmslzanixvqswtnnv`, Storage bucket `app-data`, versioned manifest.
+  Bundled JSON is the offline/first-launch fallback.
+- **Live data pipelines** (Supabase Edge Functions + pg_cron, docs in
+  `supabase/functions/*/README.md`):
+  - `scrape-cruise-arrivals` → `cruise_arrivals.json` — reads Keith Roberts'
+    public Google Sheet (theroatandirectory.com's data source), twice daily.
+    Feeds "Ships in Port Today" on Home. The section hides itself if data
+    goes stale — never claim a "quiet day" from stale data.
+  - `scrape-music-events` → `events.json` — reads Blue Wave Radio's Roatán
+    Music Scene feed (bluewaveradio.live/roatanmusicscene, Keith's Apps
+    Script), twice daily. Feeds the Tonight section and Events list.
+  - Both write public `*_status.json` health files; both refuse to overwrite
+    good data with empty parses.
+  - `generate-itinerary` — Claude Sonnet via Edge Function for Trip planning.
+- **Events system** exists (weekly live-music schedule, Tonight section,
+  Events list with Live Now badge, calendar export, event favorites) — it was
+  not in the V1 spec at all.
+- **Backends live in production:** reactions (heart/fire/thumbs +
+  Trending section), TelemetryDeck analytics, Sentry crash reporting,
+  CloudKit-synced favorites, weather/UV/sunset services, widgets + Live
+  Activities, App Intents/Siri, deep links, Spanish localization plumbing.
+- **Business data:** 94 listings; `status` values in data are `active` /
+  `permanently_closed` (not the `paused`/`closed` shown below).
+- **Currency fallback rate is defined in `Constants.swift`** (26.10 as of
+  Mar 2026), not the 24.85 written below. Live rates come from
+  `ExchangeRateService`.
+- **Design-rule deltas:** the tab bar uses system styling with a pink tint
+  (not the custom near-black bar described below), and `SkeletonView` uses a
+  shimmer `LinearGradient` — the "no gradients" rule otherwise stands for
+  content UI.
+- **Content ops:** business/guide content is curated via CSV → JSON → Supabase
+  (see `tools/`), and events/cruise data comes from Keith's sources with his
+  explicit permission. When editing content by hand, remember the scrapers
+  will overwrite `events.json` and `cruise_arrivals.json` in the bucket —
+  durable edits belong in the scraper code (e.g. the `FEATURED` overlay in
+  `scrape-music-events/index.ts`).
+
+---
+
 ## Tech Stack
 
 | Layer | Technology |

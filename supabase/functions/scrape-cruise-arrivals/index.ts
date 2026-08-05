@@ -1,37 +1,21 @@
 // Roatán Insider — Daily cruise arrivals scraper.
 //
-// Pulls the next ~30 days of cruise ship arrivals to Roatán from
-// cruisetimetables.com, normalizes them into the schema the iOS app
-// expects, and uploads the JSON to Supabase Storage at
+// Pulls upcoming cruise ship arrivals to Roatán, normalizes them into the
+// schema the iOS app expects, and uploads the JSON to Supabase Storage at
 // `app-data/cruise_arrivals.json`.
 //
 // Strategy:
-//   1. Fetch the page directly with browser-like headers.
-//   2. If Cloudflare blocks (403) or returns an obvious challenge page,
-//      retry via ScrapingBee's free-tier proxy (env: SCRAPINGBEE_API_KEY).
-//   3. Parse the HTML for the schedule table.
-//   4. Cross-reference each ship name with a baked-in passenger capacity
-//      lookup. Carnival ships dock at Mahogany Bay; everyone else at
-//      Port of Roatán (Coxen Hole) — accurate heuristic for Roatán.
-//   5. Upload result to Supabase Storage with public-read access.
-//   6. If parsing yields zero rows, ABORT — never overwrite a good
-//      file with empty data.
+//   1. PRIMARY: read Keith's public Google Sheet (tab `cruise_schedule`)
+//      via the gviz JSON API — structured rows, no HTML parsing.
+//   2. FALLBACK: scrape the rendered schedule pages (direct fetch, then
+//      ScrapingBee JS rendering when blocked; env: SCRAPINGBEE_API_KEY).
+//   3. If both paths yield zero rows, ABORT — never overwrite a good
+//      file with empty data. Upload debug HTML + failure status instead.
 //
-// Trigger: pg_cron, daily at 09:00 UTC (03:00 Roatán local).
+// Trigger: pg_cron, daily at 09:00 and 15:00 UTC.
 //
 // Deploy:
 //   supabase functions deploy scrape-cruise-arrivals
-//   supabase secrets set SCRAPINGBEE_API_KEY=...   (optional, for fallback)
-//
-// Schedule (run once in Supabase SQL editor):
-//   select cron.schedule(
-//     'cruise-arrivals-daily',
-//     '0 9 * * *',
-//     $$ select net.http_post(
-//        url := '<your-project>.functions.supabase.co/scrape-cruise-arrivals',
-//        headers := jsonb_build_object('Authorization', 'Bearer <your-anon-key>')
-//     ) $$
-//   );
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.0";
 
@@ -50,8 +34,9 @@ interface CruiseArrival {
 }
 
 // --- Passenger capacity lookup ----------------------------------------------
-// Published double-occupancy figures from cruise-line spec sheets. Update
-// when a ship is retrofitted or a new one enters service on the Roatán route.
+// Published double-occupancy figures from cruise-line spec sheets. Used only
+// when the sheet has no passenger figure for a row, and as a page-validation
+// signal in the HTML fallback path.
 
 const SHIP_CAPACITY: Record<string, { capacity: number; line: string }> = {
   // Carnival fleet (dock at Mahogany Bay — Carnival's private port)
@@ -72,6 +57,7 @@ const SHIP_CAPACITY: Record<string, { capacity: number; line: string }> = {
   "Carnival Pride":        { capacity: 2124, line: "Carnival" },
   "Carnival Spirit":       { capacity: 2124, line: "Carnival" },
   "Carnival Legend":       { capacity: 2124, line: "Carnival" },
+  "Carnival Paradise":     { capacity: 2124, line: "Carnival" },
   "Mardi Gras":            { capacity: 5282, line: "Carnival" },
   "Carnival Celebration":  { capacity: 5282, line: "Carnival" },
   "Carnival Jubilee":      { capacity: 5282, line: "Carnival" },
@@ -96,6 +82,10 @@ const SHIP_CAPACITY: Record<string, { capacity: number; line: string }> = {
   "Brilliance of the Seas":    { capacity: 2543, line: "Royal Caribbean" },
   "Radiance of the Seas":      { capacity: 2466, line: "Royal Caribbean" },
   "Jewel of the Seas":         { capacity: 2466, line: "Royal Caribbean" },
+  "Enchantment of the Seas":   { capacity: 2252, line: "Royal Caribbean" },
+  "Grandeur of the Seas":      { capacity: 1992, line: "Royal Caribbean" },
+  "Rhapsody of the Seas":      { capacity: 2000, line: "Royal Caribbean" },
+  "Star of the Seas":          { capacity: 5610, line: "Royal Caribbean" },
   "Serenade of the Seas":      { capacity: 2466, line: "Royal Caribbean" },
 
   // Norwegian (Port of Roatán)
@@ -159,7 +149,78 @@ const SHIP_CAPACITY: Record<string, { capacity: number; line: string }> = {
   "Disney Treasure": { capacity: 4000, line: "Disney" },
 };
 
-// --- Fetching ---------------------------------------------------------------
+// --- Primary source: Keith's Google Sheet ------------------------------------
+// theroatandirectory.com renders its cruise schedule client-side from a
+// public Google Sheet (spreadsheet "1Z1XVw...", tab "cruise_schedule").
+// Reading the sheet directly via the gviz JSON API gives us structured rows
+// (Date, Ship Name, Cruise Line, Arrive, Depart, Passengers, Notes) with no
+// HTML parsing at all — Keith maintains it daily and Josh has his explicit
+// permission. The HTML-scrape path below is kept only as a fallback.
+
+const SHEET_ID = "1Z1XVw4Ya2fhvGZHYk27QXQgxvF1DNJa11i7CLUbvMnc";
+const SHEET_TAB = "cruise_schedule";
+const SHEET_LABEL = `google-sheet:${SHEET_TAB}`;
+
+async function fetchSheetArrivals(): Promise<CruiseArrival[]> {
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&headers=1&sheet=${encodeURIComponent(SHEET_TAB)}`;
+  const res = await fetch(url, { headers: BROWSER_HEADERS });
+  if (!res.ok) throw new Error(`Sheet fetch failed: HTTP ${res.status}`);
+  const text = await res.text();
+
+  // Response shape: google.visualization.Query.setResponse({...});
+  const start = text.indexOf("(");
+  const end = text.lastIndexOf(")");
+  if (start < 0 || end <= start) throw new Error("Unexpected gviz response shape");
+  const payload = JSON.parse(text.substring(start + 1, end));
+  if (payload?.status !== "ok" || !payload?.table) {
+    throw new Error(`gviz status: ${payload?.status ?? "missing table"}`);
+  }
+
+  const labels: string[] = payload.table.cols.map((c: { label?: string }) => (c.label ?? "").toLowerCase());
+  const idx = (name: string) => labels.findIndex((l) => l.includes(name));
+  const iDate = idx("date"), iShip = idx("ship"), iLine = idx("line");
+  const iArr = idx("arrive"), iDep = idx("depart"), iPax = idx("passenger"), iNotes = idx("note");
+  if (iDate < 0 || iShip < 0) throw new Error(`Sheet columns changed: ${labels.join(", ")}`);
+
+  const today = todayISO();
+  const arrivals: CruiseArrival[] = [];
+  for (const row of payload.table.rows ?? []) {
+    const c = row.c ?? [];
+    const date: string = c[iDate]?.f ?? "";
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || date < today) continue;
+    const shipName = String(c[iShip]?.v ?? "").trim();
+    if (!shipName) continue;
+
+    const cruiseLine = iLine >= 0 && c[iLine]?.v ? String(c[iLine].v).trim() : null;
+    const pax = iPax >= 0 && typeof c[iPax]?.v === "number"
+      ? Math.round(c[iPax].v)
+      : SHIP_CAPACITY[shipName]?.capacity ?? 3000;
+    const notes = iNotes >= 0 && c[iNotes]?.v ? String(c[iNotes].v).trim() : undefined;
+    const port = /carnival/i.test(cruiseLine ?? shipName) ? "Mahogany Bay" : "Port of Roatán";
+
+    arrivals.push({
+      id: `${date}-${slug(shipName)}-${slug(port)}`,
+      shipName,
+      cruiseLine,
+      port,
+      date,
+      arrivalTime: padTime(c[iArr]?.f ?? "07:00"),
+      departureTime: padTime(c[iDep]?.f ?? "16:00"),
+      passengerCount: pax,
+      ...(notes ? { notes } : {}),
+    });
+  }
+  return dedupeAndSort(arrivals);
+}
+
+/// "7:00" → "07:00"; passes through anything already zero-padded.
+function padTime(t: string): string {
+  const m = t.match(/(\d{1,2}):(\d{2})/);
+  if (!m) return t;
+  return `${m[1].padStart(2, "0")}:${m[2]}`;
+}
+
+// --- Fallback fetching --------------------------------------------------------
 
 // theroatandirectory.com is maintained daily by Keith Roberts (Blue Wave
 // Radio); Josh has explicit permission to use his data. Try this first;
@@ -239,8 +300,13 @@ function looksLikeRealPage(html: string): boolean {
   if (!lower.includes("roatan") && !lower.includes("roatán")) return false;
   if (html.length < 5000) return false;
 
-  // Must mention multiple cruise ships we recognize — otherwise it's a
-  // generic 'about this port' page without a schedule.
+  // Rendered schedule markup is the strongest signal — but require the
+  // class attribute form: the bare strings also appear inside the page's
+  // CSS on the UNRENDERED shell (the schedule is injected client-side).
+  if (html.includes('class="cruise-day-block') || html.includes('class="ship-row')) return true;
+
+  // Fallback: must mention multiple cruise ships we recognize — otherwise
+  // it's a generic 'about this port' page without a schedule.
   let shipMentions = 0;
   for (const ship of Object.keys(SHIP_CAPACITY)) {
     if (html.includes(ship)) {
@@ -252,22 +318,55 @@ function looksLikeRealPage(html: string): boolean {
 }
 
 // --- Parsing ----------------------------------------------------------------
-// Tuned to theroatandirectory.com's format:
-//   <div class="cruise-today"> ... contains "In Port Today" ships
-//     <div class="ship-row">
-//       <div>
-//         <div class="list-title">Star of the Seas</div>
-//         <div class="muted">Royal Caribbean · 7:00–16:00 · 7600 pax</div>
-//       </div>
-//     </div>
-//     ...more ship-rows for today
-//   </div>
-//   <div class="list-title">Monday, May 25 / Lunes, 25 may</div>
-//     <div class="ship-row">...</div>
-//   <div class="list-title">Tuesday, May 26 / Martes, 26 may</div>
-//     <div class="ship-row">...</div>
+// Tuned to theroatandirectory.com's format as of Aug 2026 (day-block markup;
+// only present when the page was rendered with JavaScript, e.g. via
+// ScrapingBee). The pre-Aug-2026 format is kept in parseLegacySchedule.
 
 function parseSchedule(html: string): CruiseArrival[] {
+  const primary = parseDayBlocks(html);
+  if (primary.length > 0) return primary;
+  console.log("Day-block parse found nothing; trying legacy format");
+  return parseLegacySchedule(html);
+}
+
+function parseDayBlocks(html: string): CruiseArrival[] {
+  // Restrict to the cruise section — deals and events reuse the same
+  // list-title/muted markup and must not leak into the schedule.
+  let scope = html;
+  const boxStart = html.indexOf('id="cruiseBox"');
+  if (boxStart >= 0) {
+    const boxEnd = html.indexOf("</section>", boxStart);
+    scope = html.substring(boxStart, boxEnd > 0 ? boxEnd : html.length);
+  }
+
+  const arrivals: CruiseArrival[] = [];
+  const blocks = scope.split(/class="cruise-day-block[^"]*"/).slice(1);
+  for (const block of blocks) {
+    const headMatch = block.match(/class="cruise-day-head[^"]*"[^>]*>([\s\S]*?)<\/div>/);
+    if (!headMatch) continue;
+
+    let isoDate: string | null = null;
+    if (/In Port Today/i.test(headMatch[1])) {
+      isoDate = todayISO();
+    } else {
+      // Bilingual header — the English span matches, the Spanish one can't
+      // ("Jueves" doesn't end in "day").
+      const dm = headMatch[1].match(/([A-Z][a-z]+day),?\s+([A-Za-z]+)\.?\s+(\d{1,2})/);
+      if (dm) isoDate = monthDayToIso(dm[2], parseInt(dm[3], 10));
+    }
+    if (!isoDate) continue;
+
+    const shipRe = /<div\s+class="list-title">\s*([^<]+?)\s*<\/div>\s*<div\s+class="muted">\s*([^<]+?)\s*<\/div>/g;
+    let m: RegExpExecArray | null;
+    while ((m = shipRe.exec(block)) !== null) {
+      const arrival = parseShipFields(m[1], m[2], isoDate);
+      if (arrival) arrivals.push(arrival);
+    }
+  }
+  return dedupeAndSort(arrivals);
+}
+
+function parseLegacySchedule(html: string): CruiseArrival[] {
   const arrivals: CruiseArrival[] = [];
 
   // ---- Today's ships (from cruise-today section) -------------------------
@@ -299,7 +398,10 @@ function parseSchedule(html: string): CruiseArrival[] {
     }
   }
 
-  // De-dupe and sort.
+  return dedupeAndSort(arrivals);
+}
+
+function dedupeAndSort(arrivals: CruiseArrival[]): CruiseArrival[] {
   const seen = new Set<string>();
   const deduped = arrivals.filter((a) => {
     if (seen.has(a.id)) return false;
@@ -323,7 +425,7 @@ function extractCruiseTodaySection(html: string): string | null {
 
 function extractShipRows(html: string): string[] {
   const rows: string[] = [];
-  const re = /class="ship-row"[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/g;
+  const re = /class="ship-row[^"]*"[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/g;
   let m: RegExpExecArray | null;
   while ((m = re.exec(html)) !== null) {
     rows.push(m[0]);
@@ -335,9 +437,12 @@ function parseShipRow(rowHtml: string, isoDate: string): CruiseArrival | null {
   const titleMatch = rowHtml.match(/<div\s+class="list-title">\s*([^<]+?)\s*<\/div>/);
   const mutedMatch = rowHtml.match(/<div\s+class="muted">\s*([^<]+?)\s*<\/div>/);
   if (!titleMatch || !mutedMatch) return null;
+  return parseShipFields(titleMatch[1], mutedMatch[1], isoDate);
+}
 
-  const shipName = titleMatch[1].trim();
-  const muted = mutedMatch[1].trim();
+function parseShipFields(rawName: string, rawMuted: string, isoDate: string): CruiseArrival | null {
+  const shipName = rawName.trim();
+  const muted = rawMuted.trim();
 
   // Muted format: "Royal Caribbean · 7:00–16:00 · 7600 pax"
   // Split on the bullet character (U+00B7) — also tolerate any whitespace.
@@ -441,31 +546,79 @@ async function uploadJson(arrivals: CruiseArrival[]): Promise<void> {
   if (error) throw new Error(`Upload failed: ${error.message}`);
 }
 
+// --- Status ------------------------------------------------------------------
+// cruise_status.json makes pipeline health observable without log access:
+// anyone (or any scheduled checker) can read the public file and see when
+// the scrape last succeeded.
+
+async function writeStatus(ok: boolean, detail: Record<string, unknown>): Promise<void> {
+  const supabaseUrl = Deno.env.get("SUPABASE_URL");
+  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  if (!supabaseUrl || !serviceKey) return;
+  try {
+    const supabase = createClient(supabaseUrl, serviceKey);
+    const body = JSON.stringify({ ok, lastRun: new Date().toISOString(), ...detail }, null, 2);
+    await supabase.storage
+      .from("app-data")
+      .upload("cruise_status.json", new Blob([body], { type: "application/json" }), {
+        upsert: true,
+        cacheControl: "60",
+        contentType: "application/json",
+      });
+  } catch (err) {
+    console.error(`Failed to write cruise_status.json: ${err}`);
+  }
+}
+
 // --- Handler ----------------------------------------------------------------
 
 Deno.serve(async (_req) => {
   try {
-    const result = await fetchPage();
-    const arrivals = parseSchedule(result.html);
+    // Primary: Keith's Google Sheet (structured, no HTML parsing).
+    let arrivals: CruiseArrival[] = [];
+    let source = SHEET_LABEL;
+    let via = "gviz";
+    try {
+      arrivals = await fetchSheetArrivals();
+      if (arrivals.length > 0) console.log(`Sheet fetch succeeded: ${arrivals.length} arrivals`);
+    } catch (err) {
+      console.error(`Sheet fetch failed, falling back to HTML scrape: ${err}`);
+    }
 
+    // Fallback: rendered-HTML scrape of the public schedule pages.
     if (arrivals.length === 0) {
-      const tableCount = (result.html.match(/<table/gi) ?? []).length;
-      const trCount = (result.html.match(/<tr/gi) ?? []).length;
-      console.error(`Zero arrivals parsed from ${result.url} (via ${result.via})`);
-      console.error(`HTML length: ${result.html.length}, <table>: ${tableCount}, <tr>: ${trCount}`);
-      try { await uploadDebug(result.html); } catch (uploadErr) {
-        console.error(`Failed to upload debug HTML: ${uploadErr}`);
+      const result = await fetchPage();
+      arrivals = parseSchedule(result.html);
+      source = result.url;
+      via = result.via;
+
+      if (arrivals.length === 0) {
+        console.error(`Zero arrivals parsed from ${result.url} (via ${result.via}), HTML length: ${result.html.length}`);
+        try { await uploadDebug(result.html); } catch (uploadErr) {
+          console.error(`Failed to upload debug HTML: ${uploadErr}`);
+        }
+        await writeStatus(false, {
+          source: result.url,
+          error: `Sheet and HTML paths both yielded zero arrivals. Debug HTML uploaded. length=${result.html.length}`,
+        });
+        throw new Error(`Parsed zero arrivals from ${result.url}. Debug uploaded. length=${result.html.length}`);
       }
-      throw new Error(`Parsed zero arrivals from ${result.url}. Debug uploaded. table=${tableCount} tr=${trCount} length=${result.html.length}`);
     }
 
     await uploadJson(arrivals);
+    await writeStatus(true, {
+      source,
+      via,
+      count: arrivals.length,
+      firstDate: arrivals[0].date,
+      lastDate: arrivals[arrivals.length - 1].date,
+    });
 
     return new Response(
       JSON.stringify({
         ok: true,
-        source: result.url,
-        via: result.via,
+        source,
+        via,
         count: arrivals.length,
         firstDate: arrivals[0].date,
         lastDate: arrivals[arrivals.length - 1].date,

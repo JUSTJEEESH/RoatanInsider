@@ -37,6 +37,16 @@ final class CruiseArrivalsService {
         }
     }
 
+    /// True when the loaded schedule can actually speak to today — its
+    /// horizon reaches today or later. When the scraper has been failing
+    /// long enough that every row is in the past, this goes false and the
+    /// UI must NOT claim "no ships in port" (stale data saying "quiet day"
+    /// while three ships are docked is worse than showing nothing).
+    var hasCurrentData: Bool {
+        guard let latest = arrivals.map(\.date).max() else { return false }
+        return latest >= Self.dateString(daysFromNow: 0)
+    }
+
     func arrivalsToday() -> [CruiseArrival] {
         arrivals.filter { $0.isToday }.sorted { $0.arrivalTime < $1.arrivalTime }
     }

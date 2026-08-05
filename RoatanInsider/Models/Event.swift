@@ -26,6 +26,81 @@ struct Event: Identifiable, Codable, Hashable {
     let active: Bool?
     let lastUpdated: Date?
 
+    /// The remote pipeline (scrape-music-events) writes calendar dates as
+    /// plain "yyyy-MM-dd" strings, which the default JSONDecoder Date
+    /// handling can't read — so dates are decoded by hand. Times are
+    /// anchored to island midnight (UTC-6) so "today" checks behave for
+    /// users on Roatán and stay same-day for visitors' home time zones.
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decode(String.self, forKey: .id)
+        venue = try c.decode(String.self, forKey: .venue)
+        venueId = try c.decodeIfPresent(String.self, forKey: .venueId)
+        area = try c.decode(String.self, forKey: .area)
+        category = try c.decode(EventCategory.self, forKey: .category)
+        performer = try c.decode(String.self, forKey: .performer)
+        day = try c.decodeIfPresent(Weekday.self, forKey: .day)
+        date = Self.parseDay(try? c.decodeIfPresent(String.self, forKey: .date))
+        startTime = try c.decode(String.self, forKey: .startTime)
+        endTime = try c.decodeIfPresent(String.self, forKey: .endTime)
+        genre = try c.decodeIfPresent(String.self, forKey: .genre)
+        notes = try c.decodeIfPresent(String.self, forKey: .notes)
+        recurring = try c.decodeIfPresent(Bool.self, forKey: .recurring)
+        recurringRule = try c.decodeIfPresent(String.self, forKey: .recurringRule)
+        specialEvent = try c.decodeIfPresent(Bool.self, forKey: .specialEvent)
+        featured = try c.decodeIfPresent(Bool.self, forKey: .featured)
+        cruiseShipDayOnly = try c.decodeIfPresent(Bool.self, forKey: .cruiseShipDayOnly)
+        weatherDependent = try c.decodeIfPresent(Bool.self, forKey: .weatherDependent)
+        contact = try c.decodeIfPresent(String.self, forKey: .contact)
+        active = try c.decodeIfPresent(Bool.self, forKey: .active)
+        lastUpdated = Self.parseDay(try? c.decodeIfPresent(String.self, forKey: .lastUpdated))
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var c = encoder.container(keyedBy: CodingKeys.self)
+        try c.encode(id, forKey: .id)
+        try c.encode(venue, forKey: .venue)
+        try c.encodeIfPresent(venueId, forKey: .venueId)
+        try c.encode(area, forKey: .area)
+        try c.encode(category, forKey: .category)
+        try c.encode(performer, forKey: .performer)
+        try c.encodeIfPresent(day, forKey: .day)
+        try c.encodeIfPresent(date.map(Self.dayFormatter.string(from:)), forKey: .date)
+        try c.encode(startTime, forKey: .startTime)
+        try c.encodeIfPresent(endTime, forKey: .endTime)
+        try c.encodeIfPresent(genre, forKey: .genre)
+        try c.encodeIfPresent(notes, forKey: .notes)
+        try c.encodeIfPresent(recurring, forKey: .recurring)
+        try c.encodeIfPresent(recurringRule, forKey: .recurringRule)
+        try c.encodeIfPresent(specialEvent, forKey: .specialEvent)
+        try c.encodeIfPresent(featured, forKey: .featured)
+        try c.encodeIfPresent(cruiseShipDayOnly, forKey: .cruiseShipDayOnly)
+        try c.encodeIfPresent(weatherDependent, forKey: .weatherDependent)
+        try c.encodeIfPresent(contact, forKey: .contact)
+        try c.encodeIfPresent(active, forKey: .active)
+        try c.encodeIfPresent(lastUpdated.map(Self.dayFormatter.string(from:)), forKey: .lastUpdated)
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case id, venue, venueId, area, category, performer, day, date
+        case startTime, endTime, genre, notes, recurring, recurringRule
+        case specialEvent, featured, cruiseShipDayOnly, weatherDependent
+        case contact, active, lastUpdated
+    }
+
+    private static let dayFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(identifier: "America/Tegucigalpa")
+        return formatter
+    }()
+
+    private static func parseDay(_ raw: String??) -> Date? {
+        guard let value = raw ?? nil else { return nil }
+        return dayFormatter.date(from: value)
+    }
+
     var isRecurring: Bool       { recurring ?? false }
     var isSpecial: Bool         { specialEvent ?? false }
     var isFeatured: Bool        { featured ?? false }

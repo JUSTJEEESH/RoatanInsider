@@ -1,21 +1,21 @@
 import Foundation
 import Observation
 
-/// Loads the recurring event schedule from the bundled `events.json` (with
-/// remote-cache override support via `RemoteDataService`), and exposes
-/// the queries the UI cares about: tonight, today, this week, by category,
-/// by area.
+/// Loads the event schedule and exposes the queries the UI cares about:
+/// tonight, today, this week, by category, by area.
 ///
-/// V1 ships with the bundled schedule from the PRD. Live integration with
-/// bluewaveradio.live/roatanmusicscene lands in a future phase; when it
-/// does, the cached file at `events.json` becomes the live source of
-/// truth and the bundled file is the offline fallback.
+/// Source of truth is Blue Wave Radio's Roatán Music Scene
+/// (bluewaveradio.live/roatanmusicscene): the `scrape-music-events` Edge
+/// Function regenerates `app-data/events.json` from it daily, and this
+/// service pulls the fresh copy at most every 6 hours. The bundled file
+/// is the offline / first-launch fallback.
 @Observable
 final class EventsService {
     private(set) var events: [Event] = []
 
     init() {
         load()
+        Task { await refreshFromRemoteIfNeeded() }
     }
 
     private func load() {
@@ -23,6 +23,16 @@ final class EventsService {
             filename: "events.json", bundleName: "events", type: [Event].self
         ) {
             events = data.filter { $0.isActive }
+        }
+    }
+
+    /// Pulls a fresh copy from Supabase Storage if our cache is >6h old.
+    func refreshFromRemoteIfNeeded() async {
+        if let fresh: [Event] = await RemoteDataService.fetchLatest(
+            filename: "events.json",
+            type: [Event].self
+        ) {
+            await MainActor.run { self.events = fresh.filter { $0.isActive } }
         }
     }
 

@@ -2,16 +2,25 @@ import SwiftUI
 
 /// "Ships in Port Today" — daily-utility card that serves every user
 /// type: locals dodge crowds, expats plan their week, vacationers
-/// anticipate, cruise visitors see their own ship. Always rendered;
-/// empty state ('quiet day') is itself useful information.
+/// anticipate, cruise visitors see their own ship. Rendered whenever the
+/// schedule data is current; the empty state ('quiet day') is itself
+/// useful information. When the data has gone stale (scraper down, no
+/// rows covering today) the card disappears entirely rather than
+/// asserting a "quiet day" that may be wrong.
 struct ShipsInPortSection: View {
     @Environment(CruiseArrivalsService.self) private var cruise
 
     var body: some View {
+        if cruise.hasCurrentData {
+            content
+        }
+    }
+
+    private var content: some View {
         let ships = cruise.arrivalsToday()
         let tomorrow = cruise.arrivalsTomorrow()
 
-        VStack(alignment: .leading, spacing: 14) {
+        return VStack(alignment: .leading, spacing: 14) {
             header(passengers: cruise.totalPassengersToday(), count: ships.count)
 
             if ships.isEmpty {

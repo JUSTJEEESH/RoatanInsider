@@ -1,5 +1,41 @@
 # Roatán Insider — State of the App
 
+## Update — August 5, 2026
+
+The May redesign branch below was merged to `main` in full (69 commits,
++12k lines) after sitting unmerged since May 21. Everything described in
+this document is now on `main`. Changes since:
+
+- **Cruise pipeline fixed and re-architected.** The scraper had been failing
+  silently since June 14 (theroatandirectory.com moved its schedule to
+  client-side rendering and changed its markup), so the app showed "quiet
+  day" while ships were in port. The scraper now reads Keith's public
+  Google Sheet (`cruise_schedule` tab) directly via the gviz JSON API —
+  structured data, no HTML parsing — with the HTML scrape kept as fallback.
+  Runs twice daily (09:00/15:00 UTC). `CruiseArrivalsService.hasCurrentData`
+  now gates the Home card: stale data hides the section instead of lying.
+- **Music/events pipeline built.** New `scrape-music-events` Edge Function
+  pulls the weekly schedule from Blue Wave Radio's Roatán Music Scene
+  (Keith's Apps Script JSONP feed — the same data the website renders),
+  normalizes it to the `Event` schema, and publishes `events.json` twice
+  daily (09:10/15:10 UTC). `EventsService` now refreshes from remote like
+  the cruise service. Josh's "Don't Miss" curation is preserved as a
+  featured overlay inside the scraper. 72 events live as of today.
+- **Pipeline health is observable:** both scrapers write public
+  `cruise_status.json` / `music_status.json` to the `app-data` bucket on
+  every run, and refuse to overwrite good data with empty parses (debug
+  payloads get uploaded instead).
+- **Bundled `events.json` and `cruise_arrivals.json` seeds refreshed** to the
+  Aug 5 live data (offline/first-launch fallback only).
+- The "watch out" items below have moved: TelemetryDeck ✅ live, Sentry ✅
+  installed, CloudKit favorites ✅ built, Trending ✅ shipped. Still open:
+  offline-map-tiles paywall claim, uncapped Anthropic billing on
+  `generate-itinerary`, Spanish UI coverage, east-side content fill.
+
+*Original document (May 20, 2026) follows.*
+
+---
+
 *May 2026. Branch: `claude/roatan-app-redesign-CtjgW`.*
 
 This is an honest snapshot: where the app is, what's shipped recently, what works,
