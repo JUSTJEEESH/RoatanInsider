@@ -2,3 +2,19 @@
 .DS_Store
 
 .sentryclirc
+
+# Xcode local state — per-machine, never shared. Leaving these tracked is
+# how project.pbxproj ends up in a merge conflict every time two machines
+# (or a machine and an agent) touch the project.
+xcuserdata/
+*.xcuserstate
+*.xcuserdatad/
+DerivedData/
+build/
+
+# Swift Package Manager resolved state is per-checkout
+.swiftpm/
+.build/
+
+# Xcode Cloud config is generated
+RoatanInsider.xcodeproj/xcshareddata/xcodecloud/
