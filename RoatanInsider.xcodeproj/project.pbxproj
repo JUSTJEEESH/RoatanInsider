@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C0C78D683504971B0FF0150 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8463608BC840E082358A6A /* Event.swift */; };
+		8EE4441BAC36430CA46B0B1B /* CruiseArrival.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AE43D6DD884A7A959EAB6B /* CruiseArrival.swift */; };
+		21267395F672413E862D5DF9 /* CruiseArrivalsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831D8B217B0E4F00BA64B77F /* CruiseArrivalsService.swift */; };
+		84AFED49392042F38C6C4A66 /* EventsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647473CF52B4D81B3ACE8C7 /* EventsService.swift */; };
+		4E79664B0C46435FB08EEFA5 /* EventCalendarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F325D631D4609B259513A /* EventCalendarHelper.swift */; };
+		D7085D9E036145A99ED6BF79 /* EventFavoritesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D8FABB9A2C4441B179E462 /* EventFavoritesStore.swift */; };
+		60FAFEB4EA604508B0F0E1EA /* HomeGreeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D7E21923A845C6AF494B7A /* HomeGreeting.swift */; };
+		BBAC3C000C8F4311A242E2AE /* ShipsInPortSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDD847BCE7F4736A2406439 /* ShipsInPortSection.swift */; };
+		7D68BF3461B34F76AA419F82 /* TonightSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B179D5893C4B629DFABB04 /* TonightSection.swift */; };
+		7D95FF340DF14283999E535C /* EventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9D7893C77A4B868C1584C5 /* EventsListView.swift */; };
+		30894C076E9A467CABF083AB /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255E761E8F1A499E9B9E31B1 /* EventDetailView.swift */; };
+		404F2D6B8DB04B8AA4FB808B /* events.json in Resources */ = {isa = PBXBuildFile; fileRef = 5685296F95F34F429E3EAE16 /* events.json */; };
+		6013D59428B2452ABF336417 /* cruise_arrivals.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B117EEE15B3462B9729F49E /* cruise_arrivals.json */; };
 		0055DE1F42FE3CCFBF8B0A24 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9E6BAAFFD476DF7857E10B /* Colors.swift */; };
 		0A3C304657086C8DDAAB7EF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F73B201D3F8FCB88366DA9E3 /* Assets.xcassets */; };
 		0BB8FA375BB1DB7E9BACF0D3 /* Guide.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF0097318F6AEE97EB0C03E /* Guide.swift */; };
@@ -166,6 +179,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4D8463608BC840E082358A6A /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		34AE43D6DD884A7A959EAB6B /* CruiseArrival.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CruiseArrival.swift; sourceTree = "<group>"; };
+		831D8B217B0E4F00BA64B77F /* CruiseArrivalsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CruiseArrivalsService.swift; sourceTree = "<group>"; };
+		1647473CF52B4D81B3ACE8C7 /* EventsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsService.swift; sourceTree = "<group>"; };
+		883F325D631D4609B259513A /* EventCalendarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCalendarHelper.swift; sourceTree = "<group>"; };
+		C2D8FABB9A2C4441B179E462 /* EventFavoritesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFavoritesStore.swift; sourceTree = "<group>"; };
+		21D7E21923A845C6AF494B7A /* HomeGreeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGreeting.swift; sourceTree = "<group>"; };
+		CCDD847BCE7F4736A2406439 /* ShipsInPortSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipsInPortSection.swift; sourceTree = "<group>"; };
+		89B179D5893C4B629DFABB04 /* TonightSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TonightSection.swift; sourceTree = "<group>"; };
+		DA9D7893C77A4B868C1584C5 /* EventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListView.swift; sourceTree = "<group>"; };
+		255E761E8F1A499E9B9E31B1 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		5685296F95F34F429E3EAE16 /* events.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = events.json; sourceTree = "<group>"; };
+		4B117EEE15B3462B9729F49E /* cruise_arrivals.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cruise_arrivals.json; sourceTree = "<group>"; };
 		0195FA7066564444A2AD86C1 /* MapPopupCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPopupCard.swift; sourceTree = "<group>"; };
 		0A05F076695AC04B8CD07E4F /* Business.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
 		136D08D83D445A12DF0BDD78 /* AreaGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaGuideView.swift; sourceTree = "<group>"; };
@@ -347,6 +373,8 @@
 		1173103CA55AB4370D3528F6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4D8463608BC840E082358A6A /* Event.swift */,
+				34AE43D6DD884A7A959EAB6B /* CruiseArrival.swift */,
 				CEB8B7661998E6D132F5842E /* Area.swift */,
 				0A05F076695AC04B8CD07E4F /* Business.swift */,
 				63FC53A49F6C4F4E5D210CB8 /* Category.swift */,
@@ -376,6 +404,8 @@
 		4A126535AEA06493F821AD41 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				5685296F95F34F429E3EAE16 /* events.json */,
+				4B117EEE15B3462B9729F49E /* cruise_arrivals.json */,
 				9A445F6A7986016E282AA77D /* guides */,
 				D2E0F4681191E58B2BA47750 /* DataManager.swift */,
 				184A4AB40EF1F2D2FE0EAB19 /* areas.json */,
@@ -564,6 +594,7 @@
 				EA920C55081837BA07E6B00B /* Detail */,
 				8A107D8FC1B6AEAB2517CBAB /* Explore */,
 				471578CBB5CA3667CA526A32 /* Guides */,
+				C7D2D58D9C6C442B9D816BF2 /* Events */,
 				FACFED56E433978F4BC60FB2 /* Home */,
 				6102130A33B29F5DBD4CF5FB /* Map */,
 				AA22BB33CC44DD55EE66FF30 /* Onboarding */,
@@ -576,9 +607,22 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		C7D2D58D9C6C442B9D816BF2 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				DA9D7893C77A4B868C1584C5 /* EventsListView.swift */,
+				255E761E8F1A499E9B9E31B1 /* EventDetailView.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
 		DBA16712620E6653B7866FC9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				831D8B217B0E4F00BA64B77F /* CruiseArrivalsService.swift */,
+				1647473CF52B4D81B3ACE8C7 /* EventsService.swift */,
+				883F325D631D4609B259513A /* EventCalendarHelper.swift */,
+				C2D8FABB9A2C4441B179E462 /* EventFavoritesStore.swift */,
 				6D93F8AF9DD468264D391896 /* FavoritesStore.swift */,
 				B8CBE2E226575D5AA1E8F25D /* LocationManager.swift */,
 				BB22CC33DD44EE55FF660011 /* NetworkMonitor.swift */,
@@ -651,6 +695,9 @@
 		FACFED56E433978F4BC60FB2 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				21D7E21923A845C6AF494B7A /* HomeGreeting.swift */,
+				CCDD847BCE7F4736A2406439 /* ShipsInPortSection.swift */,
+				89B179D5893C4B629DFABB04 /* TonightSection.swift */,
 				EC02C46C26DF91DBBE7983CA /* CategoryGridSection.swift */,
 				BB33CC44DD55EE66FF770016 /* CollectionsSection.swift */,
 				4AFD388052EE78CC8C0AFACD /* FeaturedSection.swift */,
@@ -773,6 +820,8 @@
 				AC57565D7F0EE0912A57CC03 /* areas.json in Resources */,
 				CATE60R1E500000000000001 /* categories.json in Resources */,
 				4AE8A7EDB3949FC07ACDF38E /* businesses.json in Resources */,
+				404F2D6B8DB04B8AA4FB808B /* events.json in Resources */,
+				6013D59428B2452ABF336417 /* cruise_arrivals.json in Resources */,
 				B3063911EAE150C625BEEDFA /* cruise-coxen-hole.json in Resources */,
 				14FA262B52372AF12B6DC719 /* cruise-mahogany-bay.json in Resources */,
 				771325A05FD5B483C97C568D /* essentials.json in Resources */,
@@ -818,6 +867,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F4350E2F56F8361DCEB688C /* ContentView.swift in Sources */,
+				3C0C78D683504971B0FF0150 /* Event.swift in Sources */,
+				8EE4441BAC36430CA46B0B1B /* CruiseArrival.swift in Sources */,
+				21267395F672413E862D5DF9 /* CruiseArrivalsService.swift in Sources */,
+				84AFED49392042F38C6C4A66 /* EventsService.swift in Sources */,
+				4E79664B0C46435FB08EEFA5 /* EventCalendarHelper.swift in Sources */,
+				D7085D9E036145A99ED6BF79 /* EventFavoritesStore.swift in Sources */,
+				60FAFEB4EA604508B0F0E1EA /* HomeGreeting.swift in Sources */,
+				BBAC3C000C8F4311A242E2AE /* ShipsInPortSection.swift in Sources */,
+				7D68BF3461B34F76AA419F82 /* TonightSection.swift in Sources */,
+				7D95FF340DF14283999E535C /* EventsListView.swift in Sources */,
+				30894C076E9A467CABF083AB /* EventDetailView.swift in Sources */,
 				D2CCD52E7D09F833F89F074B /* RoatanInsiderApp.swift in Sources */,
 				C1A2B3D4E5F60045035 /* AppDelegate.swift in Sources */,
 				D620DE7D7AB0242F4CFCF3F7 /* ExploreViewModel.swift in Sources */,
