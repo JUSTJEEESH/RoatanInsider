@@ -139,7 +139,7 @@ struct Event: Identifiable, Codable, Hashable {
         }
         guard let day else { return nil }
         let targetWeekday = day.calendarWeekday
-        var components = calendar.dateComponents([.year, .month, .day], from: reference)
+        let components = calendar.dateComponents([.year, .month, .day], from: reference)
         let currentWeekday = calendar.component(.weekday, from: reference)
         let daysAhead = (targetWeekday - currentWeekday + 7) % 7
         guard let dayStart = calendar.date(from: components),
@@ -147,7 +147,6 @@ struct Event: Identifiable, Codable, Hashable {
               let combined = Self.combine(date: target, time: startTime, calendar: calendar) else {
             return nil
         }
-        _ = components
         // If today and the slot has already passed, push to next week.
         if daysAhead == 0 && combined < reference {
             return calendar.date(byAdding: .day, value: 7, to: combined)
