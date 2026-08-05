@@ -84,8 +84,9 @@ struct OpenBusinessIntent: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult {
-        let url = AppConstants.businessShareURL(slug: place.slug)
-            ?? URL(string: "roataninsider://business/\(place.slug)")!
+        // Route with the custom scheme, not the share URL — sharing points
+        // at the App Store now, and DeepLinkRouter can't route that.
+        let url = URL(string: "roataninsider://business/\(place.slug)")!
         AppIntentDataBridge.shared.requestRoute(url: url)
         return .result()
     }

@@ -193,15 +193,27 @@ struct BusinessDetailView: View {
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                ShareLink(
-                    item: shareURL,
-                    subject: Text(b.name),
-                    message: Text(shareMessage),
-                    preview: SharePreview(b.name, image: shareCardImage ?? Image(systemName: "palm.tree"))
-                ) {
-                    Image(systemName: "square.and.arrow.up")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundStyle(Color.riDark)
+                Group {
+                    // Share a link when there's a real destination; share the
+                    // write-up alone when there isn't. Never a dead URL.
+                    if let url = AppConstants.businessShareURL(slug: b.slug) {
+                        ShareLink(
+                            item: url,
+                            subject: Text(b.name),
+                            message: Text(shareMessage),
+                            preview: SharePreview(b.name, image: shareCardImage ?? Image(systemName: "palm.tree"))
+                        ) {
+                            shareIcon
+                        }
+                    } else {
+                        ShareLink(
+                            item: shareMessage,
+                            subject: Text(b.name),
+                            preview: SharePreview(b.name, image: shareCardImage ?? Image(systemName: "palm.tree"))
+                        ) {
+                            shareIcon
+                        }
+                    }
                 }
                 .accessibilityLabel("Share \(b.name)")
                 .simultaneousGesture(TapGesture().onEnded { Haptics.impact() })
@@ -209,8 +221,10 @@ struct BusinessDetailView: View {
         }
     }
 
-    private var shareURL: URL {
-        AppConstants.businessShareURL(slug: b.slug) ?? URL(string: AppConstants.webOrigin)!
+    private var shareIcon: some View {
+        Image(systemName: "square.and.arrow.up")
+            .font(.system(size: 16, weight: .medium))
+            .foregroundStyle(Color.riDark)
     }
 
     private var shareMessage: String {

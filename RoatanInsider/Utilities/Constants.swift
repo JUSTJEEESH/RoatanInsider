@@ -97,19 +97,33 @@ enum AppConstants {
     static let supportURL = "https://www.casamananaroatan.com/app/support/"
     static let supportEmail = "josh@casamananaroatan.com"
 
-    // Web / Universal Links — used by ShareLink, widgets and App Intents to
-    // deep-link into specific content.
+    // MARK: - Sharing
     //
-    // WARNING: this domain is unverified. It was written in May 2026 when
-    // the share/deep-link plumbing was built and has never pointed anywhere
-    // real; there is also no associated-domains entitlement, so universal
-    // links don't resolve back into the app either. Every shared business
-    // link therefore goes to a dead address. Decide the destination (a real
-    // page, or the App Store listing) before shipping share features.
-    static let webOrigin = "https://roataninsider.com"
+    // Shared links point at the App Store listing: there's no per-business
+    // web page to send people to, and a friend who taps the link gets the
+    // app. Previously these pointed at roataninsider.com/b/<slug>, a domain
+    // that has never existed — every link ever shared from this app is dead.
+    //
+    // ⚠️ SET THIS. Find it in App Store Connect → your app → App Information
+    // → "Apple ID" (a 9–10 digit number). While it's empty, sharing falls
+    // back to text only — no link at all — because a share with no URL is
+    // better than a share with a broken one.
+    static let appStoreID = ""
 
-    static func businessShareURL(slug: String) -> URL? {
-        guard !slug.isEmpty else { return nil }
-        return URL(string: "\(webOrigin)/b/\(slug)")
+    static var appStoreURL: URL? {
+        guard !appStoreID.isEmpty else { return nil }
+        return URL(string: "https://apps.apple.com/app/id\(appStoreID)")
     }
+
+    /// Nil until `appStoreID` is set, which callers must treat as
+    /// "share without a link" rather than substituting a placeholder.
+    static func businessShareURL(slug: String) -> URL? {
+        appStoreURL
+    }
+
+    // Universal Links — the inbound half of deep linking. `DeepLinkRouter`
+    // still parses this host, but there's no associated-domains entitlement,
+    // so no https link currently reopens the app; only the roataninsider://
+    // custom scheme works. Kept for the router's parsing and for widgets.
+    static let webOrigin = "https://roataninsider.com"
 }
