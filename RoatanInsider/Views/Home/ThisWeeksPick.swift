@@ -73,12 +73,43 @@ struct ThisWeeksPick: View {
         }
     }
 
-    /// Deterministic by ISO week. Sorted by id first so the choice doesn't
-    /// shift when the remote data file reorders.
+    /// THE ROTATION — edit this list to change what can be featured.
+    ///
+    /// Hand-curated on purpose. Anything with `isInsiderPick` set used to be
+    /// eligible, which meant the most prominent editorial slot on the app's
+    /// front page was filled by whatever the data happened to flag. This is
+    /// the one place a visitor reads a full sentence of Josh's writing, so
+    /// it should be a deliberate shortlist.
+    ///
+    /// Order is the rotation order: the ISO week walks this list, so entry 0
+    /// runs one week, entry 1 the next, wrapping at the end. A slug that
+    /// doesn't match an active business is skipped silently, so removing a
+    /// business from the data can't blank the section.
+    static let curatedSlugs: [String] = [
+        "salty-dawg",
+        "native-sons-diving",
+        "calelus",
+        "punta-gorda-garifuna-nights",
+        "roatan-chocolate-factory",
+        "oak-ridge-snorkel-adventure",
+        "island-brewing-roatan",
+        "rusty-fish-recycled-art",
+        "coxen-hole-municipal-market",
+        "anthonys-chicken",
+        "coconut-bar-coxen-hole",
+        "roacrawl",
+    ]
+
+    /// Deterministic by ISO week, anchored to island time so the pick turns
+    /// over on Monday morning in Roatán rather than mid-Sunday.
     private var pick: Business? {
-        let eligible = dataManager.activeBusinesses
-            .filter { $0.isInsiderPick && !($0.insiderTip ?? "").isEmpty }
-            .sorted { $0.id < $1.id }
+        let bySlug = Dictionary(
+            dataManager.activeBusinesses.map { ($0.slug, $0) },
+            uniquingKeysWith: { first, _ in first }
+        )
+        let eligible = Self.curatedSlugs
+            .compactMap { bySlug[$0] }
+            .filter { !($0.insiderTip ?? "").isEmpty }
         guard !eligible.isEmpty else { return nil }
 
         var calendar = Calendar(identifier: .iso8601)

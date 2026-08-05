@@ -87,9 +87,25 @@ enum AppConstants {
     static let tipPercentages = [10, 15, 18, 20]
     static let quickAmounts = [5, 10, 20, 50, 100]
 
-    // Web / Universal Links — used by ShareLink, future notifications, widgets,
-    // and App Intents to deep-link into specific content. Update `webOrigin` to
-    // match the live AASA-registered domain.
+    // MARK: - Real, verified destinations
+    //
+    // These are the live Casa Mañana pages. Everything user-facing (Settings,
+    // paywall, support) must point here. They are NOT derived from
+    // `webOrigin` — that constant is a placeholder domain (see below) and
+    // deriving legal links from it is how they were wrong for months.
+    static let privacyURL = "https://www.casamananaroatan.com/app/privacy/"
+    static let supportURL = "https://www.casamananaroatan.com/app/support/"
+    static let supportEmail = "josh@casamananaroatan.com"
+
+    // Web / Universal Links — used by ShareLink, widgets and App Intents to
+    // deep-link into specific content.
+    //
+    // WARNING: this domain is unverified. It was written in May 2026 when
+    // the share/deep-link plumbing was built and has never pointed anywhere
+    // real; there is also no associated-domains entitlement, so universal
+    // links don't resolve back into the app either. Every shared business
+    // link therefore goes to a dead address. Decide the destination (a real
+    // page, or the App Store listing) before shipping share features.
     static let webOrigin = "https://roataninsider.com"
 
     static func businessShareURL(slug: String) -> URL? {

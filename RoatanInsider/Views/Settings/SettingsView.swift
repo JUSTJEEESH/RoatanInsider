@@ -189,7 +189,7 @@ struct SettingsView: View {
 
     private var aboutSection: some View {
         Section {
-            Link(destination: URL(string: "\(AppConstants.webOrigin)/privacy")!) {
+            Link(destination: URL(string: AppConstants.privacyURL)!) {
                 HStack {
                     Label("Privacy", systemImage: "lock.shield")
                     Spacer()
@@ -197,15 +197,17 @@ struct SettingsView: View {
                         .foregroundStyle(Color.riLightGray)
                 }
             }
-            Link(destination: URL(string: "\(AppConstants.webOrigin)/terms")!) {
+            // Was labelled "Terms" pointing at a terms page that doesn't
+            // exist. Labelled for what's actually there.
+            Link(destination: URL(string: AppConstants.supportURL)!) {
                 HStack {
-                    Label("Terms", systemImage: "doc.text")
+                    Label("Support", systemImage: "lifepreserver")
                     Spacer()
                     Image(systemName: "arrow.up.right.square")
                         .foregroundStyle(Color.riLightGray)
                 }
             }
-            Link(destination: URL(string: "mailto:hello@roataninsider.com?subject=App%20feedback")!) {
+            Link(destination: URL(string: "mailto:\(AppConstants.supportEmail)?subject=App%20feedback")!) {
                 Label("Send feedback", systemImage: "envelope")
             }
             // Moved off the Home tab, which is built for visitors — an owner

@@ -293,11 +293,16 @@ struct PaywallView: View {
                 .font(.riCaption(13))
                 .foregroundStyle(Color.riLightGray)
 
-                Link("Terms", destination: URL(string: "\(AppConstants.webOrigin)/terms")!)
+                // Apple's standard EULA. An auto-renewing subscription must
+                // link Terms of Use; this is the correct link when you
+                // haven't published your own, and it beats pointing at a
+                // terms page that doesn't exist. Swap for a real URL if
+                // Casa Mañana publishes custom terms.
+                Link("Terms", destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
                     .font(.riCaption(13))
                     .foregroundStyle(Color.riLightGray)
 
-                Link("Privacy", destination: URL(string: "\(AppConstants.webOrigin)/privacy")!)
+                Link("Privacy", destination: URL(string: AppConstants.privacyURL)!)
                     .font(.riCaption(13))
                     .foregroundStyle(Color.riLightGray)
             }
