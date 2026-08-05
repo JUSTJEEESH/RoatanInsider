@@ -7,14 +7,20 @@ struct RightNowFeedSection: View {
     @Environment(WeatherService.self) private var weather
     @Environment(UserProfileStore.self) private var profileStore
     @Environment(DataManager.self) private var dataManager
+    @Environment(EventsService.self) private var events
+    @Environment(CruiseArrivalsService.self) private var cruise
 
     private var items: [FeedItem] {
-        FeedComposer.compose(
+        let shipsIn = cruise.hasCurrentData ? !cruise.arrivalsToday().isEmpty : true
+        let music = (events.happeningNow(cruiseShipInPort: shipsIn) + events.upNextToday(cruiseShipInPort: shipsIn))
+            .filter { $0.category == .liveMusic || $0.category == .dj }
+        return FeedComposer.compose(
             weather: weather.conditions,
             reefScore: weather.reefScore,
             snorkelLabel: weather.snorkelLabel,
             profile: profileStore.profile,
-            businesses: dataManager.activeBusinesses
+            businesses: dataManager.activeBusinesses,
+            musicEventsRemainingToday: music.count
         )
     }
 
@@ -88,9 +94,10 @@ struct RightNowFeedSection: View {
         case .liveMusicTonight(let count, _):
             card(
                 icon: "music.note",
-                tint: .purple,
-                title: "Live music tonight",
-                detail: "\(count) spot\(count == 1 ? "" : "s") with a band playing."
+                tint: Color.riMint,
+                title: Calendar.current.component(.hour, from: Date()) < 16
+                    ? "Live music today" : "Live music tonight",
+                detail: "\(count) set\(count == 1 ? "" : "s") on the schedule — see who's playing."
             )
 
         case .tripCountdown(let days):

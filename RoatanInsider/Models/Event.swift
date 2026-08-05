@@ -104,9 +104,16 @@ struct Event: Identifiable, Codable, Hashable {
     var isRecurring: Bool       { recurring ?? false }
     var isSpecial: Bool         { specialEvent ?? false }
     var isFeatured: Bool        { featured ?? false }
-    var isCruiseDayOnly: Bool   { cruiseShipDayOnly ?? false }
     var isWeatherDependent: Bool { weatherDependent ?? false }
     var isActive: Bool          { active ?? true }
+
+    /// Explicit flag when present; otherwise detected from Keith's text
+    /// ("Cruise Ship Days Only" lands in genre/notes on scraped data).
+    var isCruiseDayOnly: Bool {
+        if let cruiseShipDayOnly { return cruiseShipDayOnly }
+        let text = "\(genre ?? "") \(notes ?? "") \(recurringRule ?? "")".lowercased()
+        return text.contains("cruise ship day")
+    }
 
     /// True when this event started within the last `durationHours` and is
     /// likely still going. Used for the 'LIVE NOW' badge on rows.
@@ -127,7 +134,15 @@ struct Event: Identifiable, Codable, Hashable {
             return false
         }
         let elapsed = now.timeIntervalSince(start)
-        return elapsed >= 0 && elapsed < TimeInterval(durationHours * 3600)
+        guard elapsed >= 0 else { return false }
+
+        // A known end time beats the duration guess. Sets that run past
+        // midnight parse "earlier" than their start — roll those forward.
+        if let endTime, let end = Self.combine(date: start, time: endTime, calendar: calendar) {
+            let realEnd = end > start ? end : (calendar.date(byAdding: .day, value: 1, to: end) ?? end)
+            return now < realEnd
+        }
+        return elapsed < TimeInterval(durationHours * 3600)
     }
 
     /// Start time of THIS event today, anchored to current calendar day.

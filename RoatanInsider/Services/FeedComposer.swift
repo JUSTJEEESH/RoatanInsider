@@ -17,7 +17,8 @@ enum FeedComposer {
         reefScore: Int,
         snorkelLabel: String,
         profile: UserProfile,
-        businesses: [Business]
+        businesses: [Business],
+        musicEventsRemainingToday: Int = 0
     ) -> [FeedItem] {
         var items: [FeedItem] = []
 
@@ -68,17 +69,11 @@ enum FeedComposer {
             items.append(.happyHourNow(count: happyNow.count, firstBusinessId: happyNow.first?.id))
         }
 
-        // Live music tonight — businesses tagged with Live Music that open in
-        // the evening.
+        // Live music tonight — from the actual schedule (live + still to
+        // come today), not the static business tags.
         let hour = Calendar.current.component(.hour, from: Date())
-        if hour >= 14 && hour <= 23 {
-            let liveTonight = businesses.filter { biz in
-                biz.isActive &&
-                biz.features.contains(where: { $0.localizedCaseInsensitiveContains("live music") })
-            }
-            if !liveTonight.isEmpty {
-                items.append(.liveMusicTonight(count: liveTonight.count, firstBusinessId: liveTonight.first?.id))
-            }
+        if hour >= 11 && hour <= 23, musicEventsRemainingToday > 0 {
+            items.append(.liveMusicTonight(count: musicEventsRemainingToday, firstBusinessId: nil))
         }
 
         // Reef conditions — always include if we have weather, as a baseline

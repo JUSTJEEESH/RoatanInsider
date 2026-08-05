@@ -38,6 +38,7 @@ interface AppEvent {
   recurring: boolean;
   recurringRule: string | null;
   specialEvent: boolean;
+  cruiseShipDayOnly: boolean;
   featured: boolean;
   contact: string | null;
   active: boolean;
@@ -293,6 +294,9 @@ function parseItem(day: string, dataArea: string, itemHtml: string): AppEvent | 
     recurring,
     recurringRule,
     specialEvent: category === "Special Event",
+    // The phrase can live in the tail OR in an addl span (which the tail
+    // cleanup strips), so test the combined text.
+    cruiseShipDayOnly: /cruise ship days?/i.test(`${tailText} ${extraInfo.join(" ")} ${recurrenceText ?? ""}`),
     featured,
     contact,
     active: true,
@@ -397,6 +401,7 @@ Deno.serve(async (_req) => {
       recurring: events.filter((e) => e.recurring).length,
       dated: events.filter((e) => e.date !== null).length,
       featured: events.filter((e) => e.featured).length,
+      cruiseDayOnly: events.filter((e) => e.cruiseShipDayOnly).length,
     };
     await writeStatus(true, summary);
 

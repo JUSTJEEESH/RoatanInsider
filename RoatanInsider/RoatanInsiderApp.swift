@@ -7,6 +7,7 @@ import os
 @main
 struct RoatanInsiderApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+    @Environment(\.scenePhase) private var scenePhase
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
     @State private var showLaunch = true
     @State private var profileStore = UserProfileStore()
@@ -144,6 +145,14 @@ struct RoatanInsiderApp: App {
             .environment(eventFavoritesStore)
             .environment(cruiseArrivalsService)
             .environment(favoritesStore)
+            .onChange(of: scenePhase) { _, phase in
+                // The app lives in memory for days between opens — refresh
+                // the live-data surfaces on every return to foreground, not
+                // just at cold launch. Each fetch throttles itself (6h).
+                guard phase == .active else { return }
+                Task { await eventsService.refreshFromRemoteIfNeeded() }
+                Task { await cruiseArrivalsService.refreshFromRemoteIfNeeded() }
+            }
         }
         .modelContainer(modelContainer)
     }
