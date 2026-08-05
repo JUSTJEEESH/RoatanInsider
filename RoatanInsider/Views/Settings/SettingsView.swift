@@ -208,6 +208,16 @@ struct SettingsView: View {
             Link(destination: URL(string: "mailto:hello@roataninsider.com?subject=App%20feedback")!) {
                 Label("Send feedback", systemImage: "envelope")
             }
+            // Moved off the Home tab, which is built for visitors — an owner
+            // looking to get listed comes to Settings for it.
+            Link(destination: URL(string: "https://facebook.com/roataninsiderapp")!) {
+                HStack {
+                    Label("List your business", systemImage: "storefront")
+                    Spacer()
+                    Image(systemName: "arrow.up.right.square")
+                        .foregroundStyle(Color.riLightGray)
+                }
+            }
             HStack {
                 Label("Version", systemImage: "info.circle")
                 Spacer()

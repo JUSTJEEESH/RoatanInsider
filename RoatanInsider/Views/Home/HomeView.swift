@@ -1,83 +1,56 @@
 import SwiftUI
 
+/// Home, in six blocks.
+///
+/// This screen previously stacked seventeen sections, roughly 1,900 lines,
+/// in which five surfaces answered "what should I do right now?" and seven
+/// answered "which places should I look at?" — including two that both used
+/// the kicker "RIGHT NOW". Nothing had rank because everything claimed the
+/// same rank.
+///
+/// The six that remain, in the order a visitor needs them:
+///   1. HomeHeader     — who you are, and the conditions, on two lines
+///   2. TodaySection   — one ranked list of what's true today (adapts to you)
+///   3. TonightSection — what's on now and next
+///   4. ThisWeeksPick  — the single editorial moment
+///   5. BrowseSection  — the handoff to Explore
+///   6. QuickGuides    — the deeper reading
+///
+/// Sections that moved rather than died: the time-of-day business scoring
+/// in `RightNowSection`, `TrendingSection` and `ContinueBrowsingSection`
+/// belong in Explore, where they work across all 94 places instead of six;
+/// they're wired up in the Explore pass and their files stay put until
+/// then. `BusinessCTASection` moved to Settings, where an owner will
+/// actually look for it.
 struct HomeView: View {
     @Binding var selectedTab: Int
     @Environment(DataManager.self) private var dataManager
-    @Environment(UserProfileStore.self) private var profileStore
-    @State private var viewModel = HomeViewModel()
     @State private var cruiseViewModel = CruiseViewModel()
     @State private var showCruiseMode = false
     @Namespace private var zoomNS
-
-    private var showsCruiseBanner: Bool {
-        switch profileStore.profile.travelerType {
-        case .cruiser, nil: return true
-        case .local, .expat, .longStay, .vacationer: return false
-        }
-    }
 
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVStack(spacing: 0) {
-                    HomeGreeting()
+                    HomeHeader()
 
-                    LiveConditionsStrip()
-                        .padding(.top, 16)
-
-                    ShipsInPortSection()
-                        .padding(.top, 20)
-
-                    ArrivalBanner(showCruiseMode: $showCruiseMode)
-
-                    if showsCruiseBanner {
-                        CruiseBanner(showCruiseMode: $showCruiseMode)
-                            .padding(.top, 24)
-                    }
+                    TodaySection(showCruiseMode: $showCruiseMode)
+                        .padding(.top, AppConstants.Space.block)
 
                     TonightSection()
+                        .padding(.top, AppConstants.Space.section)
 
-                    RightNowFeedSection()
-                        .padding(.top, 28)
-                        .padding(.bottom, AppConstants.sectionPadding)
+                    ThisWeeksPick()
+                        .padding(.vertical, AppConstants.Space.section)
 
-                    RightNowSection(businesses: dataManager.activeBusinesses)
-                        .padding(.bottom, AppConstants.sectionPadding)
-
-                    TrendingSection()
-                        .padding(.bottom, AppConstants.sectionPadding)
-
-                    ContinueBrowsingSection()
-                        .padding(.vertical, AppConstants.sectionPadding)
-
-                    FeaturedSection(businesses: dataManager.featuredBusinesses)
-                        .padding(.vertical, AppConstants.sectionPadding)
-                        .frame(maxWidth: .infinity)
-                        .background(Color.riFixedDark)
-
-                    CollectionsSection(businesses: dataManager.activeBusinesses)
-                        .padding(.vertical, AppConstants.sectionPadding)
-
-                    CategoryGridSection()
-                        .padding(.vertical, AppConstants.sectionPadding)
-                        .frame(maxWidth: .infinity)
-                        .background(Color.riFixedDark)
-
-                    InsiderPicksSection(businesses: dataManager.insiderPicks())
-                        .padding(.vertical, AppConstants.sectionPadding)
-
-                    InsiderTipsFeedSection(businesses: dataManager.activeBusinesses)
-                        .padding(.vertical, AppConstants.sectionPadding)
+                    BrowseSection(businesses: dataManager.activeBusinesses)
+                        .padding(.vertical, AppConstants.Space.section)
                         .frame(maxWidth: .infinity)
                         .background(Color.riFixedDark)
 
                     QuickGuidesSection()
-                        .padding(.vertical, AppConstants.sectionPadding)
-
-                    BusinessCTASection()
-                        .padding(.vertical, AppConstants.sectionPadding)
-                        .frame(maxWidth: .infinity)
-                        .background(Color.riFixedDark)
+                        .padding(.vertical, AppConstants.Space.section)
                 }
                 .environment(\.colorScheme, .light)
             }

@@ -43,39 +43,6 @@ struct CuratedCollection: Identifiable, Hashable {
     ]
 }
 
-// MARK: - Collections Section
-
-struct CollectionsSection: View {
-    let businesses: [Business]
-
-    var body: some View {
-        let collections = CuratedCollection.all.filter { collection in
-            businesses.filter(collection.filter).count >= 2
-        }
-
-        if !collections.isEmpty {
-            VStack(alignment: .leading, spacing: 20) {
-                SectionHeader(
-                    title: "Best of Roatán",
-                    subtitle: "Curated by locals"
-                )
-
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 16) {
-                        ForEach(collections) { collection in
-                            NavigationLink(value: collection) {
-                                CollectionCard(collection: collection)
-                            }
-                            .buttonStyle(.plain)
-                        }
-                    }
-                    .padding(.horizontal, 20)
-                }
-            }
-        }
-    }
-}
-
 // MARK: - Collection Card
 
 struct CollectionCard: View {
