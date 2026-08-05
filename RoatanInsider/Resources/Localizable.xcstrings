@@ -1,612 +1,1479 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
+    "·" : {
+
+    },
+    "· Today" : {
+
+    },
+    "· Tomorrow" : {
+
+    },
+    "(%lld)" : {
+
+    },
+    "%@" : {
+
+    },
+    "%@ – %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ – %2$@"
+          }
+        }
+      }
+    },
+    "%@ · %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "%@, %@ in %@, %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, %2$@ in %3$@, %4$@"
+          }
+        }
+      }
+    },
+    "%@. %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@. %2$@"
+          }
+        }
+      }
+    },
+    "%@. %@. Phone: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@. %2$@. Phone: %3$@"
+          }
+        }
+      }
+    },
+    "%@%.2f" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@%2$.2f"
+          }
+        }
+      }
+    },
     "%d day" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "%d día" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d día"
+          }
         }
       }
     },
     "%d days" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "%d días" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d días"
+          }
         }
       }
     },
     "%d days until you land" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "%d días hasta tu llegada" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d días hasta tu llegada"
+          }
         }
       }
     },
     "%d places" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "%d lugares" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d lugares"
+          }
         }
       }
     },
     "%d results" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "%d resultados" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d resultados"
+          }
         }
       }
+    },
+    "%lld" : {
+
+    },
+    "%lld %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld %2$@"
+          }
+        }
+      }
+    },
+    "%lld days from today" : {
+
+    },
+    "%lld of %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld"
+          }
+        }
+      }
+    },
+    "%lld places" : {
+
+    },
+    "%lld results" : {
+
+    },
+    "%lld saved place%@ waiting for you" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld saved place%2$@ waiting for you"
+          }
+        }
+      }
+    },
+    "%lld%%" : {
+
+    },
+    "$" : {
+
+    },
+    "$%lld" : {
+
+    },
+    "0" : {
+
+    },
+    "0.00" : {
+
+    },
+    "1 USD = %.2f HNL" : {
+
+    },
+    "A little Spanish goes a long way — locals appreciate the effort" : {
+
+    },
+    "About" : {
+
+    },
+    "Activate Cruise Day Mode" : {
+
     },
     "Add a place" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Agregar un lugar" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agregar un lugar"
+          }
         }
       }
     },
     "Add your trip dates" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Agrega las fechas de tu viaje" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agrega las fechas de tu viaje"
+          }
         }
       }
+    },
+    "Allowed" : {
+
+    },
+    "Area Guides" : {
+
     },
     "Arrival" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Llegada" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Llegada"
+          }
         }
       }
+    },
+    "Ask a Local" : {
+
     },
     "Auto-renews until cancelled. Manage in Settings." : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Se renueva automáticamente hasta que canceles. Administra en Ajustes." }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se renueva automáticamente hasta que canceles. Administra en Ajustes."
+          }
         }
       }
+    },
+    "Back on board" : {
+
+    },
+    "BACK ON BOARD BY" : {
+
+    },
+    "Best For" : {
+
     },
     "Best Value" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Mejor valor" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mejor valor"
+          }
         }
       }
     },
+    "BEST VALUE" : {
+
+    },
+    "Bill Amount (USD)" : {
+
+    },
     "Billed monthly. Cancel anytime." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Cobrado mensualmente. Cancela cuando quieras." }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cobrado mensualmente. Cancela cuando quieras."
+          }
         }
       }
     },
     "Build my itinerary" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Crea mi itinerario" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crea mi itinerario"
+          }
+        }
+      }
+    },
+    "Calculate tips in USD and Lempiras — split with your group" : {
+
+    },
+    "Call %@ at %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Call %1$@ at %2$@"
+          }
         }
       }
     },
     "Cancel" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Cancelar" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
         }
       }
     },
-    "Cloud-synced favorites" : {
+    "Clear" : {
+
+    },
+    "Clear all filters" : {
+
+    },
+    "Clear trip dates" : {
+
+    },
+    "Close" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Favoritos sincronizados en la nube" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar"
+          }
         }
       }
     },
     "Closed" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Cerrado" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrado"
+          }
         }
       }
     },
-    "Close" : {
+    "Cloud-synced favorites" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Cerrar" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoritos sincronizados en la nube"
+          }
         }
       }
     },
     "Continue" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Continuar" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuar"
+          }
         }
       }
     },
     "Continue browsing" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Seguir explorando" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguir explorando"
+          }
         }
       }
+    },
+    "CONTINUE BROWSING" : {
+
+    },
+    "Cruise day" : {
+
+    },
+    "Cruise Day" : {
+
+    },
+    "Cruise Day Guide" : {
+
     },
     "Cruise day visitor" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Visitante de crucero" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visitante de crucero"
+          }
         }
       }
     },
+    "Currency Converter" : {
+
+    },
+    "Currency, tips, Spanish, safety — quick references." : {
+
+    },
     "Day %d" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Día %d" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Día %d"
+          }
         }
       }
+    },
+    "DAY %lld" : {
+
     },
     "Departure" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Salida" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salida"
+          }
         }
       }
     },
     "Directions" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Cómo llegar" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cómo llegar"
+          }
         }
       }
+    },
+    "Dismiss" : {
+
+    },
+    "DON'T MISS" : {
+
     },
     "Done" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Listo" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listo"
+          }
         }
       }
     },
+    "Double tap to call" : {
+
+    },
     "Drinks & bars" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Bebidas y bares" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bebidas y bares"
+          }
         }
       }
     },
     "Edit" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Editar" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar"
+          }
         }
       }
     },
+    "Emergency & Safety" : {
+
+    },
+    "Enable" : {
+
+    },
+    "Est. cost: %@" : {
+
+    },
+    "EVENTS THIS WEEK" : {
+
+    },
     "Everything you need on the go" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Todo lo que necesitas en el camino" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todo lo que necesitas en el camino"
+          }
         }
       }
+    },
+    "Exit" : {
+
     },
     "Explore" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Explorar" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explorar"
+          }
         }
       }
     },
+    "Explore the island like a local." : {
+
+    },
     "Family-friendly" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Para familias" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para familias"
+          }
         }
       }
     },
     "Featured" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Destacados" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Destacados"
+          }
         }
       }
     },
     "Features" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Características" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Características"
+          }
         }
       }
+    },
+    "Filter by Area" : {
+
+    },
+    "Filter by Feature" : {
+
+    },
+    "Find a place" : {
+
     },
     "Find your next island adventure" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Encuentra tu próxima aventura en la isla" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encuentra tu próxima aventura en la isla"
+          }
         }
       }
+    },
+    "First name" : {
+
     },
     "Food" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Comida" }
-        }
-      }
-    },
-    "Get started" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Empezar" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comida"
+          }
         }
       }
     },
     "Generate" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Generar" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generar"
+          }
         }
       }
+    },
+    "Get listed in the app, get featured to thousands of visitors, or add your menu so customers know what you serve before they walk in." : {
+
+    },
+    "Get started" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empezar"
+          }
+        }
+      }
+    },
+    "Getting There" : {
+
     },
     "Happening on the island" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Lo que pasa en la isla" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lo que pasa en la isla"
+          }
         }
       }
     },
     "Happy hour now" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Hora feliz ahora" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hora feliz ahora"
+          }
         }
       }
     },
     "Heads up" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Atención" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atención"
+          }
         }
       }
+    },
+    "HNL" : {
+
     },
     "Home" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Inicio" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inicio"
+          }
         }
       }
+    },
+    "Honest answers from someone who actually lives here." : {
+
     },
     "Hours" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Horario" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Horario"
+          }
         }
       }
     },
     "How are you visiting?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "¿Cómo nos visitas?" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Cómo nos visitas?"
+          }
         }
       }
+    },
+    "How Much Time Do You Have?" : {
+
     },
     "I know my dates" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Sé mis fechas" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sé mis fechas"
+          }
         }
       }
+    },
+    "I want to share what I know" : {
+
+    },
+    "I'm here as" : {
+
+    },
+    "In Your Currency" : {
+
+    },
+    "INSIDER PICK" : {
+
     },
     "Insider Tip" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Tip local" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tip local"
+          }
+        }
+      }
+    },
+    "Insider tip for %@: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Insider tip for %1$@: %2$@"
+          }
         }
       }
     },
     "Insider+" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Insider+" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insider+"
+          }
         }
       }
     },
+    "Insider+ member" : {
+
+    },
+    "Interests" : {
+
+    },
+    "Island Essentials" : {
+
+    },
+    "Keep this handy — just in case." : {
+
+    },
+    "km" : {
+
+    },
     "Let's go" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "¡Vamos!" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Vamos!"
+          }
         }
       }
     },
     "Live music tonight" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Música en vivo esta noche" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Música en vivo esta noche"
+          }
         }
       }
+    },
+    "Live music, DJs, karaoke, trivia, fire shows — every spot worth being at, sorted by day." : {
+
+    },
+    "LIVE NOW" : {
+
     },
     "Living here" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Vivo aquí" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vivo aquí"
+          }
         }
       }
     },
+    "Loading" : {
+
+    },
+    "Loading essentials..." : {
+
+    },
     "Local resident" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Residente local" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Residente local"
+          }
         }
       }
     },
     "Location" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Ubicación" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ubicación"
+          }
         }
       }
     },
     "Locations" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Ubicaciones" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ubicaciones"
+          }
         }
       }
+    },
+    "Looks like a cruise day — open your itinerary." : {
+
     },
     "Map" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Mapa" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mapa"
+          }
         }
       }
     },
+    "Menu" : {
+
+    },
+    "Menu image unavailable" : {
+
+    },
+    "Message Us on Facebook" : {
+
+    },
+    "mi" : {
+
+    },
     "Monthly" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Mensual" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mensual"
+          }
         }
       }
     },
     "My Trip" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Mi viaje" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mi viaje"
+          }
         }
       }
+    },
+    "No cruise ships in port. The beaches and dive sites are local-flow today." : {
+
     },
     "No favorites yet" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Aún no tienes favoritos" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aún no tienes favoritos"
+          }
         }
       }
     },
+    "No matches." : {
+
+    },
+    "No matching businesses nearby" : {
+
+    },
+    "No menu available" : {
+
+    },
     "No results found" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "No se encontraron resultados" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se encontraron resultados"
+          }
         }
       }
     },
     "Nothing planned yet." : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Aún no hay nada planeado." }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aún no hay nada planeado."
+          }
         }
       }
     },
+    "Nothing scheduled for %@." : {
+
+    },
+    "Notifications" : {
+
+    },
+    "Off" : {
+
+    },
+    "On a cruise ship today?" : {
+
+    },
     "On vacation" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "De vacaciones" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De vacaciones"
+          }
         }
       }
     },
     "Open" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Abierto" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abierto"
+          }
         }
       }
     },
+    "Open ${place}" : {
+
+    },
+    "Open a Roatán Insider business in the app." : {
+
+    },
+    "Open Now" : {
+
+    },
+    "Open Place on Roatán" : {
+
+    },
+    "Own a business\non Roatán?" : {
+
+    },
+    "passengers" : {
+
+    },
     "Pick a few. We'll prioritise these across the app." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Elige varios. Los priorizaremos en toda la app." }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige varios. Los priorizaremos en toda la app."
+          }
         }
       }
     },
     "Pick up where you left off" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Continúa donde lo dejaste" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continúa donde lo dejaste"
+          }
         }
       }
     },
+    "Place" : {
+
+    },
+    "Place on Roatán" : {
+
+    },
     "Plan" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Plan" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plan"
+          }
         }
       }
     },
     "Plan your day-by-day, save your shortlist." : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Planea día por día, guarda tu lista." }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Planea día por día, guarda tu lista."
+          }
         }
       }
+    },
+    "Plans, alerts, offline maps, and member discounts." : {
+
+    },
+    "Play %@" : {
+
+    },
+    "Port" : {
+
+    },
+    "Preferences" : {
+
     },
     "Privacy" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Privacidad" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacidad"
+          }
         }
       }
     },
+    "Profile" : {
+
+    },
+    "Q" : {
+
+    },
+    "Quick Convert" : {
+
+    },
+    "Quiet stretch on the island. Pull up the week to see what's coming." : {
+
+    },
     "Reef conditions: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Condiciones del arrecife: %@" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Condiciones del arrecife: %@"
+          }
         }
       }
+    },
+    "remaining" : {
+
+    },
+    "Remove %@ from this day" : {
+
+    },
+    "Remove from favorites" : {
+
+    },
+    "Remove from Favorites" : {
+
+    },
+    "Remove from Saved" : {
+
     },
     "Restore Purchases" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Restaurar compras" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restaurar compras"
+          }
         }
       }
     },
     "Right now" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Ahora mismo" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ahora mismo"
+          }
         }
       }
+    },
+    "RIGHT NOW" : {
+
+    },
+    "Roatán Insider" : {
+
+    },
+    "ROATÁN INSIDER+" : {
+
+    },
+    "Roatán, by the people who live here." : {
+
+    },
+    "Roatán, dialed in." : {
+
+    },
+    "Safety Tips" : {
+
     },
     "Save" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Guardar" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar"
+          }
         }
       }
+    },
+    "Save to favorites" : {
+
     },
     "Saved" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Guardados" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardados"
+          }
         }
       }
+    },
+    "Search businesses, areas, features..." : {
+
+    },
+    "Search places on Roatán..." : {
+
+    },
+    "Search venue, performer, area…" : {
+
     },
     "See what's around you" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Mira qué hay a tu alrededor" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mira qué hay a tu alrededor"
+          }
         }
       }
     },
+    "Select Your Port" : {
+
+    },
+    "Send feedback" : {
+
+    },
     "Set trip dates" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Establecer fechas" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Establecer fechas"
+          }
         }
       }
+    },
+    "Settings" : {
+
+    },
+    "Share %@" : {
+
+    },
+    "SHIPS IN PORT TODAY" : {
+
     },
     "Skip" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Omitir" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Omitir"
+          }
         }
       }
     },
     "Snorkel: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Snorkel: %@" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snorkel: %@"
+          }
         }
       }
+    },
+    "Spanish Phrases" : {
+
+    },
+    "Split Between" : {
+
     },
     "Start Insider+" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Comenzar Insider+" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comenzar Insider+"
+          }
         }
       }
     },
     "Staying a few weeks" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Me quedo unas semanas" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Me quedo unas semanas"
+          }
         }
       }
+    },
+    "Sun has set" : {
+
+    },
+    "Sunset %@" : {
+
+    },
+    "Sunset countdown plus today's insider pick." : {
+
     },
     "Sunset in %@" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Atardecer en %@" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atardecer en %@"
+          }
         }
       }
+    },
+    "Sunset on Roatán" : {
+
+    },
+    "Tap the heart on any business to\nsave it here for quick access." : {
+
     },
     "Terms" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Términos" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Términos"
+          }
         }
       }
     },
-    "Try Insider+" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Prueba Insider+" }
-        }
-      }
+    "Thanks for being an early supporter — all features unlocked, forever." : {
+
+    },
+    "Time's up — head to the port!" : {
+
+    },
+    "Tip Calculator" : {
+
+    },
+    "Tip Percentage" : {
+
+    },
+    "Tip: Long-press a favorite to remove it" : {
+
+    },
+    "Today on Roatán" : {
+
+    },
+    "Today's sunset time and live countdown." : {
+
+    },
+    "Too far" : {
+
     },
     "Tools" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Herramientas" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Herramientas"
+          }
         }
       }
+    },
+    "Top Picks" : {
+
     },
     "Trip" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Viaje" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Viaje"
+          }
         }
       }
     },
     "Trip dates" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Fechas del viaje" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fechas del viaje"
+          }
+        }
+      }
+    },
+    "Try a different search or category." : {
+
+    },
+    "Try Insider+" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prueba Insider+"
+          }
         }
       }
     },
     "Two quick permissions" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Dos permisos rápidos" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dos permisos rápidos"
+          }
         }
       }
     },
+    "until sunset" : {
+
+    },
+    "USD" : {
+
+    },
+    "USD and Honduran Lempira — updated daily" : {
+
+    },
+    "Use metric units" : {
+
+    },
     "Use your location" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Usar tu ubicación" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usar tu ubicación"
+          }
         }
       }
+    },
+    "Used for the trip countdown, day-by-day itinerary, and cruise-day timing." : {
+
+    },
+    "Used for trip countdown, the cruise-day countdown, and day-by-day itinerary." : {
+
+    },
+    "Version" : {
+
+    },
+    "Vibe" : {
+
+    },
+    "We use these to shape the home feed and your itinerary." : {
+
+    },
+    "We'll get back to you within 24 hours" : {
+
+    },
+    "We'll let you flag corrections and add new spots." : {
+
     },
     "Welcome to\nRoatán Insider" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Bienvenido a\nRoatán Insider" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenido a\nRoatán Insider"
+          }
         }
       }
+    },
+    "Welcome to Roatán" : {
+
+    },
+    "West Bay and West End run busier when ships are in." : {
+
     },
     "What are you into?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "¿Qué te gusta?" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Qué te gusta?"
+          }
         }
       }
+    },
+    "What's on, every night" : {
+
     },
     "When are you here?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "¿Cuándo estás aquí?" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Cuándo estás aquí?"
+          }
         }
       }
     },
+    "Why these picks" : {
+
+    },
     "Yearly" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Anual" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anual"
+          }
         }
       }
     },
     "You're all set." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Todo listo." }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todo listo."
+          }
         }
       }
+    },
+    "You're an Insider+ founding member." : {
+
     },
     "Your personal island shortlist" : {
       "localizations" : {
         "es" : {
-          "stringUnit" : { "state" : "translated", "value" : "Tu lista personal de la isla" }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu lista personal de la isla"
+          }
         }
       }
     }
