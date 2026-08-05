@@ -6,10 +6,14 @@ enum AppConstants {
     static let subtitle = "Your Local Guide to Roatán"
     static let tagline = "Explore the island like a local."
 
-    // Currency (fallback rates when offline)
-    static let usdToHnlRate: Double = 26.10
-    static let usdToCadRate: Double = 1.44  // ~Mar 2026
-    static let usdToEurRate: Double = 0.92  // ~Mar 2026
+    // Currency — OFFLINE FALLBACK ONLY. `ExchangeRateService` fetches live
+    // rates on launch; these are what a user sees with no signal, so they
+    // are labelled as approximate in the UI rather than presented as today's
+    // rate. Verified against open.er-api.com on 5 Aug 2026 — refresh when
+    // they drift more than a few percent.
+    static let usdToHnlRate: Double = 26.80
+    static let usdToCadRate: Double = 1.41
+    static let usdToEurRate: Double = 0.87
 
     // Map
     static let roatanCenter = CLLocationCoordinate2D(latitude: 16.3300, longitude: -86.5200)
@@ -54,6 +58,30 @@ enum AppConstants {
     static let buttonHeight: CGFloat = 50
     static let minTapTarget: CGFloat = 44
     static let sectionPadding: CGFloat = 48
+
+    // MARK: - Radius scale
+    //
+    // Three values, down from nine (2, 4, 8, 10, 12, 14, 16 and 18 were all
+    // in use). Inconsistent rounding is the detail a trained eye catches
+    // before it can name it — it reads as assembled rather than drawn.
+    enum Radius {
+        static let small: CGFloat = 8    // chips, tags, inputs
+        static let card: CGFloat = 16    // cards, list rows, panels
+        static let sheet: CGFloat = 28   // sheets, hero surfaces
+    }
+
+    // MARK: - Spacing scale
+    //
+    // Six steps, anchored to the 20pt gutter and 48pt section padding
+    // already in use above, so adopting it moves nothing that exists.
+    enum Space {
+        static let hair: CGFloat = 4     // inside a label
+        static let tight: CGFloat = 8    // inside a control
+        static let snug: CGFloat = 12    // between rows in a card
+        static let gutter: CGFloat = 20  // card padding, page margins
+        static let block: CGFloat = 32   // between blocks in a section
+        static let section: CGFloat = 48 // between sections
+    }
 
     // Default tip percentages
     static let tipPercentages = [10, 15, 18, 20]
