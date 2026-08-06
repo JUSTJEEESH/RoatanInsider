@@ -60,6 +60,30 @@ actual code win. See `STATE_OF_THE_APP.md` for the full picture.
   (not the custom near-black bar described below), and `SkeletonView` uses a
   shimmer `LinearGradient` — the "no gradients" rule otherwise stands for
   content UI.
+- **AREAS: there are 14, not the 10 listed below.** `dixon_cove`,
+  `palmetto_bay`, `milton_bight` and `johnson_bight` are real areas with real
+  listings. `Area`, `areas.json` and the filters all cover them; the table
+  further down this document is what's out of date.
+- **Design system (Aug 2026 pass).** `RIType` is the only way new code should
+  set type — eight steps, applied via `.riType(_:weight:)`. Radii come from
+  `AppConstants.Radius` (3 values), spacing from `AppConstants.Space` (6).
+  Components, Home, Events, Explore, Detail, Tools and Weather are converted;
+  **Map, Trip and Guides still set their own sizes** and are the next sweep.
+  Two files are deliberately exempt and say so in their own headers:
+  `ShareableBusinessCard` (fixed PNG canvas) and `RatingView` (size is a
+  parameter so it can sit inside hosts at their scale).
+- **`BusinessCard` is itself a `NavigationLink`** — never wrap it in another.
+- **Happy hour is data, not a tag.** `Business.happyHour` holds a real
+  window; the Today row and the happy-hour list only ever claim what a window
+  states. A "Happy Hour" feature tag means nothing to the UI. Only three
+  businesses have windows so far — everything else needs times gathering, via
+  the CSV's "Happy Hour" column ("16:00-18:00", or
+  "fri,sat 16:00-18:00 | 2-for-1").
+- **Insider Pick draws from two weighted pools** in `InsiderPickSection` —
+  `nearbySlugs` (the West corridor, 4 slots in 5) and `worthTheTripSlugs`
+  (the rest of the island, 1 in 5). Travel time comes from `TravelEstimate`,
+  whose winding factor and average speed are the two numbers to tune if the
+  estimates read wrong.
 - **Content ops:** business/guide content is curated via CSV → JSON → Supabase
   (see `tools/`), and events/cruise data comes from Keith's sources with his
   explicit permission. When editing content by hand, remember the scrapers
