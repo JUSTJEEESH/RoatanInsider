@@ -15,7 +15,7 @@ struct ToolsView: View {
                         Text("Tools")
                             .riType(.display)
                             .foregroundStyle(Color.riDark)
-                        Text("Currency, tips, Spanish, safety — quick references.")
+                        Text("Money, taxis, Spanish, safety — quick references.")
                             .riType(.body)
                             .foregroundStyle(Color.riLightGray)
                     }
@@ -50,6 +50,11 @@ struct ToolsView: View {
                             Text(tab.rawValue)
                                 .riType(.caption, weight: viewModel.selectedTool == tab ? .bold : .medium)
                                 .foregroundStyle(viewModel.selectedTool == tab ? .white : Color.riMediumGray)
+                                // Five tabs into a phone's width: "Currency"
+                                // is the longest and only just fits on the
+                                // narrowest devices.
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.75)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 10)
                                 .background(
@@ -70,6 +75,8 @@ struct ToolsView: View {
                         CurrencyConverterView(viewModel: viewModel)
                     case .tips:
                         TipCalculatorView(viewModel: viewModel)
+                    case .taxis:
+                        TaxiFaresView()
                     case .phrases:
                         PhrasesView()
                     case .safety:

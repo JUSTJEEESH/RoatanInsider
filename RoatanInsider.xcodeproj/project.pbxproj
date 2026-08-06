@@ -15,6 +15,8 @@
 		EE66FF77880099AA11220801 /* WeatherMetricTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220802 /* WeatherMetricTile.swift */; };
 		EE66FF77880099AA11220803 /* WeatherForecastPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220804 /* WeatherForecastPanel.swift */; };
 		EE66FF77880099AA11220805 /* MoonPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220806 /* MoonPhase.swift */; };
+		EE66FF77880099AA11220901 /* TaxiFare.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220902 /* TaxiFare.swift */; };
+		EE66FF77880099AA11220903 /* TaxiFaresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220904 /* TaxiFaresView.swift */; };
 		EE66FF77880099AA11220705 /* SunArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220706 /* SunArcView.swift */; };
 		2F39ACADB90F437997447186 /* InsiderPickSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66090DD8DED94CCA85443C05 /* InsiderPickSection.swift */; };
 		55A42DC7672A466D8A94AA04 /* BrowseSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8688C1F4645D45CFBAA41583 /* BrowseSection.swift */; };
@@ -82,6 +84,7 @@
 		AAFF1122334455660001 /* RemoteDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFF1122334455660002 /* RemoteDataService.swift */; };
 		AAFF1122334455660003 /* ask-a-local.json in Resources */ = {isa = PBXBuildFile; fileRef = AAFF1122334455660004 /* ask-a-local.json */; };
 		AC57565D7F0EE0912A57CC03 /* areas.json in Resources */ = {isa = PBXBuildFile; fileRef = 184A4AB40EF1F2D2FE0EAB19 /* areas.json */; };
+		EE66FF77880099AA11220905 /* taxi_fares.json in Resources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220906 /* taxi_fares.json */; };
 		AEF7FECD88521DA0CA44A502 /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05F076695AC04B8CD07E4F /* Business.swift */; };
 		B3063911EAE150C625BEEDFA /* cruise-coxen-hole.json in Resources */ = {isa = PBXBuildFile; fileRef = 52133D52DF9293C51F2C38DF /* cruise-coxen-hole.json */; };
 		B5B7224EFA25DD6CB1C7C120 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4611149A9B0F906F8558EE2F /* SkeletonView.swift */; };
@@ -185,6 +188,8 @@
 		EE66FF77880099AA11220802 /* WeatherMetricTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherMetricTile.swift; sourceTree = "<group>"; };
 		EE66FF77880099AA11220804 /* WeatherForecastPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastPanel.swift; sourceTree = "<group>"; };
 		EE66FF77880099AA11220806 /* MoonPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPhase.swift; sourceTree = "<group>"; };
+		EE66FF77880099AA11220902 /* TaxiFare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiFare.swift; sourceTree = "<group>"; };
+		EE66FF77880099AA11220904 /* TaxiFaresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiFaresView.swift; sourceTree = "<group>"; };
 		EE66FF77880099AA11220706 /* SunArcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunArcView.swift; sourceTree = "<group>"; };
 		66090DD8DED94CCA85443C05 /* InsiderPickSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsiderPickSection.swift; sourceTree = "<group>"; };
 		8688C1F4645D45CFBAA41583 /* BrowseSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseSection.swift; sourceTree = "<group>"; };
@@ -204,6 +209,7 @@
 		136D08D83D445A12DF0BDD78 /* AreaGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaGuideView.swift; sourceTree = "<group>"; };
 		179BA40591A489E6690226B8 /* businesses.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = businesses.json; sourceTree = "<group>"; };
 		184A4AB40EF1F2D2FE0EAB19 /* areas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = areas.json; sourceTree = "<group>"; };
+		EE66FF77880099AA11220906 /* taxi_fares.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = taxi_fares.json; sourceTree = "<group>"; };
 		20C92DD6E4FC1FFDC07625C8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2F22F7E1102E1D308B79DA47 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		35A4C6517E5D79013BBD86F2 /* BusinessDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailView.swift; sourceTree = "<group>"; };
@@ -373,6 +379,7 @@
 				34AE43D6DD884A7A959EAB6B /* CruiseArrival.swift */,
 				CEB8B7661998E6D132F5842E /* Area.swift */,
 				0A05F076695AC04B8CD07E4F /* Business.swift */,
+				EE66FF77880099AA11220902 /* TaxiFare.swift */,
 				63FC53A49F6C4F4E5D210CB8 /* Category.swift */,
 				C414E435A7648730B69DDDD4 /* Favorite.swift */,
 				C1A2B3D4E5F6000B000C /* UserProfile.swift */,
@@ -405,6 +412,7 @@
 				9A445F6A7986016E282AA77D /* guides */,
 				D2E0F4681191E58B2BA47750 /* DataManager.swift */,
 				184A4AB40EF1F2D2FE0EAB19 /* areas.json */,
+				EE66FF77880099AA11220906 /* taxi_fares.json */,
 				179BA40591A489E6690226B8 /* businesses.json */,
 				CATE60R1E500000000000002 /* categories.json */,
 			);
@@ -449,6 +457,7 @@
 				9242610978DC3254B2295A95 /* CurrencyConverterView.swift */,
 				EE66FF77880099AA11220006 /* PhrasesView.swift */,
 				EE66FF77880099AA11220402 /* ToolHeader.swift */,
+				EE66FF77880099AA11220904 /* TaxiFaresView.swift */,
 				BB33CC44DD55EE66FF770014 /* SafetyCardView.swift */,
 				75ACB383FC33499CC46A8D24 /* TipCalculatorView.swift */,
 				78C31DA567C4344BAAEA4422 /* ToolsView.swift */,
@@ -812,6 +821,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC57565D7F0EE0912A57CC03 /* areas.json in Resources */,
+				EE66FF77880099AA11220905 /* taxi_fares.json in Resources */,
 				CATE60R1E500000000000001 /* categories.json in Resources */,
 				4AE8A7EDB3949FC07ACDF38E /* businesses.json in Resources */,
 				404F2D6B8DB04B8AA4FB808B /* events.json in Resources */,
@@ -869,6 +879,8 @@
 				EE66FF77880099AA11220801 /* WeatherMetricTile.swift in Sources */,
 				EE66FF77880099AA11220803 /* WeatherForecastPanel.swift in Sources */,
 				EE66FF77880099AA11220805 /* MoonPhase.swift in Sources */,
+				EE66FF77880099AA11220901 /* TaxiFare.swift in Sources */,
+				EE66FF77880099AA11220903 /* TaxiFaresView.swift in Sources */,
 				EE66FF77880099AA11220705 /* SunArcView.swift in Sources */,
 				2F39ACADB90F437997447186 /* InsiderPickSection.swift in Sources */,
 				55A42DC7672A466D8A94AA04 /* BrowseSection.swift in Sources */,

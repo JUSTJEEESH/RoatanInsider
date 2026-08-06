@@ -5,6 +5,10 @@ final class ToolsViewModel {
     enum ToolTab: String, CaseIterable {
         case currency = "Currency"
         case tips = "Tips"
+        // Between the money tools and the reference ones, because that's
+        // what it is: the third thing a visitor gets wrong about money here,
+        // after the exchange rate and the tip.
+        case taxis = "Taxis"
         case phrases = "Phrases"
         case safety = "Safety"
     }
