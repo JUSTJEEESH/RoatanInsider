@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// "This week's pick" — the screen's one editorial moment.
+/// "Insider pick" — the screen's one editorial moment.
 ///
 /// Replaces `InsiderPicksSection` (a rail of four cards) and
 /// `InsiderTipsFeedSection` (a rail of tips). Both were rails of business
@@ -18,13 +18,13 @@ import SwiftUI
 /// every user sees the same pick, it changes on Monday, and nothing needs
 /// to be stored. Weekly rather than daily so 94 places last a year and a
 /// half instead of three months.
-struct ThisWeeksPick: View {
+struct InsiderPickSection: View {
     @Environment(DataManager.self) private var dataManager
 
     var body: some View {
         if let business = pick, let tip = business.insiderTip, !tip.isEmpty {
             VStack(alignment: .leading, spacing: AppConstants.Space.gutter) {
-                Text("THIS WEEK'S PICK")
+                Text("INSIDER PICK")
                     .riType(.label)
                     .foregroundStyle(Color.riMediumGray)
 
@@ -69,7 +69,7 @@ struct ThisWeeksPick: View {
                 .buttonStyle(.plain)
             }
             .padding(.horizontal, AppConstants.Space.gutter)
-            .onAppear { Analytics.track(.homeSectionViewed(name: "weekly_pick")) }
+            .onAppear { Analytics.track(.homeSectionViewed(name: "insider_pick")) }
         }
     }
 
@@ -100,23 +100,40 @@ struct ThisWeeksPick: View {
         "roacrawl",
     ]
 
-    /// Deterministic by ISO week, anchored to island time so the pick turns
-    /// over on Monday morning in Roatán rather than mid-Sunday.
-    private var pick: Business? {
+    /// How long each pick holds the slot. Three days keeps all twelve in
+    /// rotation on a 36-day cycle, so a week-long visitor sees two or three
+    /// different places and the section never looks static — while each
+    /// pick still gets a fair showing. Change this one number to retune.
+    static let rotationDays = 3
+
+    /// Deterministic from the calendar, anchored to island time so the pick
+    /// turns over at midnight in Roatán rather than mid-afternoon. Everyone
+    /// sees the same pick on the same day with nothing stored.
+    static func pick(from businesses: [Business], on date: Date = .now) -> Business? {
         let bySlug = Dictionary(
-            dataManager.activeBusinesses.map { ($0.slug, $0) },
+            businesses.map { ($0.slug, $0) },
             uniquingKeysWith: { first, _ in first }
         )
-        let eligible = Self.curatedSlugs
+        let eligible = curatedSlugs
             .compactMap { bySlug[$0] }
             .filter { !($0.insiderTip ?? "").isEmpty }
         guard !eligible.isEmpty else { return nil }
 
-        var calendar = Calendar(identifier: .iso8601)
+        var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = TimeZone(identifier: "America/Tegucigalpa") ?? .current
-        let week = calendar.component(.weekOfYear, from: .now)
-        let year = calendar.component(.yearForWeekOfYear, from: .now)
-        let index = abs(year &* 53 &+ week) % eligible.count
+        guard let epoch = calendar.date(from: DateComponents(year: 2026, month: 1, day: 1)) else {
+            return eligible.first
+        }
+        let days = calendar.dateComponents([.day], from: epoch, to: date).day ?? 0
+
+        // floorDiv + non-negative modulo so dates before the epoch (a device
+        // with its clock set back) still land on a valid entry.
+        let slot = Int((Double(days) / Double(rotationDays)).rounded(.down))
+        let index = ((slot % eligible.count) + eligible.count) % eligible.count
         return eligible[index]
+    }
+
+    private var pick: Business? {
+        Self.pick(from: dataManager.activeBusinesses)
     }
 }

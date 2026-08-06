@@ -12,7 +12,7 @@ import SwiftUI
 ///   1. HomeHeader     — who you are, and the conditions, on two lines
 ///   2. TodaySection   — one ranked list of what's true today (adapts to you)
 ///   3. TonightSection — what's on now and next
-///   4. ThisWeeksPick  — the single editorial moment
+///   4. InsiderPickSection — the single editorial moment
 ///   5. BrowseSection  — the handoff to Explore
 ///   6. QuickGuides    — the deeper reading
 ///
@@ -41,7 +41,7 @@ struct HomeView: View {
                     TonightSection()
                         .padding(.top, AppConstants.Space.section)
 
-                    ThisWeeksPick()
+                    InsiderPickSection()
                         .padding(.vertical, AppConstants.Space.section)
 
                     BrowseSection(businesses: dataManager.activeBusinesses)

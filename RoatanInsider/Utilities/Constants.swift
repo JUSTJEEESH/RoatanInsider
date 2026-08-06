@@ -97,6 +97,15 @@ enum AppConstants {
     static let supportURL = "https://www.casamananaroatan.com/app/support/"
     static let supportEmail = "josh@casamananaroatan.com"
 
+    /// Terms of Use. An auto-renewing subscription must link one, and until
+    /// Casa Mañana publishes its own we link Apple's standard EULA — the
+    /// documented, App-Review-accepted answer when you haven't written your
+    /// own. Set this to the real page (e.g. .../app/terms/) and every link
+    /// switches over.
+    static let ownTermsURL = ""
+    static let appleStandardEULA = "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
+    static var termsURL: String { ownTermsURL.isEmpty ? appleStandardEULA : ownTermsURL }
+
     // MARK: - Sharing
     //
     // Shared links point at the App Store listing: there's no per-business

@@ -15,6 +15,12 @@ final class CruiseArrivalsService {
         Task { await refreshFromRemoteIfNeeded() }
     }
 
+    /// Test seam — builds with a known schedule and performs no disk or
+    /// network I/O, so freshness logic can be tested against fixed dates.
+    init(arrivals: [CruiseArrival]) {
+        self.arrivals = arrivals
+    }
+
     private func load() {
         if let data: [CruiseArrival] = RemoteDataService.loadCachedOrBundled(
             filename: "cruise_arrivals.json",
