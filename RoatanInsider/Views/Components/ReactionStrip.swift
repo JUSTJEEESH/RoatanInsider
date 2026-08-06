@@ -17,7 +17,7 @@ struct ReactionStrip: View {
     @State private var animatedReaction: ReactionsService.Reaction?
 
     var body: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: AppConstants.Space.tight) {
             ForEach(ReactionsService.Reaction.allCases) { reaction in
                 button(for: reaction)
             }
@@ -50,13 +50,13 @@ struct ReactionStrip: View {
                     .scaleEffect(animatedReaction == reaction ? 1.25 : 1.0)
                 if count > 0 {
                     Text("\(count)")
-                        .font(.system(size: 13, weight: .semibold))
+                        .riType(.caption, weight: .semibold)
                         .monospacedDigit()
                 }
             }
             .foregroundStyle(tint)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
+            .padding(.horizontal, AppConstants.Space.snug)
+            .padding(.vertical, AppConstants.Space.tight)
             .background(isOn ? tint.opacity(0.15) : Color.riOffWhite)
             .overlay(
                 Capsule()

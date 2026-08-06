@@ -1,5 +1,16 @@
 import SwiftUI
 
+/// A category, as an icon over its name.
+///
+/// The icon used to sit inside a filled circle. That pattern — a glyph
+/// centred in a tinted disc — is the most machine-made-looking thing in this
+/// app, and a grid of ten of them reads as a component library rather than a
+/// designed screen. The circle is gone; the icon stands on its own, which is
+/// also what the palette rules ask for (categories are told apart by icon,
+/// never by colour).
+///
+/// The tap target keeps the full former footprint even though nothing is
+/// drawn there, so the grid is no harder to hit than it was.
 struct CategoryIcon: View {
     let iconName: String
     let displayName: String
@@ -31,22 +42,20 @@ struct CategoryIcon: View {
     }
 
     var body: some View {
-        VStack(spacing: 8) {
-            ZStack {
-                Circle()
-                    .fill(lightText ? Color.white.opacity(0.1) : Color.riOffWhite)
-                    .frame(width: size, height: size)
-
-                Image(systemName: iconName)
-                    .font(.system(size: size * 0.4, weight: .medium))
-                    .foregroundStyle(lightText ? .white : Color.riDark)
-            }
+        VStack(spacing: AppConstants.Space.snug) {
+            Image(systemName: iconName)
+                .font(.system(size: size * 0.46, weight: .light))
+                .foregroundStyle(lightText ? .white : Color.riDark)
+                .frame(width: size, height: size)
 
             Text(displayName)
-                .font(.riCaption(12))
-                .foregroundStyle(lightText ? Color.riOffWhite : Color.riMediumGray)
+                .riType(.caption)
+                .foregroundStyle(lightText ? Color.white.opacity(0.7) : Color.riMediumGray)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
         }
+        .contentShape(Rectangle())
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(displayName)
     }
 }

@@ -15,32 +15,38 @@ import SwiftUI
 // headline tracking can't drift from one screen to the next.
 
 enum RIType {
+    case figure    // 44/700 — a single number that IS the screen (converters)
     case display   // 34/800 — screen titles, once per screen
     case title     // 24/700 — section headers
     case heading   // 18/600 — card titles, row leads
     case body      // 16/400 — running copy
     case caption   // 14/400 — metadata, supporting detail
     case label     // 12/600 — uppercase kickers, tags
+    case micro     // 11/700 — status badges: LIVE NOW, DON'T MISS
 
     var size: CGFloat {
         switch self {
+        case .figure:  return 44
         case .display: return 34
         case .title:   return 24
         case .heading: return 18
         case .body:    return 16
         case .caption: return 14
         case .label:   return 12
+        case .micro:   return 11
         }
     }
 
     var weight: Font.Weight {
         switch self {
+        case .figure:  return .bold
         case .display: return .heavy
         case .title:   return .bold
         case .heading: return .semibold
         case .body:    return .regular
         case .caption: return .regular
         case .label:   return .semibold
+        case .micro:   return .bold
         }
     }
 
@@ -48,11 +54,13 @@ enum RIType {
     /// correction. Body and caption stay at the system default.
     var tracking: CGFloat {
         switch self {
+        case .figure:  return -1.0
         case .display: return -0.8
         case .title:   return -0.5
         case .heading: return -0.2
         case .body, .caption: return 0
         case .label:   return 1.2
+        case .micro:   return 1.0
         }
     }
 }
@@ -60,8 +68,14 @@ enum RIType {
 extension View {
     /// The only way new code should set type. Applies size, weight and
     /// tracking as a unit.
-    func riType(_ step: RIType) -> some View {
-        font(.system(size: step.size, weight: step.weight))
+    ///
+    /// `weight` overrides the step's default — the escape hatch the scale
+    /// is designed around. A card title in a narrow grid column needs to be
+    /// smaller AND heavier than running copy; the answer is `.body` at
+    /// `.semibold`, not a new 15pt size. Size discipline is what makes the
+    /// screen feel drawn; weight is free.
+    func riType(_ step: RIType, weight: Font.Weight? = nil) -> some View {
+        font(.system(size: step.size, weight: weight ?? step.weight))
             .tracking(step.tracking)
     }
 }

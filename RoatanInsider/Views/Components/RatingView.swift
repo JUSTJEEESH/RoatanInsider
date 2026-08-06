@@ -1,5 +1,8 @@
 import SwiftUI
 
+/// A star and a number. The star is the one place gold is allowed in this
+/// app, per the palette rules — everywhere else is black, white, grey, pink
+/// and mint.
 struct RatingView: View {
     let rating: Double
     var size: CGFloat = 12
@@ -11,8 +14,11 @@ struct RatingView: View {
                 .foregroundStyle(Color.riGoldStar)
 
             Text(String(format: "%.1f", rating))
-                .font(.system(size: size + 1, weight: .medium))
+                .font(.system(size: size + 1, weight: .semibold))
+                .monospacedDigit()
                 .foregroundStyle(Color.riDark)
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Rated \(String(format: "%.1f", rating)) out of 5")
     }
 }

@@ -198,6 +198,14 @@ struct Business: Identifiable, Codable, Hashable {
         status == "active"
     }
 
+    /// Whether we hold real opening hours for this place. `isOpenNow()`
+    /// returns false both for "closed right now" and for "we have no idea",
+    /// which are very different things to tell a visitor — callers that show
+    /// status to a human should check this first.
+    var hasKnownHours: Bool {
+        hours.contains { $0.value != nil }
+    }
+
     func isOpenNow() -> Bool {
         let now = Date()
         let dayKey = now.currentDayKey

@@ -48,9 +48,8 @@ struct BusinessImageView: View {
                         .foregroundStyle(Color.riMint)
 
                     Text(business.categoryDisplayName.uppercased())
-                        .font(.system(size: 11, weight: .semibold))
+                        .riType(.micro)
                         .foregroundStyle(Color.riMint.opacity(0.7))
-                        .tracking(1.5)
                 }
             }
             .aspectRatio(aspectRatio, contentMode: .fill)

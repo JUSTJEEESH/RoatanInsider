@@ -1,9 +1,10 @@
 import SwiftUI
 
-/// Unified empty-state for any list/grid/search result. Three-line UI:
-/// SF Symbol, headline, supporting copy, optional CTA. Replaces the
-/// one-off empty states currently sprinkled across views, each of which
-/// uses slightly different paddings and colours.
+/// Unified empty-state for any list, grid or search result: symbol,
+/// headline, supporting copy, optional CTA.
+///
+/// The symbol is set light and grey rather than large and solid — an empty
+/// state should feel like a quiet room, not an error.
 struct EmptyStateView: View {
     let symbol: String
     let title: String
@@ -12,23 +13,23 @@ struct EmptyStateView: View {
     var ctaAction: (() -> Void)?
 
     var body: some View {
-        VStack(spacing: 14) {
+        VStack(spacing: AppConstants.Space.gutter) {
             Image(systemName: symbol)
-                .font(.system(size: 44, weight: .light))
+                .font(.system(size: 40, weight: .ultraLight))
                 .foregroundStyle(Color.riLightGray)
 
-            VStack(spacing: 6) {
+            VStack(spacing: AppConstants.Space.tight) {
                 Text(title)
-                    .font(.system(size: 18, weight: .semibold))
+                    .riType(.heading)
                     .foregroundStyle(Color.riDark)
                     .multilineTextAlignment(.center)
 
                 Text(message)
-                    .font(.riBody)
-                    .foregroundStyle(Color.riLightGray)
+                    .riType(.caption)
+                    .foregroundStyle(Color.riMediumGray)
                     .multilineTextAlignment(.center)
                     .lineSpacing(3)
-                    .padding(.horizontal, 24)
+                    .frame(maxWidth: 320)
             }
 
             if let ctaLabel, let ctaAction {
@@ -37,18 +38,18 @@ struct EmptyStateView: View {
                     ctaAction()
                 } label: {
                     Text(ctaLabel)
-                        .font(.riButton)
+                        .riType(.body, weight: .semibold)
                         .foregroundStyle(.white)
-                        .padding(.horizontal, 24)
+                        .padding(.horizontal, AppConstants.Space.gutter + 4)
                         .frame(height: AppConstants.buttonHeight)
                         .background(Color.riPink)
-                        .clipShape(RoundedRectangle(cornerRadius: AppConstants.buttonCornerRadius))
+                        .clipShape(RoundedRectangle(cornerRadius: AppConstants.Radius.card, style: .continuous))
                 }
-                .padding(.top, 8)
+                .padding(.top, AppConstants.Space.hair)
             }
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 60)
-        .padding(.horizontal, 20)
+        .padding(.horizontal, AppConstants.Space.gutter)
     }
 }
