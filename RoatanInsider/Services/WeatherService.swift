@@ -22,6 +22,38 @@ final class WeatherService {
         var uvIndex: Double
         var waveHeightMeters: Double?
         var fetchedAt: Date
+        /// The next day or so, hour by hour. Empty on a cache written by an
+        /// older build, which is why every reader guards for it.
+        var hourly: [HourPoint] = []
+        /// Today onward. Empty for the same reason.
+        var daily: [DayPoint] = []
+    }
+
+    /// One hour of forecast. The rain chance is the reason this exists: on
+    /// Roatán the question that actually changes plans is whether the
+    /// afternoon squall lands before the boat goes out, and no single
+    /// "current conditions" number can answer it.
+    struct HourPoint: Codable, Equatable, Identifiable {
+        var time: Date
+        var temperatureF: Double
+        var precipitationChance: Int
+        var weatherCode: Int
+
+        var id: Date { time }
+        var symbol: String { WeatherService.weatherSymbol(code: weatherCode, at: time) }
+    }
+
+    struct DayPoint: Codable, Equatable, Identifiable {
+        var date: Date
+        var highF: Double
+        var lowF: Double
+        var precipitationChance: Int
+        var weatherCode: Int
+        var uvIndexMax: Double
+
+        var id: Date { date }
+        var symbol: String { WeatherService.weatherSymbol(code: weatherCode) }
+        var summary: String { WeatherService.weatherDescription(code: weatherCode) }
     }
 
     private(set) var conditions: Conditions?
@@ -66,7 +98,9 @@ final class WeatherService {
             windKph: f.windKph,
             uvIndex: f.uvIndex,
             waveHeightMeters: m?.waveHeightMeters,
-            fetchedAt: .now
+            fetchedAt: .now,
+            hourly: f.hourly,
+            daily: f.daily
         )
         conditions = snapshot
         persist(snapshot)
@@ -168,8 +202,44 @@ final class WeatherService {
             let wind_speed_10m: Double
             let uv_index: Double?
         }
+        struct Hourly: Decodable {
+            let time: [String]
+            let temperature_2m: [Double]
+            let precipitation_probability: [Int?]
+            let weather_code: [Int]
+        }
+        struct Daily: Decodable {
+            let time: [String]
+            let weather_code: [Int]
+            let temperature_2m_max: [Double]
+            let temperature_2m_min: [Double]
+            let precipitation_probability_max: [Int?]
+            let uv_index_max: [Double?]
+        }
         let current: Current
+        let hourly: Hourly?
+        let daily: Daily?
     }
+
+    /// Open-Meteo returns local wall-clock stamps with no offset when asked
+    /// for `timezone=auto`, so they're parsed against island time rather than
+    /// the device's — otherwise a visitor still on New York time would see
+    /// the strip shifted an hour.
+    private static let apiDateFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "yyyy-MM-dd'T'HH:mm"
+        f.locale = Locale(identifier: "en_US_POSIX")
+        f.timeZone = TimeZone(identifier: "America/Tegucigalpa")
+        return f
+    }()
+
+    private static let apiDayFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "yyyy-MM-dd"
+        f.locale = Locale(identifier: "en_US_POSIX")
+        f.timeZone = TimeZone(identifier: "America/Tegucigalpa")
+        return f
+    }()
 
     private struct MarineResponse: Decodable {
         struct Current: Decodable {
@@ -183,6 +253,8 @@ final class WeatherService {
         let weatherCode: Int
         let windKph: Double
         let uvIndex: Double
+        let hourly: [HourPoint]
+        let daily: [DayPoint]
     }
 
     private func fetchForecast() async -> ForecastTuple? {
@@ -191,6 +263,9 @@ final class WeatherService {
             URLQueryItem(name: "latitude", value: "16.33"),
             URLQueryItem(name: "longitude", value: "-86.52"),
             URLQueryItem(name: "current", value: "temperature_2m,weather_code,wind_speed_10m,uv_index"),
+            URLQueryItem(name: "hourly", value: "temperature_2m,precipitation_probability,weather_code"),
+            URLQueryItem(name: "daily", value: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,uv_index_max"),
+            URLQueryItem(name: "forecast_days", value: "7"),
             URLQueryItem(name: "temperature_unit", value: "fahrenheit"),
             URLQueryItem(name: "wind_speed_unit", value: "kmh"),
             URLQueryItem(name: "timezone", value: "auto"),
@@ -203,11 +278,51 @@ final class WeatherService {
                 temperatureF: decoded.current.temperature_2m,
                 weatherCode: decoded.current.weather_code,
                 windKph: decoded.current.wind_speed_10m,
-                uvIndex: decoded.current.uv_index ?? 0
+                uvIndex: decoded.current.uv_index ?? 0,
+                hourly: Self.hourPoints(from: decoded.hourly),
+                daily: Self.dayPoints(from: decoded.daily)
             )
         } catch {
             AppLog.network.warning("Weather forecast fetch failed: \(error.localizedDescription)")
             return nil
+        }
+    }
+
+    /// Zips the parallel arrays Open-Meteo returns into points, dropping any
+    /// row whose arrays don't line up rather than trusting an index.
+    private static func hourPoints(from hourly: ForecastResponse.Hourly?) -> [HourPoint] {
+        guard let hourly else { return [] }
+        let count = min(hourly.time.count, hourly.temperature_2m.count, hourly.weather_code.count)
+        return (0..<count).compactMap { i in
+            guard let time = apiDateFormatter.date(from: hourly.time[i]) else { return nil }
+            let chance = i < hourly.precipitation_probability.count
+                ? (hourly.precipitation_probability[i] ?? 0) : 0
+            return HourPoint(
+                time: time,
+                temperatureF: hourly.temperature_2m[i],
+                precipitationChance: chance,
+                weatherCode: hourly.weather_code[i]
+            )
+        }
+    }
+
+    private static func dayPoints(from daily: ForecastResponse.Daily?) -> [DayPoint] {
+        guard let daily else { return [] }
+        let count = min(
+            daily.time.count, daily.weather_code.count,
+            daily.temperature_2m_max.count, daily.temperature_2m_min.count
+        )
+        return (0..<count).compactMap { i in
+            guard let date = apiDayFormatter.date(from: daily.time[i]) else { return nil }
+            return DayPoint(
+                date: date,
+                highF: daily.temperature_2m_max[i],
+                lowF: daily.temperature_2m_min[i],
+                precipitationChance: i < daily.precipitation_probability_max.count
+                    ? (daily.precipitation_probability_max[i] ?? 0) : 0,
+                weatherCode: daily.weather_code[i],
+                uvIndexMax: i < daily.uv_index_max.count ? (daily.uv_index_max[i] ?? 0) : 0
+            )
         }
     }
 
@@ -238,7 +353,7 @@ final class WeatherService {
 
     // MARK: - WMO weather codes
 
-    private static func weatherDescription(code: Int) -> String {
+    static func weatherDescription(code: Int) -> String {
         switch code {
         case 0:        return "Clear"
         case 1, 2:     return "Mostly sunny"
@@ -256,10 +371,18 @@ final class WeatherService {
         }
     }
 
-    private static func weatherSymbol(code: Int) -> String {
+    /// `at` lets a night-time hour use the moon variants, which is the
+    /// detail that separates a weather view that looks made from one that
+    /// looks generated.
+    static func weatherSymbol(code: Int, at date: Date? = nil) -> String {
+        let isNight: Bool = {
+            guard let date else { return false }
+            let hour = Calendar.current.component(.hour, from: date)
+            return hour < 6 || hour >= 18
+        }()
         switch code {
-        case 0:        return "sun.max.fill"
-        case 1, 2:     return "cloud.sun.fill"
+        case 0:        return isNight ? "moon.stars.fill" : "sun.max.fill"
+        case 1, 2:     return isNight ? "cloud.moon.fill" : "cloud.sun.fill"
         case 3:        return "cloud.fill"
         case 45, 48:   return "cloud.fog.fill"
         case 51...57:  return "cloud.drizzle.fill"

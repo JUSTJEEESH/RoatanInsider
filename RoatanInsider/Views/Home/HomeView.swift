@@ -35,6 +35,9 @@ struct HomeView: View {
                 LazyVStack(spacing: 0) {
                     HomeHeader()
 
+                    ConditionsBand()
+                        .padding(.top, AppConstants.Space.gutter)
+
                     TodaySection(showCruiseMode: $showCruiseMode)
                         .padding(.top, AppConstants.Space.block)
 
@@ -76,6 +79,9 @@ struct HomeView: View {
             }
             .navigationDestination(for: HappyHourDestination.self) { _ in
                 HappyHourListView()
+            }
+            .navigationDestination(for: WeatherDestination.self) { _ in
+                WeatherDetailView()
             }
             .navigationDestination(for: Event.self) { event in
                 EventDetailView(event: event)

@@ -10,6 +10,9 @@
 		42DAAE51963B489A9F759DC3 /* HomeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD0FC2E674C429A8B2BE55D /* HomeHeader.swift */; };
 		C8BAD5815432495A8847DF77 /* TodaySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E51D8B01B478B90EC5805 /* TodaySection.swift */; };
 		EE66FF77880099AA11220501 /* HappyHourListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220502 /* HappyHourListView.swift */; };
+		EE66FF77880099AA11220701 /* ConditionsBand.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220702 /* ConditionsBand.swift */; };
+		EE66FF77880099AA11220703 /* WeatherDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220704 /* WeatherDetailView.swift */; };
+		EE66FF77880099AA11220705 /* SunArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220706 /* SunArcView.swift */; };
 		2F39ACADB90F437997447186 /* InsiderPickSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66090DD8DED94CCA85443C05 /* InsiderPickSection.swift */; };
 		55A42DC7672A466D8A94AA04 /* BrowseSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8688C1F4645D45CFBAA41583 /* BrowseSection.swift */; };
 		3C0C78D683504971B0FF0150 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8463608BC840E082358A6A /* Event.swift */; };
@@ -176,6 +179,9 @@
 		1FD0FC2E674C429A8B2BE55D /* HomeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeader.swift; sourceTree = "<group>"; };
 		7C7E51D8B01B478B90EC5805 /* TodaySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySection.swift; sourceTree = "<group>"; };
 		EE66FF77880099AA11220502 /* HappyHourListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappyHourListView.swift; sourceTree = "<group>"; };
+		EE66FF77880099AA11220702 /* ConditionsBand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionsBand.swift; sourceTree = "<group>"; };
+		EE66FF77880099AA11220704 /* WeatherDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailView.swift; sourceTree = "<group>"; };
+		EE66FF77880099AA11220706 /* SunArcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunArcView.swift; sourceTree = "<group>"; };
 		66090DD8DED94CCA85443C05 /* InsiderPickSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsiderPickSection.swift; sourceTree = "<group>"; };
 		8688C1F4645D45CFBAA41583 /* BrowseSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseSection.swift; sourceTree = "<group>"; };
 		4D8463608BC840E082358A6A /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -575,6 +581,7 @@
 				471578CBB5CA3667CA526A32 /* Guides */,
 				C7D2D58D9C6C442B9D816BF2 /* Events */,
 				FACFED56E433978F4BC60FB2 /* Home */,
+				EE66FF77880099AA11220710 /* Weather */,
 				6102130A33B29F5DBD4CF5FB /* Map */,
 				AA22BB33CC44DD55EE66FF30 /* Onboarding */,
 				C1A2B3D4E5F60013003 /* Paywall */,
@@ -671,12 +678,22 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
+		EE66FF77880099AA11220710 /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				EE66FF77880099AA11220704 /* WeatherDetailView.swift */,
+				EE66FF77880099AA11220706 /* SunArcView.swift */,
+			);
+			path = Weather;
+			sourceTree = "<group>";
+		};
 		FACFED56E433978F4BC60FB2 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				1FD0FC2E674C429A8B2BE55D /* HomeHeader.swift */,
 				7C7E51D8B01B478B90EC5805 /* TodaySection.swift */,
 				EE66FF77880099AA11220502 /* HappyHourListView.swift */,
+				EE66FF77880099AA11220702 /* ConditionsBand.swift */,
 				66090DD8DED94CCA85443C05 /* InsiderPickSection.swift */,
 				8688C1F4645D45CFBAA41583 /* BrowseSection.swift */,
 				89B179D5893C4B629DFABB04 /* TonightSection.swift */,
@@ -844,6 +861,9 @@
 				42DAAE51963B489A9F759DC3 /* HomeHeader.swift in Sources */,
 				C8BAD5815432495A8847DF77 /* TodaySection.swift in Sources */,
 				EE66FF77880099AA11220501 /* HappyHourListView.swift in Sources */,
+				EE66FF77880099AA11220701 /* ConditionsBand.swift in Sources */,
+				EE66FF77880099AA11220703 /* WeatherDetailView.swift in Sources */,
+				EE66FF77880099AA11220705 /* SunArcView.swift in Sources */,
 				2F39ACADB90F437997447186 /* InsiderPickSection.swift in Sources */,
 				55A42DC7672A466D8A94AA04 /* BrowseSection.swift in Sources */,
 				3C0C78D683504971B0FF0150 /* Event.swift in Sources */,
