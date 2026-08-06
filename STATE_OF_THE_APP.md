@@ -12,15 +12,17 @@ this document is now on `main`. Changes since:
   day" while ships were in port. The scraper now reads Keith's public
   Google Sheet (`cruise_schedule` tab) directly via the gviz JSON API —
   structured data, no HTML parsing — with the HTML scrape kept as fallback.
-  Runs twice daily (09:00/15:00 UTC). `CruiseArrivalsService.hasCurrentData`
-  now gates the Home card: stale data hides the section instead of lying.
+  Runs twice daily (11:30/23:30 UTC = island 05:30 and 17:30).
+  `CruiseArrivalsService.hasCurrentData` now gates the Home card: stale data
+  hides the section instead of lying.
 - **Music/events pipeline built.** New `scrape-music-events` Edge Function
   pulls the weekly schedule from Blue Wave Radio's Roatán Music Scene
   (Keith's Apps Script JSONP feed — the same data the website renders),
-  normalizes it to the `Event` schema, and publishes `events.json` twice
-  daily (09:10/15:10 UTC). `EventsService` now refreshes from remote like
-  the cruise service. Josh's "Don't Miss" curation is preserved as a
-  featured overlay inside the scraper. 72 events live as of today.
+  normalizes it to the `Event` schema, and publishes `events.json` every two
+  hours (`10 */2 * * *` UTC). `EventsService` refreshes at launch, on every
+  return to foreground, and on pull-to-refresh. Josh's "Don't Miss" curation
+  is preserved as a featured overlay inside the scraper. 71 events live as
+  of today.
 - **Pipeline health is observable:** both scrapers write public
   `cruise_status.json` / `music_status.json` to the `app-data` bucket on
   every run, and refuse to overwrite good data with empty parses (debug

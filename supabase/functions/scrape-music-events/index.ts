@@ -16,7 +16,11 @@
 // `app-data/music_debug.txt` for inspection. Either way, write
 // `app-data/music_status.json` so pipeline health is observable.
 //
-// Trigger: pg_cron, daily at 09:10 and 15:10 UTC.
+// Trigger: pg_cron, every two hours (10 */2 * * *, UTC). It used to run
+// twice a day at 09:10 and 15:10 UTC — island 03:10 and 09:10 — so the last
+// read of the island day happened mid-morning and nothing Keith changed
+// afterwards reached a phone until 3am the next morning. Live music is an
+// evening product; the schedule has to keep up through the evening.
 //
 // Deploy: supabase functions deploy scrape-music-events
 
@@ -42,6 +46,7 @@ interface AppEvent {
   featured: boolean;
   contact: string | null;
   active: boolean;
+  lastUpdated: string;     // "yyyy-MM-dd" island date this row was scraped
 }
 
 // --- Source ------------------------------------------------------------------
@@ -300,6 +305,7 @@ function parseItem(day: string, dataArea: string, itemHtml: string): AppEvent | 
     featured,
     contact,
     active: true,
+    lastUpdated: islandToday(),
   };
 }
 
@@ -332,15 +338,38 @@ const MONTH_NUM: Record<string, number> = {
   jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12,
 };
 
-/// "5" + "Aug" → "2026-08-05". Year inferred: month >= current month →
-/// this year, otherwise next year (island time).
+/// "5" + "Aug" → "2026-08-05".
+///
+/// Keith's day-month tags carry no year, so we pick the candidate year whose
+/// date lands closest to today. Rolling forward whenever the month is behind
+/// the current one — the obvious rule — puts a 30-Aug booking read on 1 Sep
+/// a full year into the future, where it would sit in the app as a confident
+/// wrong answer until someone noticed.
 function dayMonthToIso(day: number, monthName: string): string | null {
   const month = MONTH_NUM[monthName.slice(0, 3).toLowerCase()];
   if (!month || day < 1 || day > 31) return null;
-  const now = new Date();
-  const currentMonth = now.getMonth() + 1;
-  const year = month >= currentMonth ? now.getFullYear() : now.getFullYear() + 1;
-  return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+  const today = islandToday();
+  const thisYear = Number(today.slice(0, 4));
+  let best: string | null = null;
+  let bestGap = Infinity;
+  for (const year of [thisYear - 1, thisYear, thisYear + 1]) {
+    const iso = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    const gap = Math.abs(Date.parse(`${iso}T00:00:00Z`) - Date.parse(`${today}T00:00:00Z`));
+    if (Number.isFinite(gap) && gap < bestGap) {
+      bestGap = gap;
+      best = iso;
+    }
+  }
+  return best;
+}
+
+/// Today's date on Roatán as "yyyy-MM-dd". The island is UTC-6 year round —
+/// no daylight saving — and the function runs in UTC, so a naive `new Date()`
+/// is on tomorrow's date for the six hours after island 18:00.
+function islandToday(): string {
+  const island = new Date(Date.now() - 6 * 3600 * 1000);
+  return island.toISOString().slice(0, 10);
 }
 
 function slug(s: string): string {
@@ -384,15 +413,30 @@ async function writeStatus(ok: boolean, detail: Record<string, unknown>): Promis
 Deno.serve(async (_req) => {
   try {
     const html = await fetchScheduleHtml();
-    const events = parseEvents(html);
+    const parsed = parseEvents(html);
 
-    if (events.length < MIN_EVENTS) {
-      console.error(`Parsed only ${events.length} events (min ${MIN_EVENTS}) — aborting, not overwriting.`);
+    // Health check on the raw parse, before any filtering — this is the
+    // signal that Keith's markup changed under us.
+    if (parsed.length < MIN_EVENTS) {
+      console.error(`Parsed only ${parsed.length} events (min ${MIN_EVENTS}) — aborting, not overwriting.`);
       try { await upload("music_debug.txt", html, "text/plain"); } catch (e) {
         console.error(`Debug upload failed: ${e}`);
       }
-      await writeStatus(false, { count: events.length, error: `Parsed ${events.length} events; below safety floor of ${MIN_EVENTS}. Debug payload uploaded.` });
-      throw new Error(`Parsed only ${events.length} events. Source markup may have changed.`);
+      await writeStatus(false, { count: parsed.length, error: `Parsed ${parsed.length} events; below safety floor of ${MIN_EVENTS}. Debug payload uploaded.` });
+      throw new Error(`Parsed only ${parsed.length} events. Source markup may have changed.`);
+    }
+
+    // A dated booking whose night has passed is finished, and Keith's week
+    // fragment keeps showing it for a while. Drop it here so it can never
+    // reach a phone — a one-off that already happened is the exact kind of
+    // wrong answer that costs someone an evening.
+    const today = islandToday();
+    const events = parsed.filter((e) => e.date === null || e.date >= today);
+    const dropped = parsed.length - events.length;
+
+    if (events.length < MIN_EVENTS) {
+      await writeStatus(false, { count: events.length, dropped, error: "Too few events left after dropping past dates — not overwriting." });
+      throw new Error(`Only ${events.length} events remain after dropping ${dropped} past dates.`);
     }
 
     await upload("events.json", JSON.stringify(events, null, 2), "application/json");
@@ -402,6 +446,8 @@ Deno.serve(async (_req) => {
       dated: events.filter((e) => e.date !== null).length,
       featured: events.filter((e) => e.featured).length,
       cruiseDayOnly: events.filter((e) => e.cruiseShipDayOnly).length,
+      droppedPastDated: dropped,
+      islandDate: today,
     };
     await writeStatus(true, summary);
 

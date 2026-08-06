@@ -33,10 +33,44 @@ struct EventsListView: View {
                 } else {
                     resultsList
                 }
+
+                freshnessFooter
             }
+        }
+        .refreshable {
+            await events.refreshNow()
         }
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.riWhite)
+    }
+
+    /// Says plainly where the schedule came from and how old it is. Keith
+    /// updates the source through the day, so a week-old copy is a real
+    /// possibility offline — better to admit it than to let the reader
+    /// assume every line is confirmed.
+    private var freshnessFooter: some View {
+        VStack(spacing: 4) {
+            Text("Schedule from Blue Wave Radio's Roatán Music Scene")
+                .font(.system(size: 11))
+                .foregroundStyle(Color.riLightGray)
+
+            Text(freshnessLine)
+                .font(.system(size: 11))
+                .foregroundStyle(Color.riLightGray)
+        }
+        .multilineTextAlignment(.center)
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 20)
+        .padding(.bottom, 28)
+    }
+
+    private var freshnessLine: String {
+        guard let updated = events.lastRefreshed else {
+            return "Offline copy — pull down to update."
+        }
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .full
+        return "Updated \(formatter.localizedString(for: updated, relativeTo: .now)) · pull down to refresh"
     }
 
     @ViewBuilder

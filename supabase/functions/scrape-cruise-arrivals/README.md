@@ -45,9 +45,14 @@ Ports are assigned by cruise line: Carnival ships dock at Mahogany Bay
 
 ## Schedule
 
-pg_cron job `cruise-arrivals-daily`, `0 9,15 * * *` (09:00 + 15:00 UTC =
-03:00 + 09:00 island time). Two runs a day so a transient failure self-heals
+pg_cron job `cruise-arrivals-daily`, `30 11,23 * * *` (11:30 + 23:30 UTC =
+05:30 + 17:30 island time). Two runs a day so a transient failure self-heals
 the same day.
+
+The season schedule barely moves, so twice daily is plenty — but the timing
+matters. 05:30 island lands before the first ships dock; 17:30 picks up any
+correction made during the working day, rather than parking it until 3am as
+the old `0 9,15` slots did.
 
 ## History / when it breaks
 

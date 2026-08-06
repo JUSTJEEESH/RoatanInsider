@@ -148,7 +148,9 @@ struct RoatanInsiderApp: App {
             .onChange(of: scenePhase) { _, phase in
                 // The app lives in memory for days between opens — refresh
                 // the live-data surfaces on every return to foreground, not
-                // just at cold launch. Each fetch throttles itself (6h).
+                // just at cold launch. Each fetch throttles itself: hourly
+                // for events, which change through the day, six-hourly for
+                // the cruise schedule, which does not.
                 guard phase == .active else { return }
                 Task { await eventsService.refreshFromRemoteIfNeeded() }
                 Task { await cruiseArrivalsService.refreshFromRemoteIfNeeded() }

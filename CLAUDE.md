@@ -31,12 +31,16 @@ actual code win. See `STATE_OF_THE_APP.md` for the full picture.
 - **Live data pipelines** (Supabase Edge Functions + pg_cron, docs in
   `supabase/functions/*/README.md`):
   - `scrape-cruise-arrivals` → `cruise_arrivals.json` — reads Keith Roberts'
-    public Google Sheet (theroatandirectory.com's data source), twice daily.
+    public Google Sheet (theroatandirectory.com's data source), twice daily
+    at island 05:30 and 17:30.
     Feeds "Ships in Port Today" on Home. The section hides itself if data
     goes stale — never claim a "quiet day" from stale data.
   - `scrape-music-events` → `events.json` — reads Blue Wave Radio's Roatán
     Music Scene feed (bluewaveradio.live/roatanmusicscene, Keith's Apps
-    Script), twice daily. Feeds the Tonight section and Events list.
+    Script), every two hours. Feeds the Tonight section and Events list.
+    Dated one-off bookings supersede the recurring weekly slot at the same
+    venue and time; past-dated rows are dropped by the scraper and again by
+    `EventsService`, so a gig that already happened cannot resurface.
   - Both write public `*_status.json` health files; both refuse to overwrite
     good data with empty parses.
   - `generate-itinerary` — Claude Sonnet via Edge Function for Trip planning.

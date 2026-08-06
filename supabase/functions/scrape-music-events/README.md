@@ -59,8 +59,16 @@ Parsing details worth knowing:
 
 ## Schedule
 
-pg_cron job `music-events-daily`, `10 9,15 * * *` (09:10 + 15:10 UTC =
-03:10 + 09:10 island time), calling the function via `net.http_post`.
+pg_cron job `music-events-daily`, `10 */2 * * *` — every two hours, UTC —
+calling the function via `net.http_post`.
+
+It used to run twice a day on `10 9,15 * * *`, which is island 03:10 and
+09:10. The last read of the island day was therefore mid-morning, so
+anything Keith changed after breakfast — which is most of what changes,
+including that evening's lineup — did not reach a phone until 3am the next
+morning. Live music is an evening product. Two-hourly caps the worst case at
+about two hours behind the source, and the app's own hourly refresh puts the
+end-to-end worst case around three.
 
 ## When it breaks
 

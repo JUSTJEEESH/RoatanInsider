@@ -6,16 +6,40 @@ import Observation
 ///
 /// Source of truth is Blue Wave Radio's Roatán Music Scene
 /// (bluewaveradio.live/roatanmusicscene): the `scrape-music-events` Edge
-/// Function regenerates `app-data/events.json` from it daily, and this
-/// service pulls the fresh copy at most every 6 hours. The bundled file
-/// is the offline / first-launch fallback.
+/// Function regenerates `app-data/events.json` from it every two hours, and
+/// this service pulls the fresh copy on every return to foreground, at most
+/// hourly. The bundled file is the offline / first-launch fallback.
+///
+/// Keith's feed carries two kinds of row. Most are recurring weekly slots
+/// ("Sundowners, every Wednesday, 7pm") — the skeleton of the week. The rest
+/// are dated one-offs carrying who is actually booked on a specific night.
+/// A dated row for a slot supersedes the recurring row for the same venue and
+/// time: it names this week's act where the recurring row only names the slot.
 @Observable
 final class EventsService {
     private(set) var events: [Event] = []
 
+    /// When the schedule was last pulled from Supabase. Nil means we have
+    /// never reached the network on this device and are running on the
+    /// bundled copy.
+    private(set) var lastRefreshed: Date?
+
+    /// How long a fetched schedule is considered fresh. The scraper runs
+    /// every two hours, so an hour here means a visitor who reopens the app
+    /// is never looking at data more than about three hours behind Keith.
+    private static let refreshInterval: TimeInterval = 3600
+
     init() {
         load()
+        lastRefreshed = Self.storedRefreshDate()
         Task { await refreshFromRemoteIfNeeded() }
+    }
+
+    /// Seam for tests: a service holding an explicit schedule, with no disk
+    /// read and no network. Everything below takes an explicit `now`, so a
+    /// test can state both the week and the day it is being read on.
+    init(events: [Event]) {
+        self.events = events.filter { $0.isActive }
     }
 
     private func load() {
@@ -26,33 +50,92 @@ final class EventsService {
         }
     }
 
-    /// Pulls a fresh copy from Supabase Storage if our cache is >6h old.
+    /// Pulls a fresh copy from Supabase Storage if our cache is over an hour
+    /// old. Called at launch and on every return to foreground.
     func refreshFromRemoteIfNeeded() async {
+        await refresh(maxAge: Self.refreshInterval)
+    }
+
+    /// Unconditional refetch, for pull-to-refresh. Ignores the throttle:
+    /// a visitor who deliberately pulls is telling us they doubt the screen.
+    func refreshNow() async {
+        await refresh(maxAge: 0)
+    }
+
+    private func refresh(maxAge: TimeInterval) async {
         if let fresh: [Event] = await RemoteDataService.fetchLatest(
             filename: "events.json",
+            maxAge: maxAge,
             type: [Event].self
         ) {
-            await MainActor.run { self.events = fresh.filter { $0.isActive } }
+            await MainActor.run {
+                self.events = fresh.filter { $0.isActive }
+                self.lastRefreshed = Self.storedRefreshDate()
+            }
         }
+    }
+
+    private static func storedRefreshDate() -> Date? {
+        let stamp = UserDefaults.standard.double(forKey: "remoteDataLastFetch_events.json")
+        return stamp > 0 ? Date(timeIntervalSince1970: stamp) : nil
+    }
+
+    // MARK: - Resolving a day
+
+    /// The calendar date the given weekday next falls on, counting today as
+    /// day zero. "Friday" on a Friday means today, not next week.
+    static func nextDate(of day: Weekday, from now: Date, calendar: Calendar = .current) -> Date {
+        let daysAhead = (day.calendarWeekday - calendar.component(.weekday, from: now) + 7) % 7
+        let today = calendar.startOfDay(for: now)
+        return calendar.date(byAdding: .day, value: daysAhead, to: today) ?? today
+    }
+
+    private static func slotKey(_ event: Event) -> String {
+        "\(event.venue.lowercased())|\(event.startTime)"
+    }
+
+    /// Everything on for the given weekday, resolved against the actual date
+    /// that weekday falls on this coming week.
+    ///
+    /// Dated rows are matched by date, so a one-off that has already been and
+    /// gone can never reappear — and where a dated row and a recurring row
+    /// claim the same venue and time, the dated one wins.
+    private func resolved(for day: Weekday, now: Date, calendar: Calendar = .current) -> [Event] {
+        let target = Self.nextDate(of: day, from: now, calendar: calendar)
+        let candidates = events.filter { event in
+            if let date = event.date {
+                return calendar.isDate(date, inSameDayAs: target)
+            }
+            return event.isRecurring && event.day == day
+        }
+        let supersededSlots = Set(candidates.compactMap { $0.date != nil ? Self.slotKey($0) : nil })
+        return candidates.filter { $0.date != nil || !supersededSlots.contains(Self.slotKey($0)) }
+    }
+
+    /// The next seven days of schedule, resolved and deduped — today first.
+    /// This is "the week" everywhere the UI says the week.
+    func upcomingWeek(now: Date = .now) -> [Event] {
+        let calendar = Calendar.current
+        guard let today = Weekday.from(calendarWeekday: calendar.component(.weekday, from: now)) else {
+            return []
+        }
+        let order = Weekday.allCases.sorted {
+            ($0.calendarWeekday - today.calendarWeekday + 7) % 7
+                < ($1.calendarWeekday - today.calendarWeekday + 7) % 7
+        }
+        return order.flatMap { resolved(for: $0, now: now, calendar: calendar) }
     }
 
     // MARK: - Queries
 
     /// Events happening today. Featured 'Don't Miss' events bubble to the
-    /// top; the rest sort by start time. When Keith lists both a recurring
-    /// slot and a dated booking for the same venue and time, the dated one
-    /// wins (it's this week's specific act).
+    /// top; the rest sort by start time.
     func eventsToday(now: Date = .now) -> [Event] {
-        guard let today = Weekday.today else { return [] }
-        let todays = events.filter {
-            $0.isRecurring && $0.day == today || ($0.date.map(Calendar.current.isDateInToday) ?? false)
+        let calendar = Calendar.current
+        guard let today = Weekday.from(calendarWeekday: calendar.component(.weekday, from: now)) else {
+            return []
         }
-        let datedSlots = Set(todays.compactMap { e in
-            e.date != nil ? "\(e.venue.lowercased())|\(e.startTime)" : nil
-        })
-        return todays
-            .filter { $0.date != nil || !datedSlots.contains("\($0.venue.lowercased())|\($0.startTime)") }
-            .sorted(by: Self.featuredFirst)
+        return resolved(for: today, now: now, calendar: calendar).sorted(by: Self.featuredFirst)
     }
 
     /// Events in progress right now — started, and still inside their run
@@ -89,27 +172,25 @@ final class EventsService {
               let day = Weekday.from(calendarWeekday: calendar.component(.weekday, from: tomorrow)) else {
             return []
         }
-        let tomorrows = events.filter {
-            $0.isRecurring && $0.day == day || ($0.date.map { calendar.isDate($0, inSameDayAs: tomorrow) } ?? false)
-        }
+        let tomorrows = resolved(for: day, now: now, calendar: calendar)
         return Array(tomorrows.sorted { $0.startTime < $1.startTime }.prefix(limit))
     }
 
-    /// All upcoming events across the next 7 days, sorted by occurrence.
+    /// All upcoming events across the next 7 days, paired with the date they
+    /// land on. Occurrences already past are dropped.
     func eventsThisWeek(now: Date = .now) -> [(date: Date, event: Event)] {
         let calendar = Calendar.current
-        return events.compactMap { event -> (Date, Event)? in
-            guard let next = event.nextOccurrence(after: now, calendar: calendar) else { return nil }
+        return upcomingWeek(now: now).compactMap { event -> (Date, Event)? in
+            guard let next = event.nextOccurrence(after: now, calendar: calendar),
+                  next >= calendar.startOfDay(for: now) else { return nil }
             let daysAhead = calendar.dateComponents([.day], from: now, to: next).day ?? 0
             return daysAhead < 7 ? (next, event) : nil
         }
         .sorted { $0.0 < $1.0 }
     }
 
-    func events(for day: Weekday) -> [Event] {
-        events
-            .filter { $0.isRecurring && $0.day == day }
-            .sorted(by: Self.featuredFirst)
+    func events(for day: Weekday, now: Date = .now) -> [Event] {
+        resolved(for: day, now: now).sorted(by: Self.featuredFirst)
     }
 
     /// Featured events bubble up; everything else sorts by start time.
@@ -118,22 +199,23 @@ final class EventsService {
         return a.startTime < b.startTime
     }
 
-    func events(in category: EventCategory) -> [Event] {
-        events.filter { $0.category == category }
+    func events(in category: EventCategory, now: Date = .now) -> [Event] {
+        upcomingWeek(now: now).filter { $0.category == category }
     }
 
-    func events(inArea area: String) -> [Event] {
-        events.filter { $0.area.caseInsensitiveCompare(area) == .orderedSame }
+    func events(inArea area: String, now: Date = .now) -> [Event] {
+        upcomingWeek(now: now).filter { $0.area.caseInsensitiveCompare(area) == .orderedSame }
     }
 
     /// Unified filter+search. If `query` or `category` is non-empty, returns
-    /// matching events across ALL weekdays. Otherwise scopes by the
+    /// matching events across the whole coming week. Otherwise scopes by the
     /// passed-in day.
-    func filtered(query: String, category: EventCategory?, day: Weekday?) -> [Event] {
+    func filtered(query: String, category: EventCategory?, day: Weekday?, now: Date = .now) -> [Event] {
         let hasActiveFilter = !query.isEmpty || category != nil
-        var result = events.filter { $0.isRecurring }
+        var result: [Event]
 
         if hasActiveFilter {
+            result = upcomingWeek(now: now)
             if let category {
                 result = result.filter { $0.category == category }
             }
@@ -148,16 +230,18 @@ final class EventsService {
                 }
             }
         } else if let day {
-            result = result.filter { $0.day == day }
+            result = resolved(for: day, now: now)
+        } else {
+            result = upcomingWeek(now: now)
         }
 
         return result.sorted(by: Self.featuredFirst)
     }
 
-    /// The set of categories that actually appear in the loaded events —
-    /// avoids showing filter chips that match nothing.
-    func availableCategories() -> [EventCategory] {
-        let present = Set(events.compactMap { $0.isRecurring ? $0.category : nil })
+    /// The set of categories that actually appear this week — avoids showing
+    /// filter chips that match nothing.
+    func availableCategories(now: Date = .now) -> [EventCategory] {
+        let present = Set(upcomingWeek(now: now).map(\.category))
         return EventCategory.allCases.filter { present.contains($0) }
     }
 }
