@@ -4,22 +4,11 @@ import MapKit
 struct SafetyCardView: View {
     var body: some View {
         VStack(spacing: 0) {
-            // Header
-            VStack(spacing: 8) {
-                Image(systemName: "shield.checkered")
-                    .font(.system(size: 36, weight: .medium))
-                    .foregroundStyle(Color.riMint)
-
-                Text("Emergency & Safety")
-                    .font(.system(size: 22, weight: .bold))
-                    .foregroundStyle(Color.riDark)
-
-                Text("Keep this handy — just in case.")
-                    .font(.riCaption(14))
-                    .foregroundStyle(Color.riMediumGray)
-            }
-            .padding(.top, 28)
-            .padding(.bottom, 24)
+            ToolHeader(
+                icon: "shield.checkered",
+                title: "Emergency & Safety",
+                subtitle: "Keep this handy — just in case."
+            )
 
             VStack(spacing: 16) {
                 // Emergency numbers

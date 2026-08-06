@@ -2,27 +2,17 @@ import SwiftUI
 
 struct PhrasesView: View {
     @State private var speechService = SpeechService()
-    @State private var expandedCategory: PhraseCategory? = .basics
+    // Nothing expanded on open: the categories are the menu, and pre-opening
+    // one buries the rest under a wall of phrases before you've chosen.
+    @State private var expandedCategory: PhraseCategory?
 
     var body: some View {
         VStack(spacing: 0) {
-            // Header
-            VStack(spacing: 8) {
-                Image(systemName: "text.bubble")
-                    .font(.system(size: 36, weight: .medium))
-                    .foregroundStyle(Color.riMint)
-
-                Text("Spanish Phrases")
-                    .font(.system(size: 22, weight: .bold))
-                    .foregroundStyle(Color.riDark)
-
-                Text("A little Spanish goes a long way — locals appreciate the effort")
-                    .font(.riCaption(14))
-                    .foregroundStyle(Color.riMediumGray)
-                    .multilineTextAlignment(.center)
-            }
-            .padding(.top, 28)
-            .padding(.bottom, 24)
+            ToolHeader(
+                icon: "text.bubble",
+                title: "Spanish Phrases",
+                subtitle: "A little Spanish goes a long way — locals appreciate the effort"
+            )
 
             // Categories
             VStack(spacing: 12) {
