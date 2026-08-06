@@ -21,7 +21,7 @@ enum FeedItem: Identifiable, Hashable {
     case weatherAlert(message: String)
     /// Only when sundown is close enough to change where you'd walk.
     case sunsetImminent(remaining: String, time: String)
-    case happyHourNow(count: Int, firstBusinessId: String?)
+    case happyHourNow(count: Int, endingAt: String)
     case liveMusicToday(count: Int)
     case tripCountdown(daysUntil: Int)
 

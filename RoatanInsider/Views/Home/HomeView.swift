@@ -74,6 +74,9 @@ struct HomeView: View {
             .navigationDestination(for: EventsListDestination.self) { _ in
                 EventsListView()
             }
+            .navigationDestination(for: HappyHourDestination.self) { _ in
+                HappyHourListView()
+            }
             .navigationDestination(for: Event.self) { event in
                 EventDetailView(event: event)
             }

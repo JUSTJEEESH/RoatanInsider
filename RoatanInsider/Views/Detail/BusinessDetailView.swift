@@ -86,6 +86,8 @@ struct BusinessDetailView: View {
                         }
                     }
 
+                    happyHourLine(b)
+
                     // Description
                     Text(b.description)
                         .font(.riBody)
@@ -234,6 +236,33 @@ struct BusinessDetailView: View {
     private var shareCardImage: Image? {
         guard let ui = ShareHelper.shareImage(for: b) else { return nil }
         return Image(uiImage: ui)
+    }
+
+    /// Happy hour, stated near the top because it's time-sensitive — it
+    /// changes whether you leave now or after dinner. Mint when it's
+    /// actually running, plain grey the rest of the day; nothing at all when
+    /// we don't hold the times, which is most places.
+    @ViewBuilder
+    private func happyHourLine(_ b: Business) -> some View {
+        if let hh = b.happyHour {
+            let isOn = b.isHappyHourNow()
+            HStack(spacing: 6) {
+                if isOn {
+                    Circle().fill(Color.riMint).frame(width: 6, height: 6)
+                }
+                Text(isOn
+                     ? "Happy hour on now, \(hh.untilLabel)"
+                     : "Happy hour \(hh.fullLabel)")
+                    .riType(.caption, weight: isOn ? .semibold : .regular)
+                    .foregroundStyle(isOn ? Color.riMint : Color.riMediumGray)
+                if let note = hh.note, !note.isEmpty {
+                    Text("· \(note)")
+                        .riType(.caption)
+                        .foregroundStyle(Color.riMediumGray)
+                }
+            }
+            .accessibilityElement(children: .combine)
+        }
     }
 
     private var hoursSection: some View {

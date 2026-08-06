@@ -74,7 +74,23 @@ COLUMNS = [
     "Additional Locations",
     # Menu
     "Menu Images",
+    # Happy hour (format: "16:00-18:00" or "fri,sat 16:00-18:00", optional
+    # " | note". Blank means we don't know the times — the app then never
+    # claims this place has a happy hour on.)
+    "Happy Hour",
 ]
+
+
+def format_happy_hour(hh):
+    """{"days":["fri"],"start":"16:00","end":"18:00","note":"2-for-1"}
+    -> "fri 16:00-18:00 | 2-for-1". Empty for no stated window."""
+    if not hh:
+        return ""
+    days = ",".join(hh.get("days") or [])
+    window = f"{hh.get('start','')}-{hh.get('end','')}"
+    text = f"{days} {window}".strip()
+    note = (hh.get("note") or "").strip()
+    return f"{text} | {note}" if note else text
 
 
 def price_to_dollars(n):
@@ -138,6 +154,7 @@ def business_to_row(b):
         "Images": ", ".join(b.get("images", [])),
         "Additional Categories": format_additional_cats(b.get("additionalCategories", [])),
         "Additional Locations": format_additional_locs(b.get("additionalLocations", [])),
+        "Happy Hour": format_happy_hour(b.get("happyHour")),
         "Menu Images": ", ".join(b.get("menuImages", []) or []),
     }
 

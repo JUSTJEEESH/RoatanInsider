@@ -12,18 +12,38 @@ import Foundation
 /// failing on a user's phone.
 
 extension Business {
+    /// `hours` takes "HH:mm-HH:mm" per weekday, or an explicit nil for a day
+    /// the place is shut. An empty dictionary means hours are unknown, which
+    /// is a third state the app treats differently from either.
     static func fixture(
         slug: String,
         name: String? = nil,
         insiderTip: String? = "Ask for the corner table.",
         category: String = "eat",
         area: String = "west_end",
+        latitude: Double = 16.2985,
+        longitude: Double = -86.6110,
         isInsiderPick: Bool = true,
         status: String = "active",
         features: [String] = [],
-        hours: [String: String?] = [:]
+        hours: [String: String?] = [:],
+        happyHour: HappyHour? = nil
     ) -> Business {
         let tipField = insiderTip.map { "\"insiderTip\": \(quoted($0))," } ?? ""
+        let hoursField = hours.map { day, window -> String in
+            guard let window, let dash = window.firstIndex(of: "-") else {
+                return "\(quoted(day)): null"
+            }
+            let open = String(window[window.startIndex..<dash])
+            let close = String(window[window.index(after: dash)...])
+            return "\(quoted(day)): {\"open\": \(quoted(open)), \"close\": \(quoted(close))}"
+        }.joined(separator: ",")
+        let happyHourField = happyHour.map { hh in
+            let note = hh.note.map { "\"note\": \(quoted($0))," } ?? ""
+            return """
+            "happyHour": {"days": \(jsonArray(hh.days)), \(note)"start": \(quoted(hh.start)), "end": \(quoted(hh.end))},
+            """
+        } ?? ""
         let json = """
         {
           "id": "\(slug)-id",
@@ -31,14 +51,15 @@ extension Business {
           "name": \(quoted(name ?? slug.replacingOccurrences(of: "-", with: " ").capitalized)),
           "description": "A place on Roatán used in tests.",
           \(tipField)
+          \(happyHourField)
           "category": "\(category)",
           "subcategory": "Test",
           "area": "\(area)",
-          "latitude": 16.2985,
-          "longitude": -86.6110,
+          "latitude": \(latitude),
+          "longitude": \(longitude),
           "addressDescription": "On the main road",
           "priceRange": 2,
-          "hours": {},
+          "hours": {\(hoursField)},
           "features": \(jsonArray(features)),
           "images": ["business_placeholder"],
           "isVerified": true,

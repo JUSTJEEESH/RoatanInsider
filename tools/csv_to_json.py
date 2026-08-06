@@ -165,6 +165,7 @@ def build_new_business(row):
         "menuImages": None,
         "additionalCategories": [],
         "additionalLocations": [],
+        "happyHour": None,
     }
 
 

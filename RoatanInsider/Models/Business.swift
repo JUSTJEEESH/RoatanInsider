@@ -21,6 +21,105 @@ struct CategoryEntry: Codable, Hashable {
     }
 }
 
+/// A stated happy hour window.
+///
+/// This exists because "is happy hour on" used to be answered with "does
+/// this place carry a Happy Hour tag, and is it open" — which is true for a
+/// beach bar from ten in the morning until it closes. A tag says a place has
+/// one; only a window says it's on.
+///
+/// Absent for most places, and that's the point: a place with no window
+/// stated never claims one. Nothing here is inferred.
+struct HappyHour: Codable, Hashable {
+    /// Lowercase weekday names. Empty means every day.
+    let days: [String]
+    let start: String        // 24hr "HH:mm"
+    let end: String          // 24hr "HH:mm"
+    /// What you actually get — "2-for-1 cocktails". Optional.
+    let note: String?
+
+    private enum CodingKeys: String, CodingKey { case days, start, end, note }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        days = ((try? c.decodeIfPresent([String].self, forKey: .days)) ?? [])?
+            .map { $0.lowercased() } ?? []
+        start = try c.decode(String.self, forKey: .start)
+        end = try c.decode(String.self, forKey: .end)
+        note = try c.decodeIfPresent(String.self, forKey: .note)
+    }
+
+    init(days: [String] = [], start: String, end: String, note: String? = nil) {
+        self.days = days.map { $0.lowercased() }
+        self.start = start
+        self.end = end
+        self.note = note
+    }
+
+    var runsEveryDay: Bool { days.isEmpty }
+
+    func runs(on weekday: String) -> Bool {
+        runsEveryDay || days.contains(weekday.lowercased())
+    }
+
+    /// Whether the window is open at `now`. Handles a window that crosses
+    /// midnight (a late-night deal starting at 22:00 and ending at 01:00),
+    /// in which case the day test applies to the day it started.
+    func isOn(now: Date = .now, calendar: Calendar = .current) -> Bool {
+        let minutes = Self.minutes(from: now, calendar: calendar)
+        guard let from = Self.minutes(of: start), let to = Self.minutes(of: end) else { return false }
+        let today = Self.weekdayName(now, calendar: calendar)
+
+        if to > from {
+            return runs(on: today) && minutes >= from && minutes < to
+        }
+        // Crosses midnight: either late on the starting day, or early on the
+        // following one.
+        if minutes >= from { return runs(on: today) }
+        guard let yesterday = calendar.date(byAdding: .day, value: -1, to: now) else { return false }
+        return minutes < to && runs(on: Self.weekdayName(yesterday, calendar: calendar))
+    }
+
+    /// "until 6:00 PM" — what someone needs to know once they've been told
+    /// it's on.
+    var untilLabel: String { "until \(Self.displayTime(end))" }
+
+    var windowLabel: String { "\(Self.displayTime(start))–\(Self.displayTime(end))" }
+
+    /// "Daily 4:00 PM–6:00 PM" / "Fri, Sat 4:00 PM–6:00 PM"
+    var fullLabel: String {
+        let when = runsEveryDay
+            ? "Daily"
+            : days.map { $0.prefix(1).uppercased() + $0.dropFirst(1).prefix(2) }.joined(separator: ", ")
+        return "\(when) \(windowLabel)"
+    }
+
+    private static func minutes(of hhmm: String) -> Int? {
+        let parts = hhmm.split(separator: ":")
+        guard parts.count == 2, let h = Int(parts[0]), let m = Int(parts[1]) else { return nil }
+        return h * 60 + m
+    }
+
+    private static func minutes(from date: Date, calendar: Calendar) -> Int {
+        let c = calendar.dateComponents([.hour, .minute], from: date)
+        return (c.hour ?? 0) * 60 + (c.minute ?? 0)
+    }
+
+    private static func weekdayName(_ date: Date, calendar: Calendar) -> String {
+        Weekday.from(calendarWeekday: calendar.component(.weekday, from: date))?.rawValue ?? ""
+    }
+
+    static func displayTime(_ raw: String) -> String {
+        let parts = raw.split(separator: ":")
+        guard parts.count == 2, let hour = Int(parts[0]), let minute = Int(parts[1]) else { return raw }
+        let suffix = hour >= 12 ? "PM" : "AM"
+        let displayHour = hour == 0 ? 12 : (hour > 12 ? hour - 12 : hour)
+        return minute == 0
+            ? "\(displayHour) \(suffix)"
+            : "\(displayHour):\(String(format: "%02d", minute)) \(suffix)"
+    }
+}
+
 struct BusinessLocation: Codable, Hashable {
     let area: Area
     let latitude: Double
@@ -79,6 +178,7 @@ struct Business: Identifiable, Codable, Hashable {
     let menuImages: [String]?
     let additionalCategories: [CategoryEntry]
     let additionalLocations: [BusinessLocation]
+    let happyHour: HappyHour?
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -115,6 +215,19 @@ struct Business: Identifiable, Codable, Hashable {
         menuImages = try? container.decodeIfPresent([String].self, forKey: .menuImages)
         additionalCategories = (try? container.decode([CategoryEntry].self, forKey: .additionalCategories)) ?? []
         additionalLocations = (try? container.decode([BusinessLocation].self, forKey: .additionalLocations)) ?? []
+        happyHour = try? container.decodeIfPresent(HappyHour.self, forKey: .happyHour)
+    }
+
+    // MARK: - Happy hour
+
+    /// True only when a window is stated AND we're inside it AND the place
+    /// isn't recorded as shut. All three, because each on its own has been
+    /// wrong: a tag alone said nothing about time, a window alone would
+    /// survive the one day a week the bar is dark, and hours alone are the
+    /// old bug.
+    func isHappyHourNow(now: Date = .now) -> Bool {
+        guard let happyHour, happyHour.isOn(now: now) else { return false }
+        return !hasKnownHours || isOpenNow(now: now)
     }
 
     // MARK: - All categories (primary + additional)
@@ -206,8 +319,10 @@ struct Business: Identifiable, Codable, Hashable {
         hours.contains { $0.value != nil }
     }
 
-    func isOpenNow() -> Bool {
-        let now = Date()
+    /// `now` is a parameter rather than a call to `Date()` so that anything
+    /// built on top of this — happy hour, "open now" filters — can be tested
+    /// against a fixed clock instead of whatever day the test machine is on.
+    func isOpenNow(now: Date = Date()) -> Bool {
         let dayKey = now.currentDayKey
         let timeString = now.currentTimeString
 

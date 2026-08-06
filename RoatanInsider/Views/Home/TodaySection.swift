@@ -132,11 +132,17 @@ struct TodaySection: View {
                 trailing: time
             )
 
-        case .happyHourNow(let count, _):
-            rowContent(
-                title: "Happy hour on now",
-                detail: count == 1 ? "One place within reach." : "\(count) places within reach."
-            )
+        case .happyHourNow(let count, let endingAt):
+            NavigationLink(value: HappyHourDestination()) {
+                rowContent(
+                    title: "Happy hour on now",
+                    detail: count == 1
+                        ? "One place, on until \(HappyHour.displayTime(endingAt))."
+                        : "\(count) places — the first ends at \(HappyHour.displayTime(endingAt)).",
+                    showsChevron: true
+                )
+            }
+            .buttonStyle(.plain)
 
         case .liveMusicToday(let count):
             NavigationLink(value: EventsListDestination()) {

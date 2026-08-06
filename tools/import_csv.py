@@ -362,9 +362,68 @@ def row_to_business(row, existing_by_id):
         "menuImages": parse_list(val(row, "Menu Images")) or None,
         "additionalCategories": parse_additional_cats(val(row, "Additional Categories")),
         "additionalLocations": parse_additional_locs(val(row, "Additional Locations")),
+        # Absent unless the sheet states a window. Never inferred from a
+        # feature tag or from opening hours — that was the bug this field
+        # exists to fix.
+        "happyHour": parse_happy_hour(val(row, "Happy Hour")),
     }
 
     return business
+
+
+VALID_DAYS = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"}
+
+
+def parse_happy_hour(raw):
+    """"fri,sat 16:00-18:00 | 2-for-1 cocktails" -> dict, or None.
+
+    Returns None on anything it can't read with confidence. A half-understood
+    window would put a wrong claim on the home screen, so ambiguity fails
+    closed rather than guessing.
+    """
+    if not raw or not raw.strip():
+        return None
+
+    text, _, note = raw.partition("|")
+    text = text.strip()
+    note = note.strip() or None
+
+    parts = text.split()
+    if len(parts) == 1:
+        days_part, window = "", parts[0]
+    elif len(parts) == 2:
+        days_part, window = parts
+    else:
+        print(f"  ! Unreadable Happy Hour value, ignoring: {raw!r}")
+        return None
+
+    if "-" not in window:
+        print(f"  ! Happy Hour needs a start-end window, ignoring: {raw!r}")
+        return None
+    start, _, end = window.partition("-")
+
+    def valid_time(t):
+        bits = t.split(":")
+        if len(bits) != 2 or not all(b.isdigit() for b in bits):
+            return False
+        h, m = int(bits[0]), int(bits[1])
+        return 0 <= h <= 23 and 0 <= m <= 59
+
+    if not (valid_time(start) and valid_time(end)):
+        print(f"  ! Happy Hour times must be 24h HH:MM, ignoring: {raw!r}")
+        return None
+
+    days = []
+    if days_part:
+        for d in days_part.split(","):
+            d = d.strip().lower()
+            full = next((v for v in VALID_DAYS if v.startswith(d)), None) if d else None
+            if not full:
+                print(f"  ! Unknown day {d!r} in Happy Hour, ignoring row value: {raw!r}")
+                return None
+            days.append(full)
+
+    return {"days": days, "start": start, "end": end, "note": note}
 
 
 def main():

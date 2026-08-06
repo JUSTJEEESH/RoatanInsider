@@ -79,7 +79,13 @@
         "subcategory": "Live Music"
       }
     ],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": {
+      "days": [],
+      "start": "17:00",
+      "end": "19:00",
+      "note": null
+    }
   },
   {
     "id": "b002",
@@ -149,7 +155,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b003",
@@ -213,7 +220,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b004",
@@ -283,7 +291,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b005",
@@ -353,7 +362,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b007",
@@ -420,7 +430,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b009",
@@ -490,7 +501,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b010",
@@ -557,7 +569,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b011",
@@ -627,7 +640,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b012",
@@ -694,7 +708,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b013",
@@ -764,7 +779,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b019",
@@ -839,7 +855,13 @@
         "subcategory": "Live Music"
       }
     ],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": {
+      "days": [],
+      "start": "16:00",
+      "end": "18:00",
+      "note": null
+    }
   },
   {
     "id": "b020",
@@ -909,7 +931,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b022",
@@ -979,7 +1002,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b023",
@@ -1049,7 +1073,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b024",
@@ -1119,7 +1144,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b025",
@@ -1186,7 +1212,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b026",
@@ -1256,7 +1283,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b028",
@@ -1326,7 +1354,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b033",
@@ -1393,7 +1422,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b034",
@@ -1463,7 +1493,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b035",
@@ -1538,7 +1569,8 @@
         "subcategory": "Sports Bar"
       }
     ],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b036",
@@ -1610,7 +1642,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b042",
@@ -1685,7 +1718,8 @@
         "subcategory": "Night Club"
       }
     ],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b043",
@@ -1760,7 +1794,8 @@
         "subcategory": "Night Club"
       }
     ],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b044",
@@ -1830,7 +1865,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b045",
@@ -1900,7 +1936,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b046",
@@ -1976,7 +2013,8 @@
         "subcategory": "Night Club"
       }
     ],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b047",
@@ -2046,7 +2084,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b048",
@@ -2092,7 +2131,8 @@
         "subcategory": "Live Music"
       }
     ],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b049",
@@ -2170,7 +2210,13 @@
         "subcategory": "Beach Party"
       }
     ],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": {
+      "days": [],
+      "start": "10:00",
+      "end": "18:00",
+      "note": "2-for-1 cocktails"
+    }
   },
   {
     "id": "b053",
@@ -2240,7 +2286,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b054",
@@ -2310,7 +2357,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b058",
@@ -2380,7 +2428,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b065",
@@ -2450,7 +2499,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b066",
@@ -2521,7 +2571,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b067",
@@ -2592,7 +2643,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b068",
@@ -2663,7 +2715,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b069",
@@ -2734,7 +2787,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b072",
@@ -2805,7 +2859,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b074",
@@ -2876,7 +2931,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b079",
@@ -2947,7 +3003,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b081",
@@ -3018,7 +3075,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b083",
@@ -3089,7 +3147,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b085",
@@ -3160,7 +3219,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b089",
@@ -3231,7 +3291,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b097",
@@ -3287,7 +3348,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b098",
@@ -3346,7 +3408,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b099",
@@ -3417,7 +3480,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b108",
@@ -3470,7 +3534,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b111",
@@ -3541,7 +3606,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b112",
@@ -3612,7 +3678,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b113",
@@ -3680,7 +3747,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b114",
@@ -3751,7 +3819,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b116",
@@ -3822,7 +3891,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b118",
@@ -3893,7 +3963,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b119",
@@ -3957,7 +4028,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b120",
@@ -4028,7 +4100,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b122",
@@ -4099,7 +4172,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b123",
@@ -4170,7 +4244,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b127",
@@ -4241,7 +4316,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b131",
@@ -4312,7 +4388,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b132",
@@ -4383,7 +4460,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b133",
@@ -4454,7 +4532,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b134",
@@ -4525,7 +4604,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b135",
@@ -4596,7 +4676,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b136",
@@ -4667,7 +4748,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b139",
@@ -4738,7 +4820,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b141",
@@ -4809,7 +4892,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b146",
@@ -4879,7 +4963,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b148",
@@ -4950,7 +5035,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b151",
@@ -5041,7 +5127,8 @@
         "subcategory": "Beach Party"
       }
     ],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b153",
@@ -5112,7 +5199,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b154",
@@ -5183,7 +5271,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b155",
@@ -5262,7 +5351,8 @@
         "subcategory": "Dive Shop"
       }
     ],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b156",
@@ -5333,7 +5423,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b158",
@@ -5415,7 +5506,8 @@
         "subcategory": "Rooftop Bar"
       }
     ],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b161",
@@ -5498,7 +5590,8 @@
         "subcategory": "Dive Shop"
       }
     ],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b163",
@@ -5569,7 +5662,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b165",
@@ -5649,7 +5743,8 @@
         "subcategory": "Dive Shop"
       }
     ],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b168",
@@ -5720,7 +5815,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b169",
@@ -5791,7 +5887,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b173",
@@ -5862,7 +5959,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b176",
@@ -5933,7 +6031,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b179",
@@ -6004,7 +6103,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b180",
@@ -6075,7 +6175,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b189",
@@ -6146,7 +6247,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b190",
@@ -6217,7 +6319,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b191",
@@ -6288,7 +6391,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b192",
@@ -6359,7 +6463,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b193",
@@ -6430,7 +6535,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b195",
@@ -6501,7 +6607,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b197",
@@ -6572,7 +6679,8 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   },
   {
     "id": "b199",
@@ -6643,6 +6751,7 @@
     "collections": [],
     "menuImages": null,
     "additionalCategories": [],
-    "additionalLocations": []
+    "additionalLocations": [],
+    "happyHour": null
   }
 ]

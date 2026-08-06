@@ -75,12 +75,14 @@ enum FeedComposer {
 
         // --- What could you walk into right now? --------------------------
 
-        let happyNow = businesses.filter { biz in
-            biz.isActive && biz.isOpenNow() &&
-            biz.features.contains { $0.localizedCaseInsensitiveContains("happy hour") }
-        }
-        if !happyNow.isEmpty {
-            items.append(.happyHourNow(count: happyNow.count, firstBusinessId: happyNow.first?.id))
+        // A stated window, and we're inside it. This used to be "carries a
+        // Happy Hour tag and is open", which is true for a beach bar from
+        // ten in the morning until close — the row was wrong nearly every
+        // hour it appeared. Places with no window stated never appear here,
+        // which means the row is silent until the data earns it.
+        let happyNow = businesses.filter { $0.isActive && $0.isHappyHourNow(now: now) }
+        if let soonestEnd = happyNow.compactMap({ $0.happyHour?.end }).min() {
+            items.append(.happyHourNow(count: happyNow.count, endingAt: soonestEnd))
         }
 
         if musicEventsRemainingToday > 0 {
