@@ -16,12 +16,12 @@ struct TipCalculatorView: View {
                 // Bill amount
                 VStack(spacing: 8) {
                     Text("Bill Amount (USD)")
-                        .font(.system(size: 14, weight: .semibold))
+                        .riType(.caption, weight: .semibold)
                         .foregroundStyle(Color.riDark)
                         .tracking(0.5)
 
                     TextField("0.00", text: $viewModel.billAmount)
-                        .font(.system(size: 44, weight: .bold))
+                        .riType(.figure)
                         .foregroundStyle(Color.riDark)
                         .multilineTextAlignment(.center)
                         .keyboardType(.decimalPad)
@@ -41,7 +41,7 @@ struct TipCalculatorView: View {
                 // Tip percentage buttons
                 VStack(spacing: 12) {
                     Text("Tip Percentage")
-                        .font(.system(size: 14, weight: .semibold))
+                        .riType(.caption, weight: .semibold)
                         .foregroundStyle(Color.riDark)
                         .tracking(0.5)
 
@@ -52,7 +52,7 @@ struct TipCalculatorView: View {
                                 viewModel.tipPercentage = pct
                             } label: {
                                 Text("\(pct)%")
-                                    .font(.riButton)
+                                    .riType(.body, weight: .semibold)
                                     .foregroundStyle(viewModel.tipPercentage == pct ? .white : Color.riDark)
                                     .frame(maxWidth: .infinity)
                                     .frame(height: 44)
@@ -67,7 +67,7 @@ struct TipCalculatorView: View {
                 // Split
                 VStack(spacing: 12) {
                     Text("Split Between")
-                        .font(.system(size: 14, weight: .semibold))
+                        .riType(.caption, weight: .semibold)
                         .foregroundStyle(Color.riDark)
                         .tracking(0.5)
 
@@ -85,7 +85,7 @@ struct TipCalculatorView: View {
                         }
 
                         Text("\(viewModel.splitCount)")
-                            .font(.system(size: 28, weight: .bold))
+                            .riType(.display, weight: .bold)
                             .foregroundStyle(Color.riDark)
                             .frame(width: 60)
 
@@ -129,13 +129,13 @@ struct TipCalculatorView: View {
     private func resultRow(label: String, value: String, highlight: Bool = false) -> some View {
         HStack {
             Text(label)
-                .font(.riBody)
+                .riType(.body)
                 .foregroundStyle(Color.riDark)
 
             Spacer()
 
             Text(value)
-                .font(.system(size: highlight ? 22 : 18, weight: .bold))
+                .riType(highlight ? .title : .heading, weight: .bold)
                 .foregroundStyle(highlight ? Color.riDark : Color.riDark)
         }
     }

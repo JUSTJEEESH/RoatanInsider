@@ -120,12 +120,12 @@ struct CollectionDetailView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 24)
 
-                LazyVStack(spacing: 16) {
+                // BusinessCard is already a NavigationLink; wrapping it in
+                // another nests two links in one row, which SwiftUI resolves
+                // unpredictably.
+                LazyVStack(spacing: AppConstants.Space.gutter) {
                     ForEach(businesses) { business in
-                        NavigationLink(value: business) {
-                            BusinessCard(business: business)
-                        }
-                        .buttonStyle(.plain)
+                        BusinessCard(business: business)
                     }
                 }
                 .padding(.horizontal, 20)

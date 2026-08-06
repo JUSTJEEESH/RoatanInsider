@@ -79,7 +79,7 @@ struct PhotoGallery: View {
                     .foregroundStyle(Color.riMint)
 
                 Text(categoryDisplayName.uppercased())
-                    .font(.system(size: 12, weight: .semibold))
+                    .riType(.label)
                     .foregroundStyle(Color.riMint.opacity(0.7))
                     .tracking(2)
             }

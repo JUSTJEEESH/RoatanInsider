@@ -29,15 +29,16 @@ struct TrendingSection: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .top, spacing: AppConstants.Space.snug) {
                         ForEach(Array(resolvedBusinesses.enumerated()), id: \.element.business.id) { _, item in
-                            NavigationLink(value: item.business) {
-                                ZStack(alignment: .topTrailing) {
-                                    BusinessCard(business: item.business, style: .compact)
-                                    flameBadge(count: item.entry.total_reactions)
-                                        .padding(AppConstants.Space.tight)
-                                        .padding(.trailing, AppConstants.minTapTarget - AppConstants.Space.tight)
-                                }
+                            ZStack(alignment: .topTrailing) {
+                                BusinessCard(business: item.business, style: .compact)
+                                // Offset clear of the save heart, which claims
+                                // the same corner. Not hit-testable, so it
+                                // can't swallow the card's own tap.
+                                flameBadge(count: item.entry.total_reactions)
+                                    .padding(AppConstants.Space.tight)
+                                    .padding(.trailing, AppConstants.minTapTarget - AppConstants.Space.tight)
+                                    .allowsHitTesting(false)
                             }
-                            .buttonStyle(.plain)
                         }
                     }
                     .padding(.horizontal, AppConstants.Space.gutter)

@@ -30,11 +30,11 @@ struct MenuGalleryView: View {
                 ToolbarItem(placement: .principal) {
                     VStack(spacing: 2) {
                         Text("Menu")
-                            .font(.system(size: 16, weight: .semibold))
+                            .riType(.body, weight: .semibold)
                             .foregroundStyle(.white)
                         if displaySources.count > 1 {
                             Text("\(currentIndex + 1) of \(displaySources.count)")
-                                .font(.system(size: 12, weight: .regular))
+                                .riType(.label, weight: .regular)
                                 .foregroundStyle(.white.opacity(0.6))
                         }
                     }
@@ -80,7 +80,7 @@ struct MenuGalleryView: View {
                 .font(.system(size: 48, weight: .light))
                 .foregroundStyle(.white.opacity(0.3))
             Text("No menu available")
-                .font(.system(size: 16, weight: .medium))
+                .riType(.body, weight: .medium)
                 .foregroundStyle(.white.opacity(0.5))
         }
     }
@@ -112,7 +112,7 @@ struct ZoomableImage: View {
                 .font(.system(size: 48, weight: .light))
                 .foregroundStyle(.white.opacity(0.3))
             Text("Menu image unavailable")
-                .font(.riCaption(14))
+                .riType(.caption)
                 .foregroundStyle(.white.opacity(0.4))
         }
     }

@@ -64,13 +64,13 @@ private struct CategoryPhraseSection: View {
                         .clipShape(RoundedRectangle(cornerRadius: 8))
 
                     Text(category.rawValue)
-                        .font(.system(size: 16, weight: .semibold))
+                        .riType(.body, weight: .semibold)
                         .foregroundStyle(Color.riDark)
 
                     Spacer()
 
                     Text("\(category.phrases.count)")
-                        .font(.riCaption(13))
+                        .riType(.caption)
                         .foregroundStyle(Color.riLightGray)
 
                     Image(systemName: "chevron.right")
@@ -116,15 +116,15 @@ private struct PhraseRow: View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(phrase.english)
-                    .font(.system(size: 14, weight: .medium))
+                    .riType(.caption, weight: .medium)
                     .foregroundStyle(Color.riMediumGray)
 
                 Text(phrase.spanish)
-                    .font(.system(size: 17, weight: .semibold))
+                    .riType(.heading)
                     .foregroundStyle(Color.riDark)
 
                 Text(phrase.phonetic)
-                    .font(.system(size: 13, weight: .regular, design: .monospaced))
+                    .riType(.caption)
                     .foregroundStyle(Color.riMint)
             }
 

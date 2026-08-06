@@ -78,7 +78,7 @@ struct ContactActions: View {
                     .foregroundStyle(Color.riDark)
 
                 Text(label)
-                    .font(.riCaption(11))
+                    .riType(.micro)
                     .foregroundStyle(Color.riMediumGray)
             }
             .frame(width: 64)

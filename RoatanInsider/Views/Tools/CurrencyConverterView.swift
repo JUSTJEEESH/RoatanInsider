@@ -18,12 +18,12 @@ struct CurrencyConverterView: View {
                     // From
                     VStack(spacing: 8) {
                         Text(viewModel.isUsdToHnl ? "USD" : "HNL")
-                            .font(.system(size: 14, weight: .semibold))
+                            .riType(.caption, weight: .semibold)
                             .foregroundStyle(Color.riDark)
                             .tracking(1)
 
                         TextField("0", text: $viewModel.usdAmount)
-                            .font(.system(size: 48, weight: .bold, design: .default))
+                            .riType(.figure)
                             .foregroundStyle(Color.riDark)
                             .multilineTextAlignment(.center)
                             .keyboardType(.decimalPad)
@@ -56,12 +56,12 @@ struct CurrencyConverterView: View {
                     // To
                     VStack(spacing: 8) {
                         Text(viewModel.isUsdToHnl ? "HNL" : "USD")
-                            .font(.system(size: 14, weight: .semibold))
+                            .riType(.caption, weight: .semibold)
                             .foregroundStyle(Color.riDark)
                             .tracking(1)
 
                         Text(viewModel.convertedDisplay)
-                            .font(.system(size: 48, weight: .bold, design: .default))
+                            .riType(.figure)
                             .foregroundStyle(Color.riDark)
                             .tracking(-1)
                     }
@@ -70,7 +70,7 @@ struct CurrencyConverterView: View {
                 // Rate info
                 VStack(spacing: 4) {
                     Text("1 USD = \(viewModel.rate, specifier: "%.2f") HNL")
-                        .font(.riCaption(13))
+                        .riType(.caption)
                         .foregroundStyle(Color.riLightGray)
 
                     HStack(spacing: 4) {
@@ -80,7 +80,7 @@ struct CurrencyConverterView: View {
                             .frame(width: 6, height: 6)
 
                         Text(service.rateSourceLabel)
-                            .font(.riCaption(11))
+                            .riType(.micro)
                             .foregroundStyle(Color.riLightGray)
                     }
                 }
@@ -88,7 +88,7 @@ struct CurrencyConverterView: View {
                 // Quick amount buttons
                 VStack(spacing: 12) {
                     Text("Quick Convert")
-                        .font(.system(size: 13, weight: .semibold))
+                        .riType(.caption, weight: .semibold)
                         .foregroundStyle(Color.riDark)
                         .tracking(0.5)
 
@@ -100,7 +100,7 @@ struct CurrencyConverterView: View {
                                 viewModel.setQuickAmount(amount)
                             } label: {
                                 Text("$\(amount)")
-                                    .font(.riButton)
+                                    .riType(.body, weight: .semibold)
                                     .foregroundStyle(Color.riDark)
                                     .frame(maxWidth: .infinity)
                                     .frame(height: 44)
@@ -120,7 +120,7 @@ struct CurrencyConverterView: View {
                             .frame(height: 1)
 
                         Text("In Your Currency")
-                            .font(.system(size: 13, weight: .semibold))
+                            .riType(.caption, weight: .semibold)
                             .foregroundStyle(Color.riDark)
                             .tracking(0.5)
 
@@ -129,12 +129,12 @@ struct CurrencyConverterView: View {
                                 let amount = viewModel.usdInHomeCurrency(currency)
                                 VStack(spacing: 6) {
                                     Text(currency.displayLabel)
-                                        .font(.system(size: 12, weight: .semibold))
+                                        .riType(.label)
                                         .foregroundStyle(Color.riLightGray)
                                         .tracking(0.5)
 
                                     Text("\(currency.symbol)\(amount, specifier: "%.2f")")
-                                        .font(.system(size: 22, weight: .bold))
+                                        .riType(.title)
                                         .foregroundStyle(Color.riDark)
                                         .tracking(-0.3)
                                 }

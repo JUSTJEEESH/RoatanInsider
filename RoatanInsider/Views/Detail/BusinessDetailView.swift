@@ -35,7 +35,7 @@ struct BusinessDetailView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
                             Text(b.name)
-                                .riHeadlineStyle(26)
+                                .riType(.title)
                                 .foregroundStyle(Color.riDark)
 
                             Spacer()
@@ -48,7 +48,7 @@ struct BusinessDetailView: View {
                             Text("·")
                             Text(b.allAreaStrings.map { $0.replacingOccurrences(of: "_", with: " ").capitalized }.joined(separator: " · "))
                         }
-                        .font(.riCaption(14))
+                        .riType(.caption)
                         .foregroundStyle(Color.riLightGray)
 
                         if b.allCategories.count > 1 {
@@ -59,7 +59,7 @@ struct BusinessDetailView: View {
                                             .font(.system(size: 11))
                                         Text(entry.subcategory)
                                     }
-                                    .font(.riCaption(12))
+                                    .riType(.label)
                                     .foregroundStyle(Color.riMediumGray)
                                     .padding(.horizontal, 10)
                                     .padding(.vertical, 5)
@@ -76,7 +76,7 @@ struct BusinessDetailView: View {
 
                                     if let count = b.reviewCount, count > 0 {
                                         Text("(\(count))")
-                                            .font(.riCaption(13))
+                                            .riType(.caption)
                                             .foregroundStyle(Color.riLightGray)
                                     }
                                 }
@@ -90,7 +90,7 @@ struct BusinessDetailView: View {
 
                     // Description
                     Text(b.description)
-                        .font(.riBody)
+                        .riType(.body)
                         .foregroundStyle(Color.riMediumGray)
                         .lineSpacing(6)
 
@@ -103,11 +103,11 @@ struct BusinessDetailView: View {
 
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("Insider Tip")
-                                    .font(.system(size: 14, weight: .semibold))
+                                    .riType(.caption, weight: .semibold)
                                     .foregroundStyle(Color.riMint)
 
                                 Text(tip)
-                                    .font(.riCaption(14))
+                                    .riType(.caption)
                                     .foregroundStyle(Color.riMediumGray)
                                     .italic()
                             }
@@ -122,13 +122,13 @@ struct BusinessDetailView: View {
                     if !b.features.isEmpty {
                         VStack(alignment: .leading, spacing: 10) {
                             Text("Features")
-                                .font(.system(size: 16, weight: .semibold))
+                                .riType(.body, weight: .semibold)
                                 .foregroundStyle(Color.riDark)
 
                             FlowLayout(spacing: 8) {
                                 ForEach(b.features, id: \.self) { feature in
                                     Text(feature)
-                                        .font(.riCaption(13))
+                                        .riType(.caption)
                                         .foregroundStyle(Color.riMediumGray)
                                         .padding(.horizontal, 12)
                                         .padding(.vertical, 6)
@@ -148,11 +148,11 @@ struct BusinessDetailView: View {
                     } else if let hoursText = b.hoursText {
                         VStack(alignment: .leading, spacing: 10) {
                             Text("Hours")
-                                .font(.system(size: 16, weight: .semibold))
+                                .riType(.body, weight: .semibold)
                                 .foregroundStyle(Color.riDark)
 
                             Text(hoursText)
-                                .font(.riCaption(14))
+                                .riType(.caption)
                                 .foregroundStyle(Color.riMediumGray)
                         }
                     }
@@ -160,19 +160,19 @@ struct BusinessDetailView: View {
                     // Location(s)
                     VStack(alignment: .leading, spacing: 12) {
                         Text(b.allLocations.count > 1 ? "Locations" : "Location")
-                            .font(.system(size: 16, weight: .semibold))
+                            .riType(.body, weight: .semibold)
                             .foregroundStyle(Color.riDark)
 
                         ForEach(b.allLocations, id: \.self) { location in
                             VStack(alignment: .leading, spacing: 8) {
                                 if b.allLocations.count > 1 {
                                     Text(location.area.displayName)
-                                        .font(.system(size: 14, weight: .medium))
+                                        .riType(.caption, weight: .medium)
                                         .foregroundStyle(Color.riDark)
                                 }
 
                                 Text(location.addressDescription)
-                                    .font(.riCaption(14))
+                                    .riType(.caption)
                                     .foregroundStyle(Color.riMediumGray)
 
                                 MiniMapView(coordinate: location.coordinate, name: b.name)
@@ -268,7 +268,7 @@ struct BusinessDetailView: View {
     private var hoursSection: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Hours")
-                .font(.system(size: 16, weight: .semibold))
+                .riType(.body, weight: .semibold)
                 .foregroundStyle(Color.riDark)
 
             let days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
@@ -277,18 +277,18 @@ struct BusinessDetailView: View {
             ForEach(days, id: \.self) { day in
                 HStack {
                     Text(day.capitalized)
-                        .font(.riCaption(14))
+                        .riType(.caption)
                         .fontWeight(day == today ? .semibold : .regular)
                         .foregroundStyle(day == today ? Color.riDark : Color.riMediumGray)
                         .frame(width: 100, alignment: .leading)
 
                     if let hours = b.hours[day] ?? nil {
                         Text("\(formatTime(hours.open)) – \(formatTime(hours.close))")
-                            .font(.riCaption(14))
+                            .riType(.caption)
                             .foregroundStyle(day == today ? Color.riDark : Color.riLightGray)
                     } else {
                         Text("Closed")
-                            .font(.riCaption(14))
+                            .riType(.caption)
                             .foregroundStyle(Color.riLightGray)
                     }
                 }

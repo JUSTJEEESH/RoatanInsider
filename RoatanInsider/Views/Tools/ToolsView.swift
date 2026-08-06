@@ -13,10 +13,10 @@ struct ToolsView: View {
                 HStack(alignment: .bottom) {
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Tools")
-                            .riDisplayStyle(34)
+                            .riType(.display)
                             .foregroundStyle(Color.riDark)
                         Text("Currency, tips, Spanish, safety — quick references.")
-                            .font(.riCaption(15))
+                            .riType(.body)
                             .foregroundStyle(Color.riLightGray)
                     }
                     Spacer()
@@ -48,7 +48,7 @@ struct ToolsView: View {
                             Haptics.select()
                         } label: {
                             Text(tab.rawValue)
-                                .font(.system(size: 14, weight: viewModel.selectedTool == tab ? .bold : .medium))
+                                .riType(.caption, weight: viewModel.selectedTool == tab ? .bold : .medium)
                                 .foregroundStyle(viewModel.selectedTool == tab ? .white : Color.riMediumGray)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 10)
@@ -105,8 +105,7 @@ struct ToolsView: View {
                 Image(systemName: purchases.hasPremium ? "checkmark.seal.fill" : "sparkles")
                     .font(.system(size: 11, weight: .bold))
                 Text(purchases.hasPremium ? "Insider+" : "Try Insider+")
-                    .font(.system(size: 12, weight: .bold))
-                    .tracking(0.3)
+                    .riType(.label, weight: .bold)
             }
             .foregroundStyle(purchases.hasPremium ? Color.riMint : Color.riPink)
             .padding(.horizontal, 10)

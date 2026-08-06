@@ -118,7 +118,7 @@ struct SafetyCardView: View {
     private func sectionLabel(_ text: String) -> some View {
         HStack {
             Text(text.uppercased())
-                .font(.system(size: 12, weight: .bold))
+                .riType(.label, weight: .bold)
                 .foregroundStyle(Color.riLightGray)
                 .tracking(1.5)
             Spacer()
@@ -144,11 +144,11 @@ struct SafetyCardView: View {
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(title)
-                        .font(.system(size: 15, weight: .medium))
+                        .riType(.body, weight: .medium)
                         .foregroundStyle(Color.riDark)
 
                     Text(number)
-                        .font(.system(size: 14, weight: .semibold, design: .monospaced))
+                        .riType(.caption, weight: .semibold)
                         .foregroundStyle(color)
                 }
 
@@ -185,15 +185,15 @@ struct SafetyCardView: View {
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(title)
-                        .font(.system(size: 15, weight: .medium))
+                        .riType(.body, weight: .medium)
                         .foregroundStyle(Color.riDark)
 
                     Text(subtitle)
-                        .font(.riCaption(13))
+                        .riType(.caption)
                         .foregroundStyle(Color.riMediumGray)
 
                     Text(phone)
-                        .font(.system(size: 13, weight: .medium, design: .monospaced))
+                        .riType(.caption, weight: .medium)
                         .foregroundStyle(Color.riMint)
                 }
 
@@ -219,7 +219,7 @@ struct SafetyCardView: View {
                 .padding(.top, 7)
 
             Text(text)
-                .font(.riCaption(14))
+                .riType(.caption)
                 .foregroundStyle(Color.riMediumGray)
                 .fixedSize(horizontal: false, vertical: true)
 

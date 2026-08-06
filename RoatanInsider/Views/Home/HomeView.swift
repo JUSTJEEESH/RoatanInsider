@@ -110,15 +110,13 @@ struct CategoryListView: View {
 
     var body: some View {
         ScrollView {
-            LazyVStack(spacing: 16) {
+            // No outer NavigationLink — BusinessCard already is one.
+            LazyVStack(spacing: AppConstants.Space.gutter) {
                 ForEach(dataManager.businesses(forCategoryId: categoryId)) { business in
-                    NavigationLink(value: business) {
-                        BusinessCard(business: business)
-                    }
-                    .buttonStyle(.plain)
+                    BusinessCard(business: business)
                 }
             }
-            .padding(20)
+            .padding(AppConstants.Space.gutter)
         }
         .navigationTitle(displayName)
         .background(Color.riWhite)
