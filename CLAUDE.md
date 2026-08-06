@@ -72,6 +72,11 @@ actual code win. See `STATE_OF_THE_APP.md` for the full picture.
   `ShareableBusinessCard` (fixed PNG canvas) and `RatingView` (size is a
   parameter so it can sit inside hosts at their scale).
 - **`BusinessCard` is itself a `NavigationLink`** — never wrap it in another.
+- **The Map renders the guide, not Apple Maps.** Category chips filter
+  `businesses.json`; Apple's `MKLocalSearch` is consulted only when a text
+  search finds nothing in the guide, and those pins are grey/outlined so they
+  never read as a recommendation. Dive sites are a second mint layer, gated
+  on Insider+ and on `diveSites.hasSites`.
 - **Happy hour is data, not a tag.** `Business.happyHour` holds a real
   window; the Today row and the happy-hour list only ever claim what a window
   states. A "Happy Hour" feature tag means nothing to the UI. Only three
