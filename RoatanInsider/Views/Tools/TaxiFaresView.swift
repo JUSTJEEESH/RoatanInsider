@@ -38,7 +38,10 @@ struct TaxiFaresView: View {
             .padding(.horizontal, AppConstants.Space.gutter)
             .padding(.bottom, AppConstants.Space.block)
         }
-        .task { guide = Self.load() }
+        .task {
+            guide = Self.load()
+            if let fresh = await Self.refresh() { guide = fresh }
+        }
     }
 
     // MARK: - Rules
@@ -195,15 +198,25 @@ struct TaxiFaresView: View {
 
     // MARK: - Loading
 
-    /// Bundle only — fares are editorial content, not live data, and the
-    /// same file is what the CSV pipeline writes.
+    /// Remote-first, like every other data file, with the bundled copy as
+    /// the offline fallback.
+    ///
+    /// This was bundle-only on the reasoning that fares are editorial rather
+    /// than live. That held right up until the file shipped with every price
+    /// null: gathering the numbers is the remaining work, and tying each
+    /// batch of them to an App Store release is the difference between a
+    /// screen that fills in over a week and one that fills in whenever the
+    /// next build happens to go out.
     static func load() -> TaxiFareGuide {
-        guard let url = Bundle.main.url(forResource: "taxi_fares", withExtension: "json"),
-              let data = try? Data(contentsOf: url),
-              let guide = try? JSONDecoder().decode(TaxiFareGuide.self, from: data) else {
-            AppLog.data.warning("taxi_fares.json missing or unreadable")
-            return .empty
-        }
-        return guide
+        RemoteDataService.loadCachedOrBundled(
+            filename: "taxi_fares.json", bundleName: "taxi_fares", type: TaxiFareGuide.self
+        ) ?? .empty
+    }
+
+    /// Fares change slowly, so this is a day — same reasoning as dive sites.
+    static func refresh() async -> TaxiFareGuide? {
+        await RemoteDataService.fetchLatest(
+            filename: "taxi_fares.json", maxAge: 24 * 3600, type: TaxiFareGuide.self
+        )
     }
 }

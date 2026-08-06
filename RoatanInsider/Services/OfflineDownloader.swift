@@ -80,7 +80,9 @@ final class OfflineDownloader {
 
         // Refresh the data files too, so the offline copy is a snapshot of
         // now rather than photos wrapped around a week-old schedule.
-        await RemoteDataService.warmCache(filenames: ["events.json", "cruise_arrivals.json", "dive_sites.json"])
+        await RemoteDataService.warmCache(
+            filenames: ["events.json", "cruise_arrivals.json", "dive_sites.json", "taxi_fares.json"]
+        )
         completed += 1
 
         lastCompleted = .now
