@@ -55,7 +55,7 @@ struct AreaCard: View {
                     )
 
                 Text(guide.name)
-                    .font(.system(size: 16, weight: .bold))
+                    .riType(.body, weight: .bold)
                     .foregroundStyle(.white)
                     .padding(12)
             }
@@ -63,7 +63,7 @@ struct AreaCard: View {
             .clipShape(RoundedRectangle(cornerRadius: 12))
 
             Text(guide.bestFor)
-                .font(.riCaption(12))
+                .riType(.label)
                 .foregroundStyle(Color.riLightGray)
                 .lineLimit(2)
         }

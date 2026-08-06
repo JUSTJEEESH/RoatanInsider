@@ -126,6 +126,28 @@ final class RemoteDataService {
         }
     }
 
+    /// Forces a fetch of each named file into the on-disk cache, ignoring
+    /// the usual throttle.
+    ///
+    /// Used by the offline download: the point of that button is to make the
+    /// phone's copy current *now*, and honouring a six-hour throttle would
+    /// quietly hand someone a stale snapshot at the exact moment they're
+    /// about to lose signal.
+    static func warmCache(filenames: [String]) async {
+        for filename in filenames {
+            guard let url = URL(string: AppConstants.supabaseDataBaseURL + filename) else { continue }
+            do {
+                let (data, response) = try await noCacheSession.data(from: url)
+                guard let http = response as? HTTPURLResponse, http.statusCode == 200 else { continue }
+                let cachedURL = cacheDirectory.appendingPathComponent(filename)
+                try data.write(to: cachedURL, options: .atomic)
+                UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: "remoteDataLastFetch_\(filename)")
+            } catch {
+                AppLog.network.warning("warmCache \(filename, privacy: .public) failed: \(error.localizedDescription)")
+            }
+        }
+    }
+
     /// Downloads a file from Supabase if its remote version is newer than cached.
     /// Returns decoded data if updated, nil if no update needed.
     static func fetchIfNewer<T: Codable>(

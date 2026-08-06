@@ -105,15 +105,15 @@ struct CollectionDetailView: View {
                         .foregroundStyle(Color.riMint)
 
                     Text(collection.title)
-                        .riHeadlineStyle(26)
+                        .riType(.title)
                         .foregroundStyle(Color.riDark)
 
                     Text(collection.subtitle)
-                        .font(.riBody)
+                        .riType(.body)
                         .foregroundStyle(Color.riMediumGray)
 
                     Text("\(businesses.count) places")
-                        .font(.riCaption(13))
+                        .riType(.caption)
                         .foregroundStyle(Color.riLightGray)
                         .padding(.top, 4)
                 }

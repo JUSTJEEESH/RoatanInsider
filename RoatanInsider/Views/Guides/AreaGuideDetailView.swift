@@ -23,13 +23,13 @@ struct AreaGuideDetailView: View {
 
                 // Description
                 Text(guide.descriptionText)
-                    .font(.riBody)
+                    .riType(.body)
                     .foregroundStyle(Color.riMediumGray)
                     .lineSpacing(4)
 
                 if !guide.overview.isEmpty && guide.overview != guide.descriptionText {
                     Text(guide.overview)
-                        .font(.riBody)
+                        .riType(.body)
                         .foregroundStyle(Color.riMediumGray)
                         .lineSpacing(4)
                 }
@@ -38,11 +38,11 @@ struct AreaGuideDetailView: View {
                 if !guide.bestFor.isEmpty {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Best For")
-                            .font(.system(size: 16, weight: .semibold))
+                            .riType(.body, weight: .semibold)
                             .foregroundStyle(Color.riDark)
 
                         Text(guide.bestFor)
-                            .font(.riBody)
+                            .riType(.body)
                             .foregroundStyle(Color.riMediumGray)
                     }
                 }
@@ -51,11 +51,11 @@ struct AreaGuideDetailView: View {
                 if !guide.vibe.isEmpty {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Vibe")
-                            .font(.system(size: 16, weight: .semibold))
+                            .riType(.body, weight: .semibold)
                             .foregroundStyle(Color.riDark)
 
                         Text(guide.vibe)
-                            .font(.riBody)
+                            .riType(.body)
                             .foregroundStyle(Color.riMediumGray)
                     }
                 }
@@ -64,11 +64,11 @@ struct AreaGuideDetailView: View {
                 if !guide.gettingThere.isEmpty {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Getting There")
-                            .font(.system(size: 16, weight: .semibold))
+                            .riType(.body, weight: .semibold)
                             .foregroundStyle(Color.riDark)
 
                         Text(guide.gettingThere)
-                            .font(.riBody)
+                            .riType(.body)
                             .foregroundStyle(Color.riMediumGray)
                     }
                 }
@@ -78,7 +78,7 @@ struct AreaGuideDetailView: View {
                 if !areaBusinesses.isEmpty {
                     VStack(alignment: .leading, spacing: 16) {
                         Text("Top Picks")
-                            .font(.system(size: 18, weight: .bold))
+                            .riType(.heading, weight: .bold)
                             .foregroundStyle(Color.riDark)
 
                         ForEach(areaBusinesses.prefix(5)) { business in
@@ -92,11 +92,11 @@ struct AreaGuideDetailView: View {
 
                                     VStack(alignment: .leading, spacing: 2) {
                                         Text(business.name)
-                                            .font(.system(size: 15, weight: .semibold))
+                                            .riType(.body, weight: .semibold)
                                             .foregroundStyle(Color.riDark)
 
                                         Text(business.categoryDisplayName)
-                                            .font(.riCaption(13))
+                                            .riType(.caption)
                                             .foregroundStyle(Color.riLightGray)
                                     }
 
@@ -132,7 +132,7 @@ struct AreaGuideDetailView: View {
                     .foregroundStyle(Color.riMint.opacity(0.5))
 
                 Text(guide.name)
-                    .font(.system(size: 14, weight: .semibold))
+                    .riType(.caption, weight: .semibold)
                     .foregroundStyle(Color.riMint.opacity(0.7))
             }
         }

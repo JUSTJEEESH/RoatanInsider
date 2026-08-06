@@ -14,11 +14,11 @@ struct AskALocalView: View {
                         .foregroundStyle(Color.riMint)
 
                     Text("Ask a Local")
-                        .riDisplayStyle(30)
+                        .riType(.display)
                         .foregroundStyle(Color.riDark)
 
                     Text("Honest answers from someone who actually lives here.")
-                        .font(.riBody)
+                        .riType(.body)
                         .foregroundStyle(Color.riMediumGray)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 40)
@@ -59,12 +59,12 @@ private struct QARow: View {
             Button(action: onTap) {
                 HStack(alignment: .top, spacing: 12) {
                     Text("Q")
-                        .font(.system(size: 15, weight: .bold))
+                        .riType(.body, weight: .bold)
                         .foregroundStyle(Color.riPink)
                         .frame(width: 24)
 
                     Text(qa.question)
-                        .font(.system(size: 16, weight: .semibold))
+                        .riType(.body, weight: .semibold)
                         .foregroundStyle(Color.riDark)
                         .multilineTextAlignment(.leading)
 
@@ -88,7 +88,7 @@ private struct QARow: View {
                         .clipShape(RoundedRectangle(cornerRadius: 2))
 
                     Text(qa.answer)
-                        .font(.riBody)
+                        .riType(.body)
                         .foregroundStyle(Color.riMediumGray)
                         .lineSpacing(6)
                         .fixedSize(horizontal: false, vertical: true)

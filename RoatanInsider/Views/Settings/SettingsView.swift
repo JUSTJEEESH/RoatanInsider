@@ -12,6 +12,10 @@ struct SettingsView: View {
     @Environment(TripPlanStore.self) private var tripStore
     @Environment(UnitPreference.self) private var unitPreference
     @Environment(PurchaseManager.self) private var purchases
+    @Environment(DataManager.self) private var dataManager
+    @Environment(FavoritesStore.self) private var favoritesStore
+    @Environment(DiveSitesService.self) private var diveSites
+    @Environment(OfflineDownloader.self) private var downloader
     @Environment(\.dismiss) private var dismiss
 
     @State private var showPaywall = false
@@ -25,6 +29,7 @@ struct SettingsView: View {
                 tripSection
                 interestsSection
                 preferencesSection
+                offlineSection
                 aboutSection
             }
             .navigationTitle("Settings")
@@ -56,10 +61,10 @@ struct SettingsView: View {
 
                     VStack(alignment: .leading, spacing: 2) {
                         Text(purchases.hasPremium ? "Insider+ member" : "Insider+")
-                            .font(.system(size: 15, weight: .semibold))
+                            .riType(.body, weight: .semibold)
                             .foregroundStyle(Color.riDark)
                         Text(membershipSubtitle)
-                            .font(.riCaption(12))
+                            .riType(.label)
                             .foregroundStyle(Color.riLightGray)
                     }
                     Spacer()
@@ -177,7 +182,7 @@ struct SettingsView: View {
                     Button("Enable") {
                         Task { await enableNotifications() }
                     }
-                    .font(.riCaption(13))
+                    .riType(.caption)
                     .fontWeight(.semibold)
                     .foregroundStyle(Color.riPink)
                 }
@@ -185,6 +190,70 @@ struct SettingsView: View {
         } header: {
             Text("Preferences")
         }
+    }
+
+    /// Offline download.
+    ///
+    /// Sits next to preferences rather than buried in About, because it's
+    /// something you do deliberately before heading out, not a setting you
+    /// forget you changed.
+    private var offlineSection: some View {
+        Section {
+            switch downloader.state {
+            case .running(let done, let total):
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Downloading… \(done) of \(total)")
+                        .riType(.caption)
+                        .foregroundStyle(Color.riMediumGray)
+                    ProgressView(value: downloader.state.progress)
+                        .tint(Color.riMint)
+                }
+                .padding(.vertical, 2)
+
+            default:
+                Button {
+                    Haptics.impact()
+                    Task {
+                        await downloader.download(
+                            businesses: savedBusinesses,
+                            diveSites: diveSites.sites
+                        )
+                    }
+                } label: {
+                    HStack {
+                        Text(downloader.lastCompleted == nil ? "Download for offline" : "Update offline copy")
+                        Spacer()
+                        Image(systemName: "arrow.down.circle")
+                            .foregroundStyle(Color.riMint)
+                    }
+                }
+                .disabled(savedBusinesses.isEmpty)
+            }
+        } header: {
+            Text("Offline")
+        } footer: {
+            Text(offlineFootnote)
+        }
+    }
+
+    /// Says what will actually be downloaded, and when it last was — the two
+    /// things that decide whether the button is worth tapping.
+    private var offlineFootnote: String {
+        if savedBusinesses.isEmpty {
+            return "Save some places first. Photos for anything you've saved get stored on your phone, so they still load once you're out of signal — which happens the moment you leave the tourist stretches."
+        }
+        let count = savedBusinesses.count
+        let noun = count == 1 ? "1 saved place" : "\(count) saved places"
+        guard let last = downloader.lastCompleted else {
+            return "Photos and details for your \(noun), stored on your phone. Do it on wifi before you head out."
+        }
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .full
+        return "\(noun) stored on your phone. Last updated \(formatter.localizedString(for: last, relativeTo: .now))."
+    }
+
+    private var savedBusinesses: [Business] {
+        dataManager.activeBusinesses.filter { favoritesStore.isFavorite($0.id) }
     }
 
     private var aboutSection: some View {

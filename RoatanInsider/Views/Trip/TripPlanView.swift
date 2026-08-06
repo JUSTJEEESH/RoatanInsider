@@ -70,7 +70,7 @@ struct TripPlanView: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("My Trip")
-                .riDisplayStyle(34)
+                .riType(.display)
                 .foregroundStyle(Color.riDark)
 
             if let plan = tripStore.plan {
@@ -78,12 +78,12 @@ struct TripPlanView: View {
                     Image(systemName: "calendar")
                         .font(.system(size: 12, weight: .medium))
                     Text(dateRangeLabel(plan: plan))
-                        .font(.riCaption(14))
+                        .riType(.caption)
                         .fontWeight(.medium)
                     if let countdown = countdownLabel(plan: plan) {
                         Text("·")
                         Text(countdown)
-                            .font(.riCaption(14))
+                            .riType(.caption)
                             .foregroundStyle(Color.riPink)
                     }
                     Spacer()
@@ -92,7 +92,7 @@ struct TripPlanView: View {
                         showDatePicker = true
                     } label: {
                         Text("Edit")
-                            .font(.riCaption(13))
+                            .riType(.caption)
                             .fontWeight(.semibold)
                             .foregroundStyle(Color.riMint)
                     }
@@ -100,7 +100,7 @@ struct TripPlanView: View {
                 .foregroundStyle(Color.riMediumGray)
             } else {
                 Text("Plan your day-by-day, save your shortlist.")
-                    .font(.riCaption(15))
+                    .riType(.body)
                     .foregroundStyle(Color.riLightGray)
             }
         }
@@ -117,7 +117,7 @@ struct TripPlanView: View {
                     withAnimation(.easeInOut(duration: 0.2)) { segment = s }
                 } label: {
                     Text(s.rawValue)
-                        .font(.system(size: 14, weight: segment == s ? .bold : .medium))
+                        .riType(.caption, weight: segment == s ? .bold : .medium)
                         .foregroundStyle(segment == s ? .white : Color.riMediumGray)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
@@ -170,10 +170,10 @@ struct TripPlanView: View {
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(generatorPrimary)
-                    .font(.system(size: 14, weight: .semibold))
+                    .riType(.caption, weight: .semibold)
                     .foregroundStyle(Color.riDark)
                 Text(generatorSecondary)
-                    .font(.system(size: 12, weight: .regular))
+                    .riType(.label, weight: .regular)
                     .foregroundStyle(Color.riLightGray)
             }
 
@@ -188,7 +188,7 @@ struct TripPlanView: View {
                         Image(systemName: "lock.fill").font(.system(size: 11, weight: .bold))
                     }
                     Text(purchases.hasPremium ? "Generate" : "Insider+")
-                        .font(.system(size: 13, weight: .bold))
+                        .riType(.caption, weight: .bold)
                 }
                 .foregroundStyle(.white)
                 .padding(.horizontal, 12)
@@ -209,11 +209,10 @@ struct TripPlanView: View {
                 .frame(width: 3)
             VStack(alignment: .leading, spacing: 4) {
                 Text("Why these picks")
-                    .font(.system(size: 12, weight: .semibold))
-                    .tracking(0.5)
+                    .riType(.label)
                     .foregroundStyle(Color.riMint)
                 Text(text)
-                    .font(.riCaption(14))
+                    .riType(.caption)
                     .foregroundStyle(Color.riMediumGray)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -239,21 +238,20 @@ struct TripPlanView: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline) {
                 Text("DAY \(day.dayNumber)")
-                    .font(.system(size: 11, weight: .bold))
-                    .tracking(1.5)
+                    .riType(.micro)
                     .foregroundStyle(Color.riMint)
                 Text(day.dayLabel)
-                    .font(.system(size: 15, weight: .semibold))
+                    .riType(.body, weight: .semibold)
                     .foregroundStyle(Color.riDark)
                 Spacer()
                 Text("\(day.itemIds.count) places")
-                    .font(.riCaption(12))
+                    .riType(.label)
                     .foregroundStyle(Color.riLightGray)
             }
 
             if day.itemIds.isEmpty {
                 Text("Nothing planned yet.")
-                    .font(.riCaption(13))
+                    .riType(.caption)
                     .foregroundStyle(Color.riLightGray)
                     .padding(.vertical, 4)
             } else {
@@ -275,7 +273,7 @@ struct TripPlanView: View {
                     Image(systemName: "plus.circle.fill")
                         .font(.system(size: 14, weight: .medium))
                     Text("Add a place")
-                        .font(.system(size: 13, weight: .semibold))
+                        .riType(.caption, weight: .semibold)
                 }
                 .foregroundStyle(Color.riMint)
             }
@@ -293,11 +291,11 @@ struct TripPlanView: View {
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(business.name)
-                    .font(.system(size: 14, weight: .semibold))
+                    .riType(.caption, weight: .semibold)
                     .foregroundStyle(Color.riDark)
                     .lineLimit(1)
                 Text("\(business.categoryDisplayName) · \(business.areaDisplayName)")
-                    .font(.riCaption(12))
+                    .riType(.label)
                     .foregroundStyle(Color.riLightGray)
                     .lineLimit(1)
             }
@@ -392,12 +390,11 @@ struct TripPlanView: View {
     private func sectionLabel(_ title: String, count: Int) -> some View {
         HStack {
             Text(title)
-                .font(.system(size: 11, weight: .bold))
-                .tracking(1.2)
+                .riType(.micro)
                 .foregroundStyle(Color.riMint)
             Spacer()
             Text("\(count)")
-                .font(.system(size: 11, weight: .semibold))
+                .riType(.micro, weight: .semibold)
                 .foregroundStyle(Color.riLightGray)
         }
         .padding(.horizontal, 24)
@@ -544,10 +541,10 @@ private struct AddToDaySheet: View {
 
                                     VStack(alignment: .leading, spacing: 2) {
                                         Text(business.name)
-                                            .font(.system(size: 15, weight: .semibold))
+                                            .riType(.body, weight: .semibold)
                                             .foregroundStyle(Color.riDark)
                                         Text("\(business.categoryDisplayName) · \(business.areaDisplayName)")
-                                            .font(.riCaption(12))
+                                            .riType(.label)
                                             .foregroundStyle(Color.riLightGray)
                                     }
 

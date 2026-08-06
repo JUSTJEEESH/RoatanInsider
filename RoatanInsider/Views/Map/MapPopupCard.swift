@@ -14,12 +14,12 @@ struct MapPopupCard: View {
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(business.name)
-                        .font(.system(size: 16, weight: .semibold))
+                        .riType(.body, weight: .semibold)
                         .foregroundStyle(Color.riDark)
                         .lineLimit(1)
 
                     Text(business.categoryDisplayName)
-                        .font(.riCaption(13))
+                        .riType(.caption)
                         .foregroundStyle(Color.riLightGray)
 
                     HStack(spacing: 4) {
@@ -27,7 +27,7 @@ struct MapPopupCard: View {
                         Text("·")
                         Text(business.priceLabel)
                     }
-                    .font(.riCaption(13))
+                    .riType(.caption)
                     .foregroundStyle(Color.riLightGray)
                 }
 
@@ -65,13 +65,13 @@ struct MapItemPopupCard: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(mapItem.name ?? "Unknown")
-                    .font(.system(size: 16, weight: .semibold))
+                    .riType(.body, weight: .semibold)
                     .foregroundStyle(Color.riDark)
                     .lineLimit(1)
 
                 if let address = mapItem.placemark.title {
                     Text(address)
-                        .font(.riCaption(13))
+                        .riType(.caption)
                         .foregroundStyle(Color.riLightGray)
                         .lineLimit(2)
                 }

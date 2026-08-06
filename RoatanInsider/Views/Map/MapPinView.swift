@@ -63,7 +63,7 @@ struct ClusterPinView: View {
                 .stroke(Color.white, lineWidth: 3)
                 .frame(width: size, height: size)
             Text("\(count)")
-                .font(.system(size: count >= 100 ? 14 : 16, weight: .bold))
+                .riType(count >= 100 ? .caption : .body, weight: .bold)
                 .foregroundStyle(.white)
                 .monospacedDigit()
         }

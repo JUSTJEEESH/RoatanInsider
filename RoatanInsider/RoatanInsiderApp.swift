@@ -22,6 +22,7 @@ struct RoatanInsiderApp: App {
     @State private var dataManager = DataManager()
     @State private var eventsService = EventsService()
     @State private var diveSitesService = DiveSitesService()
+    @State private var offlineDownloader = OfflineDownloader()
     @State private var eventFavoritesStore = EventFavoritesStore()
     @State private var cruiseArrivalsService = CruiseArrivalsService()
     private let modelContainer: ModelContainer
@@ -144,6 +145,7 @@ struct RoatanInsiderApp: App {
             .environment(dataManager)
             .environment(eventsService)
             .environment(diveSitesService)
+            .environment(offlineDownloader)
             .environment(eventFavoritesStore)
             .environment(cruiseArrivalsService)
             .environment(favoritesStore)

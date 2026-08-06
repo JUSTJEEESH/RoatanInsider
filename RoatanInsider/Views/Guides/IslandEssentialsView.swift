@@ -12,7 +12,7 @@ struct IslandEssentialsView: View {
                     }
                 } else {
                     Text("Loading essentials...")
-                        .font(.riBody)
+                        .riType(.body)
                         .foregroundStyle(Color.riLightGray)
                 }
             }
@@ -42,7 +42,7 @@ struct EssentialTopicCard: View {
                         .frame(width: 36)
 
                     Text(topic.title)
-                        .font(.system(size: 17, weight: .semibold))
+                        .riType(.heading)
                         .foregroundStyle(Color.riDark)
 
                     Spacer()
@@ -58,7 +58,7 @@ struct EssentialTopicCard: View {
             if isExpanded {
                 VStack(alignment: .leading, spacing: 12) {
                     Text(topic.content)
-                        .font(.riCaption(14))
+                        .riType(.caption)
                         .foregroundStyle(Color.riMediumGray)
                         .lineSpacing(4)
 
@@ -71,7 +71,7 @@ struct EssentialTopicCard: View {
                                     .padding(.top, 2)
 
                                 Text(tip)
-                                    .font(.riCaption(13))
+                                    .riType(.caption)
                                     .foregroundStyle(Color.riMediumGray)
                             }
                         }

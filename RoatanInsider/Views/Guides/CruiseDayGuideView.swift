@@ -11,7 +11,7 @@ struct CruiseDayGuideView: View {
                 // Port selector
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Select Your Port")
-                        .font(.system(size: 16, weight: .semibold))
+                        .riType(.body, weight: .semibold)
                         .foregroundStyle(Color.riDark)
 
                     if !dataManager.cruiseGuides.isEmpty {
@@ -26,7 +26,7 @@ struct CruiseDayGuideView: View {
 
                 if let guide = currentGuide {
                     Text(guide.portDescription)
-                        .font(.riBody)
+                        .riType(.body)
                         .foregroundStyle(Color.riMediumGray)
                         .lineSpacing(4)
 
@@ -34,7 +34,7 @@ struct CruiseDayGuideView: View {
                     if !guide.itineraries.isEmpty {
                         VStack(alignment: .leading, spacing: 12) {
                             Text("How Much Time Do You Have?")
-                                .font(.system(size: 16, weight: .semibold))
+                                .riType(.body, weight: .semibold)
                                 .foregroundStyle(Color.riDark)
 
                             HStack(spacing: 10) {
@@ -43,7 +43,7 @@ struct CruiseDayGuideView: View {
                                         selectedItineraryIndex = index
                                     } label: {
                                         Text(itinerary.duration)
-                                            .font(.riButton)
+                                            .riType(.body, weight: .semibold)
                                             .foregroundStyle(selectedItineraryIndex == index ? .white : Color.riDark)
                                             .padding(.horizontal, 16)
                                             .frame(height: 40)
@@ -59,7 +59,7 @@ struct CruiseDayGuideView: View {
                             // Itinerary steps
                             VStack(alignment: .leading, spacing: 0) {
                                 Text(itinerary.title)
-                                    .font(.system(size: 20, weight: .bold))
+                                    .riType(.heading, weight: .bold)
                                     .foregroundStyle(Color.riDark)
                                     .padding(.bottom, 16)
 
@@ -74,7 +74,7 @@ struct CruiseDayGuideView: View {
                     if !guide.safetyTips.isEmpty {
                         VStack(alignment: .leading, spacing: 12) {
                             Text("Safety Tips")
-                                .font(.system(size: 18, weight: .bold))
+                                .riType(.heading, weight: .bold)
                                 .foregroundStyle(Color.riDark)
 
                             ForEach(guide.safetyTips, id: \.self) { tip in
@@ -85,7 +85,7 @@ struct CruiseDayGuideView: View {
                                         .padding(.top, 2)
 
                                     Text(tip)
-                                        .font(.riCaption(14))
+                                        .riType(.caption)
                                         .foregroundStyle(Color.riMediumGray)
                                 }
                             }
@@ -99,7 +99,7 @@ struct CruiseDayGuideView: View {
                             .frame(width: 3)
 
                         Text(guide.returnReminder)
-                            .font(.riCaption(14))
+                            .riType(.caption)
                             .foregroundStyle(Color.riMediumGray)
                             .fontWeight(.medium)
                             .padding(.leading, 12)
@@ -147,28 +147,28 @@ struct ItineraryStepView: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(step.time)
-                    .font(.riCaption(12))
+                    .riType(.label)
                     .foregroundStyle(Color.riMint)
                     .fontWeight(.semibold)
 
                 Text(step.title)
-                    .font(.system(size: 16, weight: .semibold))
+                    .riType(.body, weight: .semibold)
                     .foregroundStyle(Color.riDark)
 
                 Text(step.description)
-                    .font(.riCaption(14))
+                    .riType(.caption)
                     .foregroundStyle(Color.riMediumGray)
                     .lineSpacing(3)
 
                 if let cost = step.estimatedCost {
                     Text("Est. cost: \(cost)")
-                        .font(.riCaption(12))
+                        .riType(.label)
                         .foregroundStyle(Color.riLightGray)
                 }
 
                 if let tip = step.tip {
                     Text(tip)
-                        .font(.riCaption(12))
+                        .riType(.label)
                         .foregroundStyle(Color.riMint)
                         .italic()
                 }

@@ -6,6 +6,7 @@ struct MapTabView: View {
     @Environment(LocationManager.self) private var locationManager
     @Environment(NetworkMonitor.self) private var networkMonitor
     @State private var viewModel = MapViewModel()
+    @State private var showNearby = false
 
     private var isOffline: Bool { !networkMonitor.isConnected }
 
@@ -13,17 +14,43 @@ struct MapTabView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 // Custom header matching other tabs
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Map")
-                        .riDisplayStyle(34)
+                HStack(alignment: .bottom) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Map")
+                            .riType(.display)
+                            .foregroundStyle(Color.riDark)
+                        Text("See what's around you")
+                            .riType(.caption)
+                            .foregroundStyle(Color.riMediumGray)
+                    }
+
+                    Spacer()
+
+                    // The island has no street addresses, so "what's within
+                    // walking distance" is the question people actually have
+                    // standing on a road here.
+                    Button {
+                        Haptics.tap()
+                        showNearby = true
+                    } label: {
+                        HStack(spacing: 5) {
+                            Image(systemName: "location.fill")
+                                .font(.system(size: 11, weight: .semibold))
+                            Text("Near me")
+                                .riType(.caption, weight: .semibold)
+                        }
                         .foregroundStyle(Color.riDark)
-                    Text("See what's around you")
-                        .font(.riCaption(15))
-                        .foregroundStyle(Color.riLightGray)
+                        .padding(.horizontal, AppConstants.Space.snug + 2)
+                        .padding(.vertical, AppConstants.Space.tight)
+                        .background(Color.riOffWhite)
+                        .clipShape(Capsule())
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("What's near me")
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 20)
-                .padding(.top, 12)
+                .padding(.horizontal, AppConstants.Space.gutter)
+                .padding(.top, AppConstants.Space.snug)
                 .padding(.bottom, 6)
 
                 MapSearchBar(
@@ -149,6 +176,9 @@ struct MapTabView: View {
             }
             .background(Color.riWhite)
             .navigationBarHidden(true)
+            .sheet(isPresented: $showNearby) {
+                NearbySheet(businesses: dataManager.businesses)
+            }
             .navigationDestination(for: Business.self) { business in
                 BusinessDetailView(business: business)
             }
@@ -181,7 +211,7 @@ struct MapSearchBar: View {
                 .font(.system(size: 15, weight: .medium))
 
             TextField("Search places on Roatán...", text: $query)
-                .font(.system(size: 15, weight: .regular))
+                .riType(.body)
                 .submitLabel(.search)
                 .onSubmit(onSubmit)
 

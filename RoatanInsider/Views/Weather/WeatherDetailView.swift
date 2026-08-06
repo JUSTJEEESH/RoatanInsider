@@ -65,6 +65,9 @@ struct WeatherDetailView: View {
                 .riType(.label)
                 .foregroundStyle(Color.riMediumGray)
 
+            // Deliberately off the scale. This is the one number the screen
+            // exists for, and .figure at 44 doesn't carry a hero — the same
+            // reasoning that makes ShareableBusinessCard exempt.
             Text("\(Int(c.temperatureF.rounded()))°")
                 .font(.system(size: 76, weight: .thin))
                 .tracking(-2)

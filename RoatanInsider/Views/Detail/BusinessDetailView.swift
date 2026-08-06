@@ -1,5 +1,6 @@
 import SwiftUI
 import MapKit
+import CoreLocation
 
 struct BusinessDetailView: View {
     let business: Business
@@ -7,6 +8,7 @@ struct BusinessDetailView: View {
     @Environment(DataManager.self) private var dataManager
     @Environment(RecentlyViewedStore.self) private var recentlyViewed
     @Environment(DiveSitesService.self) private var diveSites
+    @Environment(LocationManager.self) private var locationManager
     @Environment(\.zoomNamespace) private var zoomNS
 
     /// Always use the latest version from DataManager (picks up remote updates)
@@ -70,6 +72,10 @@ struct BusinessDetailView: View {
                             }
                         }
 
+                        // The decision line. Someone opens this page asking
+                        // two things — should I go, and how far is it — and
+                        // both used to be scattered: price here, hours four
+                        // hundred points down, distance nowhere at all.
                         HStack(spacing: 12) {
                             if let rating = b.rating {
                                 HStack(spacing: 4) {
@@ -84,6 +90,12 @@ struct BusinessDetailView: View {
                             }
                             PriceRangeView(priceRange: b.priceRange)
                             OpenStatusBadge(business: b)
+                            if let travel = TravelEstimate.label(to: b, from: locationManager.userLocation) {
+                                Text(travel)
+                                    .riType(.caption)
+                                    .foregroundStyle(Color.riMediumGray)
+                                    .lineLimit(1)
+                            }
                         }
                     }
 
@@ -180,12 +192,14 @@ struct BusinessDetailView: View {
 
                                 MiniMapView(coordinate: location.coordinate, name: b.name)
                                     .frame(height: 180)
-                                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                                    .clipShape(RoundedRectangle(cornerRadius: AppConstants.Radius.card, style: .continuous))
                             }
                         }
                     }
+
+                    nearbyBlock(b)
                 }
-                .padding(20)
+                .padding(AppConstants.Space.gutter)
             }
         }
         .background(Color.riWhite)
@@ -239,6 +253,53 @@ struct BusinessDetailView: View {
     private var shareCardImage: Image? {
         guard let ui = ShareHelper.shareImage(for: b) else { return nil }
         return Image(uiImage: ui)
+    }
+
+    /// What else is within a few minutes of here.
+    ///
+    /// The page had no idea what surrounded it, which is a strange thing for
+    /// a page about a place on a small island. Someone reading about a West
+    /// End restaurant obviously wants the bar two doors down — and this is
+    /// the single best way to keep them moving through the app rather than
+    /// bouncing back to a list.
+    ///
+    /// Walking distance only. A "nearby" list that reaches across the island
+    /// is just the directory again.
+    @ViewBuilder
+    private func nearbyBlock(_ b: Business) -> some View {
+        let neighbours = nearby(to: b)
+        if !neighbours.isEmpty {
+            VStack(alignment: .leading, spacing: AppConstants.Space.snug) {
+                Text("A FEW MINUTES AWAY")
+                    .riType(.label)
+                    .foregroundStyle(Color.riMediumGray)
+
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(alignment: .top, spacing: AppConstants.Space.snug) {
+                        ForEach(neighbours) { neighbour in
+                            BusinessCard(business: neighbour, style: .compact)
+                        }
+                    }
+                }
+                // Let the rail bleed past the page's gutter the way the
+                // horizontal rails elsewhere do, instead of stopping short.
+                .padding(.horizontal, -AppConstants.Space.gutter)
+                .padding(.leading, AppConstants.Space.gutter)
+            }
+        }
+    }
+
+    /// Closest first, capped at a walk. 700m is about ten minutes on foot,
+    /// which on this island usually means "the same stretch of road".
+    private func nearby(to business: Business) -> [Business] {
+        let origin = CLLocation(latitude: business.latitude, longitude: business.longitude)
+        return dataManager.activeBusinesses
+            .filter { $0.id != business.id }
+            .map { ($0, origin.distance(from: CLLocation(latitude: $0.latitude, longitude: $0.longitude))) }
+            .filter { $0.1 <= 700 }
+            .sorted { $0.1 < $1.1 }
+            .prefix(6)
+            .map(\.0)
     }
 
     /// The sites this shop runs — the other half of the link that makes a
