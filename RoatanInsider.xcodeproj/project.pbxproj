@@ -39,6 +39,7 @@
 		3430D22E527A455DAB8AF544 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = CDBC5B115FE54B17B0506FC8 /* Sentry */; };
 		3CFE3A24C4878E0F6442401B /* MapPopupCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0195FA7066564444A2AD86C1 /* MapPopupCard.swift */; };
 		3FD1EB5C9D3E5DA1F0758290 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51054B681FC2110BFBBA3B9 /* Constants.swift */; };
+		EE66FF77880099AA11220601 /* TravelEstimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220602 /* TravelEstimate.swift */; };
 		4170CD6D76F8D9F541B1DF3C /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414E435A7648730B69DDDD4 /* Favorite.swift */; };
 		479F702AFAF3B6D85561B6D9 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F22F7E1102E1D308B79DA47 /* MapViewModel.swift */; };
 		4A6280F790064A116902C056 /* MapTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36112C333F250CC64E4826D3 /* MapTabView.swift */; };
@@ -293,6 +294,7 @@
 		C25E7EE11F9B4BA8863E1EC0 /* ExchangeRateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateService.swift; sourceTree = "<group>"; };
 		C414E435A7648730B69DDDD4 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		C51054B681FC2110BFBBA3B9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EE66FF77880099AA11220602 /* TravelEstimate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelEstimate.swift; sourceTree = "<group>"; };
 		C59651E187E480E7EDB4DF49 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		C6258ED1366C00347B067090 /* RoatanInsiderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoatanInsiderApp.swift; sourceTree = "<group>"; };
 		CATE60R1E500000000000002 /* categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 			children = (
 				BA9E6BAAFFD476DF7857E10B /* Colors.swift */,
 				C51054B681FC2110BFBBA3B9 /* Constants.swift */,
+				EE66FF77880099AA11220602 /* TravelEstimate.swift */,
 				F42C0F536141123397F12BB3 /* Extensions.swift */,
 				6E372D20A681F4605FF9F95E /* Fonts.swift */,
 				AA22BB33CC44DD55EE66FF02 /* Haptics.swift */,
@@ -892,6 +895,7 @@
 				D8C3343F54904A0EE13A261E /* ToolsView.swift in Sources */,
 				0055DE1F42FE3CCFBF8B0A24 /* Colors.swift in Sources */,
 				3FD1EB5C9D3E5DA1F0758290 /* Constants.swift in Sources */,
+				EE66FF77880099AA11220601 /* TravelEstimate.swift in Sources */,
 				A4DADDCADC5AB14F38A3C02B /* Extensions.swift in Sources */,
 				78AF3FF6C235822D0DF0F776 /* Fonts.swift in Sources */,
 				1AE9C4081261D4DB4583A7F6 /* Area.swift in Sources */,
