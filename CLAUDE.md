@@ -88,12 +88,21 @@ actual code win. See `STATE_OF_THE_APP.md` for the full picture.
   driving both the hourly scrubber and the ten-day list, plus a tile grid),
   rendered in this app's flat language — no glass, no gradients. `MoonPhase`
   is computed, not fetched. Wind is stored in **mph**, not km/h.
-- **Two features ship with empty data files and hide themselves until
-  filled:** `taxi_fares.json` (routes present, prices null) and
-  `dive_sites.json` (empty). Neither renders anything it doesn't hold, and
-  the paywall's dive-site claim is gated on `diveSites.hasSites` so it can't
-  promise content the build doesn't contain. Dive sites are Insider+;
-  taxi fares are free on purpose.
+- **Dive sites are real content now** — 22 in `dive_sites.json`, compiled
+  from operator sources and cross-checked. Insider+ gated; the paywall claim
+  is behind `diveSites.hasSites` so it can't promise content the build
+  doesn't contain. Two things in that file are deliberately NOT asserted and
+  say so at the top: coordinates are approximate placements (orientation, not
+  navigation) and `operatorSlugs` is empty except Front Porch, because
+  claiming a shop runs a site is a factual claim about someone's business.
+  Fill those and the site↔shop link lights up.
+- **`taxi_fares.json` ships with routes and null prices.** The screen renders
+  only routes that hold a fare and hides entirely when none do — safe to ship
+  half-filled. Free on purpose: being the app that stopped you getting
+  overcharged is worth more than the subscription.
+- **Scale sweep is done everywhere except Onboarding, Paywall and Cruise
+  Mode.** Deliberate off-scale sizes are commented as such where they occur
+  (weather hero at 76pt, `ShareableBusinessCard`, `RatingView`).
 - **Content ops:** business/guide content is curated via CSV → JSON → Supabase
   (see `tools/`), and events/cruise data comes from Keith's sources with his
   explicit permission. When editing content by hand, remember the scrapers
