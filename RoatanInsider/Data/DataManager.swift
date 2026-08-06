@@ -9,13 +9,25 @@ final class DataManager {
     var areaGuides: [AreaGuide] = []
     var essentials: EssentialsGuide?
     var askALocalQuestions: [LocalQA] = []
-    var categoryInfos: [CategoryInfo] = CategoryInfo.defaults
+    var categoryInfos: [CategoryInfo] = CategoryInfo.defaults {
+        didSet { rebuildDerived() }
+    }
 
     // Memoized derived collections — rebuilt only when `businesses` changes,
     // not on every SwiftUI render. Home reads these 6+ times per frame.
     private(set) var activeBusinesses: [Business] = []
     private(set) var featuredBusinesses: [Business] = []
     private(set) var bestOfBusinesses: [Business] = []
+
+    /// The categories that have something behind them.
+    ///
+    /// Half the shipped categories have no listings yet, and a tile that
+    /// opens an empty screen is worse than one that isn't there — it reads
+    /// as a broken app rather than a young directory. Derived rather than
+    /// deleted: add one real estate listing and Real Estate comes back by
+    /// itself, on Home, in Explore's filters and on the Map, with no data
+    /// edit and no release.
+    private(set) var browsableCategoryInfos: [CategoryInfo] = []
 
     init() {
         loadAll()
@@ -26,6 +38,12 @@ final class DataManager {
         activeBusinesses = businesses.filter { $0.isActive }
         featuredBusinesses = activeBusinesses.filter { $0.isFeatured }
         bestOfBusinesses = activeBusinesses.filter { $0.isBestOf }
+
+        // Counts the additional categories too, so a dive shop that also
+        // sells gear keeps Shop alive.
+        let populated = Set(activeBusinesses.flatMap { $0.allCategories.map(\.category) })
+        browsableCategoryInfos = categoryInfos.filter { populated.contains($0.id) }
+
         BusinessSearchHaystackCache.shared.purgeAll()
     }
 

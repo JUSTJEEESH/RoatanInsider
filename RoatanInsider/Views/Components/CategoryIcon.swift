@@ -9,8 +9,18 @@ import SwiftUI
 /// also what the palette rules ask for (categories are told apart by icon,
 /// never by colour).
 ///
-/// The tap target keeps the full former footprint even though nothing is
-/// drawn there, so the grid is no harder to hit than it was.
+/// Removing the circle left its footprint behind: a 22pt glyph was still
+/// centred in a 48pt box, so there were roughly 13pt of dead space under it
+/// before the 12pt stack spacing even began. Twenty-five points from glyph
+/// to label, against thirty-three between rows — near enough the same gap
+/// that each label read as floating between two icons rather than belonging
+/// to one, and the small glyphs left the columns looking airy and loose.
+///
+/// The box is now cut to the glyph, the glyph is larger and no longer
+/// hairline-weight, and the label sits just under it. Icon and name read as
+/// one object; the row spacing in the grid does the separating.
+///
+/// The whole stack is the tap target and clears 44pt comfortably.
 struct CategoryIcon: View {
     let iconName: String
     let displayName: String
@@ -42,11 +52,11 @@ struct CategoryIcon: View {
     }
 
     var body: some View {
-        VStack(spacing: AppConstants.Space.snug) {
+        VStack(spacing: AppConstants.Space.hair) {
             Image(systemName: iconName)
-                .font(.system(size: size * 0.46, weight: .light))
+                .font(.system(size: size * 0.55, weight: .regular))
                 .foregroundStyle(lightText ? .white : Color.riDark)
-                .frame(width: size, height: size)
+                .frame(width: size, height: size * 0.58)
 
             Text(displayName)
                 .riType(.caption)

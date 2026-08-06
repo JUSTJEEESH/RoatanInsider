@@ -32,12 +32,12 @@ enum Category: String, Codable, CaseIterable, Identifiable {
         case .services: return "Services"
         case .wellness: return "Wellness"
         case .groceries: return "Groceries"
-        case .photography: return "Photography"
-        case .health: return "Health & Medical"
-        case .fitness: return "Fitness & Gym"
-        case .marina: return "Marina & Boating"
-        case .events: return "Events & Weddings"
-        case .family: return "Kids & Family"
+        case .photography: return "Photos"
+        case .health: return "Health"
+        case .fitness: return "Fitness"
+        case .marina: return "Boating"
+        case .events: return "Weddings"
+        case .family: return "Family"
         }
     }
 

@@ -113,11 +113,26 @@ struct CategoryListView: View {
     }
 
     var body: some View {
+        let results = dataManager.businesses(forCategoryId: categoryId)
+
         ScrollView {
             // No outer NavigationLink — BusinessCard already is one.
             LazyVStack(spacing: AppConstants.Space.gutter) {
-                ForEach(dataManager.businesses(forCategoryId: categoryId)) { business in
-                    BusinessCard(business: business)
+                if results.isEmpty {
+                    // Home, Explore and the Map all hide categories with
+                    // nothing in them, so this should be unreachable. It
+                    // exists because a deep link or a stale cached
+                    // categories.json can still land someone here, and a
+                    // blank white page reads as a crash.
+                    EmptyStateView(
+                        symbol: "magnifyingglass",
+                        title: "Nothing here yet",
+                        message: "We haven't written up anywhere in \(displayName) so far. It's on the list."
+                    )
+                } else {
+                    ForEach(results) { business in
+                        BusinessCard(business: business)
+                    }
                 }
             }
             .padding(AppConstants.Space.gutter)

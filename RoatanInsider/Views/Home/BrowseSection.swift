@@ -34,8 +34,10 @@ struct BrowseSection: View {
             }
             .padding(.horizontal, AppConstants.Space.gutter)
 
-            LazyVGrid(columns: columns, spacing: AppConstants.Space.gutter) {
-                ForEach(dataManager.categoryInfos) { info in
+            // Row spacing does the separating now that each icon sits tight
+            // to its own label — see `CategoryIcon`.
+            LazyVGrid(columns: columns, spacing: AppConstants.Space.block) {
+                ForEach(dataManager.browsableCategoryInfos) { info in
                     NavigationLink(value: CategoryNavID(id: info.id)) {
                         CategoryIcon(categoryInfo: info, lightText: true)
                     }

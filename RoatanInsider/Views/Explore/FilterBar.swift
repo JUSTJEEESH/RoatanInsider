@@ -24,7 +24,7 @@ struct FilterBar: View {
             // Primary row: Categories + Open Now + Price
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
-                    ForEach(dataManager.categoryInfos) { info in
+                    ForEach(dataManager.browsableCategoryInfos) { info in
                         FilterChip(
                             label: info.displayName,
                             isSelected: searchEngine.selectedCategories.contains(info.id)

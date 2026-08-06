@@ -148,7 +148,7 @@ struct MapTabView: View {
                     FilterChip(label: "All", isSelected: viewModel.selectedCategory == nil) {
                         viewModel.selectCategory(nil)
                     }
-                    ForEach(dataManager.categoryInfos) { info in
+                    ForEach(dataManager.browsableCategoryInfos) { info in
                         FilterChip(
                             label: info.displayName,
                             isSelected: viewModel.selectedCategory == info.id
