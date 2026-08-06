@@ -1,8 +1,5 @@
 import SwiftUI
 
-/// Marker type for the dive site list.
-struct DiveSitesDestination: Hashable {}
-
 /// The reef, by name.
 ///
 /// An Insider+ feature, per the call that the directory, map, events and
@@ -132,7 +129,7 @@ struct DiveSitesView: View {
                         Divider().overlay(Color.riDark.opacity(0.08))
                     }
                     NavigationLink(value: site) {
-                        row(site)
+                        row(site, isLocked: false)
                     }
                     .buttonStyle(.plain)
                 }
@@ -141,7 +138,10 @@ struct DiveSitesView: View {
         }
     }
 
-    private func row(_ site: DiveSite) -> some View {
+    /// `isLocked` swaps the chevron for a lock. A row that looks tappable
+    /// and isn't is indistinguishable from a broken one — which is exactly
+    /// how the locked preview read before.
+    private func row(_ site: DiveSite, isLocked: Bool) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: AppConstants.Space.snug) {
             VStack(alignment: .leading, spacing: 3) {
                 HStack(spacing: 6) {
@@ -170,19 +170,25 @@ struct DiveSitesView: View {
                     .layoutPriority(1)
             }
 
-            Image(systemName: "chevron.right")
+            Image(systemName: isLocked ? "lock" : "chevron.right")
                 .font(.system(size: 12, weight: .semibold))
                 .foregroundStyle(Color.riLightGray)
         }
         .padding(.vertical, AppConstants.Space.snug)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
+        .accessibilityHint(isLocked ? "Insider+ required" : "")
     }
 
     // MARK: - Locked
 
     /// Names three sites and then stops. Someone deciding whether to pay
     /// needs to see the shape of what's inside, not a padlock.
+    ///
+    /// The rows are tappable and open the paywall. They used to carry a
+    /// chevron and `allowsHitTesting(false)`, which is the worst of both:
+    /// it looks like a link, does nothing when you press it, and gives you
+    /// no idea why.
     private var preview: some View {
         VStack(alignment: .leading, spacing: AppConstants.Space.gutter) {
             VStack(spacing: 0) {
@@ -190,11 +196,16 @@ struct DiveSitesView: View {
                     if index > 0 {
                         Divider().overlay(Color.riDark.opacity(0.08))
                     }
-                    row(site)
+                    Button {
+                        Haptics.tap()
+                        showPaywall = true
+                    } label: {
+                        row(site, isLocked: true)
+                    }
+                    .buttonStyle(.plain)
                 }
             }
             .padding(.horizontal, AppConstants.Space.gutter)
-            .allowsHitTesting(false)
 
             VStack(alignment: .leading, spacing: AppConstants.Space.snug) {
                 Text("\(max(0, diveSites.sites.count - 3)) more sites with Insider+")

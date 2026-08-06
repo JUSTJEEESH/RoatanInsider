@@ -1,5 +1,17 @@
 import SwiftUI
 
+/// Which guide a row opens.
+///
+/// A value rather than a view, because the stack has to know about it. A
+/// view pushed by `NavigationLink { SomeView() }` cannot see the
+/// `navigationDestination(for:)` declarations on the stack's root, so any
+/// value-based link *inside* that view silently does nothing — which is what
+/// happened to every row of the dive site list. Mixing the two link styles
+/// in one stack is the trap; this side of the app is value-based throughout.
+enum GuideDestination: Hashable {
+    case cruise, areas, essentials, askALocal, diveSites
+}
+
 /// The deeper reading, at the bottom of Home where it belongs — nobody
 /// opens a travel app to read a guide first.
 ///
@@ -16,9 +28,7 @@ struct QuickGuidesSection: View {
         let id = UUID()
         let title: String
         let subtitle: String
-        let destination: Destination
-
-        enum Destination { case cruise, areas, essentials, askALocal, diveSites }
+        let destination: GuideDestination
     }
 
     /// Dive sites appear only once there are sites loaded — an entry point
@@ -62,9 +72,7 @@ struct QuickGuidesSection: View {
                     if index > 0 {
                         Divider().overlay(Color.riDark.opacity(0.08))
                     }
-                    NavigationLink {
-                        destinationView(for: guide.destination)
-                    } label: {
+                    NavigationLink(value: guide.destination) {
                         row(guide)
                     }
                     .buttonStyle(.plain)
@@ -98,9 +106,15 @@ struct QuickGuidesSection: View {
         .accessibilityElement(children: .combine)
     }
 
+}
+
+extension GuideDestination {
+    /// Resolved by the stack, not by the link. Lives here rather than in
+    /// `HomeView` so the list of guides and the views they open stay in one
+    /// place.
     @ViewBuilder
-    private func destinationView(for destination: Guide.Destination) -> some View {
-        switch destination {
+    var view: some View {
+        switch self {
         case .cruise:     CruiseDayGuideView()
         case .areas:      AreaGuideView()
         case .essentials: IslandEssentialsView()

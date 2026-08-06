@@ -83,9 +83,7 @@ struct HomeView: View {
             .navigationDestination(for: WeatherDestination.self) { _ in
                 WeatherDetailView()
             }
-            .navigationDestination(for: DiveSitesDestination.self) { _ in
-                DiveSitesView()
-            }
+            .navigationDestination(for: GuideDestination.self) { $0.view }
             .navigationDestination(for: DiveSite.self) { site in
                 DiveSiteDetailView(site: site)
             }
