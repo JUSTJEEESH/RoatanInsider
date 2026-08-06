@@ -84,6 +84,16 @@ actual code win. See `STATE_OF_THE_APP.md` for the full picture.
   (the rest of the island, 1 in 5). Travel time comes from `TravelEstimate`,
   whose winding factor and average speed are the two numbers to tune if the
   estimates read wrong.
+- **Weather** follows iOS Weather's information design (one metric picker
+  driving both the hourly scrubber and the ten-day list, plus a tile grid),
+  rendered in this app's flat language — no glass, no gradients. `MoonPhase`
+  is computed, not fetched. Wind is stored in **mph**, not km/h.
+- **Two features ship with empty data files and hide themselves until
+  filled:** `taxi_fares.json` (routes present, prices null) and
+  `dive_sites.json` (empty). Neither renders anything it doesn't hold, and
+  the paywall's dive-site claim is gated on `diveSites.hasSites` so it can't
+  promise content the build doesn't contain. Dive sites are Insider+;
+  taxi fares are free on purpose.
 - **Content ops:** business/guide content is curated via CSV → JSON → Supabase
   (see `tools/`), and events/cruise data comes from Keith's sources with his
   explicit permission. When editing content by hand, remember the scrapers

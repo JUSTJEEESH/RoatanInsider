@@ -12,6 +12,7 @@ import StoreKit
 ///   3. Grandfathered user — show a thank-you, no buy button.
 struct PaywallView: View {
     @Environment(PurchaseManager.self) private var purchases
+    @Environment(DiveSitesService.self) private var diveSites
     @Environment(\.dismiss) private var dismiss
 
     @State private var selectedProductID: String = PurchaseManager.yearlyProductID
@@ -130,11 +131,18 @@ struct PaywallView: View {
     // Only claim what ships today. As real Insider+ features land (offline
     // maps, partner discounts, saved-spot alerts), add them back here —
     // App Review compares this list against the app.
+    //
+    // Dive sites are conditional for exactly that reason: the feature is
+    // built but the site list ships empty, and a paywall promising content
+    // the build doesn't contain is the same mistake that had this screen
+    // advertising offline maps that never existed.
 
     private var benefits: some View {
         VStack(alignment: .leading, spacing: 14) {
-            benefit(icon: "sparkles", title: "AI itinerary builder", detail: "A day-by-day plan built around your dates, pace, and interests — in seconds.")
-            benefit(icon: "arrow.trianglehead.2.clockwise", title: "Unlimited replanning", detail: "Weather turned? Ship delayed? Rebuild the day as many times as you need.")
+            if diveSites.hasSites {
+                benefit(icon: "water.waves", title: "Every dive site by name", detail: "Depths, levels, what you can reach from shore, and which shops run each one.")
+            }
+            benefit(icon: "sparkles", title: "AI itinerary builder", detail: "A day-by-day plan built around your dates, pace, and interests — and rebuilt as often as you need when the weather turns.")
             benefit(icon: "heart.fill", title: "Keep the guide independent", detail: "Insider+ funds the curation. No ads, no pay-to-play listings, ever.")
             benefit(icon: "hammer.fill", title: "Everything Insider next", detail: "New member features land here first as they ship.")
         }
