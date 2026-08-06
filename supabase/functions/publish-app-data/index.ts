@@ -22,7 +22,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.0";
 
 const BUCKET = "app-data";
 const REPO = "JUSTJEEESH/RoatanInsider";
-const SOURCE_COMMIT = "dacbc7ec998e1e176c51f966643a852edaa37348";
+const SOURCE_COMMIT = "f42784d4138ec2a1f720ccb4460b4b5b59a90ecc";
 
 // Repo path -> object name in the bucket.
 const FROM_REPO: Record<string, string> = {
