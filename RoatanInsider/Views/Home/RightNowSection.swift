@@ -1,5 +1,12 @@
 import SwiftUI
 
+/// The top of Explore: what suits this hour.
+///
+/// The scoring underneath is the valuable part and is unchanged — it reads
+/// the clock, excludes categories that make no sense right now, and rewards
+/// places that are actually open. What changed is where it lives and how it
+/// looks. It sat on Home among six other rails all asking "which places?",
+/// and it now opens Explore, where being opinionated is the whole job.
 struct RightNowSection: View {
     let businesses: [Business]
     private let context = TimeContext.current
@@ -7,55 +14,46 @@ struct RightNowSection: View {
     var body: some View {
         let recommended = recommendedBusinesses
         if !recommended.isEmpty {
-            VStack(alignment: .leading, spacing: 20) {
-                // Contextual header
-                VStack(alignment: .leading, spacing: 6) {
-                    HStack(spacing: 8) {
-                        Image(systemName: context.icon)
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(Color.riMint)
-
+            VStack(alignment: .leading, spacing: AppConstants.Space.snug) {
+                VStack(alignment: .leading, spacing: AppConstants.Space.hair) {
+                    HStack(alignment: .firstTextBaseline, spacing: AppConstants.Space.tight) {
                         Text("RIGHT NOW")
-                            .font(.system(size: 12, weight: .bold))
+                            .riType(.label)
                             .foregroundStyle(Color.riMint)
-                            .tracking(1.5)
 
-                        Spacer()
+                        Spacer(minLength: AppConstants.Space.hair)
 
-                        // Sunset countdown
                         if let countdown = SunsetCalculator.sunsetCountdown() {
-                            HStack(spacing: 4) {
-                                Image(systemName: "sunset.fill")
-                                    .font(.system(size: 12, weight: .medium))
-                                Text("Sunset \(countdown)")
-                                    .font(.system(size: 12, weight: .semibold))
-                            }
-                            .foregroundStyle(Color.riMediumGray)
-                            .accessibilityLabel("Sunset in \(countdown)")
+                            Text("Sunset in \(countdown)")
+                                .riType(.caption)
+                                .foregroundStyle(Color.riMediumGray)
+                                .accessibilityLabel("Sunset in \(countdown)")
                         }
                     }
 
                     Text(context.headline)
-                        .riHeadlineStyle(24)
+                        .riType(.title)
                         .foregroundStyle(Color.riDark)
+                        .fixedSize(horizontal: false, vertical: true)
                         .accessibilityAddTraits(.isHeader)
 
                     Text(context.subheadline)
-                        .font(.riBody)
+                        .riType(.caption)
                         .foregroundStyle(Color.riMediumGray)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal, AppConstants.Space.gutter)
 
-                // Horizontal scroll of recommended businesses
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 14) {
+                    HStack(alignment: .top, spacing: AppConstants.Space.snug) {
                         ForEach(recommended.prefix(8)) { business in
-                            BusinessCard(business: business, style: .compact, darkStyle: true)
+                            BusinessCard(business: business, style: .compact)
                         }
                     }
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, AppConstants.Space.gutter)
                 }
             }
+            .onAppear { Analytics.track(.homeSectionViewed(name: "right_now")) }
         }
     }
 

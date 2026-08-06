@@ -7,11 +7,13 @@ struct FilterBar: View {
     @State private var showAreaSheet = false
     @State private var showFeatureSheet = false
 
-    private static let popularFeatures = [
-        "Family Friendly", "Beachfront", "PADI Certified",
-        "Live Music", "Romantic", "Eco Friendly",
-        "WiFi", "Pool", "Ocean View", "Budget Friendly"
-    ]
+    /// The commonest tags, taken from `allFeatures` (already filtered to
+    /// those covering four or more places, commonest first). This used to be
+    /// a hardcoded list, which meant it could name a tag the data no longer
+    /// used — a filter chip that returns nothing.
+    private var quickFeatures: [String] {
+        Array(allFeatures.prefix(8))
+    }
 
     private var activeFilterCount: Int {
         searchEngine.selectedAreas.count + searchEngine.selectedFeatures.count
@@ -84,7 +86,7 @@ struct FilterBar: View {
                         .frame(height: 24)
 
                     // Popular feature quick chips
-                    ForEach(Self.popularFeatures, id: \.self) { feature in
+                    ForEach(quickFeatures, id: \.self) { feature in
                         FilterChip(
                             label: feature,
                             isSelected: searchEngine.selectedFeatures.contains(feature)
@@ -113,10 +115,9 @@ struct FilterBar: View {
                             Image(systemName: "xmark.circle.fill")
                                 .font(.system(size: 12))
                             Text("Clear all filters")
-                                .font(.riCaption(13))
-                                .fontWeight(.medium)
+                                .riType(.caption, weight: .semibold)
                         }
-                        .foregroundStyle(Color.riPink)
+                        .foregroundStyle(Color.riMediumGray)
                     }
                     .padding(.leading, 20)
 
@@ -158,11 +159,11 @@ struct AreaFilterSheet: View {
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(guide.name)
-                                    .font(.system(size: 16, weight: .medium))
+                                    .riType(.body, weight: .medium)
                                     .foregroundStyle(Color.riDark)
 
                                 Text(guide.bestFor)
-                                    .font(.riCaption(13))
+                                    .riType(.caption)
                                     .foregroundStyle(Color.riLightGray)
                                     .lineLimit(1)
                             }
@@ -271,11 +272,10 @@ struct FilterChip: View {
     var body: some View {
         Button(action: { Haptics.tap(); action() }) {
             Text(label)
-                .font(.riCaption(14))
-                .fontWeight(.medium)
+                .riType(.caption, weight: isSelected ? .semibold : .medium)
                 .foregroundStyle(isSelected ? .white : Color.riMediumGray)
-                .padding(.horizontal, 14)
-                .padding(.vertical, 8)
+                .padding(.horizontal, AppConstants.Space.snug + 2)
+                .padding(.vertical, AppConstants.Space.tight)
                 .background(isSelected ? Color.riPink : Color.riOffWhite)
                 .clipShape(Capsule())
         }
@@ -294,8 +294,7 @@ struct FilterChipDropdown: View {
                 Text(label)
                 if count > 0 {
                     Text("\(count)")
-                        .font(.riCaption(11))
-                        .fontWeight(.bold)
+                        .riType(.micro)
                         .foregroundStyle(.white)
                         .frame(width: 18, height: 18)
                         .background(Color.riMint)
@@ -304,11 +303,10 @@ struct FilterChipDropdown: View {
                 Image(systemName: "chevron.down")
                     .font(.system(size: 10, weight: .semibold))
             }
-            .font(.riCaption(14))
-            .fontWeight(.medium)
+            .riType(.caption, weight: .medium)
             .foregroundStyle(count > 0 ? .white : Color.riMediumGray)
-            .padding(.horizontal, 14)
-            .padding(.vertical, 8)
+            .padding(.horizontal, AppConstants.Space.snug + 2)
+            .padding(.vertical, AppConstants.Space.tight)
             .background(count > 0 ? Color.riPink : Color.riOffWhite)
             .clipShape(Capsule())
         }

@@ -11,10 +11,26 @@ final class SearchEngine {
     var showOpenNow: Bool = false
     var sortOption: SortOption = .featured
 
-    enum SortOption: String, CaseIterable {
-        case featured = "Featured"
-        case nameAZ = "Name A-Z"
-        case distance = "Distance"
+    /// Sort choices. `distance` needs a user location; `requiresLocation`
+    /// lets the UI hide it rather than offering a control that silently does
+    /// nothing — which is exactly what it did before, since nothing ever
+    /// passed a location in and no UI ever offered the choice.
+    enum SortOption: String, CaseIterable, Identifiable {
+        case featured = "Best first"
+        case distance = "Nearest"
+        case nameAZ = "A–Z"
+
+        var id: String { rawValue }
+
+        var requiresLocation: Bool { self == .distance }
+
+        var symbol: String {
+            switch self {
+            case .featured: return "sparkles"
+            case .distance: return "location"
+            case .nameAZ:   return "textformat.abc"
+            }
+        }
     }
 
     var hasActiveFilters: Bool {
@@ -104,9 +120,24 @@ final class SearchEngine {
         return results
     }
 
-    static func allFeatures(from businesses: [Business]) -> [String] {
-        let allFeatures = businesses.flatMap { $0.features }
-        let unique = Set(allFeatures)
-        return unique.sorted()
+    /// Feature tags worth offering as a filter, commonest first.
+    ///
+    /// The vocabulary has 123 distinct tags and 57 of them apply to exactly
+    /// one business. A filter that returns a single result isn't a filter,
+    /// it's a dead end — and a list of 123 chips is unscannable, so the rare
+    /// ones were crowding out the useful ones. Tags below the threshold
+    /// still show on the business page; they just aren't offered as a way to
+    /// narrow a list.
+    static func allFeatures(from businesses: [Business], minimumCoverage: Int = 4) -> [String] {
+        var counts: [String: Int] = [:]
+        for business in businesses where business.isActive {
+            for feature in Set(business.features) {
+                counts[feature, default: 0] += 1
+            }
+        }
+        return counts
+            .filter { $0.value >= minimumCoverage }
+            .sorted { $0.value == $1.value ? $0.key < $1.key : $0.value > $1.value }
+            .map(\.key)
     }
 }

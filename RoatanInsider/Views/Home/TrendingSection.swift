@@ -4,33 +4,43 @@ import SwiftUI
 /// 7 days. Hides itself when there's no signal yet, so an empty backend
 /// doesn't leave a sad zero-state on Home.
 ///
-/// Layout matches the other horizontal-scroll sections (Featured,
-/// Continue Browsing): SectionHeader + LazyHStack of compact cards.
-/// The differentiator is a flame badge on each card showing the total
-/// reaction count — earns the "trending" feel without colored chrome.
+/// Sits in Explore's discovery mode alongside Right Now and Where You Left
+/// Off, matching their kicker-and-title shape. The differentiator is a flame
+/// badge carrying the reaction count — the "trending" feel without coloured
+/// chrome. It's offset clear of the save heart, which claims the same
+/// corner.
 struct TrendingSection: View {
     @Environment(TrendingReactionsService.self) private var trending
     @Environment(DataManager.self) private var dataManager
 
     var body: some View {
         if !resolvedBusinesses.isEmpty {
-            VStack(alignment: .leading, spacing: 20) {
-                SectionHeader(title: "Loved right now", lightText: false)
+            VStack(alignment: .leading, spacing: AppConstants.Space.snug) {
+                VStack(alignment: .leading, spacing: AppConstants.Space.hair) {
+                    Text("TRENDING")
+                        .riType(.label)
+                        .foregroundStyle(Color.riMediumGray)
+                    Text("What people are reacting to")
+                        .riType(.title)
+                        .foregroundStyle(Color.riDark)
+                }
+                .padding(.horizontal, AppConstants.Space.gutter)
 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 16) {
+                    HStack(alignment: .top, spacing: AppConstants.Space.snug) {
                         ForEach(Array(resolvedBusinesses.enumerated()), id: \.element.business.id) { _, item in
                             NavigationLink(value: item.business) {
                                 ZStack(alignment: .topTrailing) {
                                     BusinessCard(business: item.business, style: .compact)
                                     flameBadge(count: item.entry.total_reactions)
-                                        .padding(10)
+                                        .padding(AppConstants.Space.tight)
+                                        .padding(.trailing, AppConstants.minTapTarget - AppConstants.Space.tight)
                                 }
                             }
                             .buttonStyle(.plain)
                         }
                     }
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, AppConstants.Space.gutter)
                 }
             }
             .task { trending.refreshIfStale() }
@@ -64,7 +74,7 @@ struct TrendingSection: View {
             Image(systemName: "flame.fill")
                 .font(.system(size: 10, weight: .bold))
             Text("\(count)")
-                .font(.system(size: 11, weight: .bold))
+                .riType(.micro)
                 .monospacedDigit()
         }
         .foregroundStyle(.white)

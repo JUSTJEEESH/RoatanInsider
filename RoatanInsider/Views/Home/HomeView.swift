@@ -10,18 +10,18 @@ import SwiftUI
 ///
 /// The six that remain, in the order a visitor needs them:
 ///   1. HomeHeader     — who you are, and the conditions, on two lines
+///   1b. ConditionsBand — the next ten hours, where the header can't show change
 ///   2. TodaySection   — one ranked list of what's true today (adapts to you)
 ///   3. TonightSection — what's on now and next
 ///   4. InsiderPickSection — the single editorial moment
 ///   5. BrowseSection  — the handoff to Explore
 ///   6. QuickGuides    — the deeper reading
 ///
-/// Sections that moved rather than died: the time-of-day business scoring
-/// in `RightNowSection`, `TrendingSection` and `ContinueBrowsingSection`
-/// belong in Explore, where they work across all 94 places instead of six;
-/// they're wired up in the Explore pass and their files stay put until
-/// then. `BusinessCTASection` moved to Settings, where an owner will
-/// actually look for it.
+/// Sections that moved rather than died: the time-of-day business scoring in
+/// `RightNowSection`, `TrendingSection` and `ContinueBrowsingSection` now
+/// open Explore, where they work across all 94 places instead of six.
+/// `BusinessCTASection` moved to Settings, where an owner will actually look
+/// for it.
 struct HomeView: View {
     @Binding var selectedTab: Int
     @Environment(DataManager.self) private var dataManager

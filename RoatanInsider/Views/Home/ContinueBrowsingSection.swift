@@ -16,28 +16,24 @@ struct ContinueBrowsingSection: View {
     var body: some View {
         let recents = items
         if !recents.isEmpty {
-            VStack(alignment: .leading, spacing: 18) {
-                HStack(alignment: .firstTextBaseline) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("CONTINUE BROWSING")
-                            .font(.system(size: 12, weight: .bold))
-                            .tracking(1.5)
-                            .foregroundStyle(Color.riMint)
-                        Text("Pick up where you left off")
-                            .riHeadlineStyle(22)
-                            .foregroundStyle(Color.riDark)
-                    }
-                    Spacer()
+            VStack(alignment: .leading, spacing: AppConstants.Space.snug) {
+                VStack(alignment: .leading, spacing: AppConstants.Space.hair) {
+                    Text("WHERE YOU LEFT OFF")
+                        .riType(.label)
+                        .foregroundStyle(Color.riMediumGray)
+                    Text("Places you looked at")
+                        .riType(.title)
+                        .foregroundStyle(Color.riDark)
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal, AppConstants.Space.gutter)
 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 14) {
+                    HStack(alignment: .top, spacing: AppConstants.Space.snug) {
                         ForEach(recents.prefix(8)) { business in
                             BusinessCard(business: business, style: .compact)
                         }
                     }
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, AppConstants.Space.gutter)
                 }
             }
             .onAppear {

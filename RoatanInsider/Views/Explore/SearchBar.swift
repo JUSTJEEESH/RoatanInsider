@@ -9,8 +9,8 @@ struct SearchBar: View {
                 .font(.system(size: 16, weight: .medium))
                 .foregroundStyle(Color.riLightGray)
 
-            TextField("Search businesses, areas, features...", text: $text)
-                .font(.riBody)
+            TextField("Search places, areas, what you fancy…", text: $text)
+                .riType(.body)
                 .foregroundStyle(Color.riDark)
                 .autocorrectionDisabled()
 
@@ -24,9 +24,9 @@ struct SearchBar: View {
                 }
             }
         }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 12)
+        .padding(.horizontal, AppConstants.Space.snug + 2)
+        .padding(.vertical, AppConstants.Space.snug)
         .background(Color.riOffWhite)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .clipShape(RoundedRectangle(cornerRadius: AppConstants.Radius.small, style: .continuous))
     }
 }
