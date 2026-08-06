@@ -53,6 +53,15 @@ final class CruiseArrivalsService {
         return latest >= Self.dateString(daysFromNow: 0)
     }
 
+    /// Whether the schedule extends far enough to say anything about
+    /// tomorrow. Without this check, a schedule that simply ends today reads
+    /// as "no ships tomorrow" — the same class of confident wrong answer
+    /// `hasCurrentData` exists to prevent.
+    var hasDataThroughTomorrow: Bool {
+        guard let latest = arrivals.map(\.date).max() else { return false }
+        return latest >= Self.dateString(daysFromNow: 1)
+    }
+
     func arrivalsToday() -> [CruiseArrival] {
         arrivals.filter { $0.isToday }.sorted { $0.arrivalTime < $1.arrivalTime }
     }

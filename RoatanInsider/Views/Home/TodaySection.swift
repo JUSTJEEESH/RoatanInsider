@@ -23,6 +23,8 @@ struct TodaySection: View {
 
     @Binding var showCruiseMode: Bool
 
+    @State private var shipsExpanded = false
+
     var body: some View {
         let items = composed
         if !items.isEmpty {
@@ -102,11 +104,23 @@ struct TodaySection: View {
             )
 
         case .shipsInPort(let count, let passengers):
-            rowContent(
-                title: count == 1 ? "1 ship in port" : "\(count) ships in port",
-                detail: "About \(rounded(passengers)) visitors ashore — West Bay and West End run busier.",
-                trailing: rounded(passengers)
-            )
+            VStack(alignment: .leading, spacing: 0) {
+                Button {
+                    Haptics.tap()
+                    withAnimation(.easeInOut(duration: 0.22)) { shipsExpanded.toggle() }
+                    if shipsExpanded { Analytics.track(.homeSectionViewed(name: "ships_expanded")) }
+                } label: {
+                    rowContent(
+                        title: count == 1 ? "1 ship in port" : "\(count) ships in port",
+                        detail: "About \(rounded(passengers)) visitors ashore — West Bay and West End run busier.",
+                        disclosureOpen: shipsExpanded
+                    )
+                }
+                .buttonStyle(.plain)
+                .accessibilityHint(shipsExpanded ? "Collapses the ship list" : "Shows which ships and when they leave")
+
+                if shipsExpanded { shipDetail }
+            }
 
         case .weatherAlert(let message):
             rowContent(title: "Heads up", detail: message)
@@ -147,7 +161,8 @@ struct TodaySection: View {
         title: String,
         detail: String,
         trailing: String? = nil,
-        showsChevron: Bool = false
+        showsChevron: Bool = false,
+        disclosureOpen: Bool? = nil
     ) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: AppConstants.Space.snug) {
             VStack(alignment: .leading, spacing: 3) {
@@ -168,7 +183,12 @@ struct TodaySection: View {
                     .foregroundStyle(Color.riLightGray)
                     .monospacedDigit()
             }
-            if showsChevron {
+            if let disclosureOpen {
+                Image(systemName: "chevron.down")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(Color.riLightGray)
+                    .rotationEffect(.degrees(disclosureOpen ? 180 : 0))
+            } else if showsChevron {
                 Image(systemName: "chevron.right")
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundStyle(Color.riLightGray)
@@ -177,6 +197,78 @@ struct TodaySection: View {
         .padding(.vertical, AppConstants.Space.snug)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
+    }
+
+    // MARK: - Ships, expanded
+    //
+    // Every arrival record already carried the ship's name, its port and its
+    // hours; the list rendered two numbers from all of it and showed the rest
+    // nowhere in the app. Which port is the part worth knowing — the two
+    // serve different ends of the island — and the last departure is the
+    // answer to "when does it get quiet again".
+
+    private var shipDetail: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            ForEach(cruise.arrivalsToday()) { ship in
+                HStack(alignment: .firstTextBaseline, spacing: AppConstants.Space.snug) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(ship.shipName)
+                            .riType(.caption, weight: .semibold)
+                            .foregroundStyle(Color.riDark)
+                            .lineLimit(1)
+                        Text(ship.port)
+                            .riType(.caption)
+                            .foregroundStyle(Color.riLightGray)
+                            .lineLimit(1)
+                    }
+
+                    Spacer(minLength: AppConstants.Space.tight)
+
+                    Text(ship.hoursLabel)
+                        .riType(.caption)
+                        .monospacedDigit()
+                        .foregroundStyle(Color.riMediumGray)
+                        .layoutPriority(1)
+                }
+                .padding(.vertical, AppConstants.Space.tight)
+                .accessibilityElement(children: .combine)
+            }
+
+            if let closing = lastDepartureLabel {
+                Text(closing)
+                    .riType(.caption)
+                    .foregroundStyle(Color.riMediumGray)
+                    .padding(.top, AppConstants.Space.tight)
+            }
+
+            if let tomorrow = tomorrowLabel {
+                Text(tomorrow)
+                    .riType(.caption)
+                    .foregroundStyle(Color.riLightGray)
+                    .padding(.top, 2)
+            }
+        }
+        .padding(.leading, AppConstants.Space.snug)
+        .padding(.bottom, AppConstants.Space.snug)
+        .transition(.opacity)
+    }
+
+    private var lastDepartureLabel: String? {
+        guard let last = cruise.arrivalsToday().max(by: { $0.departureTime < $1.departureTime }) else {
+            return nil
+        }
+        return "Quiet again after \(last.departureLabel)."
+    }
+
+    /// Only stated when the schedule genuinely reaches tomorrow. A silent
+    /// row beats "no ships tomorrow" derived from a schedule that simply
+    /// stops there.
+    private var tomorrowLabel: String? {
+        guard cruise.hasDataThroughTomorrow else { return nil }
+        let ships = cruise.arrivalsTomorrow()
+        guard !ships.isEmpty else { return "Tomorrow: none scheduled." }
+        let count = ships.count == 1 ? "1 ship" : "\(ships.count) ships"
+        return "Tomorrow: \(count), about \(rounded(cruise.totalPassengersTomorrow()))."
     }
 
     /// Exact capacity is misleading — not everyone disembarks — so the list

@@ -41,6 +41,8 @@ struct CruiseArrival: Identifiable, Codable, Hashable {
         "\(displayTime(arrivalTime)) – \(displayTime(departureTime))"
     }
 
+    var departureLabel: String { displayTime(departureTime) }
+
     private func displayTime(_ raw: String) -> String {
         let parts = raw.split(separator: ":")
         guard parts.count == 2, let hour = Int(parts[0]), let minute = Int(parts[1]) else {
