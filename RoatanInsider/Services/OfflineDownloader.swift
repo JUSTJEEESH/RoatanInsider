@@ -41,42 +41,41 @@ final class OfflineDownloader {
 
     private static let storageKey = "offlineDownloadCompletedAt"
 
+    /// How many photos to fetch at once. Hotel wifi here is not what it is
+    /// at home, and a hundred parallel requests is how you get a stalled
+    /// download rather than a fast one.
+    private static let window = 4
+
     init() {
         let stamp = UserDefaults.standard.double(forKey: Self.storageKey)
         lastCompleted = stamp > 0 ? Date(timeIntervalSince1970: stamp) : nil
     }
 
-    /// Downloads photos for the given businesses and dive sites, plus the
-    /// current remote data files.
-    ///
-    /// Runs sequentially with a small concurrency window rather than firing
-    /// every request at once: hotel wifi here is not what it is at home, and
-    /// a hundred parallel image fetches is how you get a stalled download
-    /// instead of a fast one.
+    /// Downloads photos for the given businesses, then refreshes the data
+    /// files. Dive sites need no parameter — they carry no photos, and
+    /// `dive_sites.json` is covered by the data refresh below.
     @MainActor
-    func download(businesses: [Business], diveSites: [DiveSite]) async {
+    func download(businesses: [Business]) async {
         guard !state.isRunning else { return }
 
         let urls = Self.photoURLs(for: businesses)
         let total = urls.count + 1   // +1 for the data refresh at the end
         state = .running(done: 0, total: total)
 
+        // Four at a time, in chunks. A nested helper feeding a task group
+        // would capture the group's inout binding, which Swift won't allow;
+        // chunking gets the same bounded concurrency with none of that.
         var completed = 0
-        await withTaskGroup(of: Void.self) { group in
-            var iterator = urls.makeIterator()
-            let window = 4
-
-            func addNext() {
-                guard let url = iterator.next() else { return }
-                group.addTask { _ = await ImageCache.shared.image(for: url) }
+        for chunk in stride(from: 0, to: urls.count, by: Self.window).map({
+            Array(urls[$0..<min($0 + Self.window, urls.count)])
+        }) {
+            await withTaskGroup(of: Void.self) { group in
+                for url in chunk {
+                    group.addTask { _ = await ImageCache.shared.image(for: url) }
+                }
             }
-            for _ in 0..<window { addNext() }
-
-            for await _ in group {
-                completed += 1
-                state = .running(done: completed, total: total)
-                addNext()
-            }
+            completed += chunk.count
+            state = .running(done: completed, total: total)
         }
 
         // Refresh the data files too, so the offline copy is a snapshot of

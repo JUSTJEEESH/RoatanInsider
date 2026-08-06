@@ -27,6 +27,42 @@ final class WeatherService {
         var hourly: [HourPoint] = []
         /// Today onward. Empty for the same reason.
         var daily: [DayPoint] = []
+
+        init(
+            temperatureF: Double, weatherCode: Int, windMph: Double, uvIndex: Double,
+            waveHeightMeters: Double?, fetchedAt: Date,
+            hourly: [HourPoint] = [], daily: [DayPoint] = []
+        ) {
+            self.temperatureF = temperatureF
+            self.weatherCode = weatherCode
+            self.windMph = windMph
+            self.uvIndex = uvIndex
+            self.waveHeightMeters = waveHeightMeters
+            self.fetchedAt = fetchedAt
+            self.hourly = hourly
+            self.daily = daily
+        }
+
+        /// Written by hand because a synthesised decoder throws
+        /// `keyNotFound` for a key that simply isn't in an older cache — a
+        /// default value on the property does NOT rescue it. Without this,
+        /// the first launch after the forecast fields landed would drop the
+        /// stored snapshot entirely and show nothing until a fetch returned,
+        /// which is exactly the offline case the cache exists for.
+        init(from decoder: Decoder) throws {
+            let c = try decoder.container(keyedBy: CodingKeys.self)
+            temperatureF = try c.decode(Double.self, forKey: .temperatureF)
+            weatherCode = try c.decode(Int.self, forKey: .weatherCode)
+            // Renamed from windKph when the API moved to mph; an older cache
+            // has neither the new key nor comparable units, so it falls back
+            // to zero and gets replaced on the next fetch.
+            windMph = (try? c.decode(Double.self, forKey: .windMph)) ?? 0
+            uvIndex = (try? c.decode(Double.self, forKey: .uvIndex)) ?? 0
+            waveHeightMeters = try? c.decode(Double.self, forKey: .waveHeightMeters)
+            fetchedAt = try c.decode(Date.self, forKey: .fetchedAt)
+            hourly = (try? c.decode([HourPoint].self, forKey: .hourly)) ?? []
+            daily = (try? c.decode([DayPoint].self, forKey: .daily)) ?? []
+        }
     }
 
     /// One hour of forecast. The rain chance is the reason this exists: on
@@ -48,6 +84,40 @@ final class WeatherService {
 
         var id: Date { time }
         var symbol: String { WeatherService.weatherSymbol(code: weatherCode, at: time) }
+
+        init(from decoder: Decoder) throws {
+            let c = try decoder.container(keyedBy: CodingKeys.self)
+            time = try c.decode(Date.self, forKey: .time)
+            temperatureF = try c.decode(Double.self, forKey: .temperatureF)
+            precipitationChance = (try? c.decode(Int.self, forKey: .precipitationChance)) ?? 0
+            weatherCode = (try? c.decode(Int.self, forKey: .weatherCode)) ?? 0
+            feelsLikeF = (try? c.decode(Double.self, forKey: .feelsLikeF)) ?? 0
+            precipitationInches = (try? c.decode(Double.self, forKey: .precipitationInches)) ?? 0
+            windMph = (try? c.decode(Double.self, forKey: .windMph)) ?? 0
+            gustMph = (try? c.decode(Double.self, forKey: .gustMph)) ?? 0
+            windDegrees = (try? c.decode(Double.self, forKey: .windDegrees)) ?? 0
+            uvIndex = (try? c.decode(Double.self, forKey: .uvIndex)) ?? 0
+            visibilityMiles = (try? c.decode(Double.self, forKey: .visibilityMiles)) ?? 0
+        }
+
+        init(
+            time: Date, temperatureF: Double, precipitationChance: Int, weatherCode: Int,
+            feelsLikeF: Double = 0, precipitationInches: Double = 0, windMph: Double = 0,
+            gustMph: Double = 0, windDegrees: Double = 0, uvIndex: Double = 0,
+            visibilityMiles: Double = 0
+        ) {
+            self.time = time
+            self.temperatureF = temperatureF
+            self.precipitationChance = precipitationChance
+            self.weatherCode = weatherCode
+            self.feelsLikeF = feelsLikeF
+            self.precipitationInches = precipitationInches
+            self.windMph = windMph
+            self.gustMph = gustMph
+            self.windDegrees = windDegrees
+            self.uvIndex = uvIndex
+            self.visibilityMiles = visibilityMiles
+        }
     }
 
     struct DayPoint: Codable, Equatable, Identifiable {
@@ -66,6 +136,40 @@ final class WeatherService {
         var id: Date { date }
         var symbol: String { WeatherService.weatherSymbol(code: weatherCode) }
         var summary: String { WeatherService.weatherDescription(code: weatherCode) }
+
+        init(from decoder: Decoder) throws {
+            let c = try decoder.container(keyedBy: CodingKeys.self)
+            date = try c.decode(Date.self, forKey: .date)
+            highF = try c.decode(Double.self, forKey: .highF)
+            lowF = try c.decode(Double.self, forKey: .lowF)
+            precipitationChance = (try? c.decode(Int.self, forKey: .precipitationChance)) ?? 0
+            weatherCode = (try? c.decode(Int.self, forKey: .weatherCode)) ?? 0
+            uvIndexMax = (try? c.decode(Double.self, forKey: .uvIndexMax)) ?? 0
+            precipitationInches = (try? c.decode(Double.self, forKey: .precipitationInches)) ?? 0
+            windMaxMph = (try? c.decode(Double.self, forKey: .windMaxMph)) ?? 0
+            gustMaxMph = (try? c.decode(Double.self, forKey: .gustMaxMph)) ?? 0
+            sunrise = try? c.decode(Date.self, forKey: .sunrise)
+            sunset = try? c.decode(Date.self, forKey: .sunset)
+        }
+
+        init(
+            date: Date, highF: Double, lowF: Double, precipitationChance: Int,
+            weatherCode: Int, uvIndexMax: Double, precipitationInches: Double = 0,
+            windMaxMph: Double = 0, gustMaxMph: Double = 0,
+            sunrise: Date? = nil, sunset: Date? = nil
+        ) {
+            self.date = date
+            self.highF = highF
+            self.lowF = lowF
+            self.precipitationChance = precipitationChance
+            self.weatherCode = weatherCode
+            self.uvIndexMax = uvIndexMax
+            self.precipitationInches = precipitationInches
+            self.windMaxMph = windMaxMph
+            self.gustMaxMph = gustMaxMph
+            self.sunrise = sunrise
+            self.sunset = sunset
+        }
     }
 
     private(set) var conditions: Conditions?

@@ -14,7 +14,10 @@ import CoreLocation
 /// with no depth recorded shows no depth, and one with no level shows no
 /// level, rather than inheriting a plausible default. Nothing here is
 /// inferred from anything else.
-struct DiveSite: Identifiable, Codable, Hashable {
+// Decodable, not Codable: the CodingKeys map `active` onto `isActive`, so
+// Swift can't synthesise `encode(to:)` — and nothing encodes a dive site.
+// They're read from JSON and never written back.
+struct DiveSite: Identifiable, Decodable, Hashable {
     let id: String
     let slug: String
     let name: String
@@ -61,9 +64,12 @@ struct DiveSite: Identifiable, Codable, Hashable {
         shoreAccessible = try? c.decodeIfPresent(Bool.self, forKey: .shoreAccessible)
         summary = try? c.decodeIfPresent(String.self, forKey: .summary)
         insiderTip = try? c.decodeIfPresent(String.self, forKey: .insiderTip)
-        marineLife = (try? c.decodeIfPresent([String].self, forKey: .marineLife)) as? [String] ?? []
-        operatorSlugs = (try? c.decodeIfPresent([String].self, forKey: .operatorSlugs)) as? [String] ?? []
-        isActive = (try? c.decodeIfPresent(Bool.self, forKey: .active)) as? Bool ?? true
+        // `try? c.decode(...)` gives a single optional; decodeIfPresent gives
+        // a double one, which is where the "conditional downcast does
+        // nothing" warnings came from.
+        marineLife = (try? c.decode([String].self, forKey: .marineLife)) ?? []
+        operatorSlugs = (try? c.decode([String].self, forKey: .operatorSlugs)) ?? []
+        isActive = (try? c.decode(Bool.self, forKey: .active)) ?? true
     }
 
     var coordinate: CLLocationCoordinate2D {

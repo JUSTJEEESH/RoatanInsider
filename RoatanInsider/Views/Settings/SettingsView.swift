@@ -14,7 +14,6 @@ struct SettingsView: View {
     @Environment(PurchaseManager.self) private var purchases
     @Environment(DataManager.self) private var dataManager
     @Environment(FavoritesStore.self) private var favoritesStore
-    @Environment(DiveSitesService.self) private var diveSites
     @Environment(OfflineDownloader.self) private var downloader
     @Environment(\.dismiss) private var dismiss
 
@@ -214,10 +213,7 @@ struct SettingsView: View {
                 Button {
                     Haptics.impact()
                     Task {
-                        await downloader.download(
-                            businesses: savedBusinesses,
-                            diveSites: diveSites.sites
-                        )
+                        await downloader.download(businesses: savedBusinesses)
                     }
                 } label: {
                     HStack {

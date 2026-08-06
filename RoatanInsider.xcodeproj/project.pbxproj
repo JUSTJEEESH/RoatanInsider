@@ -874,6 +874,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		4424242DFDCC4F32B9655E9B /* Upload Debug Symbols to Sentry */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -885,7 +886,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# This script is responsible for uploading debug symbols and source context for Sentry.\nif which sentry-cli >/dev/null; then\n  export SENTRY_ORG=jeeeshua\n  export SENTRY_PROJECT=apple-ios\n  ERROR=$(sentry-cli debug-files upload --include-sources \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)\n  if [ ! $? -eq 0 ]; then\n    echo \"warning: sentry-cli - $ERROR\"\n  fi\nelse\n  echo \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"\nfi\n";
+			shellScript = "# Uploads dSYMs to Sentry so production crash reports are symbolicated.\n#\n# Exits quietly when there is nothing to upload with. A debug build on a\n# machine that has never run `sentry-cli login` should not print a red line\n# — but a RELEASE build without symbols is worth knowing about, because that\n# is the one where unsymbolicated crashes actually cost you.\n\nif ! which sentry-cli >/dev/null 2>&1; then\n  if [ \"$CONFIGURATION\" = \"Release\" ]; then\n    echo \"warning: sentry-cli not installed — release crashes will not be symbolicated. brew install getsentry/tools/sentry-cli\"\n  fi\n  exit 0\nfi\n\nexport SENTRY_ORG=jeeeshua\nexport SENTRY_PROJECT=apple-ios\n\nif [ -z \"$SENTRY_AUTH_TOKEN\" ] && [ ! -f \"$SRCROOT/.sentryclirc\" ] && [ ! -f \"$HOME/.sentryclirc\" ]; then\n  if [ \"$CONFIGURATION\" = \"Release\" ]; then\n    echo \"warning: no Sentry auth token — release crashes will not be symbolicated. Run 'sentry-cli login', or put a token in .sentryclirc (gitignored).\"\n  fi\n  exit 0\nfi\n\nif ! ERROR=$(sentry-cli debug-files upload --include-sources \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null); then\n  echo \"warning: sentry-cli - $ERROR\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
