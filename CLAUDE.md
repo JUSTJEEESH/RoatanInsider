@@ -67,8 +67,7 @@ actual code win. See `STATE_OF_THE_APP.md` for the full picture.
 - **Design system (Aug 2026 pass).** `RIType` is the only way new code should
   set type — eight steps, applied via `.riType(_:weight:)`. Radii come from
   `AppConstants.Radius` (3 values), spacing from `AppConstants.Space` (6).
-  Components, Home, Events, Explore, Detail, Tools and Weather are converted;
-  **Map, Trip and Guides still set their own sizes** and are the next sweep.
+  Every view folder is converted except Onboarding, Paywall and Cruise Mode.
   Two files are deliberately exempt and say so in their own headers:
   `ShareableBusinessCard` (fixed PNG canvas) and `RatingView` (size is a
   parameter so it can sit inside hosts at their scale).
