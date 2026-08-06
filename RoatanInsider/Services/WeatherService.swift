@@ -18,7 +18,7 @@ final class WeatherService {
     struct Conditions: Codable, Equatable {
         var temperatureF: Double
         var weatherCode: Int
-        var windKph: Double
+        var windMph: Double
         var uvIndex: Double
         var waveHeightMeters: Double?
         var fetchedAt: Date
@@ -38,6 +38,13 @@ final class WeatherService {
         var temperatureF: Double
         var precipitationChance: Int
         var weatherCode: Int
+        var feelsLikeF: Double = 0
+        var precipitationInches: Double = 0
+        var windMph: Double = 0
+        var gustMph: Double = 0
+        var windDegrees: Double = 0
+        var uvIndex: Double = 0
+        var visibilityMiles: Double = 0
 
         var id: Date { time }
         var symbol: String { WeatherService.weatherSymbol(code: weatherCode, at: time) }
@@ -50,6 +57,11 @@ final class WeatherService {
         var precipitationChance: Int
         var weatherCode: Int
         var uvIndexMax: Double
+        var precipitationInches: Double = 0
+        var windMaxMph: Double = 0
+        var gustMaxMph: Double = 0
+        var sunrise: Date?
+        var sunset: Date?
 
         var id: Date { date }
         var symbol: String { WeatherService.weatherSymbol(code: weatherCode) }
@@ -95,7 +107,7 @@ final class WeatherService {
         let snapshot = Conditions(
             temperatureF: f.temperatureF,
             weatherCode: f.weatherCode,
-            windKph: f.windKph,
+            windMph: f.windMph,
             uvIndex: f.uvIndex,
             waveHeightMeters: m?.waveHeightMeters,
             fetchedAt: .now,
@@ -162,9 +174,11 @@ final class WeatherService {
             // 0.0m = great. 0.5m = ok. >1.0m = poor.
             score -= min(60, waves * 80)
         }
-        // Wind above 25 km/h kicks up chop.
-        if c.windKph > 25 {
-            score -= min(30, (c.windKph - 25) * 1.5)
+        // Wind past about 15 mph kicks up chop. (Was expressed in km/h
+        // before the API moved to mph — 25 km/h is 15.5 mph, and the slope
+        // is rescaled to match, so the score is unchanged.)
+        if c.windMph > 15.5 {
+            score -= min(30, (c.windMph - 15.5) * 2.4)
         }
         return max(0, min(100, Int(score.rounded())))
     }
@@ -207,6 +221,13 @@ final class WeatherService {
             let temperature_2m: [Double]
             let precipitation_probability: [Int?]
             let weather_code: [Int]
+            let apparent_temperature: [Double]?
+            let precipitation: [Double]?
+            let wind_speed_10m: [Double]?
+            let wind_gusts_10m: [Double]?
+            let wind_direction_10m: [Double]?
+            let uv_index: [Double]?
+            let visibility: [Double]?
         }
         struct Daily: Decodable {
             let time: [String]
@@ -215,6 +236,11 @@ final class WeatherService {
             let temperature_2m_min: [Double]
             let precipitation_probability_max: [Int?]
             let uv_index_max: [Double?]
+            let precipitation_sum: [Double]?
+            let wind_speed_10m_max: [Double]?
+            let wind_gusts_10m_max: [Double]?
+            let sunrise: [String]?
+            let sunset: [String]?
         }
         let current: Current
         let hourly: Hourly?
@@ -251,7 +277,7 @@ final class WeatherService {
     private struct ForecastTuple {
         let temperatureF: Double
         let weatherCode: Int
-        let windKph: Double
+        let windMph: Double
         let uvIndex: Double
         let hourly: [HourPoint]
         let daily: [DayPoint]
@@ -263,11 +289,12 @@ final class WeatherService {
             URLQueryItem(name: "latitude", value: "16.33"),
             URLQueryItem(name: "longitude", value: "-86.52"),
             URLQueryItem(name: "current", value: "temperature_2m,weather_code,wind_speed_10m,uv_index"),
-            URLQueryItem(name: "hourly", value: "temperature_2m,precipitation_probability,weather_code"),
-            URLQueryItem(name: "daily", value: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,uv_index_max"),
-            URLQueryItem(name: "forecast_days", value: "7"),
+            URLQueryItem(name: "hourly", value: "temperature_2m,apparent_temperature,precipitation_probability,precipitation,weather_code,wind_speed_10m,wind_gusts_10m,wind_direction_10m,uv_index,visibility"),
+            URLQueryItem(name: "daily", value: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,uv_index_max,wind_speed_10m_max,wind_gusts_10m_max,sunrise,sunset"),
+            URLQueryItem(name: "forecast_days", value: "10"),
             URLQueryItem(name: "temperature_unit", value: "fahrenheit"),
-            URLQueryItem(name: "wind_speed_unit", value: "kmh"),
+            URLQueryItem(name: "wind_speed_unit", value: "mph"),
+            URLQueryItem(name: "precipitation_unit", value: "inch"),
             URLQueryItem(name: "timezone", value: "auto"),
         ]
         guard let url = components.url else { return nil }
@@ -277,7 +304,7 @@ final class WeatherService {
             return ForecastTuple(
                 temperatureF: decoded.current.temperature_2m,
                 weatherCode: decoded.current.weather_code,
-                windKph: decoded.current.wind_speed_10m,
+                windMph: decoded.current.wind_speed_10m,
                 uvIndex: decoded.current.uv_index ?? 0,
                 hourly: Self.hourPoints(from: decoded.hourly),
                 daily: Self.dayPoints(from: decoded.daily)
@@ -297,11 +324,25 @@ final class WeatherService {
             guard let time = apiDateFormatter.date(from: hourly.time[i]) else { return nil }
             let chance = i < hourly.precipitation_probability.count
                 ? (hourly.precipitation_probability[i] ?? 0) : 0
+            func at(_ array: [Double]?) -> Double {
+                guard let array, i < array.count else { return 0 }
+                return array[i]
+            }
             return HourPoint(
                 time: time,
                 temperatureF: hourly.temperature_2m[i],
                 precipitationChance: chance,
-                weatherCode: hourly.weather_code[i]
+                weatherCode: hourly.weather_code[i],
+                feelsLikeF: at(hourly.apparent_temperature),
+                precipitationInches: at(hourly.precipitation),
+                windMph: at(hourly.wind_speed_10m),
+                gustMph: at(hourly.wind_gusts_10m),
+                windDegrees: at(hourly.wind_direction_10m),
+                uvIndex: at(hourly.uv_index),
+                // Open-Meteo reports visibility in metres regardless of the
+                // unit parameters, which only cover temperature, wind and
+                // precipitation.
+                visibilityMiles: at(hourly.visibility) / 1609.34
             )
         }
     }
@@ -314,6 +355,14 @@ final class WeatherService {
         )
         return (0..<count).compactMap { i in
             guard let date = apiDayFormatter.date(from: daily.time[i]) else { return nil }
+            func at(_ array: [Double]?) -> Double {
+                guard let array, i < array.count else { return 0 }
+                return array[i]
+            }
+            func stamp(_ array: [String]?) -> Date? {
+                guard let array, i < array.count else { return nil }
+                return apiDateFormatter.date(from: array[i])
+            }
             return DayPoint(
                 date: date,
                 highF: daily.temperature_2m_max[i],
@@ -321,7 +370,12 @@ final class WeatherService {
                 precipitationChance: i < daily.precipitation_probability_max.count
                     ? (daily.precipitation_probability_max[i] ?? 0) : 0,
                 weatherCode: daily.weather_code[i],
-                uvIndexMax: i < daily.uv_index_max.count ? (daily.uv_index_max[i] ?? 0) : 0
+                uvIndexMax: i < daily.uv_index_max.count ? (daily.uv_index_max[i] ?? 0) : 0,
+                precipitationInches: at(daily.precipitation_sum),
+                windMaxMph: at(daily.wind_speed_10m_max),
+                gustMaxMph: at(daily.wind_gusts_10m_max),
+                sunrise: stamp(daily.sunrise),
+                sunset: stamp(daily.sunset)
             )
         }
     }

@@ -59,7 +59,8 @@ enum FeedComposer {
             default:
                 break
             }
-            if c.windKph >= 35 {
+            // 35 km/h in the old units.
+            if c.windMph >= 22 {
                 items.append(.weatherAlert(message: "Windy today — the east side will be choppy."))
             }
             // UV is not here on purpose: HomeHeader already shows it, and

@@ -12,6 +12,9 @@
 		EE66FF77880099AA11220501 /* HappyHourListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220502 /* HappyHourListView.swift */; };
 		EE66FF77880099AA11220701 /* ConditionsBand.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220702 /* ConditionsBand.swift */; };
 		EE66FF77880099AA11220703 /* WeatherDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220704 /* WeatherDetailView.swift */; };
+		EE66FF77880099AA11220801 /* WeatherMetricTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220802 /* WeatherMetricTile.swift */; };
+		EE66FF77880099AA11220803 /* WeatherForecastPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220804 /* WeatherForecastPanel.swift */; };
+		EE66FF77880099AA11220805 /* MoonPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220806 /* MoonPhase.swift */; };
 		EE66FF77880099AA11220705 /* SunArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11220706 /* SunArcView.swift */; };
 		2F39ACADB90F437997447186 /* InsiderPickSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66090DD8DED94CCA85443C05 /* InsiderPickSection.swift */; };
 		55A42DC7672A466D8A94AA04 /* BrowseSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8688C1F4645D45CFBAA41583 /* BrowseSection.swift */; };
@@ -179,6 +182,9 @@
 		EE66FF77880099AA11220502 /* HappyHourListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappyHourListView.swift; sourceTree = "<group>"; };
 		EE66FF77880099AA11220702 /* ConditionsBand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionsBand.swift; sourceTree = "<group>"; };
 		EE66FF77880099AA11220704 /* WeatherDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailView.swift; sourceTree = "<group>"; };
+		EE66FF77880099AA11220802 /* WeatherMetricTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherMetricTile.swift; sourceTree = "<group>"; };
+		EE66FF77880099AA11220804 /* WeatherForecastPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastPanel.swift; sourceTree = "<group>"; };
+		EE66FF77880099AA11220806 /* MoonPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPhase.swift; sourceTree = "<group>"; };
 		EE66FF77880099AA11220706 /* SunArcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunArcView.swift; sourceTree = "<group>"; };
 		66090DD8DED94CCA85443C05 /* InsiderPickSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsiderPickSection.swift; sourceTree = "<group>"; };
 		8688C1F4645D45CFBAA41583 /* BrowseSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseSection.swift; sourceTree = "<group>"; };
@@ -631,6 +637,7 @@
 				C1A2B3D4E5F6005604F /* ArrivalDetector.swift */,
 				EE66FF77880099AA11220004 /* SpeechService.swift */,
 				BB33CC44DD55EE66FF770012 /* SunsetCalculator.swift */,
+				EE66FF77880099AA11220806 /* MoonPhase.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -677,6 +684,8 @@
 			children = (
 				EE66FF77880099AA11220704 /* WeatherDetailView.swift */,
 				EE66FF77880099AA11220706 /* SunArcView.swift */,
+				EE66FF77880099AA11220802 /* WeatherMetricTile.swift */,
+				EE66FF77880099AA11220804 /* WeatherForecastPanel.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -857,6 +866,9 @@
 				EE66FF77880099AA11220501 /* HappyHourListView.swift in Sources */,
 				EE66FF77880099AA11220701 /* ConditionsBand.swift in Sources */,
 				EE66FF77880099AA11220703 /* WeatherDetailView.swift in Sources */,
+				EE66FF77880099AA11220801 /* WeatherMetricTile.swift in Sources */,
+				EE66FF77880099AA11220803 /* WeatherForecastPanel.swift in Sources */,
+				EE66FF77880099AA11220805 /* MoonPhase.swift in Sources */,
 				EE66FF77880099AA11220705 /* SunArcView.swift in Sources */,
 				2F39ACADB90F437997447186 /* InsiderPickSection.swift in Sources */,
 				55A42DC7672A466D8A94AA04 /* BrowseSection.swift in Sources */,

@@ -131,25 +131,79 @@ struct SunArcView: View {
 /// A half-ellipse from the horizon at the left, over the top, back down to
 /// the horizon at the right. Kept as its own shape so the marker and the
 /// stroke can't drift apart — both read the same curve.
-private struct SunPath: Shape {
+struct SunPath: Shape {
+    var baselineInset: CGFloat = 10
+
     func path(in rect: CGRect) -> Path {
         var path = Path()
         let steps = 60
         for step in 0...steps {
-            let point = Self.point(at: Double(step) / Double(steps), in: rect.size)
+            let point = Self.point(
+                at: Double(step) / Double(steps),
+                in: rect.size,
+                baselineInset: baselineInset
+            )
             step == 0 ? path.move(to: point) : path.addLine(to: point)
         }
         return path
     }
 
     /// `t` runs 0 at sunrise to 1 at sunset.
-    static func point(at t: Double, in size: CGSize) -> CGPoint {
-        let baseline = size.height - 10
+    static func point(at t: Double, in size: CGSize, baselineInset: CGFloat = 10) -> CGPoint {
+        let baseline = size.height - baselineInset
         let inset: CGFloat = 6
         let width = max(1, size.width - inset * 2)
         let x = inset + width * t
         // sin() gives a natural rise and fall, peaking at solar noon.
-        let y = baseline - CGFloat(sin(t * .pi)) * (baseline - 6)
+        let y = baseline - CGFloat(sin(t * .pi)) * max(1, baseline - 6)
         return CGPoint(x: x, y: y)
+    }
+}
+
+/// The arc alone, sized for a metric tile — no headline, no endpoint labels.
+///
+/// Shares `SunPath` with the full view, so the marker and the curve can't
+/// drift apart between the two places the sun's day is drawn.
+struct SunArcMini: View {
+    var now: Date = .now
+
+    private var sunrise: Date { SunsetCalculator.todaySunrise() }
+    private var sunset: Date { SunsetCalculator.todaySunset() }
+
+    private var progress: Double {
+        let total = sunset.timeIntervalSince(sunrise)
+        guard total > 0 else { return 0 }
+        return min(1, max(0, now.timeIntervalSince(sunrise) / total))
+    }
+
+    private var isDaylight: Bool { now >= sunrise && now <= sunset }
+
+    var body: some View {
+        GeometryReader { geo in
+            let baseline = geo.size.height - 6
+
+            ZStack(alignment: .topLeading) {
+                SunPath(baselineInset: 6)
+                    .stroke(Color.riDark.opacity(0.12), style: .init(lineWidth: 1.5, lineCap: .round))
+
+                SunPath(baselineInset: 6)
+                    .trim(from: 0, to: isDaylight ? progress : (now > sunset ? 1 : 0))
+                    .stroke(Color.riDark.opacity(0.45), style: .init(lineWidth: 1.5, lineCap: .round))
+
+                Path { path in
+                    path.move(to: CGPoint(x: 0, y: baseline))
+                    path.addLine(to: CGPoint(x: geo.size.width, y: baseline))
+                }
+                .stroke(Color.riDark.opacity(0.12), style: .init(lineWidth: 1, dash: [2, 3]))
+
+                if isDaylight {
+                    Circle()
+                        .fill(Color.riGoldStar)
+                        .frame(width: 7, height: 7)
+                        .position(SunPath.point(at: progress, in: geo.size, baselineInset: 6))
+                }
+            }
+        }
+        .accessibilityHidden(true)
     }
 }
