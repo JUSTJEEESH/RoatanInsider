@@ -58,7 +58,7 @@ struct EventDetailView: View {
                     .font(.system(size: 14, weight: .bold))
                     .foregroundStyle(Color.riMint)
                 Text(event.category.rawValue.uppercased())
-                    .font(.system(size: 11, weight: .bold))
+                    .riType(.micro)
                     .tracking(1.2)
                     .foregroundStyle(Color.riMint)
                 if event.isLiveNow() {
@@ -67,7 +67,7 @@ struct EventDetailView: View {
                             .fill(Color.green)
                             .frame(width: 6, height: 6)
                         Text("LIVE NOW")
-                            .font(.system(size: 11, weight: .bold))
+                            .riType(.micro)
                             .tracking(1.2)
                             .foregroundStyle(Color.green)
                     }
@@ -77,14 +77,14 @@ struct EventDetailView: View {
             }
 
             Text(event.performer)
-                .font(.system(size: 28, weight: .bold))
+                .riType(.display)
                 .foregroundStyle(Color.riDark)
 
             HStack(spacing: 10) {
                 Image(systemName: "clock")
                     .font(.system(size: 12, weight: .medium))
                 Text(event.displayTime)
-                    .font(.system(size: 14, weight: .semibold))
+                    .riType(.caption, weight: .semibold)
             }
             .foregroundStyle(Color.riMediumGray)
         }
@@ -136,9 +136,9 @@ struct EventDetailView: View {
     private func actionLabel(icon: String, title: String) -> some View {
         HStack(spacing: 6) {
             Image(systemName: icon)
-                .font(.system(size: 13, weight: .semibold))
+                .riType(.caption, weight: .semibold)
             Text(title)
-                .font(.system(size: 13, weight: .semibold))
+                .riType(.caption, weight: .semibold)
                 .lineLimit(1)
         }
         .foregroundStyle(Color.riPink)
@@ -182,12 +182,12 @@ struct EventDetailView: View {
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(label)
-                    .font(.system(size: 11, weight: .semibold))
+                    .riType(.micro)
                     .tracking(0.8)
                     .foregroundStyle(Color.riLightGray)
                     .textCase(.uppercase)
                 Text(value)
-                    .font(.system(size: 15))
+                    .riType(.body)
                     .foregroundStyle(Color.riDark)
             }
             Spacer(minLength: 0)

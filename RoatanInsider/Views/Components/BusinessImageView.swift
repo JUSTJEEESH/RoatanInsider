@@ -72,9 +72,8 @@ struct PlaceholderImageView: View {
 
                 if !label.isEmpty {
                     Text(label.uppercased())
-                        .font(.system(size: 11, weight: .semibold))
+                        .riType(.micro)
                         .foregroundStyle(.white.opacity(0.3))
-                        .tracking(1.5)
                 }
             }
         }

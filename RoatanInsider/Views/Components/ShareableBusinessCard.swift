@@ -1,6 +1,13 @@
 import SwiftUI
 
-/// A styled card view used to render a shareable image of a business via ImageRenderer.
+/// A styled card rendered to a fixed-size image via ImageRenderer, for
+/// sharing to Messages, Instagram and the like.
+///
+/// Deliberately exempt from the app's type scale. That scale exists so
+/// on-screen UI holds together at any Dynamic Type setting; this is a fixed
+/// canvas rasterised to a PNG, where the sizes are chosen against the
+/// canvas's own dimensions and must not move with anyone's accessibility
+/// settings. Leave the point sizes here alone.
 struct ShareableBusinessCard: View {
     let business: Business
 

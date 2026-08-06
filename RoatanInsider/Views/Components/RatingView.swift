@@ -3,6 +3,10 @@ import SwiftUI
 /// A star and a number. The star is the one place gold is allowed in this
 /// app, per the palette rules — everywhere else is black, white, grey, pink
 /// and mint.
+///
+/// `size` is a parameter rather than a scale step because this sits inside
+/// other components at their scale — a rating on a grid card and one on a
+/// detail header are the same component drawn to two different hosts.
 struct RatingView: View {
     let rating: Double
     var size: CGFloat = 12

@@ -224,7 +224,7 @@ struct FeatureFilterSheet: View {
                     } label: {
                         HStack {
                             Text(feature)
-                                .font(.system(size: 16, weight: .regular))
+                                .riType(.body)
                                 .foregroundStyle(Color.riDark)
 
                             Spacer()
