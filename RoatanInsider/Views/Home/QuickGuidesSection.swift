@@ -10,16 +10,33 @@ import SwiftUI
 /// removing. What's left is a title, a line saying what's inside, and a
 /// chevron — which is all a link needs to be.
 struct QuickGuidesSection: View {
+    @Environment(DiveSitesService.self) private var diveSites
+
     private struct Guide: Identifiable {
         let id = UUID()
         let title: String
         let subtitle: String
         let destination: Destination
 
-        enum Destination { case cruise, areas, essentials, askALocal }
+        enum Destination { case cruise, areas, essentials, askALocal, diveSites }
     }
 
-    private let guides: [Guide] = [
+    /// Dive sites appear only once there are sites loaded — an entry point
+    /// to an empty screen is worse than no entry point.
+    private var guides: [Guide] {
+        var list = Self.always
+        if diveSites.hasSites {
+            list.insert(
+                .init(title: "Dive Sites",
+                      subtitle: "\(diveSites.sites.count) named sites on the reef.",
+                      destination: .diveSites),
+                at: 1
+            )
+        }
+        return list
+    }
+
+    private static let always: [Guide] = [
         .init(title: "Cruise Day Guide",
               subtitle: "Six hours ashore, planned by port.",
               destination: .cruise),
@@ -88,6 +105,7 @@ struct QuickGuidesSection: View {
         case .areas:      AreaGuideView()
         case .essentials: IslandEssentialsView()
         case .askALocal:  AskALocalView()
+        case .diveSites:  DiveSitesView()
         }
     }
 }

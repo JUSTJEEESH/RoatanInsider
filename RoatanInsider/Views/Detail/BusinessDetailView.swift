@@ -6,6 +6,7 @@ struct BusinessDetailView: View {
     @Environment(FavoritesStore.self) private var favoritesStore
     @Environment(DataManager.self) private var dataManager
     @Environment(RecentlyViewedStore.self) private var recentlyViewed
+    @Environment(DiveSitesService.self) private var diveSites
     @Environment(\.zoomNamespace) private var zoomNS
 
     /// Always use the latest version from DataManager (picks up remote updates)
@@ -114,6 +115,8 @@ struct BusinessDetailView: View {
                             .padding(.leading, 12)
                         }
                     }
+
+                    diveSitesBlock(b)
 
                     // Reactions
                     ReactionStrip(businessId: b.id)
@@ -236,6 +239,36 @@ struct BusinessDetailView: View {
     private var shareCardImage: Image? {
         guard let ui = ShareHelper.shareImage(for: b) else { return nil }
         return Image(uiImage: ui)
+    }
+
+    /// The sites this shop runs — the other half of the link that makes a
+    /// dive site entry worth having. Absent for every business that isn't a
+    /// dive shop, and for any shop we haven't recorded sites against.
+    @ViewBuilder
+    private func diveSitesBlock(_ b: Business) -> some View {
+        let sites = diveSites.sites(runBy: b.slug)
+        if !sites.isEmpty {
+            VStack(alignment: .leading, spacing: AppConstants.Space.snug) {
+                Text("SITES THEY RUN")
+                    .riType(.label)
+                    .foregroundStyle(Color.riMediumGray)
+
+                FlowLayout(spacing: AppConstants.Space.tight) {
+                    ForEach(sites) { site in
+                        NavigationLink(value: site) {
+                            Text(site.name)
+                                .riType(.caption, weight: .medium)
+                                .foregroundStyle(Color.riDark)
+                                .padding(.horizontal, AppConstants.Space.snug)
+                                .padding(.vertical, 6)
+                                .background(Color.riOffWhite)
+                                .clipShape(Capsule())
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+        }
     }
 
     /// Happy hour, stated near the top because it's time-sensitive — it
