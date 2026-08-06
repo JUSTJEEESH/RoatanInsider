@@ -8,6 +8,10 @@
     "posts and fare-estimator sites that disagree with each other, and a",
     "wrong number here costs someone money at the roadside.",
     "",
+    "One exception: Town Center port to West Bay is $10-15, not the $8-12",
+    "the area guide used to say. Josh corrected it, and areas.json was",
+    "changed to match. He lives here; he outranks the file.",
+    "",
     "A fare is only recorded in the SHARED column where the original copy",
     "said '/person'. Where it didn't, the fare is left null rather than",
     "guessed into a column — telling colectivo from private is the entire",
@@ -65,7 +69,7 @@
     { "id": "coxen-hole-oak-ridge",      "from": "Coxen Hole",       "to": "Oak Ridge",      "colectivoUSD": null, "colectivoMaxUSD": null, "privateUSD": null, "privateMaxUSD": null, "note": null },
     { "id": "coxen-hole-ferry",          "from": "Coxen Hole",       "to": "Ferry terminal", "colectivoUSD": null, "colectivoMaxUSD": null, "privateUSD": null, "privateMaxUSD": null, "note": null },
 
-    { "id": "cruise-port-west-bay",      "from": "Town Center port", "to": "West Bay",       "colectivoUSD": 8,    "colectivoMaxUSD": 12,   "privateUSD": null, "privateMaxUSD": null, "note": "About 20 minutes." },
+    { "id": "cruise-port-west-bay",      "from": "Town Center port", "to": "West Bay",       "colectivoUSD": 10,   "colectivoMaxUSD": 15,   "privateUSD": null, "privateMaxUSD": null, "note": "About 20 minutes." },
     { "id": "cruise-port-west-end",      "from": "Town Center port", "to": "West End",       "colectivoUSD": null, "colectivoMaxUSD": null, "privateUSD": null, "privateMaxUSD": null, "note": null },
     { "id": "mahogany-bay-west-bay",     "from": "Mahogany Bay",     "to": "West Bay",       "colectivoUSD": 5,    "colectivoMaxUSD": 8,    "privateUSD": null, "privateMaxUSD": null, "note": "10 minutes, or take the free chairlift." },
     { "id": "mahogany-bay-west-end",     "from": "Mahogany Bay",     "to": "West End",       "colectivoUSD": 5,    "colectivoMaxUSD": 8,    "privateUSD": null, "privateMaxUSD": null, "note": "About 15 minutes." }
