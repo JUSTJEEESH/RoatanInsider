@@ -20,6 +20,7 @@
 		EE66FF77880099AA11221001 /* DiveSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11221002 /* DiveSite.swift */; };
 		EE66FF77880099AA11221003 /* DiveSitesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11221004 /* DiveSitesService.swift */; };
 		EE66FF77880099AA11221101 /* NearbySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11221102 /* NearbySheet.swift */; };
+		EE66FF77880099AA11221201 /* MapResultsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11221202 /* MapResultsSheet.swift */; };
 		EE66FF77880099AA11221103 /* OfflineDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11221104 /* OfflineDownloader.swift */; };
 		EE66FF77880099AA11221005 /* DiveSitesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11221006 /* DiveSitesView.swift */; };
 		EE66FF77880099AA11221007 /* DiveSiteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66FF77880099AA11221008 /* DiveSiteDetailView.swift */; };
@@ -200,6 +201,7 @@
 		EE66FF77880099AA11221002 /* DiveSite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiveSite.swift; sourceTree = "<group>"; };
 		EE66FF77880099AA11221004 /* DiveSitesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiveSitesService.swift; sourceTree = "<group>"; };
 		EE66FF77880099AA11221102 /* NearbySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbySheet.swift; sourceTree = "<group>"; };
+		EE66FF77880099AA11221202 /* MapResultsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapResultsSheet.swift; sourceTree = "<group>"; };
 		EE66FF77880099AA11221104 /* OfflineDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineDownloader.swift; sourceTree = "<group>"; };
 		EE66FF77880099AA11221006 /* DiveSitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiveSitesView.swift; sourceTree = "<group>"; };
 		EE66FF77880099AA11221008 /* DiveSiteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiveSiteDetailView.swift; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 				0195FA7066564444A2AD86C1 /* MapPopupCard.swift */,
 				36112C333F250CC64E4826D3 /* MapTabView.swift */,
 				EE66FF77880099AA11221102 /* NearbySheet.swift */,
+				EE66FF77880099AA11221202 /* MapResultsSheet.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -914,6 +917,7 @@
 				EE66FF77880099AA11221001 /* DiveSite.swift in Sources */,
 				EE66FF77880099AA11221003 /* DiveSitesService.swift in Sources */,
 				EE66FF77880099AA11221101 /* NearbySheet.swift in Sources */,
+				EE66FF77880099AA11221201 /* MapResultsSheet.swift in Sources */,
 				EE66FF77880099AA11221103 /* OfflineDownloader.swift in Sources */,
 				EE66FF77880099AA11221005 /* DiveSitesView.swift in Sources */,
 				EE66FF77880099AA11221007 /* DiveSiteDetailView.swift in Sources */,

@@ -1,16 +1,38 @@
 import SwiftUI
 import MapKit
 
+/// The map's state.
+///
+/// It used to show Apple Maps results whenever it could reach the network,
+/// and the app's own 94 places only when offline — so the guide's curation,
+/// the entire reason this app exists, appeared exclusively when the phone
+/// had no signal. Tapping "Eat" ran an Apple Maps search for "restaurants"
+/// rather than filtering the twenty-three places written up in the guide,
+/// and with no search running at all the map rendered nothing.
+///
+/// Now the directory is the map, always. Apple's results are a supplement
+/// for one specific case — a text search that finds nothing in the guide,
+/// like a pharmacy — and they're drawn differently and labelled so nobody
+/// mistakes them for a recommendation.
 @Observable
 final class MapViewModel {
+    enum Layer: String, CaseIterable, Identifiable {
+        case places, diveSites
+        var id: String { rawValue }
+        var title: String { self == .places ? "Places" : "Dive sites" }
+    }
+
+    var layer: Layer = .places
     var selectedCategory: String?
     var selectedBusiness: Business?
+    var selectedDiveSite: DiveSite?
     var selectedMapItem: MKMapItem?
     var searchQuery = ""
     var searchResults: [MKMapItem] = []
     var isSearching = false
     var cameraPosition: MapCameraPosition = .region(roatanRegion)
     var visibleSpan: MKCoordinateSpan = roatanRegion.span
+    var visibleRegion: MKCoordinateRegion = roatanRegion
 
     private var currentSearchTask: Task<Void, Never>?
 
@@ -22,46 +44,88 @@ final class MapViewModel {
         )
     )
 
-    var isShowingAppleResults: Bool {
-        !searchResults.isEmpty
+    var hasQuery: Bool {
+        !searchQuery.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
-    /// Animate the camera to a target region (used when a user taps a cluster).
     func zoom(to region: MKCoordinateRegion) {
         cameraPosition = .region(region)
     }
 
-    // MARK: - Offline fallback: bundled pins
+    func clearSelection() {
+        selectedBusiness = nil
+        selectedDiveSite = nil
+        selectedMapItem = nil
+    }
 
+    // MARK: - The directory, which is the point
+
+    /// Category filter and text search both run against the guide. Nothing
+    /// here touches the network.
     func filteredBusinesses(from businesses: [Business]) -> [Business] {
-        let active = businesses.filter { $0.isActive }
+        var result = businesses.filter { $0.isActive }
         if let catId = selectedCategory {
-            return active.filter { $0.hasCategory(catId) }
+            result = result.filter { $0.hasCategory(catId) }
         }
-        return active
+        let query = searchQuery.trimmingCharacters(in: .whitespaces).lowercased()
+        if !query.isEmpty {
+            result = result.filter { $0.searchHaystack.contains(query) }
+        }
+        return result
+    }
+
+    func filteredDiveSites(from sites: [DiveSite]) -> [DiveSite] {
+        let query = searchQuery.trimmingCharacters(in: .whitespaces).lowercased()
+        guard !query.isEmpty else { return sites }
+        return sites.filter {
+            $0.name.lowercased().contains(query) || $0.areaDisplayName.lowercased().contains(query)
+        }
+    }
+
+    /// How many of the given coordinates are inside the current viewport.
+    /// Drives the "N places in view" button, which is how someone pans to
+    /// French Harbour and gets a list of what's actually there.
+    func countInView<T>(_ items: [T], coordinate: (T) -> CLLocationCoordinate2D) -> Int {
+        items.reduce(into: 0) { total, item in
+            if Self.region(visibleRegion, contains: coordinate(item)) { total += 1 }
+        }
+    }
+
+    func itemsInView<T>(_ items: [T], coordinate: (T) -> CLLocationCoordinate2D) -> [T] {
+        items.filter { Self.region(visibleRegion, contains: coordinate($0)) }
+    }
+
+    private static func region(_ region: MKCoordinateRegion, contains point: CLLocationCoordinate2D) -> Bool {
+        let latDelta = abs(point.latitude - region.center.latitude)
+        let lonDelta = abs(point.longitude - region.center.longitude)
+        return latDelta <= region.span.latitudeDelta / 2
+            && lonDelta <= region.span.longitudeDelta / 2
     }
 
     // MARK: - Category selection
 
+    /// Filters the guide. It used to fire an Apple Maps search instead,
+    /// which is how "Eat" came to mean "whatever Apple thinks is a
+    /// restaurant near here".
     func selectCategory(_ categoryId: String?) {
-        selectedCategory = categoryId
-        selectedMapItem = nil
-        selectedBusiness = nil
-
-        if let categoryId {
-            searchWithCategory(categoryId)
-        } else {
-            clearSearchResults()
-        }
+        selectedCategory = selectedCategory == categoryId ? nil : categoryId
+        clearSelection()
+        clearSearchResults()
     }
 
     // MARK: - Text search
 
-    func submitSearch() {
-        selectedMapItem = nil
-        selectedBusiness = nil
-        guard !searchQuery.trimmingCharacters(in: .whitespaces).isEmpty else {
+    /// Searches the guide immediately. Apple is consulted only if the guide
+    /// has nothing — someone looking for a pharmacy or a bank deserves an
+    /// answer, it just isn't a recommendation.
+    func submitSearch(directoryMatches: Int) {
+        clearSelection()
+        guard hasQuery else {
             clearSearch()
+            return
+        }
+        guard directoryMatches == 0 else {
+            clearSearchResults()
             return
         }
         search(for: searchQuery)
@@ -72,7 +136,7 @@ final class MapViewModel {
         searchResults = []
         searchQuery = ""
         isSearching = false
-        selectedMapItem = nil
+        clearSelection()
         selectedCategory = nil
     }
 
@@ -83,8 +147,6 @@ final class MapViewModel {
         selectedMapItem = nil
     }
 
-    // MARK: - Apple Maps search
-
     private func search(for query: String) {
         isSearching = true
         currentSearchTask?.cancel()
@@ -93,40 +155,6 @@ final class MapViewModel {
             if Task.isCancelled { return }
             await MainActor.run {
                 self.searchResults = results
-                self.isSearching = false
-            }
-        }
-    }
-
-    private func searchWithCategory(_ categoryId: String) {
-        let terms: [String]
-        if let cat = Category(rawValue: categoryId) {
-            terms = cat.mapSearchTerms
-        } else {
-            // For data-driven categories without enum cases, use the category ID as search term
-            terms = [categoryId.replacingOccurrences(of: "_", with: " ")]
-        }
-        isSearching = true
-        searchResults = []
-
-        currentSearchTask?.cancel()
-        currentSearchTask = Task {
-            var allResults: [MKMapItem] = []
-            for term in terms {
-                if Task.isCancelled { return }
-                let results = await performSearch(query: term)
-                allResults.append(contentsOf: results)
-            }
-            if Task.isCancelled { return }
-            var seen = Set<String>()
-            let unique = allResults.filter { item in
-                let name = item.name ?? ""
-                if seen.contains(name) { return false }
-                seen.insert(name)
-                return true
-            }
-            await MainActor.run {
-                self.searchResults = unique
                 self.isSearching = false
             }
         }
