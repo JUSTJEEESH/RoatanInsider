@@ -21,12 +21,35 @@ struct TaxiFare: Identifiable, Codable, Hashable {
     let id: String
     let from: String
     let to: String
-    /// USD per person in a shared taxi.
+    /// USD per person in a shared taxi. The low end when a range is given.
     let colectivoUSD: Double?
-    /// USD for the whole car.
+    /// The top of the shared range, when the fare is quoted as one. Nil
+    /// means the fare really is a single number, not that we rounded.
+    let colectivoMaxUSD: Double?
+    /// USD for the whole car. The low end when a range is given.
     let privateUSD: Double?
+    let privateMaxUSD: Double?
     /// Anything that changes the number — "after dark", "per car up to 4".
     let note: String?
+
+    private enum CodingKeys: String, CodingKey {
+        case id, from, to, colectivoUSD, colectivoMaxUSD, privateUSD, privateMaxUSD, note
+    }
+
+    // Hand-written because the range fields were added after the file
+    // shipped, and a synthesised decoder throws on a key that simply isn't
+    // in an older copy rather than falling back to the property default.
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decode(String.self, forKey: .id)
+        from = try c.decode(String.self, forKey: .from)
+        to = try c.decode(String.self, forKey: .to)
+        colectivoUSD = try? c.decodeIfPresent(Double.self, forKey: .colectivoUSD)
+        colectivoMaxUSD = try? c.decodeIfPresent(Double.self, forKey: .colectivoMaxUSD)
+        privateUSD = try? c.decodeIfPresent(Double.self, forKey: .privateUSD)
+        privateMaxUSD = try? c.decodeIfPresent(Double.self, forKey: .privateMaxUSD)
+        note = try? c.decodeIfPresent(String.self, forKey: .note)
+    }
 
     var routeLabel: String { "\(from) → \(to)" }
 
@@ -37,6 +60,19 @@ struct TaxiFare: Identifiable, Codable, Hashable {
             ? "$\(Int(amount))"
             : String(format: "$%.2f", amount)
     }
+
+    /// "$8" or "$8–12". Roatán fares are negotiated inside a band rather
+    /// than fixed, so a single number would be a more precise claim than
+    /// anyone can actually make — and precision is what a reader trusts.
+    static func formattedRange(_ low: Double?, _ high: Double?) -> String? {
+        guard let low else { return nil }
+        guard let high, high > low else { return formatted(low) }
+        let top = high == high.rounded() ? "\(Int(high))" : String(format: "%.2f", high)
+        return "\(formatted(low))–\(top)"
+    }
+
+    var colectivoLabel: String? { Self.formattedRange(colectivoUSD, colectivoMaxUSD) }
+    var privateLabel: String? { Self.formattedRange(privateUSD, privateMaxUSD) }
 }
 
 /// The fare card as published, plus the rules that apply to all of it.

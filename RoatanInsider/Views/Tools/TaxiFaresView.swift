@@ -85,13 +85,13 @@ struct TaxiFaresView: View {
                     Text("SHARED")
                         .riType(.micro)
                         .foregroundStyle(Color.riMediumGray)
-                        .frame(width: 62, alignment: .trailing)
+                        .frame(width: 78, alignment: .trailing)
                 }
                 if showsPrivate {
                     Text("PRIVATE")
                         .riType(.micro)
                         .foregroundStyle(Color.riMediumGray)
-                        .frame(width: 62, alignment: .trailing)
+                        .frame(width: 78, alignment: .trailing)
                 }
             }
 
@@ -104,12 +104,24 @@ struct TaxiFaresView: View {
                 }
             }
 
-            if showsColectivo && showsPrivate {
-                Text("Shared is per person. Private is the whole car.")
+            // Says what the number means in every case, not just when both
+            // columns are up. A lone "SHARED" header read as the price of
+            // the car is the precise mistake this screen exists to stop.
+            if let explainer = columnExplainer {
+                Text(explainer)
                     .riType(.caption)
                     .foregroundStyle(Color.riLightGray)
                     .padding(.top, AppConstants.Space.hair)
             }
+        }
+    }
+
+    private var columnExplainer: String? {
+        switch (showsColectivo, showsPrivate) {
+        case (true, true):  return "Shared is per person. Private is the whole car."
+        case (true, false): return "These are shared-taxi fares, per person. A private car — the whole vehicle to yourself — costs more; agree that separately."
+        case (false, true): return "These are private fares for the whole car. A shared seat costs less if you don't mind the stops."
+        case (false, false): return nil
         }
     }
 
@@ -131,10 +143,10 @@ struct TaxiFaresView: View {
             Spacer(minLength: AppConstants.Space.tight)
 
             if showsColectivo {
-                amount(fare.colectivoUSD)
+                amount(fare.colectivoLabel)
             }
             if showsPrivate {
-                amount(fare.privateUSD, emphasised: !showsColectivo)
+                amount(fare.privateLabel)
             }
         }
         .padding(.vertical, AppConstants.Space.snug)
@@ -144,21 +156,21 @@ struct TaxiFaresView: View {
 
     /// An em dash where a fare is missing, so the column stays aligned and
     /// the gap reads as "we don't know" rather than "free".
-    private func amount(_ value: Double?, emphasised: Bool = false) -> some View {
-        Text(value.map(TaxiFare.formatted) ?? "—")
-            .riType(.body, weight: value == nil ? .regular : .semibold)
+    private func amount(_ label: String?) -> some View {
+        Text(label ?? "—")
+            .riType(.body, weight: label == nil ? .regular : .semibold)
             .monospacedDigit()
-            .foregroundStyle(value == nil ? Color.riLightGray : Color.riDark)
-            .frame(width: 62, alignment: .trailing)
+            .foregroundStyle(label == nil ? Color.riLightGray : Color.riDark)
+            .frame(width: 78, alignment: .trailing)
     }
 
     private func accessibilityLabel(_ fare: TaxiFare) -> String {
         var parts = [fare.routeLabel]
-        if let shared = fare.colectivoUSD {
-            parts.append("shared \(TaxiFare.formatted(shared)) per person")
+        if let shared = fare.colectivoLabel {
+            parts.append("shared \(shared) per person")
         }
-        if let priv = fare.privateUSD {
-            parts.append("private \(TaxiFare.formatted(priv))")
+        if let priv = fare.privateLabel {
+            parts.append("private \(priv)")
         }
         if let note = fare.note, !note.isEmpty { parts.append(note) }
         return parts.joined(separator: ", ")
