@@ -51,11 +51,11 @@ struct EventsListView: View {
     private var freshnessFooter: some View {
         VStack(spacing: 4) {
             Text("Schedule from Blue Wave Radio's Roatán Music Scene")
-                .font(.system(size: 11))
+                .riType(.caption)
                 .foregroundStyle(Color.riLightGray)
 
             Text(freshnessLine)
-                .font(.system(size: 11))
+                .riType(.caption)
                 .foregroundStyle(Color.riLightGray)
         }
         .multilineTextAlignment(.center)
@@ -86,55 +86,55 @@ struct EventsListView: View {
         } else if hasFilter {
             groupedResults(results)
         } else {
-            VStack(spacing: 8) {
-                ForEach(results) { event in
-                    EventRow(event: event)
+            hairlineList(results)
+                .padding(.horizontal, AppConstants.Space.gutter)
+                .padding(.bottom, AppConstants.Space.block)
+        }
+    }
+
+    /// Rows separated by rules rather than gaps between filled cards — the
+    /// same timetable treatment Home uses, so an event looks like the same
+    /// object on both screens.
+    private func hairlineList(_ list: [Event]) -> some View {
+        VStack(spacing: 0) {
+            ForEach(Array(list.enumerated()), id: \.element.id) { index, event in
+                if index > 0 {
+                    Divider().overlay(Color.riDark.opacity(0.08))
                 }
+                EventRow(event: event)
             }
-            .padding(.horizontal, 20)
-            .padding(.top, 4)
-            .padding(.bottom, 32)
         }
     }
 
     @ViewBuilder
     private func groupedResults(_ matches: [Event]) -> some View {
         let groups = Self.groupByDay(matches)
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: AppConstants.Space.block) {
             ForEach(groups) { group in
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: AppConstants.Space.tight) {
                     HStack(spacing: 6) {
-                        Text(group.day.displayName.uppercased())
-                            .font(.system(size: 11, weight: .bold))
-                            .tracking(1.2)
+                        Text(dayLabel(for: group))
+                            .riType(.label)
                             .foregroundStyle(Color.riMint)
-                        if group.day == Weekday.today {
-                            Text("· Today")
-                                .font(.system(size: 11, weight: .semibold))
-                                .foregroundStyle(Color.riLightGray)
-                        } else if group.isTomorrow {
-                            Text("· Tomorrow")
-                                .font(.system(size: 11, weight: .semibold))
-                                .foregroundStyle(Color.riLightGray)
-                        }
                         Spacer()
                         Text("\(group.events.count) \(group.events.count == 1 ? "spot" : "spots")")
-                            .font(.system(size: 11))
+                            .riType(.caption)
                             .foregroundStyle(Color.riLightGray)
                     }
-                    .padding(.horizontal, 4)
 
-                    VStack(spacing: 8) {
-                        ForEach(group.events) { event in
-                            EventRow(event: event)
-                        }
-                    }
+                    hairlineList(group.events)
                 }
             }
         }
-        .padding(.horizontal, 20)
-        .padding(.top, 4)
-        .padding(.bottom, 32)
+        .padding(.horizontal, AppConstants.Space.gutter)
+        .padding(.bottom, AppConstants.Space.block)
+    }
+
+    private func dayLabel(for group: DayGroup) -> String {
+        let name = group.day.displayName.uppercased()
+        if group.day == Weekday.today { return "\(name) · TODAY" }
+        if group.isTomorrow { return "\(name) · TOMORROW" }
+        return name
     }
 
     /// Groups events by weekday, ordered starting from today and wrapping
@@ -169,12 +169,12 @@ struct EventsListView: View {
     private var emptyState: some View {
         VStack(spacing: 6) {
             Text(hasFilter ? "No matches." : "Nothing scheduled for \(selectedDay.displayName).")
-                .font(.system(size: 14, weight: .semibold))
+                .riType(.heading)
                 .foregroundStyle(Color.riDark)
             if hasFilter {
-                Text("Try a different search or category.")
-                    .font(.system(size: 13))
-                    .foregroundStyle(Color.riLightGray)
+                Text("Try a different word, or drop the category filter.")
+                    .riType(.caption)
+                    .foregroundStyle(Color.riMediumGray)
             }
         }
         .padding(.top, 60)
@@ -184,23 +184,19 @@ struct EventsListView: View {
 
     private var pageHeader: some View {
         VStack(alignment: .leading, spacing: 10) {
-            HStack(spacing: 8) {
-                Image(systemName: "music.note.list")
-                    .font(.system(size: 12, weight: .bold))
-                Text("EVENTS THIS WEEK")
-                    .font(.system(size: 12, weight: .bold))
-                    .tracking(1.4)
-            }
-            .foregroundStyle(Color.riMint)
+            Text("EVENTS THIS WEEK")
+                .riType(.label)
+                .foregroundStyle(Color.riMint)
 
             Text("What's on, every night")
-                .font(.system(size: 30, weight: .bold))
+                .riType(.display)
                 .foregroundStyle(Color.riDark)
+                .fixedSize(horizontal: false, vertical: true)
 
-            Text("Live music, DJs, karaoke, trivia, fire shows — every spot worth being at, sorted by day.")
-                .font(.system(size: 15))
-                .foregroundStyle(Color.riLightGray)
-                .lineSpacing(3)
+            Text("Live music, DJs, karaoke, trivia and fire shows — sorted by day.")
+                .riType(.caption)
+                .foregroundStyle(Color.riMediumGray)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 20)
@@ -211,7 +207,7 @@ struct EventsListView: View {
     private var searchBar: some View {
         HStack(spacing: 10) {
             Image(systemName: "magnifyingglass")
-                .font(.system(size: 14, weight: .medium))
+                .font(.system(size: 15, weight: .medium))
                 .foregroundStyle(Color.riLightGray)
             TextField(
                 "",
@@ -219,7 +215,7 @@ struct EventsListView: View {
                 prompt: Text("Search venue, performer, area…").foregroundStyle(Color.riLightGray)
             )
             .focused($searchFocused)
-            .font(.system(size: 14))
+            .riType(.body)
             .foregroundStyle(Color.riDark)
             .submitLabel(.search)
             .autocorrectionDisabled(true)
@@ -231,16 +227,16 @@ struct EventsListView: View {
                     searchText = ""
                 } label: {
                     Image(systemName: "xmark.circle.fill")
-                        .font(.system(size: 14))
+                        .font(.system(size: 16))
                         .foregroundStyle(Color.riLightGray)
                 }
                 .buttonStyle(.plain)
             }
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 10)
+        .padding(.horizontal, AppConstants.Space.snug)
+        .padding(.vertical, AppConstants.Space.snug)
         .background(Color.riOffWhite)
-        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .clipShape(RoundedRectangle(cornerRadius: AppConstants.Radius.small, style: .continuous))
     }
 
     private var categoryChips: some View {
@@ -276,10 +272,10 @@ struct EventsListView: View {
                         .font(.system(size: 11, weight: .semibold))
                 }
                 Text(label)
-                    .font(.system(size: 13, weight: isSelected ? .bold : .medium))
+                    .riType(.caption, weight: isSelected ? .bold : .medium)
             }
             .foregroundStyle(isSelected ? .white : Color.riDark)
-            .padding(.horizontal, 12)
+            .padding(.horizontal, AppConstants.Space.snug)
             .padding(.vertical, 7)
             .background(isSelected ? Color.riPink : Color.riOffWhite)
             .clipShape(Capsule())
@@ -299,10 +295,10 @@ struct EventsListView: View {
                             Haptics.tap()
                         } label: {
                             Text(day.displayName)
-                                .font(.system(size: 14, weight: selectedDay == day ? .bold : .medium))
+                                .riType(.caption, weight: selectedDay == day ? .bold : .medium)
                                 .foregroundStyle(selectedDay == day ? .white : Color.riDark)
-                                .padding(.horizontal, 14)
-                                .padding(.vertical, 8)
+                                .padding(.horizontal, AppConstants.Space.snug + 2)
+                                .padding(.vertical, AppConstants.Space.tight)
                                 .background(selectedDay == day ? Color.riPink : Color.riOffWhite)
                                 .clipShape(Capsule())
                         }

@@ -1,91 +1,93 @@
 import SwiftUI
 
+/// The deeper reading, at the bottom of Home where it belongs — nobody
+/// opens a travel app to read a guide first.
+///
+/// Four hairline rows, matching Today. Each guide used to be a dark card
+/// carrying a mint glyph in a tinted rounded square; four of those stacked
+/// read as a settings screen dropped into the middle of a travel app, and
+/// the icon-in-a-tinted-box is the pattern this redesign is systematically
+/// removing. What's left is a title, a line saying what's inside, and a
+/// chevron — which is all a link needs to be.
 struct QuickGuidesSection: View {
-    var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            SectionHeader(title: "Quick Guides")
+    private struct Guide: Identifiable {
+        let id = UUID()
+        let title: String
+        let subtitle: String
+        let destination: Destination
 
-            VStack(spacing: 12) {
-                NavigationLink {
-                    CruiseDayGuideView()
-                } label: {
-                    GuideRow(
-                        icon: "ferry",
-                        title: "Cruise Day Guide",
-                        subtitle: "Plan your port day."
-                    )
-                }
-
-                NavigationLink {
-                    AreaGuideView()
-                } label: {
-                    GuideRow(
-                        icon: "map",
-                        title: "Area Guides",
-                        subtitle: "All 10 island areas."
-                    )
-                }
-
-                NavigationLink {
-                    IslandEssentialsView()
-                } label: {
-                    GuideRow(
-                        icon: "lightbulb",
-                        title: "Island Essentials",
-                        subtitle: "Money, safety, water, language."
-                    )
-                }
-
-                NavigationLink {
-                    AskALocalView()
-                } label: {
-                    GuideRow(
-                        icon: "bubble.left.and.text.bubble.right",
-                        title: "Ask a Local",
-                        subtitle: "15 questions every visitor asks"
-                    )
-                }
-            }
-            .padding(.horizontal, 20)
-        }
+        enum Destination { case cruise, areas, essentials, askALocal }
     }
-}
 
-struct GuideRow: View {
-    let icon: String
-    let title: String
-    let subtitle: String
+    private let guides: [Guide] = [
+        .init(title: "Cruise Day Guide",
+              subtitle: "Six hours ashore, planned by port.",
+              destination: .cruise),
+        .init(title: "Area Guides",
+              subtitle: "What each stretch of the island is actually like.",
+              destination: .areas),
+        .init(title: "Island Essentials",
+              subtitle: "Money, safety, water, language.",
+              destination: .essentials),
+        .init(title: "Ask a Local",
+              subtitle: "The fifteen questions every visitor asks.",
+              destination: .askALocal),
+    ]
 
     var body: some View {
-        HStack(spacing: 16) {
-            Image(systemName: icon)
-                .font(.system(size: 20, weight: .medium))
-                .foregroundStyle(Color.riMint)
-                .frame(width: 44, height: 44)
-                .background(Color.riMint.opacity(0.15))
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+        VStack(alignment: .leading, spacing: AppConstants.Space.snug) {
+            Text("GUIDES")
+                .riType(.label)
+                .foregroundStyle(Color.riMediumGray)
 
-            VStack(alignment: .leading, spacing: 2) {
-                Text(title)
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(.white)
+            VStack(spacing: 0) {
+                ForEach(Array(guides.enumerated()), id: \.element.id) { index, guide in
+                    if index > 0 {
+                        Divider().overlay(Color.riDark.opacity(0.08))
+                    }
+                    NavigationLink {
+                        destinationView(for: guide.destination)
+                    } label: {
+                        row(guide)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+        }
+        .padding(.horizontal, AppConstants.Space.gutter)
+        .onAppear { Analytics.track(.homeSectionViewed(name: "guides")) }
+    }
 
-                Text(subtitle)
-                    .font(.riCaption(13))
-                    .foregroundStyle(Color.riLightGray)
+    private func row(_ guide: Guide) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: AppConstants.Space.snug) {
+            VStack(alignment: .leading, spacing: 3) {
+                Text(guide.title)
+                    .riType(.heading)
+                    .foregroundStyle(Color.riDark)
+                Text(guide.subtitle)
+                    .riType(.caption)
+                    .foregroundStyle(Color.riMediumGray)
+                    .fixedSize(horizontal: false, vertical: true)
             }
 
-            Spacer()
+            Spacer(minLength: AppConstants.Space.tight)
 
             Image(systemName: "chevron.right")
-                .font(.system(size: 14, weight: .medium))
+                .font(.system(size: 12, weight: .semibold))
                 .foregroundStyle(Color.riLightGray)
         }
-        .padding(16)
-        .background(Color.riFixedDark)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(.vertical, AppConstants.Space.snug)
+        .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(title). \(subtitle)")
-        .accessibilityAddTraits(.isButton)
+    }
+
+    @ViewBuilder
+    private func destinationView(for destination: Guide.Destination) -> some View {
+        switch destination {
+        case .cruise:     CruiseDayGuideView()
+        case .areas:      AreaGuideView()
+        case .essentials: IslandEssentialsView()
+        case .askALocal:  AskALocalView()
+        }
     }
 }

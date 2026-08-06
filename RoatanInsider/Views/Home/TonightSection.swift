@@ -1,18 +1,21 @@
 import SwiftUI
 import Combine
 
-/// "On the island" — the time-aware answer to the question every visitor
-/// asks when they open the app: what's happening RIGHT NOW, and what's
-/// next? Lives in its own dark section on Home.
+/// What's on now and what's next — the question a visitor opens this app to
+/// answer after dark.
 ///
-/// Shape shifts with the clock:
-///   - Morning/afternoon: "Today on the island" — daytime sets through
-///     tonight's lineup.
-///   - Evening: "Tonight on the island" — the classic night framing.
-///   - Late night: whatever is still going, then a peek at tomorrow.
-/// Events in progress lead the list with a LIVE NOW pulse; the rest follow
-/// in start-time order. Cruise-day-only events hide when no ship is in
-/// port. A once-a-minute tick keeps it honest while the app stays open.
+/// Shape shifts with the clock: today's lineup in the morning, tonight's
+/// after four, whatever is still going late, and a peek at tomorrow once the
+/// night is played out. Cruise-day-only events hide when no ship is in port.
+/// A once-a-minute tick keeps it honest while the app stays open.
+///
+/// Set as a timetable, because that is what it is. Every row used to be a
+/// filled card carrying its category glyph in a tinted mint circle, with the
+/// start time pushed to the far right — so the one thing you scan for was
+/// the last thing you read, and eight identical circles did the work of a
+/// column rule. Time now leads each row and the rows are separated by
+/// hairlines, which is how every departure board and listings page ever
+/// printed has solved this.
 struct TonightSection: View {
     @Environment(EventsService.self) private var events
     @Environment(CruiseArrivalsService.self) private var cruise
@@ -30,34 +33,50 @@ struct TonightSection: View {
         let upNext = events.upNextToday(now: now, cruiseShipInPort: shipsIn)
         let tomorrow = (live.isEmpty && upNext.isEmpty) ? events.tomorrowPreview(now: now) : []
 
-        VStack(alignment: .leading, spacing: 18) {
-            header(liveCount: live.count, upNextCount: upNext.count, showingTomorrow: !tomorrow.isEmpty)
+        VStack(alignment: .leading, spacing: AppConstants.Space.gutter) {
+            header(liveCount: live.count, showingTomorrow: !tomorrow.isEmpty)
 
             if live.isEmpty && upNext.isEmpty && tomorrow.isEmpty {
                 emptyState
             } else {
-                VStack(alignment: .leading, spacing: 8) {
-                    if !live.isEmpty {
-                        groupLabel("HAPPENING NOW", color: .green)
-                        ForEach(live.prefix(Self.liveLimit)) { EventRow(event: $0) }
-                    }
-                    if !upNext.isEmpty {
-                        if !live.isEmpty { groupLabel("UP NEXT", color: Color.riMint).padding(.top, 8) }
-                        ForEach(upNext.prefix(Self.upNextLimit)) { EventRow(event: $0) }
-                    }
-                    if !tomorrow.isEmpty {
-                        ForEach(tomorrow) { EventRow(event: $0) }
-                    }
+                VStack(spacing: 0) {
+                    listing(live, label: nil)
+                    listing(upNext, label: live.isEmpty ? nil : "Later")
+                    listing(tomorrow, label: nil)
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal, AppConstants.Space.gutter)
 
                 seeAllLink(totalCount: live.count + upNext.count)
             }
         }
-        .padding(.vertical, AppConstants.sectionPadding)
+        .padding(.vertical, AppConstants.Space.section)
         .frame(maxWidth: .infinity)
         .background(Color.riFixedDark)
         .onReceive(clock) { now = $0 }
+        .onAppear { Analytics.track(.homeSectionViewed(name: "tonight")) }
+    }
+
+    /// A run of rows under an optional quiet divider label. Returns nothing
+    /// at all for an empty run, so no stray rule is drawn.
+    @ViewBuilder
+    private func listing(_ list: [Event], label: String?) -> some View {
+        let shown = Array(list.prefix(label == nil ? Self.liveLimit : Self.upNextLimit))
+        if !shown.isEmpty {
+            if let label {
+                Text(label)
+                    .riType(.label)
+                    .foregroundStyle(Color.white.opacity(0.45))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, AppConstants.Space.gutter)
+                    .padding(.bottom, AppConstants.Space.tight)
+            }
+            ForEach(Array(shown.enumerated()), id: \.element.id) { index, event in
+                if index > 0 || label != nil {
+                    Divider().overlay(Color.white.opacity(0.12))
+                }
+                EventRow(event: event, onDark: true, now: now)
+            }
+        }
     }
 
     // MARK: - Daypart
@@ -81,42 +100,29 @@ struct TonightSection: View {
 
     // MARK: - Header
 
-    private func header(liveCount: Int, upNextCount: Int, showingTomorrow: Bool) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack(spacing: 8) {
-                Image(systemName: kickerIcon)
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundStyle(Color.riMint)
-                Text(kicker)
-                    .font(.system(size: 12, weight: .bold))
-                    .tracking(1.4)
-                    .foregroundStyle(Color.riMint)
-            }
+    private func header(liveCount: Int, showingTomorrow: Bool) -> some View {
+        VStack(alignment: .leading, spacing: AppConstants.Space.hair) {
+            Text(kicker)
+                .riType(.label)
+                .foregroundStyle(Color.riMint)
 
             Text(headline(liveCount: liveCount, showingTomorrow: showingTomorrow))
-                .font(.system(size: 26, weight: .bold))
+                .riType(.title)
                 .foregroundStyle(.white)
+                .fixedSize(horizontal: false, vertical: true)
 
             Text(subtitle(liveCount: liveCount, showingTomorrow: showingTomorrow))
-                .font(.system(size: 14))
+                .riType(.caption)
                 .foregroundStyle(Color.white.opacity(0.6))
-                .lineSpacing(2)
+                .fixedSize(horizontal: false, vertical: true)
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, AppConstants.Space.gutter)
     }
 
     private var kicker: String {
         switch daypart {
         case .morning, .afternoon: return "TODAY ON THE ISLAND"
         case .evening, .lateNight: return "TONIGHT ON THE ISLAND"
-        }
-    }
-
-    private var kickerIcon: String {
-        switch daypart {
-        case .morning:   return "sun.max.fill"
-        case .afternoon: return "sun.haze.fill"
-        case .evening, .lateNight: return "moon.stars.fill"
         }
     }
 
@@ -154,43 +160,26 @@ struct TonightSection: View {
         }
     }
 
-    private func groupLabel(_ text: String, color: Color) -> some View {
-        HStack(spacing: 6) {
-            if color == .green {
-                Circle().fill(Color.green).frame(width: 6, height: 6)
-            }
-            Text(text)
-                .font(.system(size: 10, weight: .heavy))
-                .tracking(1.2)
-                .foregroundStyle(color)
-        }
-        .padding(.leading, 4)
-    }
-
     private var emptyState: some View {
         Text("Quiet stretch on the island. Pull up the week to see what's coming.")
-            .font(.system(size: 14))
+            .riType(.caption)
             .foregroundStyle(Color.white.opacity(0.6))
-            .padding(.horizontal, 20)
+            .padding(.horizontal, AppConstants.Space.gutter)
     }
 
     private func seeAllLink(totalCount: Int) -> some View {
         NavigationLink(value: EventsListDestination()) {
-            HStack(spacing: 8) {
+            HStack(spacing: AppConstants.Space.hair + 2) {
                 Text(linkLabel(totalCount: totalCount))
-                    .font(.system(size: 14, weight: .bold))
+                    .riType(.body, weight: .semibold)
                 Image(systemName: "arrow.right")
-                    .font(.system(size: 12, weight: .bold))
+                    .font(.system(size: 13, weight: .semibold))
             }
             .foregroundStyle(.white)
-            .padding(.horizontal, 18)
-            .padding(.vertical, 12)
-            .frame(maxWidth: .infinity)
-            .background(Color.riPink)
-            .clipShape(Capsule())
+            .contentShape(Rectangle())
         }
-        .padding(.horizontal, 20)
-        .padding(.top, 4)
+        .buttonStyle(.plain)
+        .padding(.horizontal, AppConstants.Space.gutter)
     }
 
     private func linkLabel(totalCount: Int) -> String {
@@ -201,73 +190,84 @@ struct TonightSection: View {
     }
 }
 
-/// Compact single-line event row used in TonightSection and the
-/// full-week list. Adapts colors to light/dark mode. Featured events
-/// (the local 'don't miss' picks) get a pink star next to the performer
-/// name and a small DON'T MISS pill above the venue line.
+/// One line of the timetable: when, who, where, and whether it's on right
+/// now. Used on the dark Home section and in the full-week list.
+///
+/// The time leads because it's what people scan. Live beats featured in the
+/// trailing slot — a set that's actually playing is more urgent than one
+/// Josh flagged, and showing both markers on one row is two claims fighting
+/// for the same corner.
 struct EventRow: View {
     let event: Event
+    var onDark: Bool = false
+    var now: Date = .now
+
+    private var primary: Color { onDark ? .white : Color.riDark }
+    private var secondary: Color { onDark ? Color.white.opacity(0.55) : Color.riMediumGray }
 
     var body: some View {
         NavigationLink(value: event) {
-            HStack(spacing: 14) {
-                Image(systemName: event.category.iconName)
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundStyle(Color.riMint)
-                    .frame(width: 34, height: 34)
-                    .background(Color.riMint.opacity(0.12))
-                    .clipShape(Circle())
+            HStack(alignment: .firstTextBaseline, spacing: AppConstants.Space.snug) {
+                Text(event.displayTime)
+                    .riType(.caption, weight: .semibold)
+                    .monospacedDigit()
+                    .foregroundStyle(secondary)
+                    .frame(width: 66, alignment: .leading)
 
                 VStack(alignment: .leading, spacing: 3) {
-                    HStack(spacing: 8) {
-                        if event.isFeatured {
-                            Text("DON'T MISS")
-                                .font(.system(size: 9, weight: .heavy))
-                                .tracking(1.0)
-                                .foregroundStyle(Color.riPink)
-                        }
-                        if event.isLiveNow() {
-                            HStack(spacing: 4) {
-                                Circle()
-                                    .fill(Color.green)
-                                    .frame(width: 6, height: 6)
-                                Text("LIVE NOW")
-                                    .font(.system(size: 9, weight: .heavy))
-                                    .tracking(1.0)
-                                    .foregroundStyle(Color.green)
-                            }
-                        }
-                    }
                     HStack(spacing: 5) {
                         Text(event.performer)
-                            .font(.system(size: 15, weight: event.isFeatured ? .bold : .semibold))
-                            .foregroundStyle(Color.riDark)
+                            .riType(.body, weight: .semibold)
+                            .foregroundStyle(primary)
                             .lineLimit(1)
                         if event.isFeatured {
                             Image(systemName: "star.fill")
-                                .font(.system(size: 11, weight: .bold))
+                                .font(.system(size: 10, weight: .bold))
                                 .foregroundStyle(Color.riPink)
                         }
                     }
+
                     Text("\(event.venue) · \(event.area)")
-                        .font(.system(size: 12))
-                        .foregroundStyle(Color.riLightGray)
+                        .riType(.caption)
+                        .foregroundStyle(secondary)
                         .lineLimit(1)
                 }
 
-                Spacer(minLength: 8)
+                Spacer(minLength: AppConstants.Space.tight)
 
-                Text(event.displayTime)
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(Color.riDark)
-                    .monospacedDigit()
+                marker
             }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 12)
-            .background(Color.riOffWhite)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .padding(.vertical, AppConstants.Space.snug)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityDescription)
+    }
+
+    @ViewBuilder
+    private var marker: some View {
+        if event.isLiveNow(now: now) {
+            HStack(spacing: 4) {
+                Circle()
+                    .fill(Color.riMint)
+                    .frame(width: 6, height: 6)
+                Text("LIVE")
+                    .riType(.micro)
+                    .foregroundStyle(Color.riMint)
+            }
+        } else if event.isFeatured {
+            Text("DON'T MISS")
+                .riType(.micro)
+                .foregroundStyle(Color.riPink)
+        }
+    }
+
+    private var accessibilityDescription: String {
+        var parts = [event.performer, "at \(event.venue), \(event.area)", event.displayTime]
+        if event.isLiveNow(now: now) { parts.insert("Playing now", at: 0) }
+        else if event.isFeatured { parts.append("Don't miss") }
+        return parts.joined(separator: ", ")
     }
 }
 

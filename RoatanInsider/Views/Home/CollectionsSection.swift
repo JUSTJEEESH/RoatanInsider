@@ -60,20 +60,20 @@ struct CollectionCard: View {
                 // Dark overlay for text readability
                 Color.black.opacity(0.3)
 
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 3) {
                     Spacer()
                     Text(collection.title)
-                        .font(.system(size: 18, weight: .bold))
+                        .riType(.heading)
                         .foregroundStyle(.white)
 
                     Text(collection.subtitle)
-                        .font(.riCaption(13))
-                        .foregroundStyle(.white.opacity(0.8))
+                        .riType(.caption)
+                        .foregroundStyle(.white.opacity(0.75))
                 }
-                .padding(16)
+                .padding(AppConstants.Space.gutter - 4)
             }
             .frame(width: 240, height: 160)
-            .clipShape(RoundedRectangle(cornerRadius: AppConstants.cardCornerRadius))
+            .clipShape(RoundedRectangle(cornerRadius: AppConstants.Radius.card, style: .continuous))
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(collection.title). \(collection.subtitle)")
