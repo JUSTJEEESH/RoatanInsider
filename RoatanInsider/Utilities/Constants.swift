@@ -113,11 +113,10 @@ enum AppConstants {
     // app. Previously these pointed at roataninsider.com/b/<slug>, a domain
     // that has never existed — every link ever shared from this app is dead.
     //
-    // ⚠️ SET THIS. Find it in App Store Connect → your app → App Information
-    // → "Apple ID" (a 9–10 digit number). While it's empty, sharing falls
-    // back to text only — no link at all — because a share with no URL is
-    // better than a share with a broken one.
-    static let appStoreID = ""
+    // Apple ID from App Store Connect → App Information. If this is ever
+    // cleared, sharing degrades to text with no link rather than emitting a
+    // broken URL.
+    static let appStoreID = "6761062461"
 
     static var appStoreURL: URL? {
         guard !appStoreID.isEmpty else { return nil }
