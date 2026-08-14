@@ -4,14 +4,24 @@
     "" : {
 
     },
+    "—" : {
+
+    },
     "·" : {
 
     },
-    "· Today" : {
+    "· %@" : {
 
     },
-    "· Tomorrow" : {
-
+    "· %lld%% rain around %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "· %1$lld%% rain around %2$@"
+          }
+        }
+      }
     },
     "(%lld)" : {
 
@@ -35,16 +45,6 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ · %2$@"
-          }
-        }
-      }
-    },
-    "%@, %@ in %@, %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@, %2$@ in %3$@, %4$@"
           }
         }
       }
@@ -150,6 +150,12 @@
     "%lld days from today" : {
 
     },
+    "%lld here" : {
+
+    },
+    "%lld more sites with Insider+" : {
+
+    },
     "%lld of %lld" : {
       "localizations" : {
         "en" : {
@@ -163,9 +169,6 @@
     "%lld places" : {
 
     },
-    "%lld results" : {
-
-    },
     "%lld saved place%@ waiting for you" : {
       "localizations" : {
         "en" : {
@@ -176,7 +179,23 @@
         }
       }
     },
+    "%lld sites, by name" : {
+
+    },
+    "%lld–%lld mph" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld–%2$lld mph"
+          }
+        }
+      }
+    },
     "%lld%%" : {
+
+    },
+    "%lld°" : {
 
     },
     "$" : {
@@ -191,16 +210,25 @@
     "0.00" : {
 
     },
+    "1 here" : {
+
+    },
+    "1 place" : {
+
+    },
     "1 USD = %.2f HNL" : {
 
     },
-    "A little Spanish goes a long way — locals appreciate the effort" : {
+    "94 places, and what suits right now." : {
+
+    },
+    "A FEW MINUTES AWAY" : {
+
+    },
+    "A guide for negotiating, not a price list. Nothing here is fixed — drivers charge more after dark and off the main road, and every fare is agreed between you and the driver before you get in." : {
 
     },
     "About" : {
-
-    },
-    "Activate Cruise Day Mode" : {
 
     },
     "Add a place" : {
@@ -262,6 +290,9 @@
     "Best For" : {
 
     },
+    "Best of Roatán" : {
+
+    },
     "Best Value" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -290,6 +321,9 @@
         }
       }
     },
+    "BROWSE" : {
+
+    },
     "Build my itinerary" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -300,9 +334,6 @@
           }
         }
       }
-    },
-    "Calculate tips in USD and Lempiras — split with your group" : {
-
     },
     "Call %@ at %@" : {
       "localizations" : {
@@ -364,6 +395,12 @@
         }
       }
     },
+    "Collapses the ship list" : {
+
+    },
+    "Conditions" : {
+
+    },
     "Continue" : {
       "localizations" : {
         "es" : {
@@ -385,9 +422,6 @@
         }
       }
     },
-    "CONTINUE BROWSING" : {
-
-    },
     "Cruise day" : {
 
     },
@@ -407,12 +441,6 @@
           }
         }
       }
-    },
-    "Currency Converter" : {
-
-    },
-    "Currency, tips, Spanish, safety — quick references." : {
-
     },
     "Day %d" : {
       "extractionState" : "stale",
@@ -438,6 +466,9 @@
         }
       }
     },
+    "Depths, levels, what's reachable from shore, and which shops run each site." : {
+
+    },
     "Directions" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -449,7 +480,10 @@
         }
       }
     },
-    "Dismiss" : {
+    "Directions to %@" : {
+
+    },
+    "Dive sites" : {
 
     },
     "DON'T MISS" : {
@@ -467,6 +501,19 @@
     },
     "Double tap to call" : {
 
+    },
+    "Download for offline" : {
+
+    },
+    "Downloading… %lld of %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Downloading… %1$lld of %2$lld"
+          }
+        }
+      }
     },
     "Drinks & bars" : {
       "extractionState" : "stale",
@@ -489,9 +536,6 @@
         }
       }
     },
-    "Emergency & Safety" : {
-
-    },
     "Enable" : {
 
     },
@@ -511,6 +555,9 @@
           }
         }
       }
+    },
+    "EVERYWHERE" : {
+
     },
     "Exit" : {
 
@@ -535,6 +582,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Para familias"
+          }
+        }
+      }
+    },
+    "Fares from %@%@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Fares from %1$@%2$@."
           }
         }
       }
@@ -570,6 +627,7 @@
 
     },
     "Find your next island adventure" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -578,6 +636,9 @@
           }
         }
       }
+    },
+    "Find your way around" : {
+
     },
     "First name" : {
 
@@ -593,6 +654,9 @@
         }
       }
     },
+    "FROM %@" : {
+
+    },
     "Generate" : {
       "localizations" : {
         "es" : {
@@ -602,9 +666,6 @@
           }
         }
       }
-    },
-    "Get listed in the app, get featured to thousands of visitors, or add your menu so customers know what you serve before they walk in." : {
-
     },
     "Get started" : {
       "extractionState" : "stale",
@@ -620,7 +681,21 @@
     "Getting There" : {
 
     },
+    "GUIDES" : {
+
+    },
+    "H:%lld°  L:%lld°" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "H:%1$lld°  L:%2$lld°"
+          }
+        }
+      }
+    },
     "Happening on the island" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -629,6 +704,12 @@
           }
         }
       }
+    },
+    "Happy hour" : {
+
+    },
+    "Happy hour %@" : {
+
     },
     "Happy hour now" : {
       "extractionState" : "stale",
@@ -640,6 +721,9 @@
           }
         }
       }
+    },
+    "Happy hour on now, %@" : {
+
     },
     "Heads up" : {
       "extractionState" : "stale",
@@ -668,6 +752,9 @@
     "Honest answers from someone who actually lives here." : {
 
     },
+    "Hourly %@" : {
+
+    },
     "Hours" : {
       "localizations" : {
         "es" : {
@@ -688,6 +775,9 @@
           }
         }
       }
+    },
+    "HOW IT WORKS" : {
+
     },
     "How Much Time Do You Have?" : {
 
@@ -714,22 +804,15 @@
     "INSIDER PICK" : {
 
     },
+    "Insider tip" : {
+
+    },
     "Insider Tip" : {
       "localizations" : {
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tip local"
-          }
-        }
-      }
-    },
-    "Insider tip for %@: %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Insider tip for %1$@: %2$@"
           }
         }
       }
@@ -747,13 +830,13 @@
     "Insider+ member" : {
 
     },
+    "Insider+ required" : {
+
+    },
     "Interests" : {
 
     },
     "Island Essentials" : {
-
-    },
-    "Keep this handy — just in case." : {
 
     },
     "km" : {
@@ -770,6 +853,12 @@
         }
       }
     },
+    "List your business" : {
+
+    },
+    "LIVE" : {
+
+    },
     "Live music tonight" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -781,7 +870,7 @@
         }
       }
     },
-    "Live music, DJs, karaoke, trivia, fire shows — every spot worth being at, sorted by day." : {
+    "Live music, DJs, karaoke, trivia and fire shows — sorted by day." : {
 
     },
     "LIVE NOW" : {
@@ -835,9 +924,6 @@
         }
       }
     },
-    "Looks like a cruise day — open your itinerary." : {
-
-    },
     "Map" : {
       "localizations" : {
         "es" : {
@@ -854,10 +940,10 @@
     "Menu image unavailable" : {
 
     },
-    "Message Us on Facebook" : {
+    "mi" : {
 
     },
-    "mi" : {
+    "Money, taxis, Spanish, safety — quick references." : {
 
     },
     "Monthly" : {
@@ -881,10 +967,14 @@
         }
       }
     },
-    "No cruise ships in port. The beaches and dive sites are local-flow today." : {
+    "Near me" : {
+
+    },
+    "NEXT FEW HOURS" : {
 
     },
     "No favorites yet" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -933,7 +1023,7 @@
     "Off" : {
 
     },
-    "On a cruise ship today?" : {
+    "Offline" : {
 
     },
     "On vacation" : {
@@ -946,6 +1036,9 @@
           }
         }
       }
+    },
+    "Only places whose times we've confirmed. If a bar you know isn't here, we don't have its hours yet." : {
+
     },
     "Open" : {
       "localizations" : {
@@ -963,16 +1056,13 @@
     "Open a Roatán Insider business in the app." : {
 
     },
-    "Open Now" : {
+    "Open now" : {
 
     },
     "Open Place on Roatán" : {
 
     },
-    "Own a business\non Roatán?" : {
-
-    },
-    "passengers" : {
+    "Open-Meteo, for the middle of the island" : {
 
     },
     "Pick a few. We'll prioritise these across the app." : {
@@ -987,6 +1077,7 @@
       }
     },
     "Pick up where you left off" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1000,6 +1091,9 @@
 
     },
     "Place on Roatán" : {
+
+    },
+    "Places you looked at" : {
 
     },
     "Plan" : {
@@ -1023,9 +1117,6 @@
         }
       }
     },
-    "Plans, alerts, offline maps, and member discounts." : {
-
-    },
     "Play %@" : {
 
     },
@@ -1034,6 +1125,16 @@
     },
     "Preferences" : {
 
+    },
+    "Price %lld out of %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Price %1$lld out of %2$lld"
+          }
+        }
+      }
     },
     "Privacy" : {
       "localizations" : {
@@ -1045,6 +1146,9 @@
         }
       }
     },
+    "PRIVATE" : {
+
+    },
     "Profile" : {
 
     },
@@ -1055,6 +1159,9 @@
 
     },
     "Quiet stretch on the island. Pull up the week to see what's coming." : {
+
+    },
+    "Rated %@ out of 5" : {
 
     },
     "Reef conditions: %@" : {
@@ -1078,6 +1185,9 @@
 
     },
     "Remove from Favorites" : {
+
+    },
+    "Remove from saved" : {
 
     },
     "Remove from Saved" : {
@@ -1107,10 +1217,16 @@
     "RIGHT NOW" : {
 
     },
+    "ROATÁN" : {
+
+    },
     "Roatán Insider" : {
 
     },
     "ROATÁN INSIDER+" : {
+
+    },
+    "Roatán sits on the second-largest barrier reef in the world. These are the places people come for — how deep, what you'll see, and what you need to dive them. Your operator knows the moorings." : {
 
     },
     "Roatán, by the people who live here." : {
@@ -1136,6 +1252,7 @@
 
     },
     "Saved" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1145,16 +1262,23 @@
         }
       }
     },
-    "Search businesses, areas, features..." : {
+    "Schedule from Blue Wave Radio's Roatán Music Scene" : {
 
     },
     "Search places on Roatán..." : {
 
     },
+    "Search places, areas, what you fancy…" : {
+
+    },
     "Search venue, performer, area…" : {
 
     },
+    "See Insider+" : {
+
+    },
     "See what's around you" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1187,7 +1311,16 @@
     "Share %@" : {
 
     },
-    "SHIPS IN PORT TODAY" : {
+    "SHARED" : {
+
+    },
+    "SHORE" : {
+
+    },
+    "Shows which ships and when they leave" : {
+
+    },
+    "SITES THEY RUN" : {
 
     },
     "Skip" : {
@@ -1211,7 +1344,7 @@
         }
       }
     },
-    "Spanish Phrases" : {
+    "Sort by %@" : {
 
     },
     "Split Between" : {
@@ -1241,9 +1374,6 @@
     "Sun has set" : {
 
     },
-    "Sunset %@" : {
-
-    },
     "Sunset countdown plus today's insider pick." : {
 
     },
@@ -1260,7 +1390,7 @@
     "Sunset on Roatán" : {
 
     },
-    "Tap the heart on any business to\nsave it here for quick access." : {
+    "Support" : {
 
     },
     "Terms" : {
@@ -1276,16 +1406,25 @@
     "Thanks for being an early supporter — all features unlocked, forever." : {
 
     },
+    "THE LIGHT" : {
+
+    },
+    "THE REEF" : {
+
+    },
+    "These haven't been checked in a while — treat them as a guide, not a quote." : {
+
+    },
     "Time's up — head to the port!" : {
 
     },
-    "Tip Calculator" : {
+    "Times change and specials come and go — worth a quick call before you walk over." : {
 
     },
     "Tip Percentage" : {
 
     },
-    "Tip: Long-press a favorite to remove it" : {
+    "TODAY" : {
 
     },
     "Today on Roatán" : {
@@ -1310,6 +1449,9 @@
     "Top Picks" : {
 
     },
+    "TRENDING" : {
+
+    },
     "Trip" : {
       "localizations" : {
         "es" : {
@@ -1330,7 +1472,7 @@
         }
       }
     },
-    "Try a different search or category." : {
+    "Try a different word, or drop the category filter." : {
 
     },
     "Try Insider+" : {
@@ -1357,10 +1499,13 @@
     "until sunset" : {
 
     },
-    "USD" : {
+    "Update offline copy" : {
 
     },
-    "USD and Honduran Lempira — updated daily" : {
+    "Updated %@ · pull down to refresh" : {
+
+    },
+    "USD" : {
 
     },
     "Use metric units" : {
@@ -1392,9 +1537,6 @@
     "We use these to shape the home feed and your itinerary." : {
 
     },
-    "We'll get back to you within 24 hours" : {
-
-    },
     "We'll let you flag corrections and add new spots." : {
 
     },
@@ -1408,12 +1550,6 @@
         }
       }
     },
-    "Welcome to Roatán" : {
-
-    },
-    "West Bay and West End run busier when ships are in." : {
-
-    },
     "What are you into?" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1424,6 +1560,15 @@
           }
         }
       }
+    },
+    "What people are reacting to" : {
+
+    },
+    "WHAT YOU'LL SEE" : {
+
+    },
+    "What's near me" : {
+
     },
     "What's on, every night" : {
 
@@ -1439,7 +1584,16 @@
         }
       }
     },
+    "WHERE YOU LEFT OFF" : {
+
+    },
+    "WHO RUNS IT" : {
+
+    },
     "Why these picks" : {
+
+    },
+    "WORTH THE TRIP" : {
 
     },
     "Yearly" : {
@@ -1468,6 +1622,7 @@
 
     },
     "Your personal island shortlist" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1476,6 +1631,9 @@
           }
         }
       }
+    },
+    "Your trip, planned by the island's smartest local." : {
+
     }
   },
   "version" : "1.0"

@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "palm_logo.svg",
+      "filename" : "Roatan Insider App - Union.png",
       "idiom" : "universal"
     }
   ],
@@ -10,7 +10,6 @@
     "version" : 1
   },
   "properties" : {
-    "preserves-vector-data" : true,
     "template-rendering-intent" : "template"
   }
 }
