@@ -23,20 +23,27 @@ enum TravelEstimate {
 
     /// A door-to-door average, not a speed limit — speed bumps, the crawl
     /// through Coxen Hole and French Harbour, and whatever is parked in the
-    /// road. 38 was optimistic by about a third.
-    static let averageSpeedKph: Double = 32
+    /// road. 38 was optimistic by about a third; 32 was pessimistic by a
+    /// little once real measurements arrived.
+    static let averageSpeedKph: Double = 34
 
-    // Together these give about 2.7 minutes per straight-line kilometre,
-    // fitted against four independently reported drive times and checked
-    // against all four:
+    // Together these give about 2.56 minutes per straight-line kilometre,
+    // which is the median of eight routes Josh measured in Google Maps:
     //
-    //   airport - West Bay        9.3 km ->  25 min   (reported 22-40)
-    //   Mahogany Bay - West Bay  12.2 km ->  33 min   (reported 30-45)
-    //   Coxen Hole - Oak Ridge   21.5 km ->  58 min   (reported 45-60)
-    //   West End - West Bay       3.2 km ->   9 min   (reported ~10)
+    //   West End - Sandy Bay       2.7 km    5 min   1.83 min/km
+    //   Coxen Hole - Sandy Bay     3.7 km   10 min   2.72
+    //   West End - Coxen Hole      5.6 km   20 min   3.54
+    //   West Bay - Coxen Hole      7.5 km   20 min   2.67
+    //   Mahogany Bay - West End   10.4 km   30 min   2.88
+    //   Coxen Hole - French H.    10.9 km   20 min   1.84
+    //   Mahogany Bay - West Bay   12.2 km   30 min   2.47
+    //   West Bay - French H.      18.3 km   35 min   1.91
     //
-    // The old constants returned 19, 25 and 44 minutes for the first three,
-    // which is how the guides came to describe a 35-minute drive as ten.
+    // The spread is the point: the west corridor runs near 2.7 min/km and
+    // the highway east of Coxen Hole near 1.9, so a single figure runs long
+    // on eastward trips — by about eight minutes to French Harbour. Worth
+    // splitting into two zones if this label ever has to carry more weight
+    // than "about 40 min"; not worth it for a hedge.
 
     /// Where a visitor is assumed to start when we have no location. Nearly
     /// all of them are in this corridor, and saying "from West End" out loud

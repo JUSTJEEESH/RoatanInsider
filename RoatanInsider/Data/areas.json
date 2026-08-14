@@ -7,7 +7,7 @@
     "vibe": "Polished, resort-style Caribbean with a laid-back beach atmosphere and upscale dining.",
     "bestFor": "Beach lovers, families, luxury travelers, snorkelers",
     "topPicks": ["b001", "b002", "b003", "b004", "b005"],
-    "gettingThere": "From Mahogany Bay cruise port: 30 to 40 minutes by taxi ($5-8/person) — it is most of the way across the west of the island, so budget for it on a port day. From the Port of Roatán: 20 to 25 minutes ($10-15/person). From the airport: 25 to 30 minutes ($15-20)."
+    "gettingThere": "From Mahogany Bay cruise port: 30 minutes by taxi ($5-8/person). From the Port of Roatán: 15 minutes ($10-15/person). From the airport: 25 to 30 minutes ($15-20)."
   },
   {
     "id": "west_end",
@@ -17,7 +17,7 @@
     "vibe": "Laid-back, artsy, and social — flip-flops and dive tanks are the dress code.",
     "bestFor": "Divers, budget travelers, nightlife seekers, digital nomads, foodies",
     "topPicks": ["b006", "b007", "b008", "b009", "b010"],
-    "gettingThere": "From Mahogany Bay: 25 to 30 minutes by taxi ($5-8/person). From Coxen Hole: 15 to 20 minutes ($8-10/person). From West Bay: walk the beach path (20 minutes) or take a water taxi ($5/person with three aboard, $10 each if fewer, 5 minutes)."
+    "gettingThere": "From Mahogany Bay: 30 minutes by taxi ($5-8/person). From Coxen Hole: 20 minutes ($8-10/person). From West Bay: walk the beach path (20 minutes) or take a water taxi ($5/person with three aboard, $10 each if fewer, 5 minutes)."
   },
   {
     "id": "sandy_bay",
@@ -27,7 +27,7 @@
     "vibe": "Quiet, nature-oriented, and residential — the place to disconnect and go slow.",
     "bestFor": "Nature lovers, dolphin encounters, families seeking calm, snorkelers",
     "topPicks": ["b011", "b012", "b013", "b014"],
-    "gettingThere": "From Coxen Hole: 10-minute taxi ($5-8/person). From West End: 10-minute taxi ($5-8/person). Sandy Bay sits between the two on the main coastal road."
+    "gettingThere": "From Coxen Hole: 10 minutes by taxi ($5-8/person). From West End: 5 minutes ($5-8/person). Sandy Bay sits between the two on the main coastal road."
   },
   {
     "id": "coxen_hole",
@@ -37,7 +37,7 @@
     "vibe": "Busy, authentic, and local — the working heart of the island with no tourist polish.",
     "bestFor": "Cultural immersion, budget shopping, local food, practical errands",
     "topPicks": ["b015", "b016", "b017", "b018"],
-    "gettingThere": "From the airport: about 5 minutes ($5). From West End: 15 to 20 minutes; from West Bay: 20 to 25 ($8-12/person). The Port of Roatán cruise terminal is located right in Coxen Hole."
+    "gettingThere": "From the airport: about 5 minutes ($5). From West End or West Bay: 20 minutes ($8-12/person). The Port of Roatán cruise terminal is located right in Coxen Hole."
   },
   {
     "id": "flowers_bay",
@@ -47,7 +47,7 @@
     "vibe": "Sleepy, residential, and authentic — a glimpse of island life away from tourism.",
     "bestFor": "Adventurous travelers, those seeking local experiences, ironshore exploring",
     "topPicks": ["b019", "b020"],
-    "gettingThere": "From Coxen Hole: 10-minute taxi ($5). From West Bay: 25-minute taxi ($10-15/person). There's no regular public transport — you'll need a taxi or rental car."
+    "gettingThere": "From Coxen Hole: 10 minutes by taxi ($5). From West Bay: 8 minutes ($5-8/person) — much closer than the map suggests, the road runs straight round the point. There's no regular public transport — you'll need a taxi or rental car."
   },
   {
     "id": "french_harbour",
@@ -57,7 +57,7 @@
     "vibe": "Working port town with surprisingly great food and a no-nonsense island character.",
     "bestFor": "Foodies, seafood lovers, those wanting to see the real island economy",
     "topPicks": ["b021", "b022", "b023", "b024", "b025"],
-    "gettingThere": "From Coxen Hole: 25 to 40 minutes by taxi ($10-12/person). From West Bay: 45 minutes to an hour ($15-20/person). Located roughly in the center of the island along the main highway."
+    "gettingThere": "From Coxen Hole: 20 minutes by taxi ($10-12/person). From West Bay: 35 minutes ($15-20/person). Located roughly in the center of the island along the main highway."
   },
   {
     "id": "oak_ridge",
@@ -107,7 +107,7 @@
     "vibe": "Transit hub with a cruise-port energy — busy on ship days, quiet otherwise.",
     "bestFor": "Cruise passengers, ferry travelers, duty-free shopping, quick island stops",
     "topPicks": [],
-    "gettingThere": "From the airport: 5 to 10 minutes by taxi ($8-10). From West Bay: 30 to 40 minutes ($10-15). From Coxen Hole: 10 to 15 minutes ($5-8). The chairlift here runs inside the cruise terminal, between the ship and the port's own beach — it is not a way of getting anywhere else on the island."
+    "gettingThere": "From the airport: 5 to 10 minutes by taxi ($8-10). From West Bay: 30 minutes ($5-8/person). From Coxen Hole: 10 to 15 minutes ($5-8). The chairlift here runs inside the cruise terminal, between the ship and the port's own beach — it is not a way of getting anywhere else on the island."
   },
   {
     "id": "palmetto_bay",

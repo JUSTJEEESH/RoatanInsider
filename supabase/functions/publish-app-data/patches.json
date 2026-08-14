@@ -1,21 +1,6 @@
 [
   {
     "file": "areas.json",
-    "find": "From Mahogany Bay cruise port: free chairlift to the beach area or a 10-minute taxi ride ($5-8/person). From the Port of Roatán: 20-minute taxi ($10-15/person). From the airport: 25-minute taxi ($15-20).",
-    "replace": "From Mahogany Bay cruise port: 30 to 40 minutes by taxi ($5-8/person) — it is most of the way across the west of the island, so budget for it on a port day. From the Port of Roatán: 20 to 25 minutes ($10-15/person). From the airport: 25 to 30 minutes ($15-20)."
-  },
-  {
-    "file": "areas.json",
-    "find": "From Mahogany Bay: 15-minute taxi ($5-8/person). From Coxen Hole: 15-minute taxi ($8-10/person).",
-    "replace": "From Mahogany Bay: 25 to 30 minutes by taxi ($5-8/person). From Coxen Hole: 15 to 20 minutes ($8-10/person)."
-  },
-  {
-    "file": "areas.json",
-    "find": "From Coxen Hole: 20-minute taxi ($10-12/person). From West Bay: 30-minute taxi ($15-20/person).",
-    "replace": "From Coxen Hole: 25 to 40 minutes by taxi ($10-12/person). From West Bay: 45 minutes to an hour ($15-20/person)."
-  },
-  {
-    "file": "areas.json",
     "find": "From the airport: 15-minute taxi ($8-10). From West Bay: 20-minute taxi ($10-15). From Coxen Hole: 10-minute taxi ($5-8). The Mahogany Bay chairlift connects the cruise terminal to the beach area.",
     "replace": "From the airport: 5 to 10 minutes by taxi ($8-10). From West Bay: 30 to 40 minutes ($10-15). From Coxen Hole: 10 to 15 minutes ($5-8). The chairlift here runs inside the cruise terminal, between the ship and the port's own beach — it is not a way of getting anywhere else on the island."
   },
@@ -33,11 +18,6 @@
     "file": "areas.json",
     "find": "From Coxen Hole: 50-minute taxi ($20-25). From West Bay: about 1 hour by taxi ($25-30).",
     "replace": "From Coxen Hole: about an hour by taxi ($20-25). From West Bay: an hour and a half ($25-30)."
-  },
-  {
-    "file": "areas.json",
-    "find": "From the airport: 5-minute taxi ($5). From West Bay or West End: 15-20 minute taxi ($8-12/person).",
-    "replace": "From the airport: about 5 minutes ($5). From West End: 15 to 20 minutes; from West Bay: 20 to 25 ($8-12/person)."
   },
   {
     "file": "areas.json",
@@ -73,5 +53,40 @@
     "file": "ask-a-local.json",
     "find": "There are no meters. Always agree on the price before you get in. Typical fares: West Bay to West End is $5, Mahogany Bay port to West Bay is $5-8 per person, Coxen Hole to West End is $10-15. Shared colectivo minibuses run the main road for about $1-2 per person — they're totally fine to use. Water taxis between West End and West Bay are $3 per person and run constantly during the day. Ask your hotel or a restaurant to call you a taxi — they'll get you a fair price.",
     "replace": "There are no meters, so agree the price before you get in — every time, even for a run you did yesterday. Leaving the airport is the one exception: those rates are posted at the terminal and fixed for the whole car, up to four people, 6am to 6pm. It's $10 to Coxen Hole, $30 to West End, $35 to West Bay. After 6pm, or anywhere else on the island, you're negotiating again. Ask for a colectivo if you don't mind the stops — that's a shared seat priced per person, about 45-50 lempiras along the main road, and being quoted the whole-car price for one is how visitors overpay here. The water taxi between West End and West Bay is $5 a head once there are three of you in the boat, $10 each if it's one or two, and it runs all day. The full fare table is under Tools if you want to check a particular run."
+  },
+  {
+    "file": "areas.json",
+    "find": "From Mahogany Bay cruise port: 30 to 40 minutes by taxi ($5-8/person) — it is most of the way across the west of the island, so budget for it on a port day. From the Port of Roatán: 20 to 25 minutes ($10-15/person). From the airport: 25 to 30 minutes ($15-20).",
+    "replace": "From Mahogany Bay cruise port: 30 minutes by taxi ($5-8/person). From the Port of Roatán: 15 minutes ($10-15/person). From the airport: 25 to 30 minutes ($15-20)."
+  },
+  {
+    "file": "areas.json",
+    "find": "From Mahogany Bay: 25 to 30 minutes by taxi ($5-8/person). From Coxen Hole: 15 to 20 minutes ($8-10/person).",
+    "replace": "From Mahogany Bay: 30 minutes by taxi ($5-8/person). From Coxen Hole: 20 minutes ($8-10/person)."
+  },
+  {
+    "file": "areas.json",
+    "find": "From Coxen Hole: 10-minute taxi ($5-8/person). From West End: 10-minute taxi ($5-8/person).",
+    "replace": "From Coxen Hole: 10 minutes by taxi ($5-8/person). From West End: 5 minutes ($5-8/person)."
+  },
+  {
+    "file": "areas.json",
+    "find": "From the airport: about 5 minutes ($5). From West End: 15 to 20 minutes; from West Bay: 20 to 25 ($8-12/person).",
+    "replace": "From the airport: about 5 minutes ($5). From West End or West Bay: 20 minutes ($8-12/person)."
+  },
+  {
+    "file": "areas.json",
+    "find": "From Coxen Hole: 10-minute taxi ($5). From West Bay: 25-minute taxi ($10-15/person).",
+    "replace": "From Coxen Hole: 10 minutes by taxi ($5). From West Bay: 8 minutes ($5-8/person) — much closer than the map suggests, the road runs straight round the point."
+  },
+  {
+    "file": "areas.json",
+    "find": "From Coxen Hole: 25 to 40 minutes by taxi ($10-12/person). From West Bay: 45 minutes to an hour ($15-20/person).",
+    "replace": "From Coxen Hole: 20 minutes by taxi ($10-12/person). From West Bay: 35 minutes ($15-20/person)."
+  },
+  {
+    "file": "areas.json",
+    "find": "From the airport: 5 to 10 minutes by taxi ($8-10). From West Bay: 30 to 40 minutes ($10-15). From Coxen Hole: 10 to 15 minutes ($5-8).",
+    "replace": "From the airport: 5 to 10 minutes by taxi ($8-10). From West Bay: 30 minutes ($5-8/person). From Coxen Hole: 10 to 15 minutes ($5-8)."
   }
 ]
