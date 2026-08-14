@@ -40,31 +40,6 @@
     "replace": "From the airport: about 5 minutes ($5). From West End: 15 to 20 minutes; from West Bay: 20 to 25 ($8-12/person)."
   },
   {
-    "file": "cruise-mahogany-bay.json",
-    "find": "The ride is about 10 minutes.",
-    "replace": "The ride is 30 to 40 minutes — Mahogany Bay is most of the way across the island from West Bay, so this is not the quick hop it sounds like."
-  },
-  {
-    "file": "cruise-mahogany-bay.json",
-    "find": "Allow at least 30 minutes for the return trip — traffic can be heavy on cruise ship days.",
-    "replace": "Allow a full hour for the return trip: the drive alone is 30 to 40 minutes, and traffic is heavy on cruise ship days."
-  },
-  {
-    "file": "cruise-mahogany-bay.json",
-    "find": "The trip takes about 15-20 minutes depending on traffic.",
-    "replace": "The trip takes 25 to 30 minutes, longer in cruise-day traffic."
-  },
-  {
-    "file": "cruise-mahogany-bay.json",
-    "find": "The drive from Sandy Bay to Mahogany Bay is about 15 minutes.",
-    "replace": "The drive from Sandy Bay to Mahogany Bay is 20 to 25 minutes."
-  },
-  {
-    "file": "cruise-mahogany-bay.json",
-    "find": "Set an alarm for 30 minutes before all-aboard. Traffic from West Bay to Mahogany Bay can take 15-20 minutes during c",
-    "replace": "Set an alarm 90 minutes before all-aboard. West Bay to Mahogany Bay is 30 to 40 minutes on a clear road and longer on a cruise day, so 30 minutes is not enough time and never was. Traffic during c"
-  },
-  {
     "file": "areas.json",
     "find": "take a water taxi ($3/person, 5 minutes)",
     "replace": "take a water taxi ($5/person with three aboard, $10 each if fewer, 5 minutes)"
@@ -83,11 +58,6 @@
     "file": "cruise-coxen-hole.json",
     "find": "Take a water taxi from West Bay to West End ($3 per person, 5 minutes)",
     "replace": "Take a water taxi from West Bay to West End ($5 per person with three aboard, $10 if fewer, 5 minutes)"
-  },
-  {
-    "file": "cruise-mahogany-bay.json",
-    "find": "$3 for water taxi, free to walk",
-    "replace": "$5-10 per person for the water taxi, free to walk"
   },
   {
     "file": "businesses.json",
