@@ -7,7 +7,7 @@
   {
     "id": "money",
     "question": "Do I need Lempiras or can I use US dollars?",
-    "answer": "USD is accepted almost everywhere in the tourist zones. Restaurants, dive shops, bars, taxis — they all take dollars. You'll get change in a mix of USD and Lempiras though. ATMs on the island dispense Lempiras. Pro tip: carry small bills ($1s and $5s). If you pay for a $3 water taxi with a $20, you might not get change."
+    "answer": "USD is accepted almost everywhere in the tourist zones. Restaurants, dive shops, bars, taxis — they all take dollars. You'll get change in a mix of USD and Lempiras though. ATMs on the island dispense Lempiras. Pro tip: carry small bills ($1s and $5s). If you pay for a $5 water taxi with a $20, you might not get change."
   },
   {
     "id": "snorkel",
@@ -32,7 +32,7 @@
   {
     "id": "taxi",
     "question": "How do taxis work? Will I get ripped off?",
-    "answer": "There are no meters, so agree the price before you get in — every time, even for a run you did yesterday. Leaving the airport is the one exception: those rates are posted at the terminal and fixed for the whole car, up to four people, 6am to 6pm. It's $10 to Coxen Hole, $30 to West End, $35 to West Bay. After 6pm, or anywhere else on the island, you're negotiating again. Ask for a colectivo if you don't mind the stops — that's a shared seat priced per person, about 45-50 lempiras along the main road, and being quoted the whole-car price for one is how visitors overpay here. Water taxis between West End and West Bay are $3 per person and run constantly through the day. The full fare table is under Tools if you want to check a particular run."
+    "answer": "There are no meters, so agree the price before you get in — every time, even for a run you did yesterday. Leaving the airport is the one exception: those rates are posted at the terminal and fixed for the whole car, up to four people, 6am to 6pm. It's $10 to Coxen Hole, $30 to West End, $35 to West Bay. After 6pm, or anywhere else on the island, you're negotiating again. Ask for a colectivo if you don't mind the stops — that's a shared seat priced per person, about 45-50 lempiras along the main road, and being quoted the whole-car price for one is how visitors overpay here. The water taxi between West End and West Bay is $5 a head once there are three of you in the boat, $10 each if it's one or two, and it runs all day. The full fare table is under Tools if you want to check a particular run."
   },
   {
     "id": "diving",

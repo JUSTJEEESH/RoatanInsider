@@ -26,9 +26,9 @@
     "A route with no fare at all never renders, and the screen hides",
     "entirely if no route has one. Safe to ship half-filled.",
     "",
-    "STILL OPEN: the road fare between West End and West Bay, the run back",
-    "TO the airport (the posted card only governs taxis leaving it), and",
-    "private rates for anything that isn't an airport run."
+    "STILL OPEN: the run back TO the airport (the posted card only governs",
+    "taxis leaving it), and private rates for anything that isn't an airport",
+    "run or the West Bay/West End hop."
   ],
 
   "source": "the airport's posted rate card and our own island guides",
@@ -40,6 +40,8 @@
     "Say which one you want. A colectivo is a shared seat priced per person; a privado is the whole car. Being quoted the car price for what turns out to be a shared seat is how visitors overpay here.",
     "Airport fares are posted at the terminal and fixed: one price for the car, up to four people, 6am to 6pm. Outside those hours — or from the road rather than the rank — you're negotiating again.",
     "A colectivo along the main road is about 45–50 lempiras, under two dollars. If you're quoted five or eight dollars for a seat, that's the visitor price and it's worth asking.",
+    "The water taxi between West End and West Bay is $5 a head once there are three of you in the boat, and $10 each if it's just one or two. Five minutes, and usually quicker than going round by road.",
+    "If a driver is having a slow day, or is already heading your way, there's often a deal in it — the road and water taxis both compete for the same fare. Ask.",
     "Hiring a driver for the day runs roughly $25–30 a head for a group, which usually beats three or four separate runs.",
     "Carry small bills. Dollars work as well as lempiras, but drivers often can't break a twenty."
   ],
@@ -60,12 +62,13 @@
     { "id": "airport-camp-bay",          "from": "Airport",          "to": "Camp Bay",       "colectivoUSD": null, "colectivoMaxUSD": null, "privateUSD": 70, "privateMaxUSD": null, "note": "The far east end — budget an hour and a quarter." },
     { "id": "airport-port-royal",        "from": "Airport",          "to": "Port Royal",     "colectivoUSD": null, "colectivoMaxUSD": null, "privateUSD": 70, "privateMaxUSD": null, "note": null },
 
-    { "id": "west-end-west-bay",         "from": "West End",         "to": "West Bay",       "colectivoUSD": null, "colectivoMaxUSD": null, "privateUSD": null, "privateMaxUSD": null, "note": "Water taxi is $3 per person and takes five minutes — usually quicker than the road." },
+    { "id": "west-end-west-bay",         "from": "West End",         "to": "West Bay",       "colectivoUSD": null, "colectivoMaxUSD": null, "privateUSD": 5,    "privateMaxUSD": null, "note": "Per car. Or cross by water taxi — five minutes." },
     { "id": "west-end-sandy-bay",        "from": "West End",         "to": "Sandy Bay",      "colectivoUSD": 5,    "colectivoMaxUSD": 8,    "privateUSD": null, "privateMaxUSD": null, "note": "About 10 minutes." },
     { "id": "west-end-coxen-hole",       "from": "West End",         "to": "Coxen Hole",     "colectivoUSD": 8,    "colectivoMaxUSD": 10,   "privateUSD": null, "privateMaxUSD": null, "note": "About 15 minutes." },
     { "id": "west-end-french-harbour",   "from": "West End",         "to": "French Harbour", "colectivoUSD": null, "colectivoMaxUSD": null, "privateUSD": null, "privateMaxUSD": null, "note": null },
     { "id": "west-end-airport",          "from": "West End",         "to": "Airport",        "colectivoUSD": null, "colectivoMaxUSD": null, "privateUSD": null, "privateMaxUSD": null, "note": null },
 
+    { "id": "west-bay-west-end",         "from": "West Bay",         "to": "West End",       "colectivoUSD": null, "colectivoMaxUSD": null, "privateUSD": 5,    "privateMaxUSD": null, "note": "Per car. Or cross by water taxi — five minutes." },
     { "id": "west-bay-coxen-hole",       "from": "West Bay",         "to": "Coxen Hole",     "colectivoUSD": 8,    "colectivoMaxUSD": 12,   "privateUSD": null, "privateMaxUSD": null, "note": "15 to 20 minutes." },
     { "id": "west-bay-sandy-bay",        "from": "West Bay",         "to": "Sandy Bay",      "colectivoUSD": null, "colectivoMaxUSD": null, "privateUSD": null, "privateMaxUSD": null, "note": null },
     { "id": "west-bay-french-harbour",   "from": "West Bay",         "to": "French Harbour", "colectivoUSD": 15,   "colectivoMaxUSD": 20,   "privateUSD": null, "privateMaxUSD": null, "note": "About 30 minutes." },
