@@ -22,7 +22,7 @@
           "id": "mb4-2",
           "time": "0:20",
           "title": "Taxi to West Bay Beach",
-          "description": "Grab a shared taxi from the Mahogany Bay beach area to West Bay Beach. The ride is about 10 minutes. Tell the driver 'West Bay Beach' — they all know it. You'll be dropped near the public beach entrance.",
+          "description": "Grab a shared taxi from the Mahogany Bay beach area to West Bay Beach. The ride is 30 to 40 minutes — Mahogany Bay is most of the way across the island from West Bay, so this is not the quick hop it sounds like. Tell the driver 'West Bay Beach' — they all know it. You'll be dropped near the public beach entrance.",
           "estimatedCost": "$5 per person",
           "tip": "Share a taxi with other cruise passengers to split the cost. Drivers will wait for a full van — it's cheaper for everyone."
         },
@@ -46,7 +46,7 @@
           "id": "mb4-5",
           "time": "3:15",
           "title": "Head Back to the Ship",
-          "description": "Grab a taxi back to Mahogany Bay. Allow at least 30 minutes for the return trip — traffic can be heavy on cruise ship days. The taxi drops you at the port entrance, and it's a short walk back to the ship.",
+          "description": "Grab a taxi back to Mahogany Bay. Allow a full hour for the return trip: the drive alone is 30 to 40 minutes, and traffic is heavy on cruise ship days. The taxi drops you at the port entrance, and it's a short walk back to the ship.",
           "estimatedCost": "$5 per person",
           "tip": "Don't wait until the last minute. Taxis get scarce as all-aboard time approaches, and the line for the chairlift back gets very long."
         }
@@ -101,7 +101,7 @@
           "id": "mb6-6",
           "time": "4:45",
           "title": "Taxi Back to Mahogany Bay",
-          "description": "Flag a taxi on the main road in West End for the ride back to the port. The trip takes about 15-20 minutes depending on traffic. Make sure to tell the driver Mahogany Bay, not Coxen Hole.",
+          "description": "Flag a taxi on the main road in West End for the ride back to the port. The trip takes 25 to 30 minutes, longer in cruise-day traffic. Make sure to tell the driver Mahogany Bay, not Coxen Hole.",
           "estimatedCost": "$5 per person",
           "tip": "Leave West End no later than 75 minutes before all-aboard. Cruise ship day traffic between West End and the port is unpredictable."
         }
@@ -172,7 +172,7 @@
           "id": "mb8-8",
           "time": "6:45",
           "title": "Return to Mahogany Bay",
-          "description": "Head back to the port with plenty of time to spare. The drive from Sandy Bay to Mahogany Bay is about 15 minutes. Browse the shops at the port area if you have extra time.",
+          "description": "Head back to the port with plenty of time to spare. The drive from Sandy Bay to Mahogany Bay is 20 to 25 minutes. Browse the shops at the port area if you have extra time.",
           "estimatedCost": "Included in taxi tour price",
           "tip": "Don't buy souvenirs at the port shops — prices are double what you'd pay in West End or Coxen Hole. You had all day to shop smarter."
         }
@@ -187,5 +187,5 @@
     "Apply reef-safe sunscreen before you go. Regular sunscreen with oxybenzone kills the coral reef — and Roatán's reef is the reason you're here.",
     "If you're snorkeling, don't touch or stand on the coral. It takes decades to grow and seconds to destroy. Float, don't walk."
   ],
-  "returnReminder": "Set an alarm for 30 minutes before all-aboard. Traffic from West Bay to Mahogany Bay can take 15-20 minutes during cruise ship days."
+  "returnReminder": "Set an alarm 90 minutes before all-aboard. West Bay to Mahogany Bay is 30 to 40 minutes on a clear road and longer on a cruise day, so 30 minutes is not enough time and never was. Traffic during cruise ship days."
 }

@@ -71,6 +71,97 @@ const INSPECT_PATTERN = /taxi/i;
 const PATCHES: { file: string; find: string; replace: string }[] = [
   {
     file: "areas.json",
+    find:
+      "From Mahogany Bay cruise port: free chairlift to the beach area or a 10-minute taxi ride ($5-8/person). From the Port of Roatán: 20-minute taxi ($10-15/person). From the airport: 25-minute taxi ($15-20).",
+    replace:
+      "From Mahogany Bay cruise port: 30 to 40 minutes by taxi ($5-8/person) — it is most of the way across the west of the island, so budget for it on a port day. From the Port of Roatán: 20 to 25 minutes ($10-15/person). From the airport: 25 to 30 minutes ($15-20).",
+  },
+  {
+    file: "areas.json",
+    find:
+      "From Mahogany Bay: 15-minute taxi ($5-8/person). From Coxen Hole: 15-minute taxi ($8-10/person).",
+    replace:
+      "From Mahogany Bay: 25 to 30 minutes by taxi ($5-8/person). From Coxen Hole: 15 to 20 minutes ($8-10/person).",
+  },
+  {
+    file: "areas.json",
+    find:
+      "From Coxen Hole: 20-minute taxi ($10-12/person). From West Bay: 30-minute taxi ($15-20/person).",
+    replace:
+      "From Coxen Hole: 25 to 40 minutes by taxi ($10-12/person). From West Bay: 45 minutes to an hour ($15-20/person).",
+  },
+  {
+    file: "areas.json",
+    find:
+      "From the airport: 15-minute taxi ($8-10). From West Bay: 20-minute taxi ($10-15). From Coxen Hole: 10-minute taxi ($5-8). The Mahogany Bay chairlift connects the cruise terminal to the beach area.",
+    replace:
+      "From the airport: 5 to 10 minutes by taxi ($8-10). From West Bay: 30 to 40 minutes ($10-15). From Coxen Hole: 10 to 15 minutes ($5-8). The chairlift here runs inside the cruise terminal, between the ship and the port's own beach — it is not a way of getting anywhere else on the island.",
+  },
+  {
+    file: "areas.json",
+    find:
+      "From Coxen Hole: 15-minute taxi ($8-10). From West Bay: 25-minute taxi ($12-15).",
+    replace:
+      "From Coxen Hole: 20 to 25 minutes by taxi ($8-10). From West Bay: 35 to 50 minutes ($12-15).",
+  },
+  {
+    file: "areas.json",
+    find:
+      "From Coxen Hole: 45-minute taxi ($20-25). From West Bay: about 1 hour by taxi ($25-30).",
+    replace:
+      "From Coxen Hole: 50 minutes to an hour by taxi ($20-25). From West Bay: an hour and a quarter or more ($25-30).",
+  },
+  {
+    file: "areas.json",
+    find:
+      "From Coxen Hole: 50-minute taxi ($20-25). From West Bay: about 1 hour by taxi ($25-30).",
+    replace:
+      "From Coxen Hole: about an hour by taxi ($20-25). From West Bay: an hour and a half ($25-30).",
+  },
+  {
+    file: "areas.json",
+    find:
+      "From the airport: 5-minute taxi ($5). From West Bay or West End: 15-20 minute taxi ($8-12/person).",
+    replace:
+      "From the airport: about 5 minutes ($5). From West End: 15 to 20 minutes; from West Bay: 20 to 25 ($8-12/person).",
+  },
+  {
+    file: "cruise-mahogany-bay.json",
+    find:
+      "The ride is about 10 minutes.",
+    replace:
+      "The ride is 30 to 40 minutes — Mahogany Bay is most of the way across the island from West Bay, so this is not the quick hop it sounds like.",
+  },
+  {
+    file: "cruise-mahogany-bay.json",
+    find:
+      "Allow at least 30 minutes for the return trip — traffic can be heavy on cruise ship days.",
+    replace:
+      "Allow a full hour for the return trip: the drive alone is 30 to 40 minutes, and traffic is heavy on cruise ship days.",
+  },
+  {
+    file: "cruise-mahogany-bay.json",
+    find:
+      "The trip takes about 15-20 minutes depending on traffic.",
+    replace:
+      "The trip takes 25 to 30 minutes, longer in cruise-day traffic.",
+  },
+  {
+    file: "cruise-mahogany-bay.json",
+    find:
+      "The drive from Sandy Bay to Mahogany Bay is about 15 minutes.",
+    replace:
+      "The drive from Sandy Bay to Mahogany Bay is 20 to 25 minutes.",
+  },
+  {
+    file: "cruise-mahogany-bay.json",
+    find:
+      "Set an alarm for 30 minutes before all-aboard. Traffic from West Bay to Mahogany Bay can take 15-20 minutes during c",
+    replace:
+      "Set an alarm 90 minutes before all-aboard. West Bay to Mahogany Bay is 30 to 40 minutes on a clear road and longer on a cruise day, so 30 minutes is not enough time and never was. Traffic during c",
+  },
+  {
+    file: "areas.json",
     find: "take a water taxi ($3/person, 5 minutes)",
     replace: "take a water taxi ($5/person with three aboard, $10 each if fewer, 5 minutes)",
   },

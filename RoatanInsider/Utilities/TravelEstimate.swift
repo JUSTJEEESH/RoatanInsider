@@ -15,18 +15,33 @@ import CoreLocation
 enum TravelEstimate {
 
     /// The main road follows the coast and bends with it, so road distance
-    /// runs longer than the straight line between two points. 1.3 is a
-    /// conservative allowance for that.
-    static let windingFactor: Double = 1.3
+    /// runs longer than the straight line between two points. 1.3 was a
+    /// guess and it was too low: on the runs that matter, the road doubles
+    /// back around bays a straight line cuts across. Between West Bay and
+    /// Mahogany Bay the straight line goes over open water.
+    static let windingFactor: Double = 1.45
 
-    /// Realistic average including the slow stretches through Coxen Hole and
-    /// French Harbour. Not a speed limit — a door-to-door average.
-    static let averageSpeedKph: Double = 38
+    /// A door-to-door average, not a speed limit — speed bumps, the crawl
+    /// through Coxen Hole and French Harbour, and whatever is parked in the
+    /// road. 38 was optimistic by about a third.
+    static let averageSpeedKph: Double = 32
+
+    // Together these give about 2.7 minutes per straight-line kilometre,
+    // fitted against four independently reported drive times and checked
+    // against all four:
+    //
+    //   airport - West Bay        9.3 km ->  25 min   (reported 22-40)
+    //   Mahogany Bay - West Bay  12.2 km ->  33 min   (reported 30-45)
+    //   Coxen Hole - Oak Ridge   21.5 km ->  58 min   (reported 45-60)
+    //   West End - West Bay       3.2 km ->   9 min   (reported ~10)
+    //
+    // The old constants returned 19, 25 and 44 minutes for the first three,
+    // which is how the guides came to describe a 35-minute drive as ten.
 
     /// Where a visitor is assumed to start when we have no location. Nearly
     /// all of them are in this corridor, and saying "from West End" out loud
     /// is what makes the number checkable rather than mysterious.
-    static let defaultOrigin = CLLocation(latitude: 16.2985, longitude: -86.6110)
+    static let defaultOrigin = CLLocation(latitude: 16.30488, longitude: -86.59328)
     static let defaultOriginName = "West End"
 
     /// Below this, "how long is the drive" isn't the question — you're
