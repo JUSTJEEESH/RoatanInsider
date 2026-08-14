@@ -22,7 +22,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.0";
 
 const BUCKET = "app-data";
 const REPO = "JUSTJEEESH/RoatanInsider";
-const SOURCE_COMMIT = "226c396e7202ae067f1ad2f09021c49dec178a7c";
+const SOURCE_COMMIT = "4d5dd63eaad1d10a57a297a8a276c31a1c07861c";
 
 // Repo path -> object name in the bucket.
 const FROM_REPO: Record<string, string> = {
@@ -45,7 +45,7 @@ const MANIFEST_KEYS: Record<string, string> = {
 // mention a fare, so a copy in the repo can be checked against the copy
 // people are actually reading. Everything listed is in a public bucket
 // already, so this exposes nothing new.
-const INSPECT: string[] = ["cruise-mahogany-bay.json"];
+const INSPECT: string[] = ["areas.json", "cruise-mahogany-bay.json"];
 const INSPECT_PATTERN = /minute|hour/i;
 
 // Surgical edits to files that live ONLY in the bucket.
