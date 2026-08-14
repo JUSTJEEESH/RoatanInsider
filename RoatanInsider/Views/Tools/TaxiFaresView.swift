@@ -23,7 +23,7 @@ struct TaxiFaresView: View {
             ToolHeader(
                 icon: "car",
                 title: "Taxi Fares",
-                subtitle: "Agree the price before you get in — every time."
+                subtitle: "A rough guide to help you negotiate. Agree the price before you get in."
             )
 
             VStack(alignment: .leading, spacing: AppConstants.Space.block) {
@@ -213,7 +213,7 @@ struct TaxiFaresView: View {
                     .foregroundStyle(Color.riMediumGray)
                     .fixedSize(horizontal: false, vertical: true)
             } else {
-                Text("Drivers can charge more after dark or off the main road. This is what the run usually costs, not a fixed price.")
+                Text("A guide for negotiating, not a price list. Nothing here is fixed — drivers charge more after dark and off the main road, and every fare is agreed between you and the driver before you get in.")
                     .riType(.caption)
                     .foregroundStyle(Color.riLightGray)
                     .fixedSize(horizontal: false, vertical: true)
