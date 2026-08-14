@@ -22,7 +22,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.0";
 
 const BUCKET = "app-data";
 const REPO = "JUSTJEEESH/RoatanInsider";
-const SOURCE_COMMIT = "06ed8f8b471d626d2838e342960d23666ceea037";
+const SOURCE_COMMIT = "b3cbe70d70324185fcfd8b27b8473b5decaa19e5";
 
 // Repo path -> object name in the bucket.
 const FROM_REPO: Record<string, string> = {
@@ -50,164 +50,27 @@ const INSPECT_PATTERN = /taxi/i;
 
 // Surgical edits to files that live ONLY in the bucket.
 //
-// areas.json, ask-a-local.json, essentials.json and the cruise guides are
-// all bigger in the bucket than in this repo — the bucket copy is the newer
-// one, carrying edits the repo never received. Republishing the repo version
-// would delete them. So these files are patched in place instead: read the
-// live copy, swap one exact string, write it back, and leave every other
-// byte alone.
+// Every patched file is bigger in the bucket than in the repo — the bucket
+// copy is the newer one, carrying edits the repo never received
+// (businesses.json by about 100KB). Republishing the repo version would
+// delete them. So these are patched in place: read the live copy, swap one
+// exact string, write it back, leave every other byte alone.
 //
-// PATCHES ARE APPLIED IN ORDER AND THEY COMPOUND. A patch that rewrites a
-// sentence sitting inside another patch's `replace` text leaves that second
-// patch unable to recognise its own output as already-applied — which is
-// exactly what happened to the taxi answer here, and the run aborted rather
-// than writing the file half-done. Every `replace` must describe the file as
-// it should look AFTER all earlier patches have run.
+// A patch whose `find` does not appear EXACTLY ONCE abandons that file
+// untouched — zero matches means the text already changed under us, two
+// means we do not understand the file well enough to be editing it. An
+// already-applied patch is a no-op, so the list is also a record of what
+// the live files have had done to them.
 //
-// A patch whose `find` does not appear EXACTLY ONCE is abandoned and the
-// file is left untouched, because a find that matched zero times means the
-// text already changed under us, and one that matched twice means we do not
-// understand the file well enough to be editing it.
-const PATCHES: { file: string; find: string; replace: string }[] = [
-  {
-    file: "areas.json",
-    find:
-      "From Mahogany Bay cruise port: free chairlift to the beach area or a 10-minute taxi ride ($5-8/person). From the Port of Roatán: 20-minute taxi ($10-15/person). From the airport: 25-minute taxi ($15-20).",
-    replace:
-      "From Mahogany Bay cruise port: 30 to 40 minutes by taxi ($5-8/person) — it is most of the way across the west of the island, so budget for it on a port day. From the Port of Roatán: 20 to 25 minutes ($10-15/person). From the airport: 25 to 30 minutes ($15-20).",
-  },
-  {
-    file: "areas.json",
-    find:
-      "From Mahogany Bay: 15-minute taxi ($5-8/person). From Coxen Hole: 15-minute taxi ($8-10/person).",
-    replace:
-      "From Mahogany Bay: 25 to 30 minutes by taxi ($5-8/person). From Coxen Hole: 15 to 20 minutes ($8-10/person).",
-  },
-  {
-    file: "areas.json",
-    find:
-      "From Coxen Hole: 20-minute taxi ($10-12/person). From West Bay: 30-minute taxi ($15-20/person).",
-    replace:
-      "From Coxen Hole: 25 to 40 minutes by taxi ($10-12/person). From West Bay: 45 minutes to an hour ($15-20/person).",
-  },
-  {
-    file: "areas.json",
-    find:
-      "From the airport: 15-minute taxi ($8-10). From West Bay: 20-minute taxi ($10-15). From Coxen Hole: 10-minute taxi ($5-8). The Mahogany Bay chairlift connects the cruise terminal to the beach area.",
-    replace:
-      "From the airport: 5 to 10 minutes by taxi ($8-10). From West Bay: 30 to 40 minutes ($10-15). From Coxen Hole: 10 to 15 minutes ($5-8). The chairlift here runs inside the cruise terminal, between the ship and the port's own beach — it is not a way of getting anywhere else on the island.",
-  },
-  {
-    file: "areas.json",
-    find:
-      "From Coxen Hole: 15-minute taxi ($8-10). From West Bay: 25-minute taxi ($12-15).",
-    replace:
-      "From Coxen Hole: 20 to 25 minutes by taxi ($8-10). From West Bay: 35 to 50 minutes ($12-15).",
-  },
-  {
-    file: "areas.json",
-    find:
-      "From Coxen Hole: 45-minute taxi ($20-25). From West Bay: about 1 hour by taxi ($25-30).",
-    replace:
-      "From Coxen Hole: 50 minutes to an hour by taxi ($20-25). From West Bay: an hour and a quarter or more ($25-30).",
-  },
-  {
-    file: "areas.json",
-    find:
-      "From Coxen Hole: 50-minute taxi ($20-25). From West Bay: about 1 hour by taxi ($25-30).",
-    replace:
-      "From Coxen Hole: about an hour by taxi ($20-25). From West Bay: an hour and a half ($25-30).",
-  },
-  {
-    file: "areas.json",
-    find:
-      "From the airport: 5-minute taxi ($5). From West Bay or West End: 15-20 minute taxi ($8-12/person).",
-    replace:
-      "From the airport: about 5 minutes ($5). From West End: 15 to 20 minutes; from West Bay: 20 to 25 ($8-12/person).",
-  },
-  {
-    file: "cruise-mahogany-bay.json",
-    find:
-      "The ride is about 10 minutes.",
-    replace:
-      "The ride is 30 to 40 minutes — Mahogany Bay is most of the way across the island from West Bay, so this is not the quick hop it sounds like.",
-  },
-  {
-    file: "cruise-mahogany-bay.json",
-    find:
-      "Allow at least 30 minutes for the return trip — traffic can be heavy on cruise ship days.",
-    replace:
-      "Allow a full hour for the return trip: the drive alone is 30 to 40 minutes, and traffic is heavy on cruise ship days.",
-  },
-  {
-    file: "cruise-mahogany-bay.json",
-    find:
-      "The trip takes about 15-20 minutes depending on traffic.",
-    replace:
-      "The trip takes 25 to 30 minutes, longer in cruise-day traffic.",
-  },
-  {
-    file: "cruise-mahogany-bay.json",
-    find:
-      "The drive from Sandy Bay to Mahogany Bay is about 15 minutes.",
-    replace:
-      "The drive from Sandy Bay to Mahogany Bay is 20 to 25 minutes.",
-  },
-  {
-    file: "cruise-mahogany-bay.json",
-    find:
-      "Set an alarm for 30 minutes before all-aboard. Traffic from West Bay to Mahogany Bay can take 15-20 minutes during c",
-    replace:
-      "Set an alarm 90 minutes before all-aboard. West Bay to Mahogany Bay is 30 to 40 minutes on a clear road and longer on a cruise day, so 30 minutes is not enough time and never was. Traffic during c",
-  },
-  {
-    file: "areas.json",
-    find: "take a water taxi ($3/person, 5 minutes)",
-    replace: "take a water taxi ($5/person with three aboard, $10 each if fewer, 5 minutes)",
-  },
-  {
-    file: "ask-a-local.json",
-    find: "If you pay for a $3 water taxi with a $20, you might not get change.",
-    replace: "If you pay for a $5 water taxi with a $20, you might not get change.",
-  },
-  {
-    file: "ask-a-local.json",
-    find: "Water taxis between West End and West Bay are $3 per person and run constantly through the day.",
-    replace: "The water taxi between West End and West Bay is $5 a head once there are three of you in the boat, $10 each if it's one or two, and it runs all day.",
-  },
-  {
-    file: "cruise-coxen-hole.json",
-    find: "Take a water taxi from West Bay to West End ($3 per person, 5 minutes)",
-    replace: "Take a water taxi from West Bay to West End ($5 per person with three aboard, $10 if fewer, 5 minutes)",
-  },
-  {
-    file: "cruise-mahogany-bay.json",
-    find: "$3 for water taxi, free to walk",
-    replace: "$5-10 per person for the water taxi, free to walk",
-  },
-  {
-    file: "businesses.json",
-    find: "a scenic 10-minute ride through the lagoon for about $3. The fun, fast alternative to the road. Minimum 3 passengers per trip.",
-    replace: "a scenic 10-minute ride through the lagoon. $5 a head once three of you are aboard, $10 each if it's one or two. The fun, fast alternative to the road.",
-  },
-  {
-    file: "businesses.json",
-    find: "Only $3-5 per person and way more fun than driving.",
-    replace: "Way more fun than driving, and if the drivers are slow or already heading over they'll often do a deal.",
-  },
-  {
-    file: "areas.json",
-    find: "From the Port of Roat\u00e1n: 20-minute taxi ($8-12/person)",
-    replace: "From the Port of Roat\u00e1n: 20-minute taxi ($10-15/person)",
-  },
-  {
-    file: "ask-a-local.json",
-    find:
-      "There are no meters. Always agree on the price before you get in. Typical fares: West Bay to West End is $5, Mahogany Bay port to West Bay is $5-8 per person, Coxen Hole to West End is $10-15. Shared colectivo minibuses run the main road for about $1-2 per person \u2014 they're totally fine to use. Water taxis between West End and West Bay are $3 per person and run constantly during the day. Ask your hotel or a restaurant to call you a taxi \u2014 they'll get you a fair price.",
-    replace:
-      "There are no meters, so agree the price before you get in \u2014 every time, even for a run you did yesterday. Leaving the airport is the one exception: those rates are posted at the terminal and fixed for the whole car, up to four people, 6am to 6pm. It's $10 to Coxen Hole, $30 to West End, $35 to West Bay. After 6pm, or anywhere else on the island, you're negotiating again. Ask for a colectivo if you don't mind the stops \u2014 that's a shared seat priced per person, about 45-50 lempiras along the main road, and being quoted the whole-car price for one is how visitors overpay here. The water taxi between West End and West Bay is $5 a head once there are three of you in the boat, $10 each if it's one or two, and it runs all day. The full fare table is under Tools if you want to check a particular run.",
-  },
-];
+// PATCHES COMPOUND, IN ORDER. One rewriting a sentence that sits inside
+// another's `replace` leaves that second patch unable to recognise its own
+// output as already-applied, and the run correctly abandons the file rather
+// than writing it half-done. Every `replace` must describe the file as it
+// should look AFTER all earlier patches have run.
+//
+// They live in patches.json beside this file and load from the same pinned
+// commit, because they are data and they only grow.
+let PATCHES: { file: string; find: string; replace: string }[] = [];
 
 // A floor for manifest versions, for when a file was published out-of-band
 // and there is no way to tell afterwards whether the version was raised with
@@ -284,6 +147,14 @@ Deno.serve(async () => {
 
     // Patched files join the same compare-and-write path below, so an
     // already-correct bucket copy still counts as unchanged.
+    {
+      const res = await fetch(
+        `https://raw.githubusercontent.com/${REPO}/${SOURCE_COMMIT}/supabase/functions/publish-app-data/patches.json`,
+      );
+      if (!res.ok) throw new Error(`fetch patches.json: HTTP ${res.status}`);
+      PATCHES = JSON.parse(await res.text());
+    }
+
     const patchSkipped: string[] = [];
     for (const file of new Set(PATCHES.map((p) => p.file))) {
       const live = await currentBody(sb, file);
