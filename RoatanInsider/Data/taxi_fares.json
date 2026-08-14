@@ -95,7 +95,7 @@
     { "id": "west-bay-sandy-bay",        "from": "West Bay",         "to": "Sandy Bay",      "colectivoUSD": null, "colectivoMaxUSD": null, "privateUSD": null, "privateMaxUSD": null, "note": null },
     { "id": "west-bay-french-harbour",   "from": "West Bay",         "to": "French Harbour", "colectivoUSD": 15,   "colectivoMaxUSD": 20,   "privateUSD": null, "privateMaxUSD": null, "note": "45 minutes to an hour." },
     { "id": "west-bay-flowers-bay",      "from": "West Bay",         "to": "Flowers Bay",    "colectivoUSD": 10,   "colectivoMaxUSD": 15,   "privateUSD": null, "privateMaxUSD": null, "note": "20 to 25 minutes." },
-    { "id": "west-bay-mahogany-bay",     "from": "West Bay",         "to": "Mahogany Bay",   "colectivoUSD": 5,    "colectivoMaxUSD": 8,    "privateUSD": null, "privateMaxUSD": null, "note": "30 to 40 minutes — most of the way across the west of the island." },
+    { "id": "west-bay-mahogany-bay",     "from": "West Bay",         "to": "Mahogany Bay",   "colectivoUSD": 5,    "colectivoMaxUSD": 8,    "privateUSD": null, "privateMaxUSD": null, "note": "About 30 minutes, and 45 or more in cruise-day traffic — roughly 11 miles." },
 
     { "id": "coxen-hole-sandy-bay",      "from": "Coxen Hole",       "to": "Sandy Bay",      "colectivoUSD": 5,    "colectivoMaxUSD": 8,    "privateUSD": null, "privateMaxUSD": null, "note": "5 to 10 minutes." },
     { "id": "coxen-hole-french-harbour", "from": "Coxen Hole",       "to": "French Harbour", "colectivoUSD": 10,   "colectivoMaxUSD": 12,   "privateUSD": null, "privateMaxUSD": null, "note": "25 to 40 minutes." },
@@ -105,7 +105,7 @@
     { "id": "cruise-port-west-bay",      "from": "Town Center port", "to": "West Bay",       "colectivoUSD": 10,   "colectivoMaxUSD": 15,   "privateUSD": null, "privateMaxUSD": null, "note": "20 to 25 minutes." },
     { "id": "cruise-port-west-end",      "from": "Town Center port", "to": "West End",       "colectivoUSD": null, "colectivoMaxUSD": null, "privateUSD": null, "privateMaxUSD": null, "note": null },
 
-    { "id": "mahogany-bay-west-bay",     "from": "Mahogany Bay",     "to": "West Bay",       "colectivoUSD": 5,    "colectivoMaxUSD": 8,    "privateUSD": null, "privateMaxUSD": null, "note": "30 to 40 minutes. Not a quick hop — budget for it on a port day." },
-    { "id": "mahogany-bay-west-end",     "from": "Mahogany Bay",     "to": "West End",       "colectivoUSD": 5,    "colectivoMaxUSD": 8,    "privateUSD": null, "privateMaxUSD": null, "note": "25 to 30 minutes." }
+    { "id": "mahogany-bay-west-bay",     "from": "Mahogany Bay",     "to": "West Bay",       "colectivoUSD": 5,    "colectivoMaxUSD": 8,    "privateUSD": null, "privateMaxUSD": null, "note": "About 30 minutes, 45 or more on a cruise day. Not the quick hop it sounds like." },
+    { "id": "mahogany-bay-west-end",     "from": "Mahogany Bay",     "to": "West End",       "colectivoUSD": 5,    "colectivoMaxUSD": 8,    "privateUSD": null, "privateMaxUSD": null, "note": "25 to 35 minutes, longer on a cruise day." }
   ]
 }
