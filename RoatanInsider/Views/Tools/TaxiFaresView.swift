@@ -74,33 +74,54 @@ struct TaxiFaresView: View {
 
     // MARK: - The table
 
-    private var table: some View {
-        VStack(alignment: .leading, spacing: AppConstants.Space.snug) {
-            HStack(spacing: AppConstants.Space.snug) {
-                Text("ROUTE")
-                    .riType(.label)
-                    .foregroundStyle(Color.riMediumGray)
-                Spacer(minLength: 0)
-                if showsColectivo {
-                    Text("SHARED")
-                        .riType(.micro)
-                        .foregroundStyle(Color.riMediumGray)
-                        .frame(width: 78, alignment: .trailing)
-                }
-                if showsPrivate {
-                    Text("PRIVATE")
-                        .riType(.micro)
-                        .foregroundStyle(Color.riMediumGray)
-                        .frame(width: 78, alignment: .trailing)
-                }
-            }
+    /// Fares by where you're standing, in file order.
+    ///
+    /// You read this screen from one place — the airport, your hotel, the
+    /// ship — so the origin is context, not data. Repeating "Airport →" down
+    /// fourteen consecutive rows spends the widest column on the one word
+    /// that never changes, and leaves the destination, which is what you're
+    /// actually scanning for, squeezed against it.
+    private var groups: [(origin: String, fares: [TaxiFare])] {
+        var order: [String] = []
+        var byOrigin: [String: [TaxiFare]] = [:]
+        for fare in fares {
+            if byOrigin[fare.from] == nil { order.append(fare.from) }
+            byOrigin[fare.from, default: []].append(fare)
+        }
+        return order.map { ($0, byOrigin[$0] ?? []) }
+    }
 
-            VStack(spacing: 0) {
-                ForEach(Array(fares.enumerated()), id: \.element.id) { index, fare in
-                    if index > 0 {
-                        Divider().overlay(Color.riDark.opacity(0.08))
+    private var table: some View {
+        VStack(alignment: .leading, spacing: AppConstants.Space.block) {
+            ForEach(groups, id: \.origin) { group in
+                VStack(alignment: .leading, spacing: AppConstants.Space.snug) {
+                    HStack(spacing: AppConstants.Space.snug) {
+                        Text("FROM \(group.origin.uppercased())")
+                            .riType(.label)
+                            .foregroundStyle(Color.riMint)
+                        Spacer(minLength: 0)
+                        if showsColectivo {
+                            Text("SHARED")
+                                .riType(.micro)
+                                .foregroundStyle(Color.riMediumGray)
+                                .frame(width: 78, alignment: .trailing)
+                        }
+                        if showsPrivate {
+                            Text("PRIVATE")
+                                .riType(.micro)
+                                .foregroundStyle(Color.riMediumGray)
+                                .frame(width: 78, alignment: .trailing)
+                        }
                     }
-                    row(fare)
+
+                    VStack(spacing: 0) {
+                        ForEach(Array(group.fares.enumerated()), id: \.element.id) { index, fare in
+                            if index > 0 {
+                                Divider().overlay(Color.riDark.opacity(0.08))
+                            }
+                            row(fare)
+                        }
+                    }
                 }
             }
 
@@ -128,7 +149,7 @@ struct TaxiFaresView: View {
     private func row(_ fare: TaxiFare) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: AppConstants.Space.snug) {
             VStack(alignment: .leading, spacing: 2) {
-                Text(fare.routeLabel)
+                Text(fare.to)
                     .riType(.body, weight: .medium)
                     .foregroundStyle(Color.riDark)
                     .fixedSize(horizontal: false, vertical: true)

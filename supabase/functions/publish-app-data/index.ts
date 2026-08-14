@@ -36,6 +36,15 @@ const MANIFEST_KEYS: Record<string, string> = {
   "categories.json": "categories",
 };
 
+// Read-only diagnostic. Returns the lines of these live bucket objects that
+// mention a fare, so a copy in the repo can be checked against the copy
+// people are actually reading. Needed because several of these files are
+// LARGER in the bucket than in the repo — the repo is behind, and publishing
+// it would silently delete live content. Everything listed here is in a
+// public bucket already, so this exposes nothing new.
+const INSPECT: string[] = ["areas.json", "ask-a-local.json"];
+const INSPECT_PATTERN = /taxi/i;
+
 // A floor for manifest versions, for when a file was published out-of-band
 // and there is no way to tell afterwards whether the version was raised with
 // it or merely rewritten at the same number. A phone only re-fetches when the
@@ -130,6 +139,16 @@ Deno.serve(async () => {
         throw new Error("manifest.json in the bucket is not valid JSON - refusing to overwrite it");
       }
     }
+    const inspected: Record<string, unknown> = {};
+    for (const name of INSPECT) {
+      const body = await currentBody(sb, name);
+      if (body === null) { inspected[name] = "not in bucket"; continue; }
+      inspected[name] = {
+        bytes: new TextEncoder().encode(body).length,
+        matches: body.split("\n").map((l) => l.trim()).filter((l) => INSPECT_PATTERN.test(l)),
+      };
+    }
+
     const raised: string[] = [];
     for (const key of new Set([...bump, ...Object.keys(MIN_VERSIONS)])) {
       const entry = (manifest[key] ?? {}) as { version?: number; file?: string };
@@ -148,7 +167,7 @@ Deno.serve(async () => {
     }
 
     return new Response(
-      JSON.stringify({ ok: true, commit: SOURCE_COMMIT, written, unchanged, raised, manifest }, null, 2),
+      JSON.stringify({ ok: true, commit: SOURCE_COMMIT, written, unchanged, raised, inspected, manifest }, null, 2),
       { headers: { "Content-Type": "application/json" } },
     );
   } catch (e) {
