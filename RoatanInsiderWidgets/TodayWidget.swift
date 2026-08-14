@@ -1,28 +1,34 @@
 import WidgetKit
 import SwiftUI
 
-/// "Today on Roatán" — a small widget combining sunset countdown with a
-/// curated daily insider pick that the host app writes into the shared
-/// App Group defaults.
+/// "Today on Roatán" — the conditions and one place worth going.
 ///
-/// App Group setup:
-///   1. In both targets (app + widget), enable Capability → App Groups.
-///   2. Add a group named `group.com.roataninsider.shared`.
-///   3. Anywhere the app wants the widget to pick up a value, write it via
-///      `UserDefaults(suiteName: "group.com.roataninsider.shared")`.
-///   4. The widget reads from the same suite below.
+/// Two things, not five. A widget is read in about a second from four
+/// inches away, so it gets one number and one name; anything else is a
+/// second app icon's worth of clutter. Temperature answers "what is it
+/// like out", the pick answers "so where do I go".
+///
+/// Everything the app can't supply simply doesn't draw. A fresh install
+/// before the host app has ever written to the App Group shows the kicker
+/// and an invitation, not a grid of placeholder dashes pretending to be
+/// data.
+///
+/// App Group setup, required for the pick to appear at all:
+///   1. Both targets: Signing & Capabilities → + App Groups.
+///   2. Add `group.com.roataninsider.shared` to each.
+///   3. The app writes via `UserDefaults(suiteName:)`; this reads the same
+///      suite. Without the capability the reads return nil and the widget
+///      falls back to conditions only — it does not break.
 struct TodayWidget: Widget {
     let kind: String = "TodayWidget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: TodayProvider()) { entry in
             TodayWidgetView(entry: entry)
-                .containerBackground(for: .widget) {
-                    Color(red: 0.18, green: 0.18, blue: 0.18)
-                }
+                .containerBackground(for: .widget) { Color.riNearBlack }
         }
         .configurationDisplayName("Today on Roatán")
-        .description("Sunset countdown plus today's insider pick.")
+        .description("Conditions now, and today's insider pick.")
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
@@ -33,13 +39,16 @@ struct TodayEntry: TimelineEntry {
     let temperatureLabel: String?
     let pickName: String?
     let pickArea: String?
+
+    var hasPick: Bool { !(pickName ?? "").isEmpty }
 }
 
 struct TodayProvider: TimelineProvider {
     private static let appGroup = "group.com.roataninsider.shared"
 
     func placeholder(in context: Context) -> TodayEntry {
-        TodayEntry(date: .now, sunsetCountdown: "2h 14m", temperatureLabel: "84°", pickName: "Sundowners Bar", pickArea: "West End")
+        TodayEntry(date: .now, sunsetCountdown: "2h 14m", temperatureLabel: "84°",
+                   pickName: "Sundowners Bar", pickArea: "West End")
     }
 
     func getSnapshot(in context: Context, completion: @escaping (TodayEntry) -> Void) {
@@ -60,20 +69,11 @@ struct TodayProvider: TimelineProvider {
         let defaults = UserDefaults(suiteName: Self.appGroup)
         return TodayEntry(
             date: date,
-            sunsetCountdown: sunsetCountdown(at: date),
+            sunsetCountdown: SunsetProvider.countdown(at: date),
             temperatureLabel: defaults?.string(forKey: "weather.temperature"),
             pickName: defaults?.string(forKey: "pick.name"),
             pickArea: defaults?.string(forKey: "pick.area")
         )
-    }
-
-    private func sunsetCountdown(at date: Date) -> String? {
-        let sunset = SunsetCalculator.todaySunset()
-        let remaining = sunset.timeIntervalSince(date)
-        guard remaining > 0 else { return nil }
-        let hours = Int(remaining) / 3600
-        let minutes = (Int(remaining) % 3600) / 60
-        return hours > 0 ? "\(hours)h \(minutes)m" : "\(minutes)m"
     }
 }
 
@@ -83,92 +83,106 @@ struct TodayWidgetView: View {
 
     var body: some View {
         switch family {
-        case .systemMedium:
-            HStack(alignment: .top, spacing: 14) {
-                liveColumn
-                Divider().background(Color.white.opacity(0.15))
-                pickColumn
-            }
-        default:
-            VStack(alignment: .leading, spacing: 8) {
-                if let temp = entry.temperatureLabel {
-                    Text(temp)
-                        .font(.system(size: 24, weight: .bold))
-                        .foregroundStyle(.white)
-                }
-
-                if let c = entry.sunsetCountdown {
-                    HStack(spacing: 4) {
-                        Image(systemName: "sunset.fill")
-                        Text(c).font(.system(size: 13, weight: .semibold))
-                    }
-                    .foregroundStyle(Color.orange)
-                }
-
-                Spacer()
-
-                if let name = entry.pickName {
-                    Text("INSIDER PICK")
-                        .font(.system(size: 9, weight: .bold))
-                        .tracking(1)
-                        .foregroundStyle(.white.opacity(0.5))
-                    Text(name)
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(.white)
-                        .lineLimit(1)
-                    if let area = entry.pickArea {
-                        Text(area)
-                            .font(.system(size: 11))
-                            .foregroundStyle(.white.opacity(0.6))
-                    }
-                }
-            }
+        case .systemMedium: medium
+        default: small
         }
     }
 
-    private var liveColumn: some View {
-        VStack(alignment: .leading, spacing: 8) {
+    // MARK: - Small: conditions, then the pick underneath
+
+    private var small: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            conditions
+            Spacer(minLength: 8)
+            pick(titleLines: 2)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    // MARK: - Medium: side by side, split by a hairline
+
+    /// A hairline rather than a `Divider()`: the system divider draws at the
+    /// container's tint and reads heavier than anything else here, which
+    /// makes the split the loudest element on a widget whose whole point is
+    /// one number and one name.
+    private var medium: some View {
+        HStack(alignment: .top, spacing: 16) {
+            VStack(alignment: .leading, spacing: 0) {
+                conditions
+                Spacer(minLength: 0)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            Rectangle()
+                .fill(.white.opacity(0.12))
+                .frame(width: 1)
+
+            VStack(alignment: .leading, spacing: 0) {
+                pick(titleLines: 3)
+                Spacer(minLength: 0)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+
+    // MARK: - Blocks
+
+    private var conditions: some View {
+        VStack(alignment: .leading, spacing: 2) {
             Text("RIGHT NOW")
-                .font(.system(size: 10, weight: .bold))
-                .tracking(1.4)
-                .foregroundStyle(.white.opacity(0.5))
+                .riType(.label)
+                .foregroundStyle(Color.riMint)
 
             if let temp = entry.temperatureLabel {
                 Text(temp)
-                    .font(.system(size: 32, weight: .bold))
+                    .riType(.display)
                     .foregroundStyle(.white)
+                    .minimumScaleFactor(0.6)
+                    .lineLimit(1)
             }
 
             if let c = entry.sunsetCountdown {
-                HStack(spacing: 4) {
-                    Image(systemName: "sunset.fill")
-                    Text("Sunset in \(c)")
-                        .font(.system(size: 12, weight: .semibold))
-                }
-                .foregroundStyle(.orange)
+                Text("Sunset in \(c)")
+                    .riType(.caption)
+                    .foregroundStyle(.white.opacity(0.6))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+            } else {
+                Text("Sun has set")
+                    .riType(.caption)
+                    .foregroundStyle(.white.opacity(0.6))
             }
-            Spacer()
         }
     }
 
-    private var pickColumn: some View {
-        VStack(alignment: .leading, spacing: 6) {
+    @ViewBuilder
+    private func pick(titleLines: Int) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
             Text("INSIDER PICK")
-                .font(.system(size: 10, weight: .bold))
-                .tracking(1.4)
-                .foregroundStyle(.white.opacity(0.5))
+                .riType(.label)
+                .foregroundStyle(Color.riPink)
 
-            Text(entry.pickName ?? "Open the app for today's pick")
-                .font(.system(size: 14, weight: .semibold))
-                .foregroundStyle(.white)
-                .lineLimit(2)
+            if entry.hasPick {
+                Text(entry.pickName ?? "")
+                    .riType(.heading)
+                    .foregroundStyle(.white)
+                    .lineLimit(titleLines)
+                    .minimumScaleFactor(0.85)
+                    .fixedSize(horizontal: false, vertical: true)
 
-            if let area = entry.pickArea {
-                Text(area)
-                    .font(.system(size: 12))
-                    .foregroundStyle(.white.opacity(0.6))
+                if let area = entry.pickArea, !area.isEmpty {
+                    Text(area)
+                        .riType(.caption)
+                        .foregroundStyle(.white.opacity(0.6))
+                        .lineLimit(1)
+                }
+            } else {
+                Text("Open the app to set today's pick")
+                    .riType(.caption)
+                    .foregroundStyle(.white.opacity(0.55))
+                    .lineLimit(titleLines)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            Spacer()
         }
     }
 }

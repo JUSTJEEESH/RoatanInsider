@@ -11,9 +11,9 @@ import WidgetKit
 ///   2. Add `com.apple.security.application-groups` with the same value
 ///      to both `.entitlements` files.
 ///
-/// Call `WidgetSharedData.publish(...)` from the app whenever weather or
-/// today's pick changes, then call `WidgetCenter.shared.reloadAllTimelines()`
-/// so the widget grabs the new snapshot on its next refresh.
+/// `HomeView` calls `publish(...)` when it appears and whenever the weather
+/// changes. Call it from anywhere else that learns something the widget
+/// shows; it is cheap to call and does nothing when nothing has changed.
 enum WidgetSharedData {
     static let appGroup = "group.com.roataninsider.shared"
 
@@ -21,6 +21,15 @@ enum WidgetSharedData {
         UserDefaults(suiteName: appGroup)
     }
 
+    /// Writes the snapshot and reloads timelines only if a value actually
+    /// moved.
+    ///
+    /// WidgetKit gives each widget a daily reload budget and spends it on
+    /// requests, not on changes — so an unconditional reload on every Home
+    /// appearance burns the allowance re-rendering the same pixels, and the
+    /// widget goes stale later in the day when there is something new to
+    /// say. The temperature changes a few times an hour and the pick every
+    /// three days; that is how often this should cost anything.
     static func publish(
         temperatureLabel: String?,
         pickName: String?,
@@ -31,10 +40,22 @@ enum WidgetSharedData {
             AppLog.app.warning("App Group defaults unavailable (\(appGroup, privacy: .public)). Add the App Group capability to both targets.")
             return
         }
-        defaults.set(temperatureLabel, forKey: "weather.temperature")
-        defaults.set(pickName, forKey: "pick.name")
-        defaults.set(pickArea, forKey: "pick.area")
-        defaults.set(pickId, forKey: "pick.id")
+
+        let incoming: [String: String?] = [
+            "weather.temperature": temperatureLabel,
+            "pick.name": pickName,
+            "pick.area": pickArea,
+            "pick.id": pickId,
+        ]
+        guard incoming.contains(where: { defaults.string(forKey: $0.key) != $0.value }) else { return }
+
+        for (key, value) in incoming {
+            if let value {
+                defaults.set(value, forKey: key)
+            } else {
+                defaults.removeObject(forKey: key)
+            }
+        }
 
         WidgetCenter.shared.reloadAllTimelines()
     }

@@ -25,6 +25,8 @@ import SwiftUI
 struct HomeView: View {
     @Binding var selectedTab: Int
     @Environment(DataManager.self) private var dataManager
+    @Environment(WeatherService.self) private var weather
+    @Environment(LocationManager.self) private var location
     @State private var cruiseViewModel = CruiseViewModel()
     @State private var showCruiseMode = false
     @Namespace private var zoomNS
@@ -97,9 +99,29 @@ struct HomeView: View {
         // Applied on the NavigationStack (not its content) so navigationDestination
         // children inherit the namespace.
         .environment(\.zoomNamespace, zoomNS)
+        .onAppear(perform: publishWidgetSnapshot)
+        .onChange(of: weather.conditions) { _, _ in publishWidgetSnapshot() }
     }
 
-
+    /// Hands the home screen's two headline facts to the widget.
+    ///
+    /// Home is the right place for this because it is the one screen that
+    /// already resolves both of them, and the widget shows exactly what it
+    /// shows. Publishing from here also means the widget's empty state —
+    /// "Open the app to set today's pick" — is true: opening the app is
+    /// literally what fills it.
+    private func publishWidgetSnapshot() {
+        let selection = InsiderPickSection.pick(
+            from: dataManager.activeBusinesses,
+            userLocation: location.userLocation
+        )
+        WidgetSharedData.publish(
+            temperatureLabel: weather.conditions.map { "\(Int($0.temperatureF.rounded()))°" },
+            pickName: selection?.business.name,
+            pickArea: selection?.business.areaDisplayName,
+            pickId: selection?.business.id
+        )
+    }
 }
 
 struct CategoryListView: View {
