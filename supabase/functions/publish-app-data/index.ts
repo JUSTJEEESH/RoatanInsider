@@ -34,16 +34,44 @@ const FROM_REPO: Record<string, string> = {
 // fetched by the app on an age timer instead and needs no manifest entry.
 const MANIFEST_KEYS: Record<string, string> = {
   "categories.json": "categories",
+  "areas.json": "areas",
+  "ask-a-local.json": "askALocal",
 };
 
 // Read-only diagnostic. Returns the lines of these live bucket objects that
 // mention a fare, so a copy in the repo can be checked against the copy
-// people are actually reading. Needed because several of these files are
-// LARGER in the bucket than in the repo — the repo is behind, and publishing
-// it would silently delete live content. Everything listed here is in a
-// public bucket already, so this exposes nothing new.
+// people are actually reading. Everything listed is in a public bucket
+// already, so this exposes nothing new.
 const INSPECT: string[] = ["areas.json", "ask-a-local.json"];
 const INSPECT_PATTERN = /taxi/i;
+
+// Surgical edits to files that live ONLY in the bucket.
+//
+// areas.json, ask-a-local.json, essentials.json and the cruise guides are
+// all bigger in the bucket than in this repo — the bucket copy is the newer
+// one, carrying edits the repo never received. Republishing the repo version
+// would delete them. So these files are patched in place instead: read the
+// live copy, swap one exact string, write it back, and leave every other
+// byte alone.
+//
+// A patch whose `find` does not appear EXACTLY ONCE is abandoned and the
+// file is left untouched, because a find that matched zero times means the
+// text already changed under us, and one that matched twice means we do not
+// understand the file well enough to be editing it.
+const PATCHES: { file: string; find: string; replace: string }[] = [
+  {
+    file: "areas.json",
+    find: "From the Port of Roat\u00e1n: 20-minute taxi ($8-12/person)",
+    replace: "From the Port of Roat\u00e1n: 20-minute taxi ($10-15/person)",
+  },
+  {
+    file: "ask-a-local.json",
+    find:
+      "There are no meters. Always agree on the price before you get in. Typical fares: West Bay to West End is $5, Mahogany Bay port to West Bay is $5-8 per person, Coxen Hole to West End is $10-15. Shared colectivo minibuses run the main road for about $1-2 per person \u2014 they're totally fine to use. Water taxis between West End and West Bay are $3 per person and run constantly during the day. Ask your hotel or a restaurant to call you a taxi \u2014 they'll get you a fair price.",
+    replace:
+      "There are no meters, so agree the price before you get in \u2014 every time, even for a run you did yesterday. Leaving the airport is the one exception: those rates are posted at the terminal and fixed for the whole car, up to four people, 6am to 6pm. It's $10 to Coxen Hole, $30 to West End, $35 to West Bay. After 6pm, or anywhere else on the island, you're negotiating again. Ask for a colectivo if you don't mind the stops \u2014 that's a shared seat priced per person, about 45-50 lempiras along the main road, and being quoted the whole-car price for one is how visitors overpay here. Water taxis between West End and West Bay are $3 per person and run constantly through the day. The full fare table is under Tools if you want to check a particular run.",
+  },
+];
 
 // A floor for manifest versions, for when a file was published out-of-band
 // and there is no way to tell afterwards whether the version was raised with
@@ -118,6 +146,32 @@ Deno.serve(async () => {
       payloads[object] = JSON.stringify(JSON.parse(text), null, 2);
     }
 
+    // Patched files join the same compare-and-write path below, so an
+    // already-correct bucket copy still counts as unchanged.
+    const patchSkipped: string[] = [];
+    for (const file of new Set(PATCHES.map((p) => p.file))) {
+      const live = await currentBody(sb, file);
+      if (live === null) { patchSkipped.push(`${file}: not in bucket`); continue; }
+      let next = live;
+      let abort: string | null = null;
+      for (const patch of PATCHES.filter((p) => p.file === file)) {
+        const hits = next.split(patch.find).length - 1;
+        if (hits === 1) { next = next.split(patch.find).join(patch.replace); continue; }
+        // Already applied is not a failure; anything else is.
+        if (hits === 0 && next.includes(patch.replace)) continue;
+        abort = `${file}: "${patch.find.slice(0, 40)}..." matched ${hits} times`;
+        break;
+      }
+      if (abort) { patchSkipped.push(abort); continue; }
+      try {
+        JSON.parse(next);
+      } catch {
+        patchSkipped.push(`${file}: patched result is not valid JSON`);
+        continue;
+      }
+      payloads[file] = next;
+    }
+
     const written: string[] = [];
     const unchanged: string[] = [];
     for (const [path, body] of Object.entries(payloads)) {
@@ -167,7 +221,7 @@ Deno.serve(async () => {
     }
 
     return new Response(
-      JSON.stringify({ ok: true, commit: SOURCE_COMMIT, written, unchanged, raised, inspected, manifest }, null, 2),
+      JSON.stringify({ ok: true, commit: SOURCE_COMMIT, written, unchanged, raised, patchSkipped, inspected, manifest }, null, 2),
       { headers: { "Content-Type": "application/json" } },
     );
   } catch (e) {
