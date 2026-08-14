@@ -45,8 +45,8 @@ const MANIFEST_KEYS: Record<string, string> = {
 // mention a fare, so a copy in the repo can be checked against the copy
 // people are actually reading. Everything listed is in a public bucket
 // already, so this exposes nothing new.
-const INSPECT: string[] = ["areas.json", "ask-a-local.json"];
-const INSPECT_PATTERN = /taxi/i;
+const INSPECT: string[] = ["cruise-mahogany-bay.json"];
+const INSPECT_PATTERN = /minute|hour/i;
 
 // Surgical edits to files that live ONLY in the bucket.
 //

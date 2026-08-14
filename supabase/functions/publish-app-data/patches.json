@@ -100,11 +100,6 @@
     "replace": "Way more fun than driving, and if the drivers are slow or already heading over they'll often do a deal."
   },
   {
-    "file": "areas.json",
-    "find": "From the Port of Roatán: 20-minute taxi ($8-12/person)",
-    "replace": "From the Port of Roatán: 20-minute taxi ($10-15/person)"
-  },
-  {
     "file": "ask-a-local.json",
     "find": "There are no meters. Always agree on the price before you get in. Typical fares: West Bay to West End is $5, Mahogany Bay port to West Bay is $5-8 per person, Coxen Hole to West End is $10-15. Shared colectivo minibuses run the main road for about $1-2 per person — they're totally fine to use. Water taxis between West End and West Bay are $3 per person and run constantly during the day. Ask your hotel or a restaurant to call you a taxi — they'll get you a fair price.",
     "replace": "There are no meters, so agree the price before you get in — every time, even for a run you did yesterday. Leaving the airport is the one exception: those rates are posted at the terminal and fixed for the whole car, up to four people, 6am to 6pm. It's $10 to Coxen Hole, $30 to West End, $35 to West Bay. After 6pm, or anywhere else on the island, you're negotiating again. Ask for a colectivo if you don't mind the stops — that's a shared seat priced per person, about 45-50 lempiras along the main road, and being quoted the whole-car price for one is how visitors overpay here. The water taxi between West End and West Bay is $5 a head once there are three of you in the boat, $10 each if it's one or two, and it runs all day. The full fare table is under Tools if you want to check a particular run."
