@@ -32,9 +32,13 @@ import StoreKit
 ///
 /// YOU CANNOT TEST THIS IN SANDBOX OR TESTFLIGHT. For sandbox accounts
 /// `AppTransaction.originalAppVersion` reports a fixed "1.0" regardless of
-/// purchase history, so every tester looks grandfathered and the paywall
-/// never appears. That is not a passing test — it is the API declining to
+/// purchase history. That is not a passing test — it is the API declining to
 /// answer. The first honest check is a real App Store build.
+///
+/// Because of that, `evaluateGrandfather` runs the check ONLY in the
+/// production environment. Everywhere else the paywall shows, which is both
+/// the honest default and the only way App Review — which runs in sandbox —
+/// can ever reach the in-app purchases it has to evaluate.
 @Observable
 final class PurchaseManager {
     // MARK: - Configuration
@@ -171,6 +175,30 @@ final class PurchaseManager {
         do {
             let verification = try await AppTransaction.shared
             if case .verified(let appTransaction) = verification {
+                // Outside production this question has no honest answer.
+                // Sandbox and TestFlight report a fixed originalAppVersion of
+                // "1.0" no matter what the account ever bought, and "1.0"
+                // sorts below the cutoff — so every sandbox user reads as a
+                // founding member and the paywall never appears.
+                //
+                // That is not a harmless test-only quirk. App Review runs in
+                // sandbox: a reviewer would get Insider+ free, never reach
+                // the paywall, and reject the build under Guideline 2.1 for
+                // in-app purchases they could not locate.
+                //
+                // So: grandfather only where the receipt can actually say so.
+                // Anywhere else, fall through to the paywall — the same
+                // conservative default the catch below already takes when
+                // StoreKit declines to answer at all. The cost outside
+                // production is that a real founding member testing via
+                // TestFlight sees a paywall they don't owe; the cost of the
+                // opposite default is the release.
+                guard appTransaction.environment == .production else {
+                    AppLog.purchase.notice("Grandfather check skipped in \(appTransaction.environment.rawValue, privacy: .public) — originalAppVersion is not meaningful outside production.")
+                    isGrandfathered = false
+                    return
+                }
+
                 // `originalAppVersion` is the CFBundleVersion at the time of
                 // the customer's FIRST purchase — build "1" for everyone who
                 // bought any version from 1.0 through 1.6.
