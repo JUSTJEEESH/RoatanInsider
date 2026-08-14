@@ -22,7 +22,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.0";
 
 const BUCKET = "app-data";
 const REPO = "JUSTJEEESH/RoatanInsider";
-const SOURCE_COMMIT = "07ca2f9136e700571ed4405cd13fc2953c5916ba";
+const SOURCE_COMMIT = "06ed8f8b471d626d2838e342960d23666ceea037";
 
 // Repo path -> object name in the bucket.
 const FROM_REPO: Record<string, string> = {
@@ -36,6 +36,9 @@ const MANIFEST_KEYS: Record<string, string> = {
   "categories.json": "categories",
   "areas.json": "areas",
   "ask-a-local.json": "askALocal",
+  "businesses.json": "businesses",
+  "cruise-coxen-hole.json": "cruiseCoxenHole",
+  "cruise-mahogany-bay.json": "cruiseMahoganyBay",
 };
 
 // Read-only diagnostic. Returns the lines of these live bucket objects that
@@ -54,11 +57,53 @@ const INSPECT_PATTERN = /taxi/i;
 // live copy, swap one exact string, write it back, and leave every other
 // byte alone.
 //
+// PATCHES ARE APPLIED IN ORDER AND THEY COMPOUND. A patch that rewrites a
+// sentence sitting inside another patch's `replace` text leaves that second
+// patch unable to recognise its own output as already-applied — which is
+// exactly what happened to the taxi answer here, and the run aborted rather
+// than writing the file half-done. Every `replace` must describe the file as
+// it should look AFTER all earlier patches have run.
+//
 // A patch whose `find` does not appear EXACTLY ONCE is abandoned and the
 // file is left untouched, because a find that matched zero times means the
 // text already changed under us, and one that matched twice means we do not
 // understand the file well enough to be editing it.
 const PATCHES: { file: string; find: string; replace: string }[] = [
+  {
+    file: "areas.json",
+    find: "take a water taxi ($3/person, 5 minutes)",
+    replace: "take a water taxi ($5/person with three aboard, $10 each if fewer, 5 minutes)",
+  },
+  {
+    file: "ask-a-local.json",
+    find: "If you pay for a $3 water taxi with a $20, you might not get change.",
+    replace: "If you pay for a $5 water taxi with a $20, you might not get change.",
+  },
+  {
+    file: "ask-a-local.json",
+    find: "Water taxis between West End and West Bay are $3 per person and run constantly through the day.",
+    replace: "The water taxi between West End and West Bay is $5 a head once there are three of you in the boat, $10 each if it's one or two, and it runs all day.",
+  },
+  {
+    file: "cruise-coxen-hole.json",
+    find: "Take a water taxi from West Bay to West End ($3 per person, 5 minutes)",
+    replace: "Take a water taxi from West Bay to West End ($5 per person with three aboard, $10 if fewer, 5 minutes)",
+  },
+  {
+    file: "cruise-mahogany-bay.json",
+    find: "$3 for water taxi, free to walk",
+    replace: "$5-10 per person for the water taxi, free to walk",
+  },
+  {
+    file: "businesses.json",
+    find: "a scenic 10-minute ride through the lagoon for about $3. The fun, fast alternative to the road. Minimum 3 passengers per trip.",
+    replace: "a scenic 10-minute ride through the lagoon. $5 a head once three of you are aboard, $10 each if it's one or two. The fun, fast alternative to the road.",
+  },
+  {
+    file: "businesses.json",
+    find: "Only $3-5 per person and way more fun than driving.",
+    replace: "Way more fun than driving, and if the drivers are slow or already heading over they'll often do a deal.",
+  },
   {
     file: "areas.json",
     find: "From the Port of Roat\u00e1n: 20-minute taxi ($8-12/person)",
@@ -69,7 +114,7 @@ const PATCHES: { file: string; find: string; replace: string }[] = [
     find:
       "There are no meters. Always agree on the price before you get in. Typical fares: West Bay to West End is $5, Mahogany Bay port to West Bay is $5-8 per person, Coxen Hole to West End is $10-15. Shared colectivo minibuses run the main road for about $1-2 per person \u2014 they're totally fine to use. Water taxis between West End and West Bay are $3 per person and run constantly during the day. Ask your hotel or a restaurant to call you a taxi \u2014 they'll get you a fair price.",
     replace:
-      "There are no meters, so agree the price before you get in \u2014 every time, even for a run you did yesterday. Leaving the airport is the one exception: those rates are posted at the terminal and fixed for the whole car, up to four people, 6am to 6pm. It's $10 to Coxen Hole, $30 to West End, $35 to West Bay. After 6pm, or anywhere else on the island, you're negotiating again. Ask for a colectivo if you don't mind the stops \u2014 that's a shared seat priced per person, about 45-50 lempiras along the main road, and being quoted the whole-car price for one is how visitors overpay here. Water taxis between West End and West Bay are $3 per person and run constantly through the day. The full fare table is under Tools if you want to check a particular run.",
+      "There are no meters, so agree the price before you get in \u2014 every time, even for a run you did yesterday. Leaving the airport is the one exception: those rates are posted at the terminal and fixed for the whole car, up to four people, 6am to 6pm. It's $10 to Coxen Hole, $30 to West End, $35 to West Bay. After 6pm, or anywhere else on the island, you're negotiating again. Ask for a colectivo if you don't mind the stops \u2014 that's a shared seat priced per person, about 45-50 lempiras along the main road, and being quoted the whole-car price for one is how visitors overpay here. The water taxi between West End and West Bay is $5 a head once there are three of you in the boat, $10 each if it's one or two, and it runs all day. The full fare table is under Tools if you want to check a particular run.",
   },
 ];
 
