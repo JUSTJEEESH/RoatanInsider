@@ -2,7 +2,7 @@
   {
     "file": "areas.json",
     "find": "From the airport: 15-minute taxi ($8-10). From West Bay: 20-minute taxi ($10-15). From Coxen Hole: 10-minute taxi ($5-8). The Mahogany Bay chairlift connects the cruise terminal to the beach area.",
-    "replace": "From the airport: 5 to 10 minutes by taxi ($8-10). From West Bay: 30 to 40 minutes ($10-15). From Coxen Hole: 10 to 15 minutes ($5-8). The chairlift here runs inside the cruise terminal, between the ship and the port's own beach — it is not a way of getting anywhere else on the island."
+    "replace": "From the airport: 5 to 10 minutes by taxi ($8-10). From West Bay: 30 minutes ($5-8/person). From Coxen Hole: 10 to 15 minutes ($5-8). The chairlift here runs inside the cruise terminal, between the ship and the port's own beach — it is not a way of getting anywhere else on the island."
   },
   {
     "file": "areas.json",
@@ -83,10 +83,5 @@
     "file": "areas.json",
     "find": "From Coxen Hole: 25 to 40 minutes by taxi ($10-12/person). From West Bay: 45 minutes to an hour ($15-20/person).",
     "replace": "From Coxen Hole: 20 minutes by taxi ($10-12/person). From West Bay: 35 minutes ($15-20/person)."
-  },
-  {
-    "file": "areas.json",
-    "find": "From the airport: 5 to 10 minutes by taxi ($8-10). From West Bay: 30 to 40 minutes ($10-15). From Coxen Hole: 10 to 15 minutes ($5-8).",
-    "replace": "From the airport: 5 to 10 minutes by taxi ($8-10). From West Bay: 30 minutes ($5-8/person). From Coxen Hole: 10 to 15 minutes ($5-8)."
   }
 ]
