@@ -19,9 +19,15 @@ actual code win. See `STATE_OF_THE_APP.md` for the full picture.
 
 **What's different from the spec below:**
 
-- **App is live on the App Store at $4.99** (paid up front). An Insider+
-  subscription scaffold (StoreKit 2, paywall, founding-member grandfathering
-  for pre-2.0 buyers) exists but has not shipped.
+- **Versions 1.0 through 1.6 shipped paid up front at $4.99, all as build 1.**
+  Version 2.0 (build 100) turns the app free with a single Insider+ tier at
+  $2.99/month or $14.99/year, gating the AI itinerary builder and dive sites.
+  Everyone who bought at $4.99 is a founding member with Insider+ for life,
+  detected from `AppTransaction.originalAppVersion` — which on iOS is the
+  BUILD number, not the marketing version. `freemiumReleaseBuild` is "100"
+  for that reason and because a new marketing version makes build 1 available
+  again. Prices themselves live in App Store Connect; the app only ever reads
+  `product.displayPrice`.
 - **Five tabs, but not the original five:** Home, Explore, Map, Tools,
   **Trip** (day-by-day planner + Claude-backed AI itinerary generator).
   Saved/favorites now live inside the Trip tab.

@@ -17,18 +17,24 @@ import StoreKit
 ///   Users who originally bought the app at $4.99 get Insider+ for free,
 ///   forever, automatically. This is detected via StoreKit 2's
 ///   `AppTransaction.shared.originalAppVersion`: any device whose first
-///   purchase preceded `freemiumReleaseAppVersion` is silently entitled with no
+///   purchase preceded `freemiumReleaseBuild` is silently entitled with no
 ///   "restore purchases" tap required, no servers, no manual flags. New
 ///   installs after the freemium release see the paywall.
 ///
 /// To roll out:
 ///   1. Configure the two in-app purchase products in App Store Connect using
 ///      the IDs below.
-///   2. Set `freemiumReleaseAppVersion` to the CFBundleShortVersionString of
-///      the build where Insider+ ships (e.g. "2.0.0"). DO NOT bump this for
-///      patch releases — it's the single switch that defines the grandfather
-///      cohort and should never move.
-///   3. Update binary version once and never again.
+///   2. `freemiumReleaseBuild` is the CFBundleVersion of the build where
+///      Insider+ ships — 100, matching CURRENT_PROJECT_VERSION. DO NOT bump
+///      it for patch releases; it is the single switch defining the
+///      grandfather cohort and should never move. Every later build must be
+///      numbered above it.
+///
+/// YOU CANNOT TEST THIS IN SANDBOX OR TESTFLIGHT. For sandbox accounts
+/// `AppTransaction.originalAppVersion` reports a fixed "1.0" regardless of
+/// purchase history, so every tester looks grandfathered and the paywall
+/// never appears. That is not a passing test — it is the API declining to
+/// answer. The first honest check is a real App Store build.
 @Observable
 final class PurchaseManager {
     // MARK: - Configuration
@@ -37,10 +43,25 @@ final class PurchaseManager {
     static let yearlyProductID  = "com.roataninsider.app.insiderplus.yearly"
     static let allProductIDs = [yearlyProductID, monthlyProductID]
 
-    /// Any user whose original app purchase version is earlier than this is
-    /// grandfathered into Insider+ for life. Bump only when you intentionally
-    /// want to close the grandfather window — typically never.
-    static let freemiumReleaseAppVersion = "2.0.0"
+    /// The BUILD NUMBER (CFBundleVersion) of the first freemium release.
+    /// Anyone whose original purchase predates it is a founding member and
+    /// gets Insider+ for life. Never move this.
+    ///
+    /// It is a build number, not "2.0", and that distinction is the whole
+    /// point. On iOS, `AppTransaction.originalAppVersion` returns
+    /// CFBundleVersion — the build number — NOT the marketing version.
+    /// (macOS is the platform that returns the short version string.) This
+    /// constant used to be "2.0.0", compared numerically against a build
+    /// number, and "2" sorts before "2.0.0" because the digit runs tie and
+    /// the shorter string wins. Every new customer would have been silently
+    /// grandfathered and nobody would ever have reported it.
+    ///
+    /// 100 rather than 2 on purpose. Versions 1.0 through 1.6 all shipped as
+    /// build 1, and a new marketing version makes build 1 available again —
+    /// so shipping 2.0 as build 1 would have handed every new customer the
+    /// founding-member entitlement. Starting at 100 puts a gap between the
+    /// old numbering and the new that a slip cannot close.
+    static let freemiumReleaseBuild = "100"
 
     // MARK: - Observable state
 
@@ -150,9 +171,12 @@ final class PurchaseManager {
         do {
             let verification = try await AppTransaction.shared
             if case .verified(let appTransaction) = verification {
+                // `originalAppVersion` is the CFBundleVersion at the time of
+                // the customer's FIRST purchase — build "1" for everyone who
+                // bought any version from 1.0 through 1.6.
                 let original = appTransaction.originalAppVersion
-                let cutoff = Self.freemiumReleaseAppVersion
-                // Numeric compare: "1.5.0" < "2.0.0" -> .orderedAscending.
+                let cutoff = Self.freemiumReleaseBuild
+                // Numeric compare so "99" < "100" rather than sorting as text.
                 let comparison = original.compare(cutoff, options: .numeric)
                 isGrandfathered = (comparison == .orderedAscending)
                 if isGrandfathered {

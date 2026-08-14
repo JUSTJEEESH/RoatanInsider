@@ -97,7 +97,7 @@ the gap this doc is about closing.
 - **App Intents** wire the app into Spotlight and Siri. *"Hey Siri, show me dive shops in Roatán."*
 - **Smart search** with synonym matching — "snorkel" finds dive shops, "lounge" finds nightlife.
 - **Onboarding 2.0** — six optional steps (traveler type, dates, interests, permissions). Profile-optional throughout.
-- **StoreKit 2** with grandfather cohort for pre-2.0.0 $4.99 buyers (founding members never see a paywall).
+- **StoreKit 2** with a grandfather cohort for the $4.99 buyers of 1.0-1.6 (founding members never see a paywall). The cutoff is build 100, compared against `originalAppVersion`, which is a build number on iOS.
 - **Deep linking router** — every business has a canonical `slug` URL.
 - **49 haptic call sites** — the app feels tactile.
 - **Spanish localization** plumbing in place via String Catalog.
@@ -339,7 +339,7 @@ campaign produces one thing a user would mention out loud.
   out the east side or own the framing as "the West End / West Bay insider
   guide." Both are valid product positions; pick one.
 - **The grandfather cohort** is generous (anyone with `originalAppVersion <
-  2.0.0` gets Insider+ free forever). Make sure marketing for the major
+  build 100` gets Insider+ free forever). Make sure marketing for the major
   update doesn't accidentally invalidate this — those are your loudest fans.
 
 ---
