@@ -12,7 +12,6 @@ import SwiftUI
 /// file advertises nothing.
 struct DiveSitesView: View {
     @Environment(DiveSitesService.self) private var diveSites
-    @Environment(LocationManager.self) private var location
     @Environment(UnitPreference.self) private var units
     @Environment(PurchaseManager.self) private var purchases
 
@@ -22,12 +21,7 @@ struct DiveSitesView: View {
     @State private var showPaywall = false
 
     private var results: [DiveSite] {
-        diveSites.filtered(
-            kind: kind,
-            level: level,
-            shoreOnly: shoreOnly,
-            near: location.userLocation
-        )
+        diveSites.filtered(kind: kind, level: level, shoreOnly: shoreOnly)
     }
 
     var body: some View {
@@ -64,7 +58,7 @@ struct DiveSitesView: View {
                 .foregroundStyle(Color.riDark)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Text("Roatán sits on the second-largest barrier reef in the world. These are the places people come for — where they are, what you'll see, and who runs them.")
+            Text("Roatán sits on the second-largest barrier reef in the world. These are the places people come for — how deep, what you'll see, and what you need to dive them. Your operator knows the moorings.")
                 .riType(.caption)
                 .foregroundStyle(Color.riMediumGray)
                 .fixedSize(horizontal: false, vertical: true)

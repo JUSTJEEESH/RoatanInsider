@@ -9,9 +9,7 @@ import SwiftUI
 /// you, and get the list without pinch-hunting for each pin.
 struct MapResultsSheet: View {
     let businesses: [Business]
-    let diveSites: [DiveSite]
 
-    @Environment(UnitPreference.self) private var units
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -28,15 +26,6 @@ struct MapResultsSheet: View {
                         .buttonStyle(.plain)
                     }
 
-                    ForEach(Array(diveSites.enumerated()), id: \.element.id) { index, site in
-                        if index > 0 || !businesses.isEmpty {
-                            Divider().overlay(Color.riDark.opacity(0.08))
-                        }
-                        NavigationLink(value: site) {
-                            diveRow(site)
-                        }
-                        .buttonStyle(.plain)
-                    }
                 }
                 .padding(.horizontal, AppConstants.Space.gutter)
                 .padding(.bottom, AppConstants.Space.block)
@@ -45,7 +34,6 @@ struct MapResultsSheet: View {
             .navigationTitle(title)
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: Business.self) { BusinessDetailView(business: $0) }
-            .navigationDestination(for: DiveSite.self) { DiveSiteDetailView(site: $0) }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") { dismiss() }
@@ -59,8 +47,7 @@ struct MapResultsSheet: View {
     }
 
     private var title: String {
-        let total = businesses.count + diveSites.count
-        return total == 1 ? "1 here" : "\(total) here"
+        businesses.count == 1 ? "1 here" : "\(businesses.count) here"
     }
 
     private func businessRow(_ business: Business) -> some View {
@@ -88,25 +75,4 @@ struct MapResultsSheet: View {
         .accessibilityElement(children: .combine)
     }
 
-    private func diveRow(_ site: DiveSite) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: AppConstants.Space.snug) {
-            VStack(alignment: .leading, spacing: 3) {
-                Text(site.name)
-                    .riType(.heading)
-                    .foregroundStyle(Color.riDark)
-                    .lineLimit(1)
-                Text(site.subtitle(useMetric: units.useMetric))
-                    .riType(.caption)
-                    .foregroundStyle(Color.riMediumGray)
-                    .lineLimit(1)
-            }
-            Spacer(minLength: AppConstants.Space.tight)
-            Image(systemName: "chevron.right")
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(Color.riLightGray)
-        }
-        .padding(.vertical, AppConstants.Space.snug)
-        .contentShape(Rectangle())
-        .accessibilityElement(children: .combine)
-    }
 }

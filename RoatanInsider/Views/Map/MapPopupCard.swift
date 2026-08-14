@@ -86,57 +86,6 @@ struct MapPopupCard: View {
     }
 }
 
-/// The dive-site equivalent. No photo — we hold none for sites — so the
-/// facts fill that space instead.
-struct DiveSitePopupCard: View {
-    let site: DiveSite
-    @Environment(UnitPreference.self) private var units
-
-    var body: some View {
-        NavigationLink(value: site) {
-            HStack(spacing: AppConstants.Space.snug) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: AppConstants.Radius.small, style: .continuous)
-                        .fill(Color.riMint.opacity(0.15))
-                        .frame(width: 56, height: 56)
-                    Image(systemName: site.kind?.iconName ?? "water.waves")
-                        .font(.system(size: 22, weight: .light))
-                        .foregroundStyle(Color.riMint)
-                }
-
-                VStack(alignment: .leading, spacing: 3) {
-                    Text(site.name)
-                        .riType(.body, weight: .semibold)
-                        .foregroundStyle(Color.riDark)
-                        .lineLimit(1)
-
-                    Text(site.subtitle(useMetric: units.useMetric))
-                        .riType(.caption)
-                        .foregroundStyle(Color.riMediumGray)
-                        .lineLimit(1)
-
-                    if let level = site.level {
-                        Text(level.displayName)
-                            .riType(.caption)
-                            .foregroundStyle(Color.riLightGray)
-                    }
-                }
-
-                Spacer(minLength: 0)
-
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(Color.riLightGray)
-            }
-            .padding(AppConstants.Space.snug)
-            .background(.regularMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: AppConstants.Radius.card, style: .continuous))
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
-        .accessibilityElement(children: .combine)
-    }
-}
 
 // MARK: - Apple Maps Result Popup
 

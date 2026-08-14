@@ -1,6 +1,5 @@
 import Foundation
 import Observation
-import CoreLocation
 
 /// Loads the dive site list and answers the questions a diver asks: what's
 /// near me, what can I do on my certification, what can I reach from shore,
@@ -75,27 +74,21 @@ final class DiveSitesService {
         return site.operatorSlugs.compactMap { bySlug[$0] }.filter(\.isActive)
     }
 
-    /// Filtered and sorted for the list screen. Distance sorting only when
-    /// we actually have a location; otherwise alphabetical, which is at
-    /// least predictable.
+    /// Filtered for the list screen, alphabetically.
+    ///
+    /// There was a distance sort here. It went when the coordinates did —
+    /// sorting by a position nobody measured is a worse answer than A to Z,
+    /// because it looks like it knows something.
     func filtered(
         kind: DiveSiteKind? = nil,
         level: DiveLevel? = nil,
-        shoreOnly: Bool = false,
-        near location: CLLocation? = nil
+        shoreOnly: Bool = false
     ) -> [DiveSite] {
         var result = sites
         if let kind { result = result.filter { $0.kind == kind } }
         if let level { result = result.filter { $0.level == level } }
         if shoreOnly { result = result.filter { $0.shoreAccessible == true } }
-
-        guard let location else {
-            return result.sorted { $0.name < $1.name }
-        }
-        return result.sorted {
-            location.distance(from: CLLocation(latitude: $0.latitude, longitude: $0.longitude))
-                < location.distance(from: CLLocation(latitude: $1.latitude, longitude: $1.longitude))
-        }
+        return result.sorted { $0.name < $1.name }
     }
 
     /// Only the kinds and levels actually present, so no filter chip ever

@@ -14,18 +14,15 @@ import MapKit
 /// for one specific case — a text search that finds nothing in the guide,
 /// like a pharmacy — and they're drawn differently and labelled so nobody
 /// mistakes them for a recommendation.
+///
+/// Dive sites used to be a second layer here. They were removed because
+/// nobody has measured where they are: every position was reconstructed
+/// from written descriptions, and a dive site drawn in the wrong bay is
+/// worse than one that isn't on the map. They live in the guide instead.
 @Observable
 final class MapViewModel {
-    enum Layer: String, CaseIterable, Identifiable {
-        case places, diveSites
-        var id: String { rawValue }
-        var title: String { self == .places ? "Places" : "Dive sites" }
-    }
-
-    var layer: Layer = .places
     var selectedCategory: String?
     var selectedBusiness: Business?
-    var selectedDiveSite: DiveSite?
     var selectedMapItem: MKMapItem?
     var searchQuery = ""
     var searchResults: [MKMapItem] = []
@@ -54,7 +51,6 @@ final class MapViewModel {
 
     func clearSelection() {
         selectedBusiness = nil
-        selectedDiveSite = nil
         selectedMapItem = nil
     }
 
@@ -72,14 +68,6 @@ final class MapViewModel {
             result = result.filter { $0.searchHaystack.contains(query) }
         }
         return result
-    }
-
-    func filteredDiveSites(from sites: [DiveSite]) -> [DiveSite] {
-        let query = searchQuery.trimmingCharacters(in: .whitespaces).lowercased()
-        guard !query.isEmpty else { return sites }
-        return sites.filter {
-            $0.name.lowercased().contains(query) || $0.areaDisplayName.lowercased().contains(query)
-        }
     }
 
     /// How many of the given coordinates are inside the current viewport.

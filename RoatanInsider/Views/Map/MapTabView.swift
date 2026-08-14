@@ -11,14 +11,17 @@ import MapKit
 /// the guide, and with no search running the map rendered nothing at all.
 ///
 /// The directory is the map now, online and off. Category chips filter the
-/// guide. Dive sites are a second layer. Apple's results appear only when a
-/// text search finds nothing in the guide — drawn grey and labelled, so a
-/// pharmacy Apple happens to know about never reads as something we picked.
+/// guide. Apple's results appear only when a text search finds nothing in
+/// the guide — drawn grey and labelled, so a pharmacy Apple happens to know
+/// about never reads as something we picked.
+///
+/// Dive sites were a second layer here and are not any more. Nobody has
+/// measured where they are; every position was reconstructed from written
+/// descriptions, and one drawn in the wrong bay is worse than one that
+/// isn't drawn at all. They're in the guide, off the Home screen.
 struct MapTabView: View {
     @Environment(DataManager.self) private var dataManager
-    @Environment(DiveSitesService.self) private var diveSites
     @Environment(LocationManager.self) private var locationManager
-    @Environment(PurchaseManager.self) private var purchases
     @State private var viewModel = MapViewModel()
     @State private var showNearby = false
     @State private var showInView = false
@@ -26,14 +29,6 @@ struct MapTabView: View {
     private var businesses: [Business] {
         viewModel.filteredBusinesses(from: dataManager.businesses)
     }
-
-    private var sites: [DiveSite] {
-        viewModel.filteredDiveSites(from: diveSites.sites)
-    }
-
-    /// Dive sites are Insider+, and the layer control only appears when
-    /// there are sites to show at all.
-    private var showsDiveLayer: Bool { diveSites.hasSites && purchases.hasPremium }
 
     var body: some View {
         NavigationStack {
@@ -46,16 +41,12 @@ struct MapTabView: View {
             .background(Color.riWhite)
             .navigationBarHidden(true)
             .navigationDestination(for: Business.self) { BusinessDetailView(business: $0) }
-            .navigationDestination(for: DiveSite.self) { DiveSiteDetailView(site: $0) }
             .sheet(isPresented: $showNearby) {
                 NearbySheet(businesses: dataManager.businesses)
             }
             .sheet(isPresented: $showInView) {
                 MapResultsSheet(
-                    businesses: viewModel.layer == .places
-                        ? viewModel.itemsInView(businesses, coordinate: { $0.coordinate }) : [],
-                    diveSites: viewModel.layer == .diveSites
-                        ? viewModel.itemsInView(sites, coordinate: { $0.coordinate }) : []
+                    businesses: viewModel.itemsInView(businesses, coordinate: { $0.coordinate })
                 )
             }
         }
@@ -105,10 +96,7 @@ struct MapTabView: View {
     }
 
     private var subtitle: String {
-        switch viewModel.layer {
-        case .places:    return "\(businesses.count) places from the guide"
-        case .diveSites: return "\(sites.count) dive sites on the reef"
-        }
+        "\(businesses.count) places from the guide"
     }
 
     private var searchBar: some View {
@@ -116,7 +104,7 @@ struct MapTabView: View {
             query: $viewModel.searchQuery,
             isSearching: viewModel.isSearching
         ) {
-            viewModel.submitSearch(directoryMatches: businesses.count + sites.count)
+            viewModel.submitSearch(directoryMatches: businesses.count)
         } onClear: {
             viewModel.clearSearch()
         }
@@ -124,42 +112,23 @@ struct MapTabView: View {
         .padding(.bottom, AppConstants.Space.hair)
     }
 
-    @ViewBuilder
     private var controls: some View {
-        if showsDiveLayer {
+        ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: AppConstants.Space.tight) {
-                ForEach(MapViewModel.Layer.allCases) { option in
-                    FilterChip(label: option.title, isSelected: viewModel.layer == option) {
-                        withAnimation(.easeInOut(duration: 0.15)) {
-                            viewModel.layer = option
-                            viewModel.clearSelection()
-                        }
+                FilterChip(label: "All", isSelected: viewModel.selectedCategory == nil) {
+                    viewModel.selectCategory(nil)
+                }
+                ForEach(dataManager.browsableCategoryInfos) { info in
+                    FilterChip(
+                        label: info.displayName,
+                        isSelected: viewModel.selectedCategory == info.id
+                    ) {
+                        viewModel.selectCategory(info.id)
                     }
                 }
-                Spacer(minLength: 0)
             }
             .padding(.horizontal, AppConstants.Space.gutter)
-            .padding(.top, AppConstants.Space.hair)
-        }
-
-        if viewModel.layer == .places {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: AppConstants.Space.tight) {
-                    FilterChip(label: "All", isSelected: viewModel.selectedCategory == nil) {
-                        viewModel.selectCategory(nil)
-                    }
-                    ForEach(dataManager.browsableCategoryInfos) { info in
-                        FilterChip(
-                            label: info.displayName,
-                            isSelected: viewModel.selectedCategory == info.id
-                        ) {
-                            viewModel.selectCategory(info.id)
-                        }
-                    }
-                }
-                .padding(.horizontal, AppConstants.Space.gutter)
-                .padding(.vertical, AppConstants.Space.tight)
-            }
+            .padding(.vertical, AppConstants.Space.tight)
         }
     }
 
@@ -167,11 +136,7 @@ struct MapTabView: View {
 
     private var mapBody: some View {
         Map(position: $viewModel.cameraPosition, interactionModes: .all) {
-            if viewModel.layer == .places {
-                placePins
-            } else {
-                divePins
-            }
+            placePins
 
             // Apple's results, only when the guide came up empty on a text
             // search. Grey and outlined so they never read as a pick.
@@ -248,21 +213,6 @@ struct MapTabView: View {
         }
     }
 
-    @MapContentBuilder
-    private var divePins: some MapContent {
-        ForEach(sites) { site in
-            Annotation(site.name, coordinate: site.coordinate) {
-                DiveSitePinView(site: site, isSelected: viewModel.selectedDiveSite?.id == site.id)
-                    .onTapGesture {
-                        withAnimation(.easeInOut(duration: 0.2)) {
-                            viewModel.clearSelection()
-                            viewModel.selectedDiveSite = site
-                        }
-                    }
-            }
-        }
-    }
-
     // MARK: - Overlays
 
     /// Pan somewhere and this says what's under you, then hands you the
@@ -270,10 +220,8 @@ struct MapTabView: View {
     /// already fits on one screen.
     @ViewBuilder
     private var inViewButton: some View {
-        let total = viewModel.layer == .places ? businesses.count : sites.count
-        let count = viewModel.layer == .places
-            ? viewModel.countInView(businesses, coordinate: { $0.coordinate })
-            : viewModel.countInView(sites, coordinate: { $0.coordinate })
+        let total = businesses.count
+        let count = viewModel.countInView(businesses, coordinate: { $0.coordinate })
 
         if count > 0 && count < total {
             Button {
@@ -298,8 +246,6 @@ struct MapTabView: View {
         Group {
             if let mapItem = viewModel.selectedMapItem {
                 MapItemPopupCard(mapItem: mapItem) { viewModel.selectedMapItem = nil }
-            } else if let site = viewModel.selectedDiveSite {
-                DiveSitePopupCard(site: site)
             } else if let business = viewModel.selectedBusiness {
                 MapPopupCard(business: business, userLocation: locationManager.userLocation) {
                     viewModel.selectedBusiness = nil

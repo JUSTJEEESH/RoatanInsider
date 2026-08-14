@@ -54,29 +54,6 @@ struct AppleResultPinView: View {
     }
 }
 
-/// A dive site. Mint rather than pink, because it's a different kind of
-/// thing from a business and the map should say so before you tap it.
-struct DiveSitePinView: View {
-    let site: DiveSite
-    let isSelected: Bool
-
-    var body: some View {
-        VStack(spacing: 0) {
-            ZStack {
-                Circle()
-                    .fill(Color.riMint)
-                    .frame(width: isSelected ? 34 : 26, height: isSelected ? 34 : 26)
-                Image(systemName: site.kind?.iconName ?? "water.waves")
-                    .font(.system(size: isSelected ? 15 : 11, weight: .medium))
-                    .foregroundStyle(.white)
-            }
-            Triangle()
-                .fill(Color.riMint)
-                .frame(width: 11, height: 6)
-        }
-        .animation(.easeInOut(duration: 0.2), value: isSelected)
-    }
-}
 
 struct ClusterPinView: View {
     let count: Int

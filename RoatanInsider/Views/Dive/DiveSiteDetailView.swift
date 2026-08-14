@@ -1,5 +1,4 @@
 import SwiftUI
-import MapKit
 
 /// One dive site.
 ///
@@ -7,6 +6,12 @@ import MapKit
 /// boat — then what it's actually like, then who takes you. Every block
 /// disappears when its data is missing, so a half-recorded site reads as a
 /// short entry rather than a form with holes in it.
+///
+/// There is no map. There were two attempts at one and both put sites in
+/// the wrong water, because nobody has measured where these are — the
+/// positions were reconstructed from written descriptions. A site drawn in
+/// the wrong bay looks authoritative and is wrong, which is worse than no
+/// map at all. Your operator knows the mooring.
 struct DiveSiteDetailView: View {
     let site: DiveSite
 
@@ -23,7 +28,6 @@ struct DiveSiteDetailView: View {
                 tipBlock
                 lifeBlock
                 operatorsBlock
-                mapBlock
             }
             .padding(.bottom, AppConstants.Space.block)
         }
@@ -197,33 +201,5 @@ struct DiveSiteDetailView: View {
             }
             .padding(.horizontal, AppConstants.Space.gutter)
         }
-    }
-
-    // MARK: - Where
-
-    private var mapBlock: some View {
-        VStack(alignment: .leading, spacing: AppConstants.Space.snug) {
-            Text("WHERE IT IS")
-                .riType(.label)
-                .foregroundStyle(Color.riMediumGray)
-
-            Map(initialPosition: .region(MKCoordinateRegion(
-                center: site.coordinate,
-                span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)
-            ))) {
-                Marker(site.name, systemImage: site.kind?.iconName ?? "water.waves",
-                       coordinate: site.coordinate)
-                    .tint(Color.riPink)
-            }
-            .frame(height: 180)
-            .clipShape(RoundedRectangle(cornerRadius: AppConstants.Radius.card, style: .continuous))
-            .allowsHitTesting(false)
-
-            Text("Approximate — for orientation, not navigation. Your boat captain knows the mooring.")
-                .riType(.caption)
-                .foregroundStyle(Color.riLightGray)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .padding(.horizontal, AppConstants.Space.gutter)
     }
 }

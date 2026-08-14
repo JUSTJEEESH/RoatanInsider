@@ -1,5 +1,4 @@
 import Foundation
-import CoreLocation
 
 /// A named dive site on Roatán's reef.
 ///
@@ -9,7 +8,15 @@ import CoreLocation
 /// and choose an operator second; a directory that lists only operators
 /// answers the easier question.
 ///
-/// Everything except `name`, `area` and `coordinate` is optional on purpose.
+/// THERE ARE NO COORDINATES HERE, and that is deliberate. Two attempts at
+/// placing these on a map put the Sandy Bay cluster on top of the village
+/// and the West End group three kilometres out to sea, because the
+/// positions were reconstructed from prose rather than measured. A site
+/// drawn in the wrong bay is worse than a site with no map at all: it looks
+/// authoritative and it is wrong. If real GPS ever arrives — from a dive
+/// computer or an operator — add the fields back and the map with them.
+///
+/// Everything except `name` and `area` is optional on purpose.
 /// Depth and difficulty are safety information, not marketing copy: a site
 /// with no depth recorded shows no depth, and one with no level shows no
 /// level, rather than inheriting a plausible default. Nothing here is
@@ -23,8 +30,6 @@ struct DiveSite: Identifiable, Decodable, Hashable {
     let name: String
     /// Which stretch of coast, matching the app's `Area` ids where possible.
     let area: String
-    let latitude: Double
-    let longitude: Double
 
     let kind: DiveSiteKind?
     let level: DiveLevel?
@@ -44,7 +49,7 @@ struct DiveSite: Identifiable, Decodable, Hashable {
     let isActive: Bool
 
     private enum CodingKeys: String, CodingKey {
-        case id, slug, name, area, latitude, longitude, kind, level
+        case id, slug, name, area, kind, level
         case minDepthMeters, maxDepthMeters, shoreAccessible
         case summary, insiderTip, marineLife, operatorSlugs, active
     }
@@ -55,8 +60,6 @@ struct DiveSite: Identifiable, Decodable, Hashable {
         slug = try c.decode(String.self, forKey: .slug)
         name = try c.decode(String.self, forKey: .name)
         area = try c.decode(String.self, forKey: .area)
-        latitude = try c.decode(Double.self, forKey: .latitude)
-        longitude = try c.decode(Double.self, forKey: .longitude)
         kind = try? c.decodeIfPresent(DiveSiteKind.self, forKey: .kind)
         level = try? c.decodeIfPresent(DiveLevel.self, forKey: .level)
         minDepthMeters = try? c.decodeIfPresent(Double.self, forKey: .minDepthMeters)
@@ -70,10 +73,6 @@ struct DiveSite: Identifiable, Decodable, Hashable {
         marineLife = (try? c.decode([String].self, forKey: .marineLife)) ?? []
         operatorSlugs = (try? c.decode([String].self, forKey: .operatorSlugs)) ?? []
         isActive = (try? c.decode(Bool.self, forKey: .active)) ?? true
-    }
-
-    var coordinate: CLLocationCoordinate2D {
-        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 
     var areaDisplayName: String {
