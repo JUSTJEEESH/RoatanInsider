@@ -98,6 +98,9 @@ struct EventDetailView: View {
             Haptics.tap()
         } label: {
             Image(systemName: favorites.isFavorited(event) ? "heart.fill" : "heart")
+                // Same fill as the business heart in FavoriteButton. One
+                // control, two screens — it has to feel identical on both.
+                .contentTransition(.symbolEffect(.replace))
                 .font(.system(size: 20, weight: .semibold))
                 .foregroundStyle(favorites.isFavorited(event) ? Color.riPink : Color.riLightGray)
                 .frame(width: 36, height: 36)

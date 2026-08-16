@@ -682,13 +682,20 @@ struct OnboardingView: View {
 
             Button {
                 Haptics.tap()
-                if isHearted {
-                    draftHeartedIds.remove(business.id)
-                } else {
-                    draftHeartedIds.insert(business.id)
+                // Wrapped so the heart below can fill rather than snap.
+                // `contentTransition` only animates inside an animated
+                // change; on its own it is silently inert, which is the
+                // trap with that modifier.
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+                    if isHearted {
+                        draftHeartedIds.remove(business.id)
+                    } else {
+                        draftHeartedIds.insert(business.id)
+                    }
                 }
             } label: {
                 Image(systemName: isHearted ? "heart.fill" : "heart")
+                    .contentTransition(.symbolEffect(.replace))
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundStyle(isHearted ? Color.riPink : Color.white.opacity(0.4))
                     .frame(width: 44, height: 44)

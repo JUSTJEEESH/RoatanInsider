@@ -135,6 +135,14 @@ private struct PhraseRow: View {
                 speechService.speak(phrase.spanish, id: phrase.id)
             } label: {
                 Image(systemName: isPlaying ? "speaker.wave.2.fill" : "play.circle.fill")
+                    .contentTransition(.symbolEffect(.replace))
+                    // Driven by `value:` rather than a `withAnimation` in the
+                    // tap, because this state doesn't come from the tap. It
+                    // comes from SpeechService, and it changes twice — once
+                    // when playback starts and again when it stops on its
+                    // own. A tap-local animation would catch the first and
+                    // miss the second, leaving the icon to snap back.
+                    .animation(.easeInOut(duration: 0.2), value: isPlaying)
                     .font(.system(size: 32, weight: .regular))
                     .foregroundStyle(isPlaying ? Color.riPink : Color.riMint)
             }

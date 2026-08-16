@@ -23,6 +23,16 @@ struct FavoriteButton: View {
             Analytics.track(.businessFavorited(id: businessId, isFavorite: favoritesStore.isFavorite(businessId)))
         } label: {
             Image(systemName: isSaved ? "heart.fill" : "heart")
+                // The outline fills in rather than being swapped for a
+                // different glyph. Everything around this tap was already
+                // animated — the spring on scale, the colour crossing to
+                // pink — and the one thing that hard-cut was the shape
+                // itself, which is the part the eye is actually on.
+                //
+                // The system draws this from the symbol's own vector data,
+                // so it costs nothing and stays right if the glyph changes
+                // in a future SF Symbols release.
+                .contentTransition(.symbolEffect(.replace))
                 .font(.system(size: 19, weight: .semibold))
                 .foregroundStyle(isSaved ? Color.riPink : (onPhoto ? .white : Color.riLightGray))
                 .shadow(color: .black.opacity(onPhoto ? 0.28 : 0), radius: 3, y: 1)
