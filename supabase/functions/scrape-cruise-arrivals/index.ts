@@ -12,12 +12,64 @@
 //   3. If both paths yield zero rows, ABORT — never overwrite a good
 //      file with empty data. Upload debug HTML + failure status instead.
 //
-// Trigger: pg_cron, daily at 09:00 and 15:00 UTC.
+// Trigger: pg_cron job `cruise-arrivals-daily`, `30 11,23 * * *` — 11:30 and
+// 23:30 UTC, which is 05:30 and 17:30 on the island.
 //
 // Deploy:
 //   supabase functions deploy scrape-cruise-arrivals
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.0";
+
+// --- Time budget ------------------------------------------------------------
+//
+// Every fetch in here used to be unbounded, and on 2026-08-24 the gviz call
+// simply never resolved. The function booted, made one request, logged
+// nothing further, and was killed by the platform 150s later with a 504.
+//
+// The damage was not the missed run — the next run six hours later would
+// have covered it. The damage was that NOTHING was written, including
+// cruise_status.json, so the health file kept yesterday's `ok: true` and
+// reported the pipeline green while a run had failed. An observability
+// channel that goes quiet exactly when it should shout is worse than none.
+//
+// So: every request is bounded, and the whole invocation is bounded, and
+// failure always writes a status. A hang is now a loud `ok: false` within
+// ~100 seconds instead of a silent 504.
+
+const GVIZ_TIMEOUT_MS = 12_000;
+const DIRECT_TIMEOUT_MS = 12_000;
+// ScrapingBee renders JS and is told to wait 5s before returning, so it is
+// legitimately slower than the others and gets a budget that reflects that.
+const SCRAPINGBEE_TIMEOUT_MS = 25_000;
+
+// Comfortably inside the platform's ceiling, so we return our own answer
+// rather than being killed mid-flight with nothing recorded.
+const OVERALL_BUDGET_MS = 100_000;
+
+// Set per request by the handler, NOT at module scope. Edge runtimes reuse
+// an isolate across invocations, so a module-scope start time would be the
+// boot time of the first request the isolate ever served — by the second
+// run the budget would already read as exhausted and every fetch would fail
+// before it was made. The cron fires this twice a day, so there is no
+// overlapping invocation to race over the value.
+let deadlineAt = 0;
+const msLeft = () => deadlineAt - Date.now();
+
+/// `fetch` that cannot outlive its welcome.
+///
+/// AbortSignal.timeout throws a TimeoutError, which every call site here
+/// already handles as "this source failed, try the next one" — so bounding
+/// the request turns an invisible hang into an ordinary, logged failure
+/// travelling down paths that already exist.
+async function fetchWithTimeout(
+  url: string,
+  init: RequestInit,
+  ms: number,
+): Promise<Response> {
+  const budget = Math.min(ms, Math.max(0, msLeft()));
+  if (budget <= 0) throw new Error("out of time budget before request started");
+  return await fetch(url, { ...init, signal: AbortSignal.timeout(budget) });
+}
 
 // --- Schema -----------------------------------------------------------------
 
@@ -163,7 +215,24 @@ const SHEET_LABEL = `google-sheet:${SHEET_TAB}`;
 
 async function fetchSheetArrivals(): Promise<CruiseArrival[]> {
   const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&headers=1&sheet=${encodeURIComponent(SHEET_TAB)}`;
-  const res = await fetch(url, { headers: BROWSER_HEADERS });
+
+  // One retry, because this is the path that matters. The HTML fallback
+  // below scrapes third-party pages that describe the same schedule less
+  // reliably than Keith maintains it, so spending twelve more seconds here
+  // is better than falling through on a single transient stall.
+  let res: Response | null = null;
+  let lastErr: unknown = null;
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      res = await fetchWithTimeout(url, { headers: BROWSER_HEADERS }, GVIZ_TIMEOUT_MS);
+      break;
+    } catch (err) {
+      lastErr = err;
+      console.error(`gviz attempt ${attempt} failed: ${err}`);
+      if (msLeft() < GVIZ_TIMEOUT_MS) break;
+    }
+  }
+  if (!res) throw new Error(`Sheet fetch failed after retries: ${lastErr}`);
   if (!res.ok) throw new Error(`Sheet fetch failed: HTTP ${res.status}`);
   const text = await res.text();
 
@@ -251,9 +320,18 @@ async function fetchPage(): Promise<FetchResult> {
   const errors: string[] = [];
 
   for (const url of SOURCE_CANDIDATES) {
+    // Four candidate sites, each tried twice (direct, then a JS render).
+    // Unbounded, that is eight requests with no ceiling between them and
+    // the platform's kill switch. Stop before starting work there is no
+    // time to finish, so the handler still gets to write a status.
+    if (msLeft() <= DIRECT_TIMEOUT_MS) {
+      errors.push(`${url}: skipped, out of time budget`);
+      break;
+    }
+
     // Try 1: direct fetch with browser headers.
     try {
-      const res = await fetch(url, { headers: BROWSER_HEADERS });
+      const res = await fetchWithTimeout(url, { headers: BROWSER_HEADERS }, DIRECT_TIMEOUT_MS);
       if (res.ok) {
         const html = await res.text();
         if (looksLikeRealPage(html)) {
@@ -274,7 +352,7 @@ async function fetchPage(): Promise<FetchResult> {
     }
     try {
       const sbUrl = `https://app.scrapingbee.com/api/v1/?api_key=${apiKey}&url=${encodeURIComponent(url)}&render_js=true&wait=5000`;
-      const res = await fetch(sbUrl);
+      const res = await fetchWithTimeout(sbUrl, {}, SCRAPINGBEE_TIMEOUT_MS);
       if (res.ok) {
         const html = await res.text();
         if (looksLikeRealPage(html)) {
@@ -573,6 +651,13 @@ async function writeStatus(ok: boolean, detail: Record<string, unknown>): Promis
 // --- Handler ----------------------------------------------------------------
 
 Deno.serve(async (_req) => {
+  deadlineAt = Date.now() + OVERALL_BUDGET_MS;
+
+  // The zero-arrivals path writes its own, more specific status before it
+  // throws. This flag keeps the catch below from overwriting that detail
+  // with a generic one.
+  let statusWritten = false;
+
   try {
     // Primary: Keith's Google Sheet (structured, no HTML parsing).
     let arrivals: CruiseArrival[] = [];
@@ -601,6 +686,7 @@ Deno.serve(async (_req) => {
           source: result.url,
           error: `Sheet and HTML paths both yielded zero arrivals. Debug HTML uploaded. length=${result.html.length}`,
         });
+        statusWritten = true;
         throw new Error(`Parsed zero arrivals from ${result.url}. Debug uploaded. length=${result.html.length}`);
       }
     }
@@ -627,6 +713,24 @@ Deno.serve(async (_req) => {
     );
   } catch (err) {
     console.error("scrape-cruise-arrivals failed:", err);
+
+    // Record the failure. Without this, any error outside the zero-arrivals
+    // branch — a hang, a 500 from Google, a shape change — left
+    // cruise_status.json holding the last successful run's `ok: true`, and
+    // the pipeline reported healthy while it was not running. The status
+    // file is the only thing watching this function; it has to be told.
+    if (!statusWritten) {
+      try {
+        await writeStatus(false, {
+          source: SHEET_LABEL,
+          error: String(err),
+          elapsedMs: Date.now() - (deadlineAt - OVERALL_BUDGET_MS),
+        });
+      } catch (statusErr) {
+        console.error(`Failed to record failure status: ${statusErr}`);
+      }
+    }
+
     return new Response(
       JSON.stringify({ ok: false, error: String(err) }),
       { status: 500, headers: { "Content-Type": "application/json" } }
