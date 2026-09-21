@@ -255,8 +255,8 @@ async function fetchSheetArrivals(): Promise<CruiseArrival[]> {
   const arrivals: CruiseArrival[] = [];
   for (const row of payload.table.rows ?? []) {
     const c = row.c ?? [];
-    const date: string = c[iDate]?.f ?? "";
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || date < today) continue;
+    const date = cellToISODate(c[iDate]);
+    if (!date || date < today) continue;
     const shipName = String(c[iShip]?.v ?? "").trim();
     if (!shipName) continue;
 
@@ -279,7 +279,51 @@ async function fetchSheetArrivals(): Promise<CruiseArrival[]> {
       ...(notes ? { notes } : {}),
     });
   }
+  // Rows seen vs rows kept. When these diverge sharply the sheet is fine and
+  // something here is rejecting it — which is the difference between "the
+  // source has run out" and "we can no longer read the source", two
+  // failures that otherwise produce the identical zero-arrivals symptom.
+  console.log(`Sheet: ${payload.table.rows?.length ?? 0} rows, ${arrivals.length} on/after ${today}`);
   return dedupeAndSort(arrivals);
+}
+
+/// Normalises a gviz date cell to ISO `YYYY-MM-DD`, whatever the column's
+/// display format happens to be.
+///
+/// This reads `v`, not `f`, and that is the entire point. `f` is the
+/// spreadsheet's DISPLAY string, so it changes whenever the owner reformats
+/// the column — which is exactly what happened on 2026-09-21. Column A had
+/// been a plain string column holding literal "2026-08-31" text; Keith
+/// retyped it as a real date with pattern `M/d/yyyy`, `f` started arriving
+/// as "9/9/2026", the old `/^\d{4}-\d{2}-\d{2}$/` test rejected every row,
+/// and the scraper reported zero arrivals for 21 days while the sheet was
+/// full of September sailings.
+///
+/// `v` for a date-typed cell is gviz's canonical `Date(2026,8,9)` and does
+/// not move when the display pattern does. NOTE THE MONTH IS 0-BASED — 8 is
+/// September — which is the one thing to get wrong here and would silently
+/// shift every arrival by a month.
+///
+/// `f` is still read as a fallback, in both the ISO and M/d/yyyy spellings,
+/// so this keeps working if the column is ever a string again.
+function cellToISODate(cell: { v?: unknown; f?: string } | null | undefined): string | null {
+  if (!cell) return null;
+
+  const v = typeof cell.v === "string" ? cell.v : "";
+  const dm = v.match(/^Date\((\d{4}),(\d{1,2}),(\d{1,2})\)$/);
+  if (dm) {
+    const month = String(parseInt(dm[2], 10) + 1).padStart(2, "0");
+    const day = String(parseInt(dm[3], 10)).padStart(2, "0");
+    return `${dm[1]}-${month}-${day}`;
+  }
+
+  const f = (cell.f ?? "").trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(f)) return f;
+
+  const us = f.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (us) return `${us[3]}-${us[1].padStart(2, "0")}-${us[2].padStart(2, "0")}`;
+
+  return null;
 }
 
 /// "7:00" → "07:00"; passes through anything already zero-padded.
