@@ -273,8 +273,8 @@ async function fetchSheetArrivals(): Promise<CruiseArrival[]> {
       cruiseLine,
       port,
       date,
-      arrivalTime: padTime(c[iArr]?.f ?? "07:00"),
-      departureTime: padTime(c[iDep]?.f ?? "16:00"),
+      arrivalTime: cellToTime(c[iArr], "07:00"),
+      departureTime: cellToTime(c[iDep], "16:00"),
       passengerCount: pax,
       ...(notes ? { notes } : {}),
     });
@@ -326,11 +326,31 @@ function cellToISODate(cell: { v?: unknown; f?: string } | null | undefined): st
   return null;
 }
 
-/// "7:00" → "07:00"; passes through anything already zero-padded.
-function padTime(t: string): string {
-  const m = t.match(/(\d{1,2}):(\d{2})/);
-  if (!m) return t;
-  return `${m[1].padStart(2, "0")}:${m[2]}`;
+/// Pulls `HH:mm` out of a gviz time cell, from whichever field carries it.
+///
+/// The Arrive/Depart columns are string-typed, and a gviz string cell has
+/// only `v` — no `f` at all. This used to read `c[iArr]?.f ?? "07:00"`,
+/// which therefore resolved to the fallback for EVERY row: restoring the
+/// schedule without this would have published 178 sailings that all claimed
+/// to arrive at 07:00 and leave at 16:00. Uniformly plausible, uniformly
+/// wrong, on the one screen where being wrong costs somebody their ship.
+///
+/// Tries `f` first so a formatted time column still wins, then `v`. The
+/// meridiem handling is defensive rather than currently needed — the sheet
+/// is in 24-hour time today, but a column reformatted to "5:00 PM" without
+/// it would silently publish a 05:00 departure.
+function cellToTime(cell: { v?: unknown; f?: string } | null | undefined, fallback: string): string {
+  for (const raw of [cell?.f, cell?.v]) {
+    if (typeof raw !== "string") continue;
+    const m = raw.match(/(\d{1,2}):(\d{2})\s*([AaPp][Mm])?/);
+    if (!m) continue;
+    let hour = parseInt(m[1], 10);
+    const meridiem = m[3]?.toLowerCase();
+    if (meridiem === "pm" && hour < 12) hour += 12;
+    if (meridiem === "am" && hour === 12) hour = 0;
+    return `${String(hour).padStart(2, "0")}:${m[2]}`;
+  }
+  return fallback;
 }
 
 // --- Fallback fetching --------------------------------------------------------
